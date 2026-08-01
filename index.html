@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>A Common Man's Journey to Become a Flutter Developer</title>
+  <meta name="description" content="An interactive animated story roadmap tracing a beginner's path to becoming a Senior Flutter Developer. Explore 14 milestones including Discrete Mathematics, Dart, Flutter, State Management, APIs, DevOps, and App Publishing.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- FULLSCREEN ANIMATED ROADMAP SVG JOURNEY -->
+    <div id="roadmapJourneyContainer" class="roadmap-journey-container">
+      <svg class="journey-svg" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#0175C2" />
+            <stop offset="33%" stop-color="#E91E63" />
+            <stop offset="66%" stop-color="#13B9FD" />
+            <stop offset="100%" stop-color="#00E5FF" />
+          </linearGradient>
+        </defs>
+        <!-- Dynamic Path -->
+        <path id="journeySvgPath" class="journey-svg-path-fill" d="" />
+      </svg>
+
+      <!-- Animated Developer Avatar -->
+      <div id="developerAvatar" class="developer-avatar">
+        <div class="avatar-character">👨‍💻</div>
+        <div class="avatar-label">Alex (Common Man)</div>
+      </div>
+
+      <!-- 14 Milestone Nodes Container -->
+      <div id="journeyNodes" class="journey-nodes-container"></div>
+    </div>
+
+    <!-- Top Navigation Header Bar -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-icon">💙</div>
+        <div>
+          <h1 class="brand-title">A COMMON MAN'S FLUTTER JOURNEY</h1>
+          <p class="brand-subtitle">Interactive Story & Career Roadmap (14 Milestones)</p>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="soundBtn" class="btn" title="Toggle Sound Engine">🔊 Sound On</button>
+        <button id="autoDriveBtn" class="btn btn-active" title="Toggle Story Auto-Tour">🎬 Watch Story: ON</button>
+        <button id="openDrawerBtn" class="btn btn-primary">🗺️ Milestones Directory</button>
+      </div>
+    </header>
+
+    <!-- HUD Dashboard Overlay -->
+    <div class="hud-container">
+      <!-- Current Milestone Chapter Card -->
+      <div class="biome-card">
+        <div id="currentBiomeBadge" class="biome-badge">🎯</div>
+        <div>
+          <div id="currentBiomeName" class="biome-name">1. Dart Language</div>
+          <div id="currentBiomeSubtitle" class="biome-subtitle">Chapter 1 • The First Spark</div>
+        </div>
+      </div>
+
+      <!-- Developer Rank & XP Dashboard -->
+      <div class="stats-widget">
+        <div class="stat-item">
+          <span id="distValue" class="stat-value">Beginner Explorer 🐣</span>
+          <span class="stat-label">DEVELOPER RANK</span>
+        </div>
+        <div class="stat-item">
+          <span id="xpValue" class="stat-value">0 XP</span>
+          <span class="stat-label">ROADMAP XP</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Progress Bar & Mini-Map -->
+    <div class="bottom-bar">
+      <div class="roadmap-progress-container">
+        <div class="progress-header">
+          <span>FLUTTER ROADMAP MASTERY PROGRESS</span>
+          <span id="overallProgressText" style="color: var(--flutter-sky);">0% Complete</span>
+        </div>
+        <div class="progress-track">
+          <div id="overallProgressFill" class="progress-fill" style="width: 0%;"></div>
+          <div id="minimapCarIcon" class="progress-car-icon">👨‍💻</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide-Out Milestones Directory Drawer -->
+    <aside id="drawer" class="drawer">
+      <div class="drawer-header">
+        <h2 class="drawer-title">14 Core Milestones</h2>
+        <button id="closeDrawerBtn" class="close-btn">&times;</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search milestone or story chapter...">
+      </div>
+      <div id="drawerContent" class="drawer-content"></div>
+    </aside>
+
+    <!-- Milestone Detail Modal Popup -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-header-left">
+            <div id="modalIcon" class="modal-icon">🎯</div>
+            <div>
+              <h2 id="modalTitle" class="modal-title">Dart Language</h2>
+              <span id="modalBadge" class="modal-badge">Chapter 1 • The First Spark</span>
+            </div>
+          </div>
+          <button id="closeModalBtn" class="close-btn">&times;</button>
+        </div>
+
+        <div class="modal-tabs">
+          <div class="modal-tab active" data-tab="overview">Overview & Story</div>
+          <div class="modal-tab" data-tab="submilestones">Sub-Milestones</div>
+          <div class="modal-tab" data-tab="code">Code Example</div>
+          <div class="modal-tab" data-tab="resources">Resources</div>
+        </div>
+
+        <div class="modal-body">
+          <!-- Overview Tab -->
+          <div id="tab-overview" class="modal-tab-content active">
+            <div id="storyCard" class="story-card"></div>
+            <p id="modalDescription" style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px; color: #CBD5E1;"></p>
+            <h3 style="font-size: 1.1rem; color: var(--flutter-sky); margin-bottom: 10px;">Key Topics Covered:</h3>
+            <ul id="topicsList" style="list-style: none; padding-left: 0;"></ul>
+          </div>
+
+          <!-- Sub-Milestones Tab -->
+          <div id="tab-submilestones" class="modal-tab-content">
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+              Check off completed sub-milestones to level up your Developer XP and Rank:
+            </p>
+            <div id="submilestonesList" class="submilestones-list"></div>
+          </div>
+
+          <!-- Code Example Tab -->
+          <div id="tab-code" class="modal-tab-content">
+            <div class="code-wrapper">
+              <button id="copyCodeBtn" class="copy-btn">📋 Copy Code</button>
+              <pre><code id="codeSnippetBlock" class="code-block"></code></pre>
+            </div>
+          </div>
+
+          <!-- Resources Tab -->
+          <div id="tab-resources" class="modal-tab-content">
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+              Curated documentation and interactive tutorials:
+            </p>
+            <div id="resourcesList" class="resources-list"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Press <kbd style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">ESC</kbd> to close modal</span>
+          <button onclick="uiController.closeModal()" class="btn btn-primary">Continue Journey 🚀</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/milestones.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/journey.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      window.journeyEngine = new JourneyEngine();
+    });
+  </script>
+</body>
+</html>

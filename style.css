@@ -1,0 +1,839 @@
+/* Modern Cyberpunk Dark Flutter Roadmap CSS - "Common Man's Journey" */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap');
+
+:root {
+  --flutter-blue: #02569B;
+  --flutter-cyan: #0175C2;
+  --flutter-sky: #13B9FD;
+  --flutter-accent: #00E5FF;
+  --bg-dark: #070913;
+  --panel-bg: rgba(10, 14, 28, 0.88);
+  --panel-border: rgba(19, 185, 253, 0.3);
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --gold-accent: #FFD700;
+  --success-green: #10B981;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --glow-cyan: 0 0 25px rgba(19, 185, 253, 0.4);
+  --glow-accent: 0 0 30px rgba(0, 229, 255, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-main);
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Top Navigation Bar */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(7, 9, 19, 0.95) 0%, rgba(7, 9, 19, 0) 100%);
+  pointer-events: none;
+}
+
+.navbar > * {
+  pointer-events: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, var(--flutter-cyan), var(--flutter-accent));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: var(--glow-cyan);
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #FFFFFF, var(--flutter-sky), var(--flutter-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.brand-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--text-main);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(16px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn:hover {
+  background: rgba(19, 185, 253, 0.18);
+  border-color: var(--flutter-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-cyan));
+  border: none;
+  box-shadow: 0 4px 20px rgba(1, 117, 194, 0.5);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--flutter-cyan), var(--flutter-accent));
+  box-shadow: var(--glow-accent);
+}
+
+.btn-active {
+  background: rgba(0, 229, 255, 0.2) !important;
+  border-color: var(--flutter-accent) !important;
+  color: var(--flutter-accent) !important;
+}
+
+/* HUD Banner & Developer Rank */
+.hud-container {
+  position: absolute;
+  top: 85px;
+  left: 32px;
+  right: 32px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.hud-container > * {
+  pointer-events: auto;
+}
+
+.biome-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(20px);
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.biome-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.biome-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.biome-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Developer Rank & XP Widget */
+.stats-widget {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(20px);
+  padding: 14px 24px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--flutter-sky);
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* FULLSCREEN ANIMATED ROADMAP JOURNEY CONTAINER */
+.roadmap-journey-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 50%, #0F172A 0%, #060913 100%);
+  overflow: hidden;
+}
+
+.journey-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.journey-svg-path-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 16;
+  stroke-linecap: round;
+}
+
+.journey-svg-path-fill {
+  fill: none;
+  stroke: url(#pathGradient);
+  stroke-width: 8;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.6));
+}
+
+/* DEVELOPER CHARACTER AVATAR */
+.developer-avatar {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.avatar-character {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--flutter-cyan), var(--flutter-accent));
+  border: 3px solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 0 30px var(--flutter-accent);
+  animation: avatarFloat 2s infinite ease-in-out alternate;
+}
+
+@keyframes avatarFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+.avatar-label {
+  background: rgba(10, 14, 28, 0.95);
+  border: 1px solid var(--flutter-sky);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+}
+
+/* 13 TIMELINE NODES ALONG JOURNEY PATH */
+.journey-nodes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.journey-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.journey-node:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.journey-node-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+}
+
+.journey-node.active .journey-node-icon {
+  border-color: var(--flutter-accent);
+  box-shadow: 0 0 25px var(--flutter-accent);
+  transform: scale(1.1);
+}
+
+.journey-node-badge {
+  background: rgba(10, 14, 28, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 6px;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+
+/* Bottom Progress Bar */
+.bottom-bar {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  right: 32px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.bottom-bar > * {
+  pointer-events: auto;
+}
+
+.roadmap-progress-container {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.progress-track {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: visible;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--flutter-blue), var(--flutter-sky), var(--flutter-accent));
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  box-shadow: var(--glow-cyan);
+}
+
+.progress-car-icon {
+  position: absolute;
+  top: -12px;
+  transform: translateX(-50%);
+  font-size: 20px;
+  transition: left 0.3s ease;
+}
+
+/* Slide-out Milestone Drawer */
+.drawer {
+  position: absolute;
+  top: 0;
+  right: -440px;
+  width: 420px;
+  height: 100%;
+  background: rgba(6, 9, 19, 0.96);
+  border-left: 1px solid var(--panel-border);
+  backdrop-filter: blur(28px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -15px 0 50px rgba(0,0,0,0.9);
+}
+
+.drawer.open {
+  right: 0;
+}
+
+.drawer-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawer-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+.search-box {
+  padding: 18px 28px;
+}
+
+.search-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--flutter-sky);
+  box-shadow: var(--glow-cyan);
+}
+
+.drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.milestone-item-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.milestone-item-card:hover {
+  background: rgba(19, 185, 253, 0.12);
+  border-color: var(--flutter-sky);
+  transform: translateX(-4px);
+}
+
+.milestone-item-icon {
+  font-size: 26px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milestone-item-info {
+  flex: 1;
+}
+
+.milestone-item-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.milestone-item-biome {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Modal Popup Dialog */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(4, 6, 12, 0.82);
+  backdrop-filter: blur(16px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  width: 90%;
+  max-width: 820px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.95);
+  overflow: hidden;
+  transform: scale(0.94);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.open .modal-card {
+  transform: scale(1);
+}
+
+.modal-header {
+  padding: 28px 36px;
+  background: linear-gradient(135deg, rgba(1, 117, 194, 0.25), rgba(0,0,0,0.5));
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.modal-icon {
+  font-size: 38px;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.modal-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(19, 185, 253, 0.2);
+  color: var(--flutter-sky);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Modal Tabs */
+.modal-tabs {
+  display: flex;
+  background: rgba(0,0,0,0.35);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 36px;
+}
+
+.modal-tab {
+  padding: 16px 24px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.modal-tab.active {
+  color: var(--flutter-accent);
+  border-bottom-color: var(--flutter-accent);
+}
+
+.modal-body {
+  padding: 28px 36px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-tab-content {
+  display: none;
+}
+
+.modal-tab-content.active {
+  display: block;
+}
+
+/* Sub-milestones Checklist */
+.submilestones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.submilestone-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submilestone-item:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.submilestone-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  border: 2px solid var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.submilestone-item.checked {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.submilestone-item.checked .submilestone-checkbox {
+  background: var(--success-green);
+  border-color: var(--success-green);
+}
+
+.submilestone-text {
+  font-size: 0.98rem;
+}
+
+/* Story Box Styling */
+.story-card {
+  background: linear-gradient(135deg, rgba(1, 117, 194, 0.15), rgba(0, 229, 255, 0.05));
+  border: 1px solid rgba(19, 185, 253, 0.3);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #E2E8F0;
+}
+
+/* Code Snippet Container */
+.code-wrapper {
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background: var(--flutter-sky);
+}
+
+.code-block {
+  background: #080C16;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  color: #A5D6A7;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+/* Resources List */
+.resources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.resource-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  color: var(--flutter-sky);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.resource-link:hover {
+  background: rgba(19, 185, 253, 0.12);
+  border-color: var(--flutter-sky);
+  transform: translateX(4px);
+}
+
+.modal-footer {
+  padding: 20px 36px;
+  background: rgba(0,0,0,0.35);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hud-container {
+    top: 75px;
+    left: 14px;
+    right: 14px;
+  }
+
+  .stats-widget {
+    gap: 14px;
+    padding: 10px 16px;
+  }
+
+  .drawer {
+    width: 100%;
+    right: -100%;
+  }
+
+  .modal-card {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 20px 24px;
+  }
+
+  .modal-body {
+    padding: 20px 24px;
+  }
+}
