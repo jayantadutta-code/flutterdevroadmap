@@ -138,6 +138,12 @@ class UIController {
       this.modalBadge.style.color = ms.color;
     }
 
+    // Dynamic Tab Title for 3rd Tab
+    const codeTabHeader = document.getElementById('codeTabHeader');
+    if (codeTabHeader) {
+      codeTabHeader.innerText = ms.customTabName || "Code Example";
+    }
+
     // Story Card
     const storyCard = document.getElementById('storyCard');
     if (storyCard) {
@@ -172,8 +178,40 @@ class UIController {
       });
     }
 
-    // Code Example
-    if (this.codeSnippetBlock) this.codeSnippetBlock.innerText = ms.codeSnippet;
+    // Code Example / Digital Book Tab Content
+    const tabCodeEl = document.getElementById('tab-code');
+    if (tabCodeEl) {
+      if (ms.hasDigitalBook || ms.id === 'git-github') {
+        const bookUrl = ms.digitalBookUrl || 'git-github/index.html';
+        tabCodeEl.innerHTML = `
+          <div class="digital-book-modal-wrapper">
+            <div class="digital-book-modal-header">
+              <div class="digital-book-info">
+                <span class="digital-book-title">📚 <strong>The Git & GitHub Flipbook Guide (28 Chapters)</strong></span>
+                <span class="digital-book-subtitle">Interactive 3D page-flipping book with live terminal & command quizzes</span>
+              </div>
+              <a href="${bookUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-digital-book">
+                <span>🚀 Fullscreen Book ↗</span>
+              </a>
+            </div>
+            <iframe src="${bookUrl}" class="digital-book-iframe" title="Git & GitHub Digital Book"></iframe>
+          </div>
+        `;
+      } else {
+        tabCodeEl.innerHTML = `
+          <div class="code-wrapper">
+            <button id="copyCodeBtn" class="copy-btn">📋 Copy Code</button>
+            <pre><code id="codeSnippetBlock" class="code-block"></code></pre>
+          </div>
+        `;
+        this.codeSnippetBlock = document.getElementById('codeSnippetBlock');
+        this.copyCodeBtn = document.getElementById('copyCodeBtn');
+        if (this.codeSnippetBlock) this.codeSnippetBlock.innerText = ms.codeSnippet;
+        if (this.copyCodeBtn) {
+          this.copyCodeBtn.addEventListener('click', () => this.copyCodeSnippet());
+        }
+      }
+    }
 
     // Resources
     if (this.resourcesList) {

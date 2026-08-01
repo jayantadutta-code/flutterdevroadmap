@@ -397,12 +397,14 @@ void listenToCommunityChat() {
       { id: "git-4", title: "Git Stash, Reset, Revert & Cherry-pick Mastery", completed: false },
       { id: "git-5", title: "GitHub Pull Request Review Workflow", completed: false }
     ],
-    codeSnippet: `# Chapter 10: Alex's Daily Git Workflow
-git checkout -b feature/user-profile-riverpod
-git add .
-git commit -m "feat(profile): add edit user bio notifier"
-git push origin feature/user-profile-riverpod`,
+    customTabName: "Digital Book 📚",
+    hasDigitalBook: true,
+    digitalBookUrl: "git-github/index.html",
+    codeSnippet: `# Interactive 3D Git & GitHub Digital Book (28 Chapters)
+# Open the interactive digital book to read chapters, try the terminal, and solve quizzes!
+URL: git-github/index.html`,
     resources: [
+      { name: "📖 Interactive Git & GitHub Digital Book (28 Chapters)", url: "git-github/index.html" },
       { name: "Pro Git Book", url: "https://git-scm.com/book/en/v2" },
       { name: "GitHub Skills & Tutorials", url: "https://skills.github.com" }
     ]
