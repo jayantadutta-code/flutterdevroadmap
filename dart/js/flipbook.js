@@ -1,16 +1,15 @@
 /* ==========================================================================
-   Dart Cookbook - 3D FlipBook Physics & Navigation Engine (YAML & Git-GitHub Spec)
+   Dart Cookbook - 3D FlipBook Engine (YAML & Git-GitHub Spec Engine)
    ========================================================================== */
 
 class FlipBookEngine {
   constructor() {
     this.currentSheet = 0;
-    this.maxSheetIndex = 9;
-    this.totalParts = 7;
+    this.totalSheets = 10;
     this.isFlipping = false;
 
     this.searchDatabase = [
-      // Part 1: Basics
+      // Part 1: Basics (Sheet 2)
       { id: 1, title: "1.1 Introduction to Dart", sheet: 2, moduleIdx: 0, exp: "Dart origins, client optimization, native & web compilation.", keywords: ["intro", "introduction", "dart", "jit", "aot"] },
       { id: 2, title: "1.2 Comments", sheet: 2, moduleIdx: 0, exp: "Single-line //, multi-line /* */, doc comments ///.", keywords: ["comments", "//", "doc", "documentation"] },
       { id: 3, title: "1.3 Variables and Data Types", sheet: 2, moduleIdx: 0, exp: "var, final, const, explicit types int, String, bool.", keywords: ["variables", "types", "var", "final", "const"] },
@@ -22,14 +21,14 @@ class FlipBookEngine {
       { id: 9, title: "1.9 Conditions", sheet: 2, moduleIdx: 0, exp: "if, else if, else, ternary operator ? :.", keywords: ["conditions", "if", "else", "ternary"] },
       { id: 10, title: "1.10 Loops", sheet: 2, moduleIdx: 0, exp: "for, for-in, forEach, while, do-while, break, continue.", keywords: ["loops", "for", "while", "foreach", "break"] },
 
-      // Part 2: Core Dart
+      // Part 2: Core Dart (Sheet 3)
       { id: 11, title: "2.1 Function", sheet: 3, moduleIdx: 1, exp: "Function signatures, parameters, return types, arrow => syntax.", keywords: ["function", "arrow", "return", "params"] },
       { id: 12, title: "2.2 Function Advance", sheet: 3, moduleIdx: 1, exp: "Named params {required}, positional, default values, higher-order.", keywords: ["named parameters", "positional", "required", "closure"] },
       { id: 13, title: "2.3 List", sheet: 3, moduleIdx: 1, exp: "List methods, spread operator ..., collection if/for.", keywords: ["list", "array", "spread", "collection"] },
       { id: 14, title: "2.4 Set", sheet: 3, moduleIdx: 1, exp: "Unordered collection of unique items, set union & intersection.", keywords: ["set", "unique", "union", "intersection"] },
       { id: 15, title: "2.5 Map", sheet: 3, moduleIdx: 1, exp: "Key-value dictionary mapping, putIfAbsent, entries iteration.", keywords: ["map", "dictionary", "key", "value"] },
 
-      // Part 3: OOP
+      // Part 3: OOP (Sheet 4)
       { id: 16, title: "3.1 Classes and Object", sheet: 4, moduleIdx: 2, exp: "Class fields, methods, instantiation of objects.", keywords: ["class", "object", "instance", "method"] },
       { id: 17, title: "3.2 Constructor", sheet: 4, moduleIdx: 2, exp: "Generative, named, redirecting, const, factory constructors.", keywords: ["constructor", "factory", "named", "const constructor"] },
       { id: 18, title: "3.3 Inheritance", sheet: 4, moduleIdx: 2, exp: "Subclassing with extends, super keyword, @override.", keywords: ["inheritance", "extends", "super", "override"] },
@@ -38,12 +37,12 @@ class FlipBookEngine {
       { id: 21, title: "3.6 Mixins", sheet: 4, moduleIdx: 2, exp: "Code reuse with mixin and with keywords, on constraints.", keywords: ["mixin", "with", "multiple inheritance", "reuse"] },
       { id: 22, title: "3.7 Static and Constant Member", sheet: 4, moduleIdx: 2, exp: "static variables & methods, class-level static const memory.", keywords: ["static", "const member", "class variable"] },
 
-      // Part 4: Safety & Control
+      // Part 4: Safety & Control (Sheet 5)
       { id: 23, title: "4.1 Null Safety", sheet: 5, moduleIdx: 3, exp: "Sound null safety, nullable ?, late, null assertion !, ??, ?. operators.", keywords: ["null safety", "nullable", "late", "null check"] },
       { id: 24, title: "4.2 Exception Handling", sheet: 5, moduleIdx: 3, exp: "try, on Exception, catch (e, s), finally, throw custom errors.", keywords: ["exception", "try catch", "finally", "throw", "error"] },
       { id: 25, title: "4.3 Enums", sheet: 5, moduleIdx: 3, exp: "Simple enums and enhanced enums with properties, getters & constructors.", keywords: ["enum", "enhanced enum", "values", "switch"] },
 
-      // Part 5: Asynchronous
+      // Part 5: Asynchronous (Sheet 6)
       { id: 26, title: "5.1 Futures", sheet: 6, moduleIdx: 4, exp: "Future<T>, completed vs uncompleted, delayed, then, catchError.", keywords: ["future", "async", "promise", "delay"] },
       { id: 27, title: "5.2 Async", sheet: 6, moduleIdx: 4, exp: "async keyword returning futures implicitly.", keywords: ["async", "keyword", "function"] },
       { id: 28, title: "5.3 Await", sheet: 6, moduleIdx: 4, exp: "await keyword pausing execution for async completion.", keywords: ["await", "blocking async", "wait"] },
@@ -51,14 +50,14 @@ class FlipBookEngine {
       { id: 30, title: "5.5 Generators (async*)", sheet: 6, moduleIdx: 4, exp: "sync* with yield for Iterable, async* with yield for Stream.", keywords: ["generator", "async*", "sync*", "yield"] },
       { id: 31, title: "5.6 Event Loop", sheet: 6, moduleIdx: 4, exp: "Event loop execution semantics, Microtask queue vs Event queue.", keywords: ["event loop", "microtask", "queue", "scheduleMicrotask"] },
 
-      // Part 6: Advance
+      // Part 6: Advance (Sheet 7)
       { id: 32, title: "6.1 Generics", sheet: 7, moduleIdx: 5, exp: "Generic type safety <T>, generic classes & methods, bounds T extends num.", keywords: ["generics", "template", "<T>", "type bound"] },
       { id: 33, title: "6.2 Extension", sheet: 7, moduleIdx: 5, exp: "extension on Type syntax adding methods to built-in types.", keywords: ["extension", "extension methods", "utility"] },
       { id: 34, title: "6.3 Lambda + Functional Programming", sheet: 7, moduleIdx: 5, exp: "Higher-order functions, map, where, fold, reduce, immutability.", keywords: ["lambda", "functional programming", "map", "where", "fold"] },
       { id: 35, title: "6.4 File Handling", sheet: 7, moduleIdx: 5, exp: "dart:io File, Directory reading and writing text & bytes.", keywords: ["file handling", "dart:io", "readAsString", "writeAsString"] },
       { id: 36, title: "6.5 Dart 3 Features", sheet: 7, moduleIdx: 5, exp: "Records (a, b), pattern matching, switch expressions, sealed classes.", keywords: ["dart 3", "records", "patterns", "switch expression", "sealed"] },
 
-      // Part 7: Concurrency
+      // Part 7: Concurrency (Sheet 8)
       { id: 37, title: "7.1 Isolates", sheet: 8, moduleIdx: 6, exp: "Isolate.run(), ReceivePort, SendPort background thread concurrency.", keywords: ["isolates", "concurrency", "multithreading", "receiveport", "sendport"] }
     ];
 
@@ -67,8 +66,7 @@ class FlipBookEngine {
 
   init() {
     this.sheets = Array.from(document.querySelectorAll('.paper-sheet'));
-    this.maxSheetIndex = this.sheets.length - 1; // 9
-    this.totalParts = 7;
+    this.totalSheets = this.sheets.length; // 10 (Sheets 0 to 9)
     this.book3d = document.getElementById('book3d');
     this.prevBtn = document.getElementById('prevPageBtn');
     this.nextBtn = document.getElementById('nextPageBtn');
@@ -84,7 +82,7 @@ class FlipBookEngine {
 
     if (this.currentSheet === 0) {
       this.book3d.className = 'book-3d at-cover';
-    } else if (this.currentSheet === this.maxSheetIndex) {
+    } else if (this.currentSheet === this.totalSheets) {
       this.book3d.className = 'book-3d at-back-cover';
     } else {
       this.book3d.className = 'book-3d';
@@ -96,7 +94,7 @@ class FlipBookEngine {
         sheet.style.zIndex = idx;
       } else {
         sheet.classList.remove('flipped');
-        sheet.style.zIndex = (this.maxSheetIndex + 1) - idx;
+        sheet.style.zIndex = this.totalSheets - idx;
       }
     });
 
@@ -105,19 +103,19 @@ class FlipBookEngine {
         this.currentPageNumEl.textContent = 'Spread 0 (Front Cover)';
       } else if (this.currentSheet === 1) {
         this.currentPageNumEl.textContent = 'Spread 1 (Master Index)';
-      } else if (this.currentSheet === this.maxSheetIndex) {
-        this.currentPageNumEl.textContent = 'Back Cover';
+      } else if (this.currentSheet === this.totalSheets) {
+        this.currentPageNumEl.textContent = 'Book Closed (Rear Cover)';
       } else {
-        this.currentPageNumEl.textContent = `Part ${this.currentSheet - 1} of ${this.totalParts}`;
+        this.currentPageNumEl.textContent = `Part ${this.currentSheet - 1} of 7`;
       }
     }
 
     if (this.prevBtn) this.prevBtn.disabled = (this.currentSheet === 0);
-    if (this.nextBtn) this.nextBtn.disabled = (this.currentSheet === this.maxSheetIndex);
+    if (this.nextBtn) this.nextBtn.disabled = (this.currentSheet === this.totalSheets);
   }
 
   turnNext() {
-    if (this.isFlipping || this.currentSheet >= this.maxSheetIndex) return;
+    if (this.isFlipping || this.currentSheet >= this.totalSheets) return;
     this.isFlipping = true;
 
     if (window.soundEngine) window.soundEngine.playPageFlip();
@@ -152,14 +150,19 @@ class FlipBookEngine {
     this.turnPrev();
   }
 
-  jumpToModule(moduleIndex) {
-    if (moduleIndex < 0 || moduleIndex >= this.totalParts) return;
-    const targetSheet = moduleIndex + 2; // Module 0 is Sheet 2
-    if (this.currentSheet === targetSheet) return;
+  jumpToSheet(sheetIndex) {
+    if (sheetIndex < 0 || sheetIndex > this.totalSheets) return;
+    if (this.currentSheet === sheetIndex) return;
 
     if (window.soundEngine) window.soundEngine.playPageFlip();
-    this.currentSheet = targetSheet;
+    this.currentSheet = sheetIndex;
     this.updateBookState();
+  }
+
+  jumpToModule(moduleIndex) {
+    if (moduleIndex < 0 || moduleIndex >= 7) return;
+    const targetSheet = moduleIndex + 2; // Module 0 is Sheet 2
+    this.jumpToSheet(targetSheet);
   }
 
   bindEvents() {
