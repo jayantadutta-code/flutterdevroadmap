@@ -135,7 +135,7 @@ function initSearch() {
         <div class="search-result-snippet"><strong>${m.partTitle}</strong> — ${m.snippet}</div>
       `;
       card.addEventListener("click", () => {
-        window.flipbookEngine.goToSpread(Math.floor(m.flatIdx / 2));
+        window.flipbookEngine.goToSheet(Math.floor(m.flatIdx / 2) + 1);
         closeAllSidebars();
       });
       resultsContainer.appendChild(card);

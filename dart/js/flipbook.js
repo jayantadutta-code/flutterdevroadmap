@@ -1,13 +1,15 @@
 /**
- * Dart Cookbook - 3D Flipbook Page Turn Engine
- * Manages dual-page spreads, 3D CSS page flips, scrub slider synchronization, and page rendering.
+ * Dart Cookbook - 3D Physical Flipbook Page Turn Engine
+ * Manages 3D CSS physical paper sheets, cover opening/closing, sound effects, scrub slider synchronization, and page rendering.
  */
 
 class FlipbookEngine {
   constructor() {
     this.parts = [];
     this.flatPages = [];
-    this.currentSpreadIndex = 0; // 0-based spread index
+    this.currentSheet = 0; // 0 = Front Cover, 1..N-1 = Spreads, N = Back Cover
+    this.totalSheets = 0;
+    this.isFlipping = false;
     this.mode = 'flipbook'; // 'flipbook' or 'reader'
     this.bookmarks = this.loadBookmarks();
 
@@ -59,145 +61,396 @@ class FlipbookEngine {
 
   initUI() {
     document.addEventListener("DOMContentLoaded", () => {
-      this.flattenBookPages(); // Ensure all parts are flattened on DOM ready
+      this.flattenBookPages();
+      this.build3DSheets();
 
       this.scrubber = document.getElementById("page-scrubber");
-      this.leftBody = document.getElementById("left-page-body");
-      this.rightBody = document.getElementById("right-page-body");
-      this.leftHeader = document.getElementById("left-header-tag");
-      this.rightHeader = document.getElementById("right-header-tag");
-      this.leftNum = document.getElementById("left-page-num");
-      this.rightNum = document.getElementById("right-page-num");
-
-      // Update Scrubber Max
-      const maxSpreads = Math.ceil(this.flatPages.length / 2);
       if (this.scrubber) {
-        this.scrubber.max = maxSpreads;
+        this.scrubber.min = 0;
+        this.scrubber.max = this.totalSheets;
+        this.scrubber.value = 0;
         this.scrubber.addEventListener("input", (e) => {
-          const spreadIdx = parseInt(e.target.value) - 1;
-          this.goToSpread(spreadIdx);
+          const targetSheet = parseInt(e.target.value);
+          this.goToSheet(targetSheet);
         });
       }
 
       // Arrows
       document.getElementById("btn-prev-page")?.addEventListener("click", () => this.prevPage());
       document.getElementById("btn-next-page")?.addEventListener("click", () => this.nextPage());
-      document.getElementById("btn-first-page")?.addEventListener("click", () => this.goToSpread(0));
-      document.getElementById("btn-last-page")?.addEventListener("click", () => this.goToSpread(maxSpreads - 1));
+      document.getElementById("btn-first-page")?.addEventListener("click", () => this.goToSheet(0));
+      document.getElementById("btn-last-page")?.addEventListener("click", () => this.goToSheet(this.totalSheets));
 
       // Part Jump Buttons
       document.getElementById("btn-prev-chapter")?.addEventListener("click", () => this.jumpChapter(-1));
       document.getElementById("btn-next-chapter")?.addEventListener("click", () => this.jumpChapter(1));
 
-      // Bookmarks Buttons
-      document.getElementById("btn-bookmark-left")?.addEventListener("click", () => this.toggleBookmark(this.currentSpreadIndex * 2));
-      document.getElementById("btn-bookmark-right")?.addEventListener("click", () => this.toggleBookmark(this.currentSpreadIndex * 2 + 1));
-
       // Key Navigation
       document.addEventListener("keydown", (e) => {
-        if (document.querySelector(".modal-overlay.active")) return; // Don't trigger when modal open
+        if (document.querySelector(".modal-overlay.active")) return;
         if (e.key === "ArrowLeft") this.prevPage();
         if (e.key === "ArrowRight") this.nextPage();
       });
 
-      // Render Initial Spread
-      this.renderSpread(0);
+      this.updateBookState();
       this.buildTOC();
       this.buildReaderView();
     });
   }
 
-  goToSpread(spreadIndex) {
-    const maxSpreads = Math.ceil(this.flatPages.length / 2);
-    if (spreadIndex < 0 || spreadIndex >= maxSpreads) return;
+  build3DSheets() {
+    const flipbookEl = document.getElementById("flipbook");
+    if (!flipbookEl) return;
 
+    // Clear existing paper sheets while preserving spine & paper stacks
+    const existingSheets = flipbookEl.querySelectorAll(".paper-sheet");
+    existingSheets.forEach(el => el.remove());
+
+    const numPages = this.flatPages.length;
+    const numContentSheets = Math.ceil(numPages / 2);
+    const totalSheets = numContentSheets + 1; // +1 for Back Cover sheet
+    this.totalSheets = totalSheets;
+
+    // 1. SHEET 0: FRONT COVER
+    const sheet0 = document.createElement("div");
+    sheet0.className = "paper-sheet sheet-cover";
+    sheet0.id = "sheet-0";
+    sheet0.style.zIndex = totalSheets + 10;
+    sheet0.innerHTML = `
+      <div class="page-face page-front cover-front">
+        <div class="cover-container">
+          <div class="cover-badge"><i class="fa-solid fa-star"></i> Dart 3.x Edition • 2026</div>
+          <div class="cover-graphic">
+            <div class="dart-logo-wrapper">
+              <i class="fa-solid fa-bullseye dart-target-icon"></i>
+              <i class="fa-solid fa-code dart-code-icon"></i>
+            </div>
+          </div>
+          <h1 class="cover-title">DART COOKBOOK<br><span class="highlight">INTERACTIVE FLIPBOOK</span></h1>
+          <p class="cover-subtitle">Master Modern Dart 3.x from Core Syntax & OOP to Null Safety, Streams & Multi-Isolate Concurrency</p>
+
+          <div class="cover-features">
+            <div class="feature-tag"><i class="fa-solid fa-book-open"></i> 7 Core Parts</div>
+            <div class="feature-tag"><i class="fa-solid fa-terminal"></i> Interactive Playground</div>
+            <div class="feature-tag"><i class="fa-solid fa-graduation-cap"></i> 700 MCQ Arena</div>
+            <div class="feature-tag"><i class="fa-solid fa-volume-high"></i> 3D Flip Sound</div>
+          </div>
+
+          <div class="cover-actions">
+            <button id="startReadingBtn" class="btn btn-primary btn-large">
+              Open Book <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button id="coverTakeMcqBtn" class="btn btn-gold btn-large">
+              <i class="fa-solid fa-graduation-cap"></i> Take MCQ Exam
+            </button>
+          </div>
+          <span class="keyboard-tip"><i class="fa-solid fa-keyboard"></i> Use Left/Right Arrow Keys or Click Page Corner to Flip</span>
+        </div>
+        <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
+      </div>
+      <div class="page-face page-back cover-back">
+        <div class="inside-cover-content">
+          <h3><i class="fa-solid fa-feather-pointed"></i> Preface & Key Concepts</h3>
+          <p>Welcome to the <strong>Dart Cookbook Interactive 3D Flipbook</strong>. This comprehensive guide covers 7 extensive modules of Dart 3 programming with live code runners, instant search, bookmarking, and 700 MCQ level exams.</p>
+          <div class="quick-guide-box">
+            <h4>Interactive Features Included:</h4>
+            <ul>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Real 3D Page Turn:</strong> Physical curl physics with sound feedback.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Live Dart Playground:</strong> Click "Run Code" on any snippet to edit and run live.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>700 MCQ Exam Engine:</strong> 5 difficulty levels per part with certificates.</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>Bookmarks & Search:</strong> Instantly search keywords or save reference pages.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    `;
+    flipbookEl.appendChild(sheet0);
+
+    // 2. INNER CONTENT SHEETS (sheet-1 to sheet-numContentSheets)
+    for (let i = 1; i <= numContentSheets; i++) {
+      const leftIdx = (i - 1) * 2;
+      const rightIdx = leftIdx + 1;
+
+      const leftPage = this.flatPages[leftIdx];
+      const rightPage = this.flatPages[rightIdx];
+
+      const sheet = document.createElement("div");
+      sheet.className = "paper-sheet";
+      sheet.id = `sheet-${i}`;
+      sheet.style.zIndex = totalSheets + 10 - i;
+
+      const frontContent = leftPage ? `
+        <div class="page-header-strip">
+          <span class="chapter-tag">${leftPage.header}</span>
+          <button class="btn-bookmark-page ${this.bookmarks.includes(leftIdx) ? 'bookmarked' : ''}" data-flat-idx="${leftIdx}" title="Bookmark Page">
+            <i class="fa-regular fa-bookmark"></i>
+          </button>
+        </div>
+        <div class="page-inner-content">${leftPage.content}</div>
+        <div class="page-footer-strip">
+          <span class="page-num">Page ${leftIdx + 1}</span>
+        </div>
+      ` : `<div class="chapter-title-page"><h3>End of Content</h3></div>`;
+
+      const backContent = rightPage ? `
+        <div class="page-header-strip">
+          <button class="btn-bookmark-page ${this.bookmarks.includes(rightIdx) ? 'bookmarked' : ''}" data-flat-idx="${rightIdx}" title="Bookmark Page">
+            <i class="fa-regular fa-bookmark"></i>
+          </button>
+          <span class="chapter-tag">${rightPage.header}</span>
+        </div>
+        <div class="page-inner-content">${rightPage.content}</div>
+        <div class="page-footer-strip">
+          <span class="page-num">Page ${rightIdx + 1}</span>
+        </div>
+      ` : `<div class="chapter-title-page"><h3>End of Chapter</h3></div>`;
+
+      sheet.innerHTML = `
+        <div class="page-face page-front">
+          ${frontContent}
+          <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
+        </div>
+        <div class="page-face page-back">
+          ${backContent}
+        </div>
+      `;
+      flipbookEl.appendChild(sheet);
+    }
+
+    // 3. BACK COVER SHEET (sheet-totalSheets)
+    const backSheet = document.createElement("div");
+    backSheet.className = "paper-sheet sheet-cover sheet-back-cover";
+    backSheet.id = `sheet-${totalSheets}`;
+    backSheet.style.zIndex = 9;
+    backSheet.innerHTML = `
+      <div class="page-face page-front">
+        <div class="chapter-title-page" style="text-align:center; padding: 2rem;">
+          <i class="fa-solid fa-graduation-cap" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 1rem;"></i>
+          <h2>Dart 3 Cookbook Summary</h2>
+          <p style="color: var(--text-muted); margin-top: 0.5rem; line-height: 1.6;">You have explored all 7 key domains of Dart programming: Basic Engineering, Collections & Core APIs, OOP & Mixins, Null Safety & Patterns, Asynchronous Streams, Advanced Metaprogramming & FFI, and Concurrency & Isolates.</p>
+          <div class="quick-guide-box" style="margin-top: 1.5rem; text-align: left;">
+            <h4>Next Steps for Mastery:</h4>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Complete all 5 Level Exams for each Part in the MCQ Arena</li>
+              <li><i class="fa-solid fa-check"></i> Practice writing Dart isolates & async generator streams</li>
+              <li><i class="fa-solid fa-check"></i> Test your knowledge in the Interactive Dart Playground</li>
+            </ul>
+          </div>
+        </div>
+        <div class="corner-curl-hint">Close Book <i class="fa-solid fa-turn-up"></i></div>
+      </div>
+      <div class="page-face page-back cover-back">
+        <div class="cover-container">
+          <div class="cover-badge" id="finalResultBadge"><i class="fa-solid fa-award"></i> DART 3.X COOKBOOK • BACK COVER</div>
+          <h2 style="font-family:var(--font-heading); font-size: 1.8rem; margin-top: 0.5rem;">Dart Cookbook Completed!</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Mastery across 7 Parts, Code Snippets, and 700 Exam Questions.</p>
+
+          <div class="score-report-card" style="margin-top:12px; width:100%; text-align:center; background:rgba(255,255,255,0.05); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
+            <div style="display:flex; justify-content:space-around; align-items:center; margin-bottom:8px;">
+              <div>
+                <div style="font-size:1.6rem; font-weight:800; color:var(--accent-cyan);" id="reportScore">7 Parts</div>
+                <div style="font-size:0.72rem; color:var(--text-muted);">MASTERED</div>
+              </div>
+              <div style="width:1px; height:32px; background:rgba(255,255,255,0.1);"></div>
+              <div>
+                <div style="font-size:1.6rem; font-weight:800; color:var(--accent-success);" id="reportAccuracy">700 Qs</div>
+                <div style="font-size:0.72rem; color:var(--text-muted);">MCQ ARENA</div>
+              </div>
+              <div style="width:1px; height:32px; background:rgba(255,255,255,0.1);"></div>
+              <div>
+                <div style="font-size:1.6rem; font-weight:800; color:var(--accent-gold);" id="reportMaxStreak">35 Levels</div>
+                <div style="font-size:0.72rem; color:var(--text-muted);">EXAM PATH</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Official Book ISBN Barcode Box -->
+          <div class="barcode-box" style="margin-top: 10px; padding: 8px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <div style="font-family: var(--font-code); font-size: 0.72rem; color: var(--text-muted); text-align: left; line-height: 1.4;">
+              <div style="font-weight: 600; color: #fff;">ISBN 978-0-321-76784-5</div>
+              <div>Google DeepMind • Dart Edition</div>
+            </div>
+            <div style="display: flex; gap: 3px; height: 26px; align-items: center; padding: 0 4px; background: #ffffff; border-radius: 3px;">
+              <span style="width: 3px; height: 22px; background: #000;"></span>
+              <span style="width: 1px; height: 22px; background: #000;"></span>
+              <span style="width: 4px; height: 22px; background: #000;"></span>
+              <span style="width: 2px; height: 22px; background: #000;"></span>
+              <span style="width: 1px; height: 22px; background: #000;"></span>
+              <span style="width: 3px; height: 22px; background: #000;"></span>
+              <span style="width: 2px; height: 22px; background: #000;"></span>
+              <span style="width: 4px; height: 22px; background: #000;"></span>
+              <span style="width: 1px; height: 22px; background: #000;"></span>
+            </div>
+          </div>
+
+          <div class="score-report-actions" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px;">
+            <button id="restartBookBtn" class="btn btn-primary btn-large">
+              <i class="fa-solid fa-rotate-left"></i> Re-Open Book (Front Cover)
+            </button>
+            <button id="backCoverMcqBtn" class="btn btn-gold btn-large">
+              <i class="fa-solid fa-graduation-cap"></i> Launch Part Exam
+            </button>
+          </div>
+        </div>
+        <div class="corner-curl-hint" style="left:18px; right:auto;">Flip Open <i class="fa-solid fa-turn-up"></i></div>
+      </div>
+    `;
+    flipbookEl.appendChild(backSheet);
+
+    // Attach button click listeners inside cover sheets
+    document.getElementById("startReadingBtn")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.goToSheet(1);
+    });
+    document.getElementById("coverTakeMcqBtn")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.quizEngine?.openLevelSelect(window.appState.currentPart || 1);
+    });
+    document.getElementById("restartBookBtn")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.goToSheet(0);
+    });
+    document.getElementById("backCoverMcqBtn")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.quizEngine?.openLevelSelect(window.appState.currentPart || 1);
+    });
+
+    // Bookmark button listeners inside sheets
+    flipbookEl.querySelectorAll(".btn-bookmark-page").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const flatIdx = parseInt(btn.getAttribute("data-flat-idx"));
+        if (!isNaN(flatIdx)) this.toggleBookmark(flatIdx);
+      });
+    });
+
+    // Attach page face click handlers for quick flipping on sheet clicks
+    const sheets = flipbookEl.querySelectorAll(".paper-sheet");
+    sheets.forEach((sheet, idx) => {
+      sheet.addEventListener("click", (e) => {
+        if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input") || e.target.closest(".code-snippet-box")) return;
+
+        if (sheet.classList.contains("flipped")) {
+          if (idx === totalSheets) {
+            this.goToSheet(totalSheets - 1);
+          } else {
+            this.goToSheet(idx);
+          }
+        } else {
+          this.goToSheet(idx + 1);
+        }
+      });
+    });
+
+    if (window.Prism) {
+      window.Prism.highlightAllUnder(flipbookEl);
+    }
+  }
+
+  goToSheet(targetSheet) {
+    if (targetSheet < 0 || targetSheet > this.totalSheets || this.isFlipping) return;
+    this.isFlipping = true;
     window.soundEngine?.playPageFlip();
-    this.currentSpreadIndex = spreadIndex;
-    this.renderSpread(spreadIndex);
+
+    const flipbookEl = document.getElementById("flipbook");
+    const sheets = Array.from(flipbookEl.querySelectorAll(".paper-sheet"));
+
+    const flipCount = (targetSheet === this.totalSheets) ? sheets.length : targetSheet;
+
+    sheets.forEach((sheet, i) => {
+      if (i < flipCount) {
+        sheet.classList.add("flipped");
+        sheet.style.zIndex = 10 + i;
+      } else {
+        sheet.classList.remove("flipped");
+        sheet.style.zIndex = (sheets.length + 10) - i;
+      }
+    });
+
+    this.currentSheet = targetSheet;
+    this.updateBookState();
+
+    setTimeout(() => {
+      this.isFlipping = false;
+    }, 850);
   }
 
   prevPage() {
-    this.goToSpread(this.currentSpreadIndex - 1);
+    this.goToSheet(this.currentSheet - 1);
   }
 
   nextPage() {
-    this.goToSpread(this.currentSpreadIndex + 1);
+    this.goToSheet(this.currentSheet + 1);
   }
 
   jumpChapter(direction) {
-    const currentFlatIdx = this.currentSpreadIndex * 2;
+    const currentFlatIdx = Math.max(0, (this.currentSheet - 1) * 2);
     const currentPart = this.flatPages[currentFlatIdx]?.partId || 1;
     const targetPart = currentPart + direction;
 
     if (targetPart < 1 || targetPart > 7) return;
 
-    // Find first page of target part
     const targetIdx = this.flatPages.findIndex(p => p.partId === targetPart);
     if (targetIdx !== -1) {
-      const spreadIdx = Math.floor(targetIdx / 2);
-      this.goToSpread(spreadIdx);
+      const sheetIdx = Math.floor(targetIdx / 2) + 1;
+      this.goToSheet(sheetIdx);
     }
   }
 
-  renderSpread(spreadIdx) {
-    const leftIdx = spreadIdx * 2;
-    const rightIdx = leftIdx + 1;
+  updateBookState() {
+    const flipbookEl = document.getElementById("flipbook");
+    const prevBtn = document.getElementById("btn-prev-page");
+    const nextBtn = document.getElementById("btn-next-page");
+    const pageIndicator = document.getElementById("current-page-num");
+    const partIndicator = document.getElementById("current-part-label");
 
-    const leftPage = this.flatPages[leftIdx];
-    const rightPage = this.flatPages[rightIdx];
+    if (!flipbookEl) return;
 
-    // Render Left Page
-    if (leftPage) {
-      this.leftBody.innerHTML = leftPage.content;
-      this.leftHeader.textContent = leftPage.header;
-      this.leftNum.textContent = leftIdx + 1;
-      document.getElementById("btn-bookmark-left")?.classList.toggle("bookmarked", this.bookmarks.includes(leftIdx));
+    flipbookEl.classList.remove("at-cover", "at-back-cover");
+
+    if (this.currentSheet === 0) {
+      flipbookEl.classList.add("at-cover");
+      if (prevBtn) { prevBtn.style.opacity = '0'; prevBtn.style.pointerEvents = 'none'; }
+      if (nextBtn) { nextBtn.style.opacity = '1'; nextBtn.style.pointerEvents = 'auto'; }
+      if (pageIndicator) pageIndicator.textContent = "Front Cover";
+      if (partIndicator) partIndicator.textContent = "Dart Cookbook";
+    } else if (this.currentSheet === this.totalSheets) {
+      flipbookEl.classList.add("at-back-cover");
+      if (prevBtn) { prevBtn.style.opacity = '1'; prevBtn.style.pointerEvents = 'auto'; }
+      if (nextBtn) { nextBtn.style.opacity = '0'; nextBtn.style.pointerEvents = 'none'; }
+      if (pageIndicator) pageIndicator.textContent = "Back Cover (Completion)";
+      if (partIndicator) partIndicator.textContent = "Dart Mastery";
     } else {
-      this.leftBody.innerHTML = "";
-      this.leftHeader.textContent = "";
-      this.leftNum.textContent = "";
-    }
+      if (prevBtn) { prevBtn.style.opacity = '1'; prevBtn.style.pointerEvents = 'auto'; }
+      if (nextBtn) { nextBtn.style.opacity = '1'; nextBtn.style.pointerEvents = 'auto'; }
 
-    // Render Right Page
-    if (rightPage) {
-      this.rightBody.innerHTML = rightPage.content;
-      this.rightHeader.textContent = rightPage.header;
-      this.rightNum.textContent = rightIdx + 1;
-      document.getElementById("btn-bookmark-right")?.classList.toggle("bookmarked", this.bookmarks.includes(rightIdx));
-    } else {
-      this.rightBody.innerHTML = `<div class="chapter-title-page"><h3>End of Chapter</h3></div>`;
-      this.rightHeader.textContent = "DART COOKBOOK";
-      this.rightNum.textContent = rightIdx + 1;
-    }
+      const flatIdx = (this.currentSheet - 1) * 2;
+      const pageObj = this.flatPages[flatIdx];
 
-    // Prism syntax highlighting trigger
-    if (window.Prism) {
-      window.Prism.highlightAllUnder(this.leftBody);
-      window.Prism.highlightAllUnder(this.rightBody);
-    }
+      if (pageIndicator) pageIndicator.textContent = `Page ${flatIdx + 1} of ${this.flatPages.length}`;
+      if (partIndicator && pageObj) partIndicator.textContent = pageObj.partTitle;
 
-    // Update Header & Scrubber UI
-    const currentPartId = leftPage?.partId || 1;
-    const currentPartTitle = leftPage?.partTitle || "Part 1: Basic";
-    
-    document.getElementById("current-part-label").textContent = currentPartTitle;
-    document.getElementById("current-page-num").textContent = `Page ${leftIdx + 1} of ${this.flatPages.length}`;
+      if (window.appState && pageObj) {
+        window.appState.currentPart = pageObj.partId;
+        window.appState.currentFlatIndex = flatIdx;
+      }
+    }
 
     if (this.scrubber) {
-      this.scrubber.value = spreadIdx + 1;
-      document.getElementById("scrubber-val").textContent = `${spreadIdx + 1} / ${Math.ceil(this.flatPages.length / 2)}`;
-    }
-
-    // Sync active state with appState
-    if (window.appState) {
-      window.appState.currentPart = currentPartId;
-      window.appState.currentFlatIndex = leftIdx;
+      this.scrubber.value = this.currentSheet;
+      this.scrubber.max = this.totalSheets;
+      const scrubberVal = document.getElementById("scrubber-val");
+      if (scrubberVal) {
+        if (this.currentSheet === 0) scrubberVal.textContent = "Cover";
+        else if (this.currentSheet === this.totalSheets) scrubberVal.textContent = "End";
+        else scrubberVal.textContent = `${this.currentSheet} / ${this.totalSheets - 1}`;
+      }
     }
 
     // TOC progress fill
     const progressFill = document.getElementById("toc-progress-fill");
     if (progressFill) {
-      const pct = ((leftIdx + 1) / this.flatPages.length) * 100;
+      const pct = (this.currentSheet / this.totalSheets) * 100;
       progressFill.style.width = `${pct}%`;
     }
   }
@@ -211,7 +464,7 @@ class FlipbookEngine {
       this.bookmarks.splice(idx, 1);
     }
     this.saveBookmarks();
-    this.renderSpread(this.currentSpreadIndex);
+    this.build3DSheets();
     this.renderBookmarksList();
   }
 
@@ -236,7 +489,8 @@ class FlipbookEngine {
         <div class="search-result-snippet">${page.partTitle}</div>
       `;
       card.addEventListener("click", () => {
-        this.goToSpread(Math.floor(flatIdx / 2));
+        const sheetIdx = Math.floor(flatIdx / 2) + 1;
+        this.goToSheet(sheetIdx);
       });
       list.appendChild(card);
     });
@@ -273,7 +527,8 @@ class FlipbookEngine {
         item.addEventListener("click", () => {
           const flatIdx = this.flatPages.findIndex(p => p.pageId === pg.pageId);
           if (flatIdx !== -1) {
-            this.goToSpread(Math.floor(flatIdx / 2));
+            const sheetIdx = Math.floor(flatIdx / 2) + 1;
+            this.goToSheet(sheetIdx);
           }
         });
         list.appendChild(item);
