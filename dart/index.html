@@ -60,7 +60,7 @@
         <div class="rank-badge" id="user-rank-display">Dart Novice</div>
       </div>
 
-      <button id="toc-toggle-btn" class="icon-btn" title="Table of Contents">
+      <button id="toc-toggle-btn" class="icon-btn" title="Table of Contents" onclick="if(window.flipbookEngine) window.flipbookEngine.toggleTOC()">
         <i class="fa-solid fa-list-ol"></i> Index
       </button>
 
@@ -98,7 +98,7 @@
   <div id="toc-drawer" class="toc-drawer">
     <div class="toc-header">
       <h3><i class="fa-solid fa-list"></i> Table of Contents</h3>
-      <button id="toc-close-btn" class="icon-btn">&times;</button>
+      <button id="toc-close-btn" class="icon-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.closeTOC()">&times;</button>
     </div>
     <div id="toc-list-container" class="toc-list"></div>
   </div>
@@ -106,9 +106,9 @@
   <!-- Main View Content Area -->
   <main class="app-container">
 
-    <!-- View 1: 3D Page-Flipping Book Stage (Matching YAML & Git-GitHub) -->
+    <!-- View 1: 3D Page-Flipping Book Stage -->
     <section class="view-section active" id="view-book">
-      <!-- Page Flip Control - Left/Prev (Matching YAML) -->
+      <!-- Page Flip Control - Left/Prev -->
       <button id="prevPageBtn" class="nav-corner nav-left" aria-label="Previous Page (Flip Reverse)" title="Previous Page (Left Arrow)">
         <i class="fa-solid fa-chevron-left"></i>
         <span class="corner-hint">Reverse Flip</span>
@@ -563,16 +563,20 @@ void main() async {
         </div>
       </div>
 
-      <!-- Page Flip Control - Right/Next (Matching YAML) -->
+      <!-- Page Flip Control - Right/Next -->
       <button id="nextPageBtn" class="nav-corner nav-right" aria-label="Next Page (Flip Next)" title="Next Page (Right Arrow)">
         <i class="fa-solid fa-chevron-right"></i>
         <span class="corner-hint">Flip Next</span>
       </button>
 
-      <!-- Floating Reader Toolbar (Matching YAML) -->
+      <!-- Floating Reader Toolbar -->
       <div class="reader-toolbar">
         <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnPrev()" title="Previous Page (Left Arrow)">
           <i class="fa-solid fa-chevron-left"></i> Previous
+        </button>
+        <div class="reader-divider"></div>
+        <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.toggleTOC()" title="Table of Contents">
+          <i class="fa-solid fa-list-ol"></i> Index
         </button>
         <div class="reader-divider"></div>
         <span class="page-indicator" id="currentPageNum">Spread 0 (Front Cover)</span>

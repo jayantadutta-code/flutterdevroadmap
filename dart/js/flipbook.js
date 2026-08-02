@@ -125,7 +125,7 @@ class FlipBookEngine {
 
     setTimeout(() => {
       this.isFlipping = false;
-    }, 650);
+    }, 600);
   }
 
   nextPage() {
@@ -143,7 +143,7 @@ class FlipBookEngine {
 
     setTimeout(() => {
       this.isFlipping = false;
-    }, 650);
+    }, 600);
   }
 
   prevPage() {
@@ -157,6 +157,7 @@ class FlipBookEngine {
     if (window.soundEngine) window.soundEngine.playPageFlip();
     this.currentSheet = sheetIndex;
     this.updateBookState();
+    this.closeTOC();
   }
 
   jumpToModule(moduleIndex) {
@@ -165,9 +166,33 @@ class FlipBookEngine {
     this.jumpToSheet(targetSheet);
   }
 
+  toggleTOC() {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer) {
+      drawer.classList.toggle('open');
+    }
+  }
+
+  closeTOC() {
+    const drawer = document.getElementById('toc-drawer');
+    if (drawer) {
+      drawer.classList.remove('open');
+    }
+  }
+
   bindEvents() {
-    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.turnPrev());
-    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.turnNext());
+    if (this.prevBtn) {
+      this.prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.turnPrev();
+      });
+    }
+    if (this.nextBtn) {
+      this.nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.turnNext();
+      });
+    }
 
     // Page Face & Corner Curl Click Listeners
     this.sheets.forEach((sheet) => {
@@ -201,18 +226,6 @@ class FlipBookEngine {
         if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.turnPrev();
       }
     });
-
-    // TOC Toggle
-    const tocBtn = document.getElementById('toc-toggle-btn');
-    const tocDrawer = document.getElementById('toc-drawer');
-    const tocCloseBtn = document.getElementById('toc-close-btn');
-
-    if (tocBtn && tocDrawer) {
-      tocBtn.addEventListener('click', () => tocDrawer.classList.toggle('open'));
-    }
-    if (tocCloseBtn && tocDrawer) {
-      tocCloseBtn.addEventListener('click', () => tocDrawer.classList.remove('open'));
-    }
 
     // Search Engine
     const searchInput = document.getElementById('commandSearchInput');
@@ -258,7 +271,7 @@ class FlipBookEngine {
     if (!tocListContainer) return;
 
     tocListContainer.innerHTML = DART_MODULES.map((mod, idx) => `
-      <div class="toc-item" onclick="window.flipbookEngine.jumpToModule(${idx}); document.getElementById('toc-drawer').classList.remove('open');">
+      <div class="toc-item" onclick="window.flipbookEngine.jumpToModule(${idx}); window.flipbookEngine.closeTOC();">
         <span class="toc-num">${mod.chapterNum}</span>
         <div class="toc-info">
           <div class="toc-title">${mod.title}</div>
