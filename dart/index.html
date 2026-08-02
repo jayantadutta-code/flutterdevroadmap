@@ -4,20 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YAML Interactive 3D FlipBook & Masterclass Guide</title>
+  <title>Dart Interactive 3D FlipBook & Masterclass Guide</title>
   <meta name="description"
-    content="Master YAML (Yet Another Markup Language) step-by-step with an authentic 3D page-flipping book, live YAML validator, gamified Q&A arena, and search engine!" />
+    content="Master Dart step-by-step with an authentic 3D page-flipping book, live code simulator playground, 700-question Q&A quest arena, and topic search!" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
 
-  <!-- FontAwesome Icons, JS-YAML Parser & Canvas Confetti -->
+  <!-- FontAwesome Icons & Canvas Confetti -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <link rel="stylesheet" href="styles.css" />
@@ -29,58 +28,51 @@
   <header class="app-header">
     <div class="header-left">
       <div class="brand">
-        <div class="brand-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+        <div class="brand-icon"><i class="fa-solid fa-code"></i></div>
         <div class="brand-text">
-          <span class="brand-title">YAML<span class="highlight">FlipBook</span></span>
-          <span class="brand-tagline">38-Topic Master Guide</span>
+          <span class="brand-title">Dart<span class="highlight">FlipBook</span></span>
+          <span class="brand-tagline">37-Topic Master Guide</span>
         </div>
       </div>
     </div>
 
     <!-- Center Navigation Tabs & Topic Search -->
     <div class="header-center">
-      <!-- View Navigation Tabs -->
       <div class="view-tab-group">
         <button class="nav-tab active" id="tab-book-btn" onclick="switchMainView('book')">
           <i class="fa-solid fa-book-open"></i> FlipBook
         </button>
         <button class="nav-tab" id="tab-playground-btn" onclick="switchMainView('playground')">
-          <i class="fa-solid fa-code"></i> Playground
+          <i class="fa-solid fa-terminal"></i> Playground
         </button>
         <button class="nav-tab" id="tab-quiz-btn" onclick="switchMainView('quiz')">
-          <i class="fa-solid fa-gamepad"></i> Quest Arena <span class="badge-pill">Quiz</span>
+          <i class="fa-solid fa-gamepad"></i> Quest Arena <span class="badge-pill">700 MCQs</span>
         </button>
       </div>
 
-      <!-- Quick Command / Topic Search Input -->
+      <!-- Search Input -->
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="commandSearchInput"
-          placeholder="Search topic or concept... (e.g. anchors, chomping, k8s)" autocomplete="off">
+        <input type="text" id="commandSearchInput" placeholder="Search Dart topic... (e.g. Isolates, Mixin, Records)"
+          autocomplete="off">
         <div id="searchSearchResults" class="search-results-dropdown hidden"></div>
       </div>
     </div>
 
     <!-- Right Header Controls -->
     <div class="header-right">
-      <!-- Player Stats Pill -->
-      <div class="player-stats-pill" id="player-stats-btn" onclick="switchMainView('quiz')"
-        title="View Badges & Accomplishments">
+      <div class="player-stats-pill" id="player-stats-btn" onclick="switchMainView('quiz')" title="View Badges & XP">
         <div class="xp-badge"><i class="fa-solid fa-bolt"></i> <span id="user-xp-display">0</span> XP</div>
-        <div class="rank-badge" id="user-rank-display">YAML Novice</div>
+        <div class="rank-badge" id="user-rank-display">Dart Novice</div>
       </div>
 
-      <!-- TOC Toggle Button -->
-      <button id="toc-toggle-btn" class="icon-btn" title="Table of Contents" aria-label="Toggle Table of Contents">
-        <i class="fa-solid fa-list-ol"></i>
-        <span class="btn-text">Index</span>
+      <button id="toc-toggle-btn" class="icon-btn" title="Table of Contents">
+        <i class="fa-solid fa-list-ol"></i> Index
       </button>
 
-      <!-- Sound Toggle -->
-      <button id="sound-toggle-btn" class="icon-btn" title="Toggle Page Flip Sound (Mute/Unmute)"
-        aria-label="Toggle Sound">
+      <button id="sound-toggle-btn" class="icon-btn" title="Toggle Sound">
         <i class="fa-solid fa-volume-high" id="sound-icon"></i>
-        <span class="btn-text" id="sound-text">Sound On</span>
+        <span id="sound-text">Sound On</span>
       </button>
 
       <!-- Theme Selector Dropdown -->
@@ -88,11 +80,14 @@
         <button id="theme-btn" class="theme-dropdown-btn" title="Change Theme">
           <i class="fa-solid fa-palette"></i>
           <span id="current-theme-name">Cyberpunk</span>
-          <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div class="theme-dropdown-menu" id="theme-menu">
           <div class="theme-option active" data-theme-id="cyberpunk">
             <span class="theme-dot cyberpunk-dot"></span> Cyberpunk Dark
+          </div>
+          <div class="theme-option" data-theme-id="fluttersky">
+            <span class="theme-dot fluttersky-dot"></span> Flutter Sky
           </div>
           <div class="theme-option" data-theme-id="obsidian">
             <span class="theme-dot obsidian-dot"></span> Obsidian Slate
@@ -100,580 +95,609 @@
           <div class="theme-option" data-theme-id="solarized">
             <span class="theme-dot solarized-dot"></span> Solarized Light
           </div>
-          <div class="theme-option" data-theme-id="synthwave">
-            <span class="theme-dot synthwave-dot"></span> Synthwave Sunset
-          </div>
-          <div class="theme-option" data-theme-id="emerald">
-            <span class="theme-dot emerald-dot"></span> Emerald Forest
-          </div>
         </div>
-      </div>
-
-      <!-- Reading Spread Progress -->
-      <div class="page-counter">
-        <span id="currentPageNum">Spread 0</span> / <span id="totalPagesNum">11</span>
       </div>
     </div>
   </header>
 
   <!-- Table of Contents Slide-Out Drawer -->
-  <div class="toc-backdrop" id="toc-backdrop"></div>
-  <aside class="toc-drawer" id="toc-drawer">
+  <div id="toc-drawer" class="toc-drawer">
     <div class="toc-header">
-      <h3><i class="fa-solid fa-list-ol"></i> Table of Contents</h3>
-      <button id="toc-close-btn" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+      <h3><i class="fa-solid fa-list"></i> Table of Contents</h3>
+      <button id="toc-close-btn" class="icon-btn">&times;</button>
     </div>
-    <div class="toc-progress-info">
-      <span>Reading Progress</span>
-      <span id="toc-progress-percent">0%</span>
-    </div>
-    <div class="progress-bar-container">
-      <div class="progress-bar-fill" id="toc-progress-bar"></div>
-    </div>
-    <ul class="toc-list" id="toc-list">
-      <!-- Populated dynamically in flipbook.js -->
-    </ul>
-  </aside>
+    <div id="toc-list-container" class="toc-list"></div>
+  </div>
 
-  <!-- Toast Notification Container -->
-  <div id="toast-container" class="toast-container"></div>
+  <!-- Main View Content Area -->
+  <main class="app-container">
 
-  <!-- Main Content Container -->
-  <main class="main-container">
+    <!-- View 1: 3D Page-Flipping Book Stage (Matching YAML & Git-GitHub) -->
+    <section class="view-section active" id="view-book">
+      <!-- Page Flip Control - Left/Prev (Matching YAML) -->
+      <button id="prevPageBtn" class="nav-corner nav-left" aria-label="Previous Page (Flip Reverse)"
+        title="Previous Page (Left Arrow)">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span class="corner-hint">Reverse Flip</span>
+      </button>
 
-    <!-- VIEW 1: AUTHENTIC 3D FLIPBOOK VIEW -->
-    <section id="view-book" class="view-section active">
-      <div class="flipbook-wrapper">
-        <!-- Page Flip Control - Left/Prev -->
-        <button id="prevPageBtn" class="nav-corner nav-left" aria-label="Previous Page (Reverse Flip)"
+      <div class="book-viewport">
+        <div class="book-3d at-cover" id="book3d">
+          <div class="book-spine"></div>
+          <div class="paper-stack-left"></div>
+          <div class="paper-stack-right"></div>
+
+          <!-- SHEET 0: FRONT COVER -->
+          <div class="paper-sheet sheet-cover" id="sheet-0" style="z-index: 10;">
+            <div class="page-face page-front">
+              <div class="cover-content">
+                <div class="cover-badge">GOOGLE DART 3 MASTERCLASS</div>
+                <h1 class="cover-title">DART<br /><span class="cover-highlight">COOKBOOK</span></h1>
+                <p class="cover-subtitle">Interactive 3D Master Guide & 700-Question Quiz Arena</p>
+                <div class="cover-meta">
+                  <span>7 Core Parts</span> • <span>37 Subtopics</span> • <span>35 Level Exams</span>
+                </div>
+                <button class="btn btn-primary" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()">
+                  <span>Open Cookbook</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-inner">
+                <h2 class="page-h2">Welcome to the Dart Masterclass</h2>
+                <p class="page-p">
+                  This interactive 3D cookbook covers the complete Dart language specification: from foundational
+                  syntax, OOP, and Sound Null Safety to Advanced Async Streams, Dart 3 Patterns, and Background Thread
+                  Isolates.
+                </p>
+                <div class="tip-box">
+                  <i class="fa-solid fa-compass"></i>
+                  <strong>Navigation Tip:</strong> Click any page or corner hint to flip pages, use Left/Right arrow
+                  keys, or open the Index drawer to jump to any topic!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 1: MASTER TABLE OF CONTENTS INDEX -->
+          <div class="paper-sheet" id="sheet-1" style="z-index: 9;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">INDEX (PART 1 - 4)</span>
+                <span class="page-chapter-title">Master Curriculum Index</span>
+              </div>
+              <div class="page-inner">
+                <div class="toc-grid">
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(0)">
+                    <div class="toc-number">Part 1</div>
+                    <div class="toc-info">
+                      <h4>Basics & Syntax</h4>
+                      <p>Topics 1.1 to 1.10</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(1)">
+                    <div class="toc-number">Part 2</div>
+                    <div class="toc-info">
+                      <h4>Core Dart Collections</h4>
+                      <p>Topics 2.1 to 2.5</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(2)">
+                    <div class="toc-number">Part 3</div>
+                    <div class="toc-info">
+                      <h4>Object Oriented (OOP)</h4>
+                      <p>Topics 3.1 to 3.7</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(3)">
+                    <div class="toc-number">Part 4</div>
+                    <div class="toc-info">
+                      <h4>Safety & Control</h4>
+                      <p>Topics 4.1 to 4.3</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">INDEX (PART 5 - 7)</span>
+                <span class="page-chapter-title">Advanced Curriculum Index</span>
+              </div>
+              <div class="page-inner">
+                <div class="toc-grid">
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(4)">
+                    <div class="toc-number">Part 5</div>
+                    <div class="toc-info">
+                      <h4>Asynchronous Programming</h4>
+                      <p>Topics 5.1 to 5.6</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(5)">
+                    <div class="toc-number">Part 6</div>
+                    <div class="toc-info">
+                      <h4>Advance & Dart 3</h4>
+                      <p>Topics 6.1 to 6.5</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(6)">
+                    <div class="toc-number">Part 7</div>
+                    <div class="toc-info">
+                      <h4>Concurrency (Isolates)</h4>
+                      <p>Topic 7.1</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 2: PART 1 BASICS -->
+          <div class="paper-sheet" id="sheet-2" style="z-index: 8;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 1</span>
+                <span class="page-chapter-title">Basics (Topics 1.1 - 1.4)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">1.1 Introduction to Dart</h2>
+                <p class="page-p"><strong>Dart</strong> is a client-optimized, strongly-typed language developed by
+                  Google. Powers Flutter for mobile, web, and desktop apps.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Hello World</span><code>void main() {
+  print('Welcome to Dart Programming!');
+}</code></pre>
+
+                <h2 class="page-h2">1.2 Comments</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Comments</span><code>// Single-line comment
+/* Multi-line block */
+/// Doc comment for API documentation</code></pre>
+
+                <h2 class="page-h2">1.3 Variables & Data Types</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Variables</span><code>var name = 'Alex'; // Inferred String
+final DateTime now = DateTime.now(); // Runtime const
+const double pi = 3.14159; // Compile-time const</code></pre>
+
+                <h2 class="page-h2">1.4 Numbers</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Numbers</span><code>int val = int.parse('42');
+double rate = 9.99;
+print(val.isEven); // true</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 1 (Cont.)</span>
+                <span class="page-chapter-title">Basics (Topics 1.5 - 1.10)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">1.5 Strings & 1.6 RegExp</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Strings & RegEx</span><code>String msg = 'I love ${"Flutter"}!';
+RegExp email = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+print(email.hasMatch('dev@flutter.dev')); // true</code></pre>
+
+                <h2 class="page-h2">1.7 StringBuffer</h2>
+                <pre class="book-code-block"><span class="code-header-badge">StringBuffer</span><code>var sb = StringBuffer();
+sb.writeAll(['Flutter ', 'is ', 'awesome!']);
+print(sb.toString());</code></pre>
+
+                <h2 class="page-h2">1.8 Operators, 1.9 Conditions & 1.10 Loops</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Control Flow</span><code>int div = 10 ~/ 3; // Truncating division = 3
+if (div > 2) print('Greater');
+for (var i = 0; i < 3; i++) { print('Count: $i'); }</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 3: PART 2 CORE DART -->
+          <div class="paper-sheet" id="sheet-3" style="z-index: 7;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 2</span>
+                <span class="page-chapter-title">Core Dart (Functions)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">2.1 Functions & 2.2 Function Advance</h2>
+                <p class="page-p">Functions are first-class objects. Supports arrow syntax, named parameters, default
+                  values, and closures.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Functions</span><code>// Arrow Function
+int add(int a, int b) => a + b;
+
+// Named Parameters
+void createUser({required String name, int age = 18}) {
+  print('$name ($age)');
+}
+
+void main() {
+  createUser(name: 'Alex', age: 25);
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 2 (Cont.)</span>
+                <span class="page-chapter-title">Core Dart (List, Set, Map)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">2.3 Lists, 2.4 Sets & 2.5 Maps</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Collections</span><code>// List & Spread operator
+List<int> nums = [1, 2];
+List<int> expanded = [0, ...nums, 3]; // [0, 1, 2, 3]
+
+// Unique Set
+Set<String> tags = {'dart', 'flutter', 'dart'}; // 2 items
+
+// Map
+Map<String, int> scores = {'Alex': 95};
+scores.putIfAbsent('Sam', () => 90);</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 4: PART 3 OOP -->
+          <div class="paper-sheet" id="sheet-4" style="z-index: 6;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 3</span>
+                <span class="page-chapter-title">OOP (Classes, Constructors, Inheritance)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">3.1 Classes, 3.2 Constructors & 3.3 Inheritance</h2>
+                <pre class="book-code-block"><span class="code-header-badge">OOP Fundamentals</span><code>class Person {
+  final String name;
+  const Person(this.name); // Const constructor
+}
+
+class Animal {
+  void speak() => print('Animal sound');
+}
+
+class Dog extends Animal {
+  @override
+  void speak() => print('Bark!');
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 3 (Cont.)</span>
+                <span class="page-chapter-title">OOP (Abstract, Interfaces, Mixins, Static)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">3.4 Abstract, 3.5 Interfaces, 3.6 Mixins & 3.7 Static</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Advanced OOP</span><code>abstract class Printable {
+  void printData();
+}
+
+mixin Swimmer {
+  void swim() => print('Swimming fast!');
+}
+
+class Duck extends Animal with Swimmer implements Printable {
+  @override
+  void printData() => print('Duck item');
+}
+
+class Config {
+  static const String version = '1.0.0';
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 5: PART 4 SAFETY & CONTROL -->
+          <div class="paper-sheet" id="sheet-5" style="z-index: 5;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 4</span>
+                <span class="page-chapter-title">Safety & Control (Null Safety)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">4.1 Sound Null Safety</h2>
+                <p class="page-p">Types are non-nullable by default. Append <code>?</code> for nullable variables.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Null Safety</span><code>String? nickname; // Nullable
+late String bio; // Deferred init
+
+void main() {
+  bio = 'Dart Developer';
+  print(nickname?.length ?? 0); // Null-aware & coalescing
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 4 (Cont.)</span>
+                <span class="page-chapter-title">Safety & Control (Exceptions & Enums)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">4.2 Exception Handling & 4.3 Enhanced Enums</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Exceptions & Enums</span><code>try {
+  int res = 10 ~/ 0;
+} on UnsupportedError {
+  print('Caught error!');
+} finally {
+  print('Cleanup executed.');
+}
+
+enum Status {
+  pending(100), success(200);
+  final int code;
+  const Status(this.code);
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 6: PART 5 ASYNCHRONOUS -->
+          <div class="paper-sheet" id="sheet-6" style="z-index: 4;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 5</span>
+                <span class="page-chapter-title">Asynchronous (Futures, Async, Await, Stream)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">5.1 Futures, 5.2 Async, 5.3 Await & 5.4 Streams</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Futures & Streams</span><code>Future<String> fetchData() async {
+  await Future.delayed(Duration(milliseconds: 500));
+  return 'Data Loaded!';
+}
+
+void main() async {
+  print(await fetchData());
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 5 (Cont.)</span>
+                <span class="page-chapter-title">Generators & Event Loop</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">5.5 Generators (async*) & 5.6 Event Loop</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Generators & Event Loop</span><code>Stream<int> countStream(int max) async* {
+  for (int i = 1; i <= max; i++) {
+    yield i; // Emit to stream
+  }
+}
+
+void main() {
+  print('1. Sync');
+  scheduleMicrotask(() => print('2. Microtask'));
+  Future(() => print('3. Event Queue'));
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 7: PART 6 ADVANCE -->
+          <div class="paper-sheet" id="sheet-7" style="z-index: 3;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 6</span>
+                <span class="page-chapter-title">Advance (Generics, Extension, Lambda/FP)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">6.1 Generics, 6.2 Extensions & 6.3 Lambda/FP</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Generics & Extensions</span><code>class Box<T extends num> {
+  T val;
+  Box(this.val);
+}
+
+extension StringUpper on String {
+  String get shout => '${this.toUpperCase()}!';
+}
+
+print('flutter'.shout); // FLUTTER!</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 6 (Cont.)</span>
+                <span class="page-chapter-title">File Handling & Dart 3 Features</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">6.4 File Handling (dart:io) & 6.5 Dart 3 Features</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Dart 3 Records & Patterns</span><code>(String, int) getUser() => ('Alex', 2026);
+
+String describe(Object obj) => switch (obj) {
+  (String name, int age) => 'User $name is $age',
+  _ => 'Unknown'
+};
+
+void main() {
+  var (name, year) = getUser();
+  print('$name in $year');
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 8: PART 7 CONCURRENCY -->
+          <div class="paper-sheet" id="sheet-8" style="z-index: 2;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 7</span>
+                <span class="page-chapter-title">Concurrency (Isolates)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">7.1 Isolates & Multithreading</h2>
+                <p class="page-p">Isolates are memory-isolated threads running on independent CPU cores.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Isolate.run()</span><code>import 'dart:isolate';
+
+int heavyTask(int count) {
+  int sum = 0;
+  for (int i = 0; i < count; i++) sum += i;
+  return sum;
+}
+
+void main() async {
+  int result = await Isolate.run(() => heavyTask(1000000));
+  print('Background Isolate Result: $result');
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-inner" style="text-align: center; justify-content: center; padding: 2rem;">
+                <i class="fa-solid fa-medal"
+                  style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 1rem;"></i>
+                <h2 class="page-h2" style="border: none; padding: 0;">Dart Language Certificate</h2>
+                <p class="page-p">You have mastered all 7 Core Parts & 37 Subtopics of Dart 3!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 9: BACK COVER -->
+          <div class="paper-sheet sheet-cover" id="sheet-9" style="z-index: 1;">
+            <div class="page-face page-front">
+              <div class="page-inner" style="text-align: center; justify-content: center; padding: 2rem;">
+                <i class="fa-solid fa-trophy" style="font-size: 3rem; color: #ffb703; margin-bottom: 1rem;"></i>
+                <h2 class="page-h2" style="border: none; padding: 0;">Ready for Quest Arena?</h2>
+                <p class="page-p">Test your knowledge with 700 questions across 35 level examinations!</p>
+                <button class="btn btn-primary" onclick="switchMainView('quiz')" style="margin: 1rem auto;">
+                  <i class="fa-solid fa-gamepad"></i> Launch Quest Arena
+                </button>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-inner" style="text-align: center; justify-content: center; padding: 2rem;">
+                <h3>Dart 3 Masterclass Flipbook</h3>
+                <p>Google Flutter Developer Roadmap 2026</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Page Flip Control - Right/Next (Matching YAML) -->
+      <button id="nextPageBtn" class="nav-corner nav-right" aria-label="Next Page (Flip Next)"
+        title="Next Page (Right Arrow)">
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="corner-hint">Flip Next</span>
+      </button>
+
+      <!-- Floating Reader Toolbar (Matching YAML) -->
+      <div class="reader-toolbar">
+        <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnPrev()"
           title="Previous Page (Left Arrow)">
-          <i class="fa-solid fa-chevron-left"></i>
-          <span class="corner-hint">Reverse Flip</span>
+          <i class="fa-solid fa-chevron-left"></i> Previous
         </button>
+        <div class="reader-divider"></div>
+        <span class="page-indicator" id="currentPageNum">Spread 0 (Front Cover)</span>
+        <div class="reader-divider"></div>
+        <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()"
+          title="Next Page (Right Arrow)">
+          Next <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
 
-        <!-- Book Stage (3D Physical Book Viewport Container) -->
-        <div class="book-viewport">
-          <div class="book-3d at-cover" id="book3d">
-            <div class="book-spine"></div>
-            <div class="paper-stack-left"></div>
-            <div class="paper-stack-right"></div>
+    <!-- View 2: Interactive Dart Code Playground -->
+    <section class="view-section" id="view-playground">
+      <div class="playground-layout">
+        <div class="playground-editor-card">
+          <div class="card-header">
+            <span><i class="fa-solid fa-code"></i> Dart Code Editor</span>
+            <select id="playgroundPresetSelect" class="preset-select"></select>
+          </div>
+          <textarea id="playgroundCodeInput" class="code-editor-textarea" spellcheck="false"></textarea>
+          <div class="card-actions">
+            <button class="btn btn-secondary" id="copyPlaygroundCodeBtn"><i class="fa-solid fa-copy"></i> Copy
+              Code</button>
+            <button class="btn btn-primary" id="runCodeBtn"><i class="fa-solid fa-play"></i> Run Code</button>
+          </div>
+        </div>
 
-            <!-- ================= SHEET 0: COVER ================= -->
-            <div class="paper-sheet sheet-cover" id="sheet-0" style="z-index: 12;">
-              <div class="page-face page-front cover-front">
-                <div class="cover-container">
-                  <div class="cover-badge">Masterclass Edition • 2026</div>
-                  <div class="cover-emblem">
-                    <i class="fa-solid fa-file-code"></i>
-                  </div>
-                  <h1 class="cover-title">THE YAML & CONFIG <br><span class="highlight">3D FLIPBOOK GUIDE</span></h1>
-                  <p class="cover-subtitle">38-Topic Complete Masterclass with Live Validator, Code Playground & 3D
-                    Sheet Curl Physics</p>
+        <div class="playground-console-card">
+          <div class="card-header">
+            <span><i class="fa-solid fa-terminal"></i> Console Output</span>
+            <button class="btn btn-secondary" id="clearConsoleBtn"
+              style="padding: 4px 8px; font-size: 0.75rem;">Clear</button>
+          </div>
+          <pre id="playgroundConsoleOutput"
+            class="console-output-box">Press "Run Code" to execute script in simulated Dart runtime...</pre>
+        </div>
+      </div>
+    </section>
 
-                  <div class="cover-features">
-                    <div class="feature-tag"><i class="fa-solid fa-book-open"></i> 38 Topics</div>
-                    <div class="feature-tag"><i class="fa-solid fa-terminal"></i> Live Validator</div>
-                    <div class="feature-tag"><i class="fa-brackets-curly"></i> JSON Converter</div>
-                    <div class="feature-tag"><i class="fa-solid fa-gamepad"></i> Gamified Quest Arena</div>
-                  </div>
+    <!-- View 3: Gamified Quest Arena (7 Parts x 5 Levels x 20 MCQs = 700 Questions) -->
+    <section class="view-section" id="view-quiz">
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: var(--accent-cyan);">Dart Quest Arena
+          Examination</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">7 Main Parts • 5 Levels Per Part • 20 MCQs Per Level
+          (700 Total Questions)</p>
+      </div>
 
-                  <div class="cover-actions">
-                    <button id="startReadingBtn" class="btn btn-primary btn-large"
-                      onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()">
-                      Open Book <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <button class="btn btn-github btn-large" onclick="switchMainView('playground')">
-                      <i class="fa-solid fa-flask"></i> Try Playground
-                    </button>
-                  </div>
-                  <span class="keyboard-tip"><i class="fa-solid fa-keyboard"></i> Use Left/Right Arrow Keys or Click
-                    Page Corner to Flip</span>
-                </div>
-                <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
-              </div>
-              <div class="page-face page-back cover-back">
-                <div class="inside-cover-content">
-                  <h3><i class="fa-solid fa-feather-pointed"></i> Preface & Masterclass Overview</h3>
-                  <p>YAML (YAML Ain't Markup Language) is the backbone of modern DevOps, Cloud Architecture, Docker
-                    Compose, Kubernetes, CI/CD pipelines, and Flutter configuration. This 3D flipbook breaks down all 38
-                    points into clear, practical chapters with instant code testing.</p>
-                  <div class="quick-guide-box">
-                    <h4>Interactive Guide Features:</h4>
-                    <ul>
-                      <li><i class="fa-solid fa-circle-check"></i> <strong>Realistic 3D Page Flip:</strong> Authentic
-                        sheet curl physics & paper turn sounds.</li>
-                      <li><i class="fa-solid fa-circle-check"></i> <strong>Live Code Testing:</strong> Click
-                        <em>"Try"</em> on any code block to test it in the live validator.
-                      </li>
-                      <li><i class="fa-solid fa-circle-check"></i> <strong>Quick Command Search:</strong> Search any
-                        topic in top navigation bar for 1-click jumps.</li>
-                      <li><i class="fa-solid fa-circle-check"></i> <strong>Interactive Quest Arena:</strong> Test your
-                        skills, unlock badges, and track XP.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- Part Selector Navigation Bar -->
+      <div class="quiz-part-selector" id="quizPartSelector">
+        <button class="part-tab-btn active" data-part="1" onclick="window.quizEngine.switchPart(1)">Part 1:
+          Basics</button>
+        <button class="part-tab-btn" data-part="2" onclick="window.quizEngine.switchPart(2)">Part 2: Core Dart</button>
+        <button class="part-tab-btn" data-part="3" onclick="window.quizEngine.switchPart(3)">Part 3: OOP</button>
+        <button class="part-tab-btn" data-part="4" onclick="window.quizEngine.switchPart(4)">Part 4: Safety &
+          Control</button>
+        <button class="part-tab-btn" data-part="5" onclick="window.quizEngine.switchPart(5)">Part 5:
+          Asynchronous</button>
+        <button class="part-tab-btn" data-part="6" onclick="window.quizEngine.switchPart(6)">Part 6: Advance</button>
+        <button class="part-tab-btn" data-part="7" onclick="window.quizEngine.switchPart(7)">Part 7:
+          Concurrency</button>
+      </div>
 
-            <!-- ================= SHEET 1: TOC INDEX (SPREAD P2-P3) ================= -->
-            <div class="paper-sheet" id="sheet-1" style="z-index: 11;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">INDEX (PART 1)</span>
-                  <h2>Master Table of Contents (Points 1 - 24)</h2>
-                </div>
-                <div class="page-content">
-                  <div class="toc-grid">
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(2)">
-                      <div class="toc-number">Mod 1</div>
-                      <div class="toc-info">
-                        <h4>Basics, Comments & Numbers</h4>
-                        <p>Points 1 to 5 <span class="page-link-tag">Page 4</span></p>
-                      </div>
-                    </div>
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(3)">
-                      <div class="toc-number">Mod 2</div>
-                      <div class="toc-info">
-                        <h4>Booleans, Nulls & Lists</h4>
-                        <p>Points 6 to 9 <span class="page-link-tag">Page 6</span></p>
-                      </div>
-                    </div>
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(4)">
-                      <div class="toc-number">Mod 3</div>
-                      <div class="toc-info">
-                        <h4>Dictionaries, Objects & Mixed</h4>
-                        <p>Points 10 to 14 <span class="page-link-tag">Page 8</span></p>
-                      </div>
-                    </div>
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(5)">
-                      <div class="toc-number">Mod 4</div>
-                      <div class="toc-info">
-                        <h4>Indentation, Anchors & Merges</h4>
-                        <p>Points 15 to 19 <span class="page-link-tag">Page 10</span></p>
-                      </div>
-                    </div>
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(6)">
-                      <div class="toc-number">Mod 5</div>
-                      <div class="toc-info">
-                        <h4>Explicit Types & Timestamps</h4>
-                        <p>Points 20 to 24 <span class="page-link-tag">Page 12</span></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 2</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">INDEX (PART 2)</span>
-                  <h2>Master Table of Contents (Points 25 - 38)</h2>
-                </div>
-                <div class="page-content">
-                  <div class="toc-grid">
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(7)">
-                      <div class="toc-number">Mod 6</div>
-                      <div class="toc-info">
-                        <h4>K8s, Docker, GitHub & Flutter</h4>
-                        <p>Points 25 to 28 <span class="page-link-tag">Page 14</span></p>
-                      </div>
-                    </div>
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(8)">
-                      <div class="toc-number">Mod 7</div>
-                      <div class="toc-info">
-                        <h4>Mistakes, Best Practices & JSON</h4>
-                        <p>Points 29 to 32 <span class="page-link-tag">Page 16</span></p>
-                      </div>
-                    </div>
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(9)">
-                      <div class="toc-number">Mod 8</div>
-                      <div class="toc-info">
-                        <h4>Data Types, Chomping & Flow</h4>
-                        <p>Points 33 to 36 <span class="page-link-tag">Page 18</span></p>
-                      </div>
-                    </div>
-                    <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(10)">
-                      <div class="toc-number">Mod 9</div>
-                      <div class="toc-info">
-                        <h4>All-In-One Reference & Roadmap</h4>
-                        <p>Points 37 to 38 <span class="page-link-tag">Page 20</span></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="key-takeaway-card" style="margin-top: 1rem;">
-                    <strong><i class="fa-solid fa-lightbulb"></i> Navigation Shortcut:</strong><br>
-                    Click any module card above, or use the top search bar to jump instantly to any YAML topic!
-                  </div>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 3</span>
-                </div>
-              </div>
-            </div>
+      <!-- Dynamic Level Cards Container for Selected Part -->
+      <div class="quiz-grid" id="quizLevelGrid"></div>
+    </section>
 
-            <!-- ================= SHEET 2: MODULE 1 (P4-P5) ================= -->
-            <div class="paper-sheet" id="sheet-2" style="z-index: 10;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 1 • POINTS 1-3</span>
-                  <h2>YAML Basics, Comments & Key-Values</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">1. YAML Basics</h3>
-                  <p class="page-p"><strong>YAML</strong> (YAML Ain't Markup Language) is a human-readable data
-                    serialization language. It is commonly used for configuration files, Kubernetes, Docker Compose,
-                    CI/CD pipelines, Ansible, Flutter's pubspec.yaml, GitHub Actions, and many more.</p>
+  </main>
 
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">File Extension</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>.yaml
-.yml
-</code></pre>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">YAML Example</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>name: Jayanta
-age: 22
-country: India</code></pre>
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">2. Comments</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Comments Syntax</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Single-line comment
-name: Jayanta
+  <!-- Question Arena Modal Overlay -->
+  <div id="quiz-arena-modal" class="quiz-arena-modal hidden">
+    <div class="quiz-card">
+      <div class="arena-header">
+        <div id="arena-level-title" class="level-indicator">Level 1 • Question 1 of 20</div>
+        <div id="arena-xp-reward" class="xp-reward">+50 XP</div>
+      </div>
 
-# Multiple comments
-# User Profile Info
-# Created by Admin
-country: India</code></pre>
+      <div class="question-body">
+        <h3 id="question-prompt" class="question-prompt">Question Text Here</h3>
+        <div id="options-container" class="options-grid"></div>
+      </div>
 
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">3. Key-Value Pairs</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Key-Value Example</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>language: YAML
-creator: Clark Evans
-year: 2001</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 4</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 1 • POINTS 4-5</span>
-                  <h2>Strings & Numeric Scalars</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">4. Strings & Quoting</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">String Syntax</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Unquoted string
-name: Jayanta
+      <div id="explanation-box" class="explanation-box hidden">
+        <p id="explanation-text"></p>
+      </div>
 
-# Double Quotes (supports escape sequences like \n and \t)
-bio: "Flutter &\nDart Developer"
+      <div class="arena-footer">
+        <button class="btn btn-secondary" onclick="exitQuizArena()"><i class="fa-solid fa-arrow-left"></i> Exit
+          Arena</button>
+        <button id="next-question-btn" class="btn btn-primary hidden" onclick="nextQuizQuestion()">Next Question <i
+            class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
 
-# Single Quotes (literal string, preserves backslashes)
-path: 'C:\Users\Jayanta'</code></pre>
+  <script src="js/sound.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/flipbook.js"></script>
+  <script src="js/playground.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/app.js"></script>
+</body>
 
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">5. Numbers (Int, Float, Scientific)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Numeric Types</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>age: 22          # Integer
-pi: 3.14159      # Float
-distance: 2e5    # Scientific (evaluates to 200000)
-temp: -12        # Negative Number</code></pre>
-
-                  <div class="key-takeaway-card" style="margin-top: 0.6rem;">
-                    <strong><i class="fa-solid fa-circle-info"></i> Quoting Rule:</strong> Strings in YAML don't require
-                    quotes unless they contain special characters like colons <code>:</code> or brackets
-                    <code>[]</code>.
-                  </div>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 5</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ================= SHEET 3: MODULE 2 (P6-P7) ================= -->
-            <div class="paper-sheet" id="sheet-3" style="z-index: 9;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 2 • POINTS 6-8</span>
-                  <h2>Booleans, Nulls & Lists</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">6. Booleans</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Boolean Syntax</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>isAdmin: true
-isStudent: false
-
-# Also recognized in YAML 1.1 parsers:
-enabled: yes
-disabled: no
-active: on
-inactive: off</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">7. Null Representations</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Null Values</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>middleName: null
-nickname: ~
-city: </code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">8. Lists (Block & Flow Style)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Lists</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Block Style List (- item)
-fruits:
-  - Apple
-  - Mango
-  - Banana
-
-# Inline Flow Style List
-colors: [Red, Green, Blue]</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 6</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 2 • POINT 9</span>
-                  <h2>Nested Lists & Matrices</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">9. Nested Lists & Matrices</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Nested List & Matrix</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>students:
-  - Jayanta
-  - Rahul
-  - Amit
-
-# Matrix (List of Lists)
-matrix:
-  - [1, 2, 3]
-  - [4, 5, 6]
-  - [7, 8, 9]</code></pre>
-
-                  <div class="key-takeaway-card" style="margin-top: 1rem;">
-                    <strong><i class="fa-solid fa-layer-group"></i> List Rule:</strong><br>
-                    Always include a space after the dash (<code>- </code>). A dash without space (e.g.
-                    <code>-12</code>) is parsed as negative number!
-                  </div>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 7</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ================= SHEET 4: MODULE 3 (P8-P9) ================= -->
-            <div class="paper-sheet" id="sheet-4" style="z-index: 8;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 3 • POINTS 10-12</span>
-                  <h2>Dictionaries & Objects</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">10. Dictionaries (Maps / Objects)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Dictionary Syntax</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>person:
-  name: Jayanta
-  age: 22
-  city: Kolkata</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">11. Deeply Nested Objects</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Nested Objects</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>person:
-  name: Jayanta
-  address:
-    city: Kolkata
-    state: West Bengal
-    country: India</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">12. List of Objects</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Sequence of Maps</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>employees:
-  - name: Alice
-    role: Architect
-    age: 25
-  - name: Bob
-    role: Engineer
-    age: 28</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 8</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 3 • POINTS 13-14</span>
-                  <h2>Inline Objects & Mixed Data</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">13. Inline Objects (Flow Style)</h3>
-                  <pre
-                    class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Inline Object</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>person: {name: Jayanta, age: 22, city: Kolkata}</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.8rem;">14. Mixed Complex Data</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Complex Mixed Structure</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>user:
-  name: Jayanta
-  skills:
-    - Flutter
-    - Dart
-    - Firebase
-  metadata:
-    active: true
-    roles: [Dev, Admin]</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 9</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ================= SHEET 5: MODULE 4 (P10-P11) ================= -->
-            <div class="paper-sheet" id="sheet-5" style="z-index: 7;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 4 • POINTS 15-17</span>
-                  <h2>Indentation, Streams & Anchors</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">15. Golden Indentation Rules</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Indentation Rules</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Correct (Use 2 spaces, NEVER TABS)
-person:
-  name: Jayanta
-  age: 22</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">16. Multi-Document Streams (---)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Multi-Doc Stream</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>doc: First Document
----
-doc: Second Document
----
-doc: Third Document</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">17. Anchors (&amp;anchor_name)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Anchor Definition</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>default_user: &default
-  country: India
-  timezone: IST</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 10</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 4 • POINTS 18-19</span>
-                  <h2>Aliases & Merge Keys (DRY YAML)</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">18. Aliases (*alias_name)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Alias Reference</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>developer: &dev
-  language: Dart
-  framework: Flutter
-
-user1:
-  profile: *dev
-user2:
-  profile: *dev</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.8rem;">19. Merge Keys (&lt;&lt;)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Merge Key Example</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>base: &base
-  country: India
-  active: true
-
-user1:
-  <<: *base
-  name: Jayanta
-
-user2:
-  <<: *base
-  name: Rahul</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 11</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ================= SHEET 6: MODULE 5 (P12-P13) ================= -->
-            <div class="paper-sheet" id="sheet-6" style="z-index: 6;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 5 • POINTS 20-22</span>
-                  <h2>Explicit Tags, Escapes & Dates</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">20. Explicit Type Tags (!!)</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Type Casting</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Force string
-str_val: !!str 12345
-
-# Force float
-float_val: !!float "10"
-
-# Force boolean
-bool_val: !!bool "true"</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">21. Special Characters & Unicode</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Escapes & Unicode</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>msg: "Line 1\nLine 2\tTabbed"
-heart: "\u2764"</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">22. Dates</h3>
-                  <pre
-                    class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Date Format</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>today: 2026-08-02</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 12</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 5 • POINTS 23-24</span>
-                  <h2>Timestamps & Env Var Expansion</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">23. Timestamps (ISO-8601)</h3>
-                  <pre
-                    class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Timestamp</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>created_at: 2026-08-02T07:30:00Z</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.8rem;">24. Environment Variable Expansion</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Env Templating</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>database:
-  host: ${DB_HOST}
-  port: ${DB_PORT:-5432}
-  password: ${DB_PASS}</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 13</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ================= SHEET 7: MODULE 6 (P14-P15) ================= -->
-            <div class="paper-sheet" id="sheet-7" style="z-index: 5;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 6 • POINTS 25-26</span>
-                  <h2>Kubernetes & Docker Compose</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">25. Kubernetes Pod Manifest</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">pod.yaml</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx-pod
-spec:
-  containers:
-    - name: nginx
-      image: nginx:latest</code></pre>
-
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">26. Docker Compose File</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">docker-compose.yml</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>services:
-  web:
-    image: nginx
-    ports: ["80:80"]
-  db:
-    image: mysql</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 14</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 6 • POINTS 27-28</span>
-                  <h2>GitHub Actions & Flutter Config</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">27. GitHub Actions Workflow</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">.github/workflows/ci.yml</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>name: CI Build
+</html>
+<h2>GitHub Actions & Flutter Config</h2>
+</div>
+<div class="page-content">
+  <h3 class="topic-h3">27. GitHub Actions Workflow</h3>
+  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">.github/workflows/ci.yml</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>name: CI Build
 on: [push, pull_request]
 jobs:
   build:
@@ -682,108 +706,108 @@ jobs:
       - uses: actions/checkout@v4
       - run: echo "Build complete!"</code></pre>
 
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">28. Flutter pubspec.yaml</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">pubspec.yaml</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>name: flutter_app
+  <h3 class="topic-h3" style="margin-top: 0.6rem;">28. Flutter pubspec.yaml</h3>
+  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">pubspec.yaml</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>name: flutter_app
 version: 1.0.0+1
 environment:
   sdk: ">=3.0.0 <4.0.0"
 dependencies:
   flutter:
     sdk: flutter</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 15</span>
-                </div>
-              </div>
-            </div>
+</div>
+<div class="page-footer">
+  <span class="page-number">Page 15</span>
+</div>
+</div>
+</div>
 
-            <!-- ================= SHEET 8: MODULE 7 (P16-P17) ================= -->
-            <div class="paper-sheet" id="sheet-8" style="z-index: 4;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 7 • POINTS 29-30</span>
-                  <h2>Reserved Chars & Common Mistakes</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">29. Reserved Characters</h3>
-                  <p class="page-p">Quote strings containing: <code>: # - ? & * ! | > @ ` % {} [] ,</code></p>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Quoting Reserved Characters</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>message: "Hello: World!"
+<!-- ================= SHEET 8: MODULE 7 (P16-P17) ================= -->
+<div class="paper-sheet" id="sheet-8" style="z-index: 4;">
+  <div class="page-face page-front">
+    <div class="page-header">
+      <span class="chapter-tag">MODULE 7 • POINTS 29-30</span>
+      <h2>Reserved Chars & Common Mistakes</h2>
+    </div>
+    <div class="page-content">
+      <h3 class="topic-h3">29. Reserved Characters</h3>
+      <p class="page-p">Quote strings containing: <code>: # - ? & * ! | > @ ` % {} [] ,</code></p>
+      <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Quoting Reserved Characters</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>message: "Hello: World!"
 equation: "2 + 2 = 4"</code></pre>
 
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">30. Common Mistakes & Pitfalls</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Pitfalls Comparison</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>❌ Using tabs for indentation
+      <h3 class="topic-h3" style="margin-top: 0.6rem;">30. Common Mistakes & Pitfalls</h3>
+      <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Pitfalls Comparison</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>❌ Using tabs for indentation
 ❌ Missing space after colon (key:value)
 ❌ Missing space after dash (-item)
 ❌ Mismatched indentation levels</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 16</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 7 • POINTS 31-32</span>
-                  <h2>Best Practices & YAML vs JSON</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">31. Production Best Practices</h3>
-                  <ul class="best-practice-list">
-                    <li>✔ Standardize on 2 spaces per level</li>
-                    <li>✔ Keep nesting levels shallow</li>
-                    <li>✔ Quote strings with colons or special symbols</li>
-                    <li>✔ Add comments for complex configurations</li>
-                  </ul>
+    </div>
+    <div class="page-footer">
+      <span class="page-number">Page 16</span>
+      <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
+    </div>
+  </div>
+  <div class="page-face page-back">
+    <div class="page-header">
+      <span class="chapter-tag">MODULE 7 • POINTS 31-32</span>
+      <h2>Best Practices & YAML vs JSON</h2>
+    </div>
+    <div class="page-content">
+      <h3 class="topic-h3">31. Production Best Practices</h3>
+      <ul class="best-practice-list">
+        <li>✔ Standardize on 2 spaces per level</li>
+        <li>✔ Keep nesting levels shallow</li>
+        <li>✔ Quote strings with colons or special symbols</li>
+        <li>✔ Add comments for complex configurations</li>
+      </ul>
 
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">32. YAML vs JSON Comparison</h3>
-                  <table class="comparison-table">
-                    <thead>
-                      <tr>
-                        <th>Feature</th>
-                        <th>YAML</th>
-                        <th>JSON</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Human Readability</td>
-                        <td>⭐⭐⭐⭐⭐</td>
-                        <td>⭐⭐⭐</td>
-                      </tr>
-                      <tr>
-                        <td>Supports Comments</td>
-                        <td>✅ Yes (#)</td>
-                        <td>❌ No</td>
-                      </tr>
-                      <tr>
-                        <td>Syntax Overhead</td>
-                        <td>Minimal</td>
-                        <td>Brackets & Quotes</td>
-                      </tr>
-                      <tr>
-                        <td>Primary Use</td>
-                        <td>Config Files</td>
-                        <td>API Data Transfer</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 17</span>
-                </div>
-              </div>
-            </div>
+      <h3 class="topic-h3" style="margin-top: 0.6rem;">32. YAML vs JSON Comparison</h3>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>YAML</th>
+            <th>JSON</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Human Readability</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td>Supports Comments</td>
+            <td>✅ Yes (#)</td>
+            <td>❌ No</td>
+          </tr>
+          <tr>
+            <td>Syntax Overhead</td>
+            <td>Minimal</td>
+            <td>Brackets & Quotes</td>
+          </tr>
+          <tr>
+            <td>Primary Use</td>
+            <td>Config Files</td>
+            <td>API Data Transfer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="page-footer">
+      <span class="page-number">Page 17</span>
+    </div>
+  </div>
+</div>
 
-            <!-- ================= SHEET 9: MODULE 8 (P18-P19) ================= -->
-            <div class="paper-sheet" id="sheet-9" style="z-index: 3;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 8 • POINTS 33-34</span>
-                  <h2>Data Types & Flow vs Block Style</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">33. Data Types Summary</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Data Types Cheat Sheet</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>string: "Text"
+<!-- ================= SHEET 9: MODULE 8 (P18-P19) ================= -->
+<div class="paper-sheet" id="sheet-9" style="z-index: 3;">
+  <div class="page-face page-front">
+    <div class="page-header">
+      <span class="chapter-tag">MODULE 8 • POINTS 33-34</span>
+      <h2>Data Types & Flow vs Block Style</h2>
+    </div>
+    <div class="page-content">
+      <h3 class="topic-h3">33. Data Types Summary</h3>
+      <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Data Types Cheat Sheet</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code>string: "Text"
 int: 42
 float: 3.14
 bool: true
@@ -791,28 +815,28 @@ null_val: null
 list: [a, b]
 map: {x: 1}</code></pre>
 
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">34. Block Style vs Flow Style</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Style Comparison</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Block Style (Readable)
+      <h3 class="topic-h3" style="margin-top: 0.6rem;">34. Block Style vs Flow Style</h3>
+      <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Style Comparison</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Block Style (Readable)
 users:
   - Jayanta
   - Rahul
 
 # Flow Style (Compact)
 users: [Jayanta, Rahul]</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 18</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 8 • POINTS 35-36</span>
-                  <h2>Multiline Chomping & Ecosystem</h2>
-                </div>
-                <div class="page-content">
-                  <h3 class="topic-h3">35. Multiline Chomping Indicators</h3>
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Chomping Controls</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Strip final newline (|-)
+    </div>
+    <div class="page-footer">
+      <span class="page-number">Page 18</span>
+      <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
+    </div>
+  </div>
+  <div class="page-face page-back">
+    <div class="page-header">
+      <span class="chapter-tag">MODULE 8 • POINTS 35-36</span>
+      <h2>Multiline Chomping & Ecosystem</h2>
+    </div>
+    <div class="page-content">
+      <h3 class="topic-h3">35. Multiline Chomping Indicators</h3>
+      <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">Chomping Controls</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># Strip final newline (|-)
 strip: |-
   Line 1
   Line 2
@@ -822,31 +846,31 @@ keep: |+
   Line 1
   Line 2</code></pre>
 
-                  <h3 class="topic-h3" style="margin-top: 0.6rem;">36. Real-World Ecosystem</h3>
-                  <div class="ecosystem-tags">
-                    <span class="eco-tag"><i class="fa-solid fa-server"></i> Kubernetes</span>
-                    <span class="eco-tag"><i class="fa-brands fa-docker"></i> Docker Compose</span>
-                    <span class="eco-tag"><i class="fa-brands fa-github"></i> GitHub Actions</span>
-                    <span class="eco-tag"><i class="fa-solid fa-mobile-screen"></i> Flutter</span>
-                    <span class="eco-tag"><i class="fa-solid fa-cubes"></i> Ansible</span>
-                    <span class="eco-tag"><i class="fa-solid fa-cloud"></i> Helm</span>
-                  </div>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 19</span>
-                </div>
-              </div>
-            </div>
+      <h3 class="topic-h3" style="margin-top: 0.6rem;">36. Real-World Ecosystem</h3>
+      <div class="ecosystem-tags">
+        <span class="eco-tag"><i class="fa-solid fa-server"></i> Kubernetes</span>
+        <span class="eco-tag"><i class="fa-brands fa-docker"></i> Docker Compose</span>
+        <span class="eco-tag"><i class="fa-brands fa-github"></i> GitHub Actions</span>
+        <span class="eco-tag"><i class="fa-solid fa-mobile-screen"></i> Flutter</span>
+        <span class="eco-tag"><i class="fa-solid fa-cubes"></i> Ansible</span>
+        <span class="eco-tag"><i class="fa-solid fa-cloud"></i> Helm</span>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-number">Page 19</span>
+    </div>
+  </div>
+</div>
 
-            <!-- ================= SHEET 10: MODULE 9 (P20-P21) ================= -->
-            <div class="paper-sheet" id="sheet-10" style="z-index: 2;">
-              <div class="page-face page-front">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 9 • POINT 37</span>
-                  <h2>All-In-One Quick Reference</h2>
-                </div>
-                <div class="page-content">
-                  <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">All-In-One Master Reference</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># 1. Scalars
+<!-- ================= SHEET 10: MODULE 9 (P20-P21) ================= -->
+<div class="paper-sheet" id="sheet-10" style="z-index: 2;">
+  <div class="page-face page-front">
+    <div class="page-header">
+      <span class="chapter-tag">MODULE 9 • POINT 37</span>
+      <h2>All-In-One Quick Reference</h2>
+    </div>
+    <div class="page-content">
+      <pre class="book-code-block"><div class="code-header-bar"><span class="code-header-badge">All-In-One Master Reference</span><div class="code-actions"><button class="code-action-btn" onclick="copyCodeBlock(this)"><i class="fa-regular fa-copy"></i> Copy</button><button class="code-action-btn try-btn" onclick="tryCodeInPlayground(this)"><i class="fa-solid fa-play"></i> Try</button></div></div><code># 1. Scalars
 name: Jayanta Dutta    # String
 age: 22                # Int
 pi: 3.14159            # Float
@@ -882,260 +906,259 @@ user2:
 ---
 # 4. Multi-Doc Stream
 doc: 2</code></pre>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 20</span>
-                  <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-                </div>
-              </div>
-              <div class="page-face page-back">
-                <div class="page-header">
-                  <span class="chapter-tag">MODULE 9 • POINT 38</span>
-                  <h2>YAML Learning Roadmap</h2>
-                </div>
-                <div class="page-content">
-                  <div class="roadmap-box">
-                    <div class="roadmap-step step-beginner">
-                      <h4><i class="fa-solid fa-seedling"></i> Beginner</h4>
-                      <p>Syntax rules, 2-space indentation, strings, numbers, booleans, lists, objects.</p>
-                    </div>
-                    <div class="roadmap-step step-intermediate">
-                      <h4><i class="fa-solid fa-bolt"></i> Intermediate</h4>
-                      <p>Multiline strings (| & >), multi-document streams (---), anchors (&), aliases (*), merge keys (
-                        <<).< /p>
-                    </div>
-                    <div class="roadmap-step step-advanced">
-                      <h4><i class="fa-solid fa-crown"></i> Advanced</h4>
-                      <p>Kubernetes manifests, Docker Compose, GitHub Actions CI/CD, Flutter pubspec.yaml, YAML linting.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="page-footer">
-                  <span class="page-number">Page 21</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ================= SHEET 11: BACK COVER ================= -->
-            <div class="paper-sheet sheet-cover" id="sheet-11" style="z-index: 1;">
-              <div class="page-face page-front cover-back">
-                <div class="inside-cover-content">
-                  <h3><i class="fa-solid fa-award"></i> Congratulations!</h3>
-                  <p>You've completed <strong>The YAML 38-Topic Masterclass Guide</strong>. Test your knowledge in the
-                    Live Playground or challenge yourself in the Quest Arena!</p>
-                  <div class="cover-actions" style="margin-top: 1rem;">
-                    <button class="btn btn-primary btn-large" onclick="switchMainView('playground')">
-                      <i class="fa-solid fa-code"></i> Live Playground
-                    </button>
-                    <button class="btn btn-github btn-large" onclick="switchMainView('quiz')">
-                      <i class="fa-solid fa-gamepad"></i> Quest Arena Quiz
-                    </button>
-                    <button class="btn btn-outline btn-large"
-                      onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(0)">
-                      <i class="fa-solid fa-rotate-left"></i> Restart Flipbook
-                    </button>
-                  </div>
-                </div>
-                <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
-              </div>
-              <div class="page-face page-back cover-front">
-                <div class="cover-container">
-                  <div class="cover-emblem"><i class="fa-solid fa-book-bookmark"></i></div>
-                  <h2 style="font-family: var(--font-heading); font-size: 1.6rem; color: #fff;">YAML MASTERCLASS</h2>
-                  <p class="cover-subtitle">Created with 3D Page Flip Engine & Web Audio Sound Effects</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-number">Page 20</span>
+      <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
+    </div>
+  </div>
+  <div class="page-face page-back">
+    <div class="page-header">
+      <span class="chapter-tag">MODULE 9 • POINT 38</span>
+      <h2>YAML Learning Roadmap</h2>
+    </div>
+    <div class="page-content">
+      <div class="roadmap-box">
+        <div class="roadmap-step step-beginner">
+          <h4><i class="fa-solid fa-seedling"></i> Beginner</h4>
+          <p>Syntax rules, 2-space indentation, strings, numbers, booleans, lists, objects.</p>
         </div>
+        <div class="roadmap-step step-intermediate">
+          <h4><i class="fa-solid fa-bolt"></i> Intermediate</h4>
+          <p>Multiline strings (| & >), multi-document streams (---), anchors (&), aliases (*), merge keys (
+            <<).< /p>
+        </div>
+        <div class="roadmap-step step-advanced">
+          <h4><i class="fa-solid fa-crown"></i> Advanced</h4>
+          <p>Kubernetes manifests, Docker Compose, GitHub Actions CI/CD, Flutter pubspec.yaml, YAML linting.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-number">Page 21</span>
+    </div>
+  </div>
+</div>
 
-        <!-- Page Flip Control - Right/Next -->
-        <button id="nextPageBtn" class="nav-corner nav-right" aria-label="Next Page (Flip Next)"
-          title="Next Page (Right Arrow)">
-          <i class="fa-solid fa-chevron-right"></i>
-          <span class="corner-hint">Flip Next</span>
+<!-- ================= SHEET 11: BACK COVER ================= -->
+<div class="paper-sheet sheet-cover" id="sheet-11" style="z-index: 1;">
+  <div class="page-face page-front cover-back">
+    <div class="inside-cover-content">
+      <h3><i class="fa-solid fa-award"></i> Congratulations!</h3>
+      <p>You've completed <strong>The YAML 38-Topic Masterclass Guide</strong>. Test your knowledge in the
+        Live Playground or challenge yourself in the Quest Arena!</p>
+      <div class="cover-actions" style="margin-top: 1rem;">
+        <button class="btn btn-primary btn-large" onclick="switchMainView('playground')">
+          <i class="fa-solid fa-code"></i> Live Playground
         </button>
+        <button class="btn btn-github btn-large" onclick="switchMainView('quiz')">
+          <i class="fa-solid fa-gamepad"></i> Quest Arena Quiz
+        </button>
+        <button class="btn btn-outline btn-large"
+          onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(0)">
+          <i class="fa-solid fa-rotate-left"></i> Restart Flipbook
+        </button>
+      </div>
+    </div>
+    <div class="corner-curl-hint">Flip <i class="fa-solid fa-turn-up"></i></div>
+  </div>
+  <div class="page-face page-back cover-front">
+    <div class="cover-container">
+      <div class="cover-emblem"><i class="fa-solid fa-book-bookmark"></i></div>
+      <h2 style="font-family: var(--font-heading); font-size: 1.6rem; color: #fff;">YAML MASTERCLASS</h2>
+      <p class="cover-subtitle">Created with 3D Page Flip Engine & Web Audio Sound Effects</p>
+    </div>
+  </div>
+</div>
 
-        <!-- Floating FlipBook Reader Control Toolbar -->
-        <div class="reader-toolbar">
-          <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnPrev()"
-            title="Previous Page (Left Arrow)">
-            <i class="fa-solid fa-chevron-left"></i> Previous
-          </button>
-          <div class="reader-divider"></div>
-          <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.toggleTOC()"
-            title="Table of Contents">
-            <i class="fa-solid fa-list-ol"></i> Index
-          </button>
-          <button class="reader-btn reader-sound-btn" id="reader-sound-btn"
-            title="Toggle Page Flip Sound (Mute/Unmute)">
-            <i class="fa-solid fa-volume-high" id="reader-sound-icon"></i>
-            <span id="reader-sound-text">Sound On</span>
-          </button>
-          <div class="reader-divider"></div>
-          <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()"
-            title="Next Page (Right Arrow)">
-            Next <i class="fa-solid fa-chevron-right"></i>
-          </button>
+</div>
+</div>
+
+<!-- Page Flip Control - Right/Next -->
+<button id="nextPageBtn" class="nav-corner nav-right" aria-label="Next Page (Flip Next)"
+  title="Next Page (Right Arrow)">
+  <i class="fa-solid fa-chevron-right"></i>
+  <span class="corner-hint">Flip Next</span>
+</button>
+
+<!-- Floating FlipBook Reader Control Toolbar -->
+<div class="reader-toolbar">
+  <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnPrev()"
+    title="Previous Page (Left Arrow)">
+    <i class="fa-solid fa-chevron-left"></i> Previous
+  </button>
+  <div class="reader-divider"></div>
+  <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.toggleTOC()"
+    title="Table of Contents">
+    <i class="fa-solid fa-list-ol"></i> Index
+  </button>
+  <button class="reader-btn reader-sound-btn" id="reader-sound-btn" title="Toggle Page Flip Sound (Mute/Unmute)">
+    <i class="fa-solid fa-volume-high" id="reader-sound-icon"></i>
+    <span id="reader-sound-text">Sound On</span>
+  </button>
+  <div class="reader-divider"></div>
+  <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()"
+    title="Next Page (Right Arrow)">
+    Next <i class="fa-solid fa-chevron-right"></i>
+  </button>
+</div>
+</div>
+</section>
+
+<!-- VIEW 2: LIVE PLAYGROUND & VALIDATOR -->
+<section id="view-playground" class="view-section">
+  <div class="playground-container">
+    <div class="playground-header">
+      <div class="playground-title-area">
+        <h2><i class="fa-solid fa-terminal"></i> Interactive YAML Playground & Validator</h2>
+        <p>Write, format, validate, and convert YAML to JSON in real time.</p>
+      </div>
+      <div class="playground-presets">
+        <label for="preset-select"><i class="fa-solid fa-folder-open"></i> Preset Templates:</label>
+        <select id="preset-select" onchange="loadPlaygroundPreset(this.value)">
+          <option value="cheatsheet">Module 9: Quick Reference Cheat Sheet</option>
+          <option value="basic">Module 1: Basics & Comments</option>
+          <option value="scalars">Module 2: Scalars & Explicit Tags</option>
+          <option value="multiline">Module 3: Multiline & Chomping</option>
+          <option value="lists_objects">Module 4-5: Lists & Objects</option>
+          <option value="anchors">Module 6: Anchors & Merges</option>
+          <option value="devops">Module 8: Kubernetes & Docker</option>
+          <option value="cicd_flutter">Module 9: GitHub Actions & Flutter</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="playground-grid">
+      <!-- Left: Input YAML Code Editor -->
+      <div class="editor-pane">
+        <div class="pane-header">
+          <span><i class="fa-solid fa-code"></i> YAML Input</span>
+          <div class="pane-actions">
+            <button class="action-btn" onclick="formatYamlInPlayground()"><i
+                class="fa-solid fa-wand-magic-sparkles"></i> Clean & Format</button>
+            <button class="action-btn" onclick="clearPlayground()"><i class="fa-solid fa-trash-can"></i>
+              Clear</button>
+          </div>
+        </div>
+        <textarea id="yaml-input-editor" class="code-textarea" spellcheck="false"
+          placeholder="Type or paste your YAML code here..."></textarea>
+        <div class="editor-status-bar" id="editor-status">
+          <span class="status-indicator status-valid"><i class="fa-solid fa-circle-check"></i> Valid YAML</span>
+          <span id="editor-cursor-pos">Ln 1, Col 1</span>
         </div>
       </div>
-    </section>
 
-    <!-- VIEW 2: LIVE PLAYGROUND & VALIDATOR -->
-    <section id="view-playground" class="view-section">
-      <div class="playground-container">
-        <div class="playground-header">
-          <div class="playground-title-area">
-            <h2><i class="fa-solid fa-terminal"></i> Interactive YAML Playground & Validator</h2>
-            <p>Write, format, validate, and convert YAML to JSON in real time.</p>
+      <!-- Right: Parsed Output & JSON Viewer -->
+      <div class="output-pane">
+        <div class="pane-header">
+          <div class="output-tabs">
+            <button class="output-tab active" id="tab-json-btn" onclick="switchOutputTab('json')"><i
+                class="fa-brackets-curly"></i> Parsed JSON</button>
+            <button class="output-tab" id="tab-ast-btn" onclick="switchOutputTab('ast')"><i
+                class="fa-solid fa-sitemap"></i> Tree Structure</button>
           </div>
-          <div class="playground-presets">
-            <label for="preset-select"><i class="fa-solid fa-folder-open"></i> Preset Templates:</label>
-            <select id="preset-select" onchange="loadPlaygroundPreset(this.value)">
-              <option value="cheatsheet">Module 9: Quick Reference Cheat Sheet</option>
-              <option value="basic">Module 1: Basics & Comments</option>
-              <option value="scalars">Module 2: Scalars & Explicit Tags</option>
-              <option value="multiline">Module 3: Multiline & Chomping</option>
-              <option value="lists_objects">Module 4-5: Lists & Objects</option>
-              <option value="anchors">Module 6: Anchors & Merges</option>
-              <option value="devops">Module 8: Kubernetes & Docker</option>
-              <option value="cicd_flutter">Module 9: GitHub Actions & Flutter</option>
-            </select>
-          </div>
+          <button class="action-btn" onclick="copyParsedOutput()"><i class="fa-regular fa-copy"></i> Copy
+            Output</button>
         </div>
-
-        <div class="playground-grid">
-          <!-- Left: Input YAML Code Editor -->
-          <div class="editor-pane">
-            <div class="pane-header">
-              <span><i class="fa-solid fa-code"></i> YAML Input</span>
-              <div class="pane-actions">
-                <button class="action-btn" onclick="formatYamlInPlayground()"><i
-                    class="fa-solid fa-wand-magic-sparkles"></i> Clean & Format</button>
-                <button class="action-btn" onclick="clearPlayground()"><i class="fa-solid fa-trash-can"></i>
-                  Clear</button>
-              </div>
-            </div>
-            <textarea id="yaml-input-editor" class="code-textarea" spellcheck="false"
-              placeholder="Type or paste your YAML code here..."></textarea>
-            <div class="editor-status-bar" id="editor-status">
-              <span class="status-indicator status-valid"><i class="fa-solid fa-circle-check"></i> Valid YAML</span>
-              <span id="editor-cursor-pos">Ln 1, Col 1</span>
-            </div>
-          </div>
-
-          <!-- Right: Parsed Output & JSON Viewer -->
-          <div class="output-pane">
-            <div class="pane-header">
-              <div class="output-tabs">
-                <button class="output-tab active" id="tab-json-btn" onclick="switchOutputTab('json')"><i
-                    class="fa-brackets-curly"></i> Parsed JSON</button>
-                <button class="output-tab" id="tab-ast-btn" onclick="switchOutputTab('ast')"><i
-                    class="fa-solid fa-sitemap"></i> Tree Structure</button>
-              </div>
-              <button class="action-btn" onclick="copyParsedOutput()"><i class="fa-regular fa-copy"></i> Copy
-                Output</button>
-            </div>
-            <div class="output-content">
-              <pre id="json-output-display" class="code-output-display"></pre>
-              <div id="tree-output-display" class="tree-output-display hidden"></div>
-            </div>
-            <!-- Error Alert Box -->
-            <div id="yaml-error-box" class="yaml-error-box hidden">
-              <div class="error-title"><i class="fa-solid fa-triangle-exclamation"></i> YAML Parsing Error</div>
-              <div id="yaml-error-msg" class="error-msg"></div>
-            </div>
-          </div>
+        <div class="output-content">
+          <pre id="json-output-display" class="code-output-display"></pre>
+          <div id="tree-output-display" class="tree-output-display hidden"></div>
+        </div>
+        <!-- Error Alert Box -->
+        <div id="yaml-error-box" class="yaml-error-box hidden">
+          <div class="error-title"><i class="fa-solid fa-triangle-exclamation"></i> YAML Parsing Error</div>
+          <div id="yaml-error-msg" class="error-msg"></div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- VIEW 3: GAMIFIED QUEST ARENA (Q&A GAME) -->
-    <section id="view-quiz" class="view-section">
-      <div class="quiz-container">
-        <!-- Quiz Welcome Banner / Dashboard -->
-        <div class="quiz-header-card">
-          <div class="quiz-hero">
-            <div class="quiz-title-badge"><i class="fa-solid fa-trophy"></i> YAML Quest Arena</div>
-            <h2>Test Your YAML Mastery & Unlock Badges!</h2>
-            <p>Complete multi-level interactive challenges: multiple choice, fix broken indentation bugs, and master
-              real-world syntax.</p>
-          </div>
-          <div class="quiz-stats-summary">
-            <div class="stat-card">
-              <i class="fa-solid fa-fire stat-icon"></i>
-              <div class="stat-details">
-                <span class="stat-value" id="quiz-streak-count">0</span>
-                <span class="stat-label">Current Streak</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <i class="fa-solid fa-medal stat-icon"></i>
-              <div class="stat-details">
-                <span class="stat-value" id="unlocked-badges-count">0/6</span>
-                <span class="stat-label">Badges Unlocked</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <i class="fa-solid fa-star stat-icon"></i>
-              <div class="stat-details">
-                <span class="stat-value" id="quiz-accuracy-score">100%</span>
-                <span class="stat-label">Accuracy</span>
-              </div>
-            </div>
+<!-- VIEW 3: GAMIFIED QUEST ARENA (Q&A GAME) -->
+<section id="view-quiz" class="view-section">
+  <div class="quiz-container">
+    <!-- Quiz Welcome Banner / Dashboard -->
+    <div class="quiz-header-card">
+      <div class="quiz-hero">
+        <div class="quiz-title-badge"><i class="fa-solid fa-trophy"></i> YAML Quest Arena</div>
+        <h2>Test Your YAML Mastery & Unlock Badges!</h2>
+        <p>Complete multi-level interactive challenges: multiple choice, fix broken indentation bugs, and master
+          real-world syntax.</p>
+      </div>
+      <div class="quiz-stats-summary">
+        <div class="stat-card">
+          <i class="fa-solid fa-fire stat-icon"></i>
+          <div class="stat-details">
+            <span class="stat-value" id="quiz-streak-count">0</span>
+            <span class="stat-label">Current Streak</span>
           </div>
         </div>
-
-        <!-- Level Selector Grid -->
-        <div class="quiz-levels-grid" id="quiz-levels-grid">
-          <!-- Populated in quiz.js -->
+        <div class="stat-card">
+          <i class="fa-solid fa-medal stat-icon"></i>
+          <div class="stat-details">
+            <span class="stat-value" id="unlocked-badges-count">0/6</span>
+            <span class="stat-label">Badges Unlocked</span>
+          </div>
         </div>
-
-        <!-- Interactive Question Arena Modal / Container -->
-        <div class="question-arena-card hidden" id="question-arena">
-          <div class="arena-progress-bar">
-            <div class="arena-progress-fill" id="arena-progress-fill"></div>
-          </div>
-
-          <div class="arena-header">
-            <div class="level-indicator" id="arena-level-title">Level 1 Question</div>
-            <div class="xp-reward" id="arena-xp-reward">+50 XP</div>
-          </div>
-
-          <div class="question-body">
-            <h3 class="question-prompt" id="question-prompt">Question Text Here</h3>
-
-            <div class="options-grid" id="options-container">
-              <!-- Rendered dynamically -->
-            </div>
-          </div>
-
-          <div class="explanation-box hidden" id="explanation-box">
-            <div class="explanation-title"><i class="fa-solid fa-circle-info"></i> Explanation</div>
-            <p id="explanation-text"></p>
-          </div>
-
-          <div class="arena-footer">
-            <button class="action-btn" onclick="exitQuizArena()"><i class="fa-solid fa-arrow-left"></i> Exit
-              Arena</button>
-            <button class="action-btn primary-btn hidden" id="next-question-btn" onclick="nextQuizQuestion()">Next
-              Question <i class="fa-solid fa-arrow-right"></i></button>
+        <div class="stat-card">
+          <i class="fa-solid fa-star stat-icon"></i>
+          <div class="stat-details">
+            <span class="stat-value" id="quiz-accuracy-score">100%</span>
+            <span class="stat-label">Accuracy</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-  </main>
+    <!-- Level Selector Grid -->
+    <div class="quiz-levels-grid" id="quiz-levels-grid">
+      <!-- Populated in quiz.js -->
+    </div>
 
-  <script src="js/sound.js"></script>
-  <script src="js/themes.js"></script>
-  <script src="js/content.js"></script>
-  <script src="js/flipbook.js"></script>
-  <script src="js/playground.js"></script>
-  <script src="js/quiz.js"></script>
-  <script src="js/app.js"></script>
+    <!-- Interactive Question Arena Modal / Container -->
+    <div class="question-arena-card hidden" id="question-arena">
+      <div class="arena-progress-bar">
+        <div class="arena-progress-fill" id="arena-progress-fill"></div>
+      </div>
+
+      <div class="arena-header">
+        <div class="level-indicator" id="arena-level-title">Level 1 Question</div>
+        <div class="xp-reward" id="arena-xp-reward">+50 XP</div>
+      </div>
+
+      <div class="question-body">
+        <h3 class="question-prompt" id="question-prompt">Question Text Here</h3>
+
+        <div class="options-grid" id="options-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <div class="explanation-box hidden" id="explanation-box">
+        <div class="explanation-title"><i class="fa-solid fa-circle-info"></i> Explanation</div>
+        <p id="explanation-text"></p>
+      </div>
+
+      <div class="arena-footer">
+        <button class="action-btn" onclick="exitQuizArena()"><i class="fa-solid fa-arrow-left"></i> Exit
+          Arena</button>
+        <button class="action-btn primary-btn hidden" id="next-question-btn" onclick="nextQuizQuestion()">Next
+          Question <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="js/sound.js"></script>
+<script src="js/themes.js"></script>
+<script src="js/content.js"></script>
+<script src="js/flipbook.js"></script>
+<script src="js/playground.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/app.js"></script>
 </body>
 
 </html>
