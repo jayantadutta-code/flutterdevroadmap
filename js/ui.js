@@ -181,20 +181,22 @@ class UIController {
     // Code Example / Digital Book Tab Content
     const tabCodeEl = document.getElementById('tab-code');
     if (tabCodeEl) {
-      if (ms.hasDigitalBook || ms.id === 'git-github') {
-        const bookUrl = ms.digitalBookUrl || 'git-github/index.html';
+      if (ms.hasDigitalBook || ms.id === 'git-github' || ms.id === 'flutter-framework') {
+        const bookUrl = ms.digitalBookUrl || (ms.id === 'flutter-framework' ? 'YAML/index.html' : 'git-github/index.html');
+        const bookTitle = ms.id === 'flutter-framework' ? 'The YAML Interactive 3D FlipBook (38 Topics)' : 'The Git & GitHub Flipbook Guide (28 Chapters)';
+        const bookSubtitle = ms.id === 'flutter-framework' ? 'Interactive 3D page-flipping book with YAML parser, validator & quest arena' : 'Interactive 3D page-flipping book with live terminal & command quizzes';
         tabCodeEl.innerHTML = `
           <div class="digital-book-modal-wrapper">
             <div class="digital-book-modal-header">
               <div class="digital-book-info">
-                <span class="digital-book-title">📚 <strong>The Git & GitHub Flipbook Guide (28 Chapters)</strong></span>
-                <span class="digital-book-subtitle">Interactive 3D page-flipping book with live terminal & command quizzes</span>
+                <span class="digital-book-title">📚 <strong>${bookTitle}</strong></span>
+                <span class="digital-book-subtitle">${bookSubtitle}</span>
               </div>
               <a href="${bookUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-digital-book">
                 <span>🚀 Fullscreen Book ↗</span>
               </a>
             </div>
-            <iframe src="${bookUrl}" class="digital-book-iframe" title="Git & GitHub Digital Book"></iframe>
+            <iframe src="${bookUrl}" class="digital-book-iframe" title="${bookTitle}"></iframe>
           </div>
         `;
       } else {

@@ -60,9 +60,18 @@ class JourneyEngine {
     const W = this.container.clientWidth || window.innerWidth;
     const H = this.container.clientHeight || 500;
 
-    MILESTONES_DATA.forEach((ms, index) => {
+      // Smart badge vertical position (above vs below icon) to prevent text collision
+      let isAbove = false;
+      if (ms.yPos >= 60) {
+        isAbove = true;
+      } else if (ms.yPos <= 35) {
+        isAbove = false;
+      } else {
+        isAbove = (index % 2 === 1);
+      }
+
       const nodeEl = document.createElement('div');
-      nodeEl.className = 'journey-node';
+      nodeEl.className = `journey-node ${isAbove ? 'badge-above' : 'badge-below'}`;
       nodeEl.style.left = `${ms.xPos}%`;
       nodeEl.style.top = `${ms.yPos}%`;
       nodeEl.style.borderColor = ms.color;

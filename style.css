@@ -355,6 +355,15 @@ body, html {
   transform: scale(1.1);
 }
 
+.journey-node.badge-above {
+  flex-direction: column-reverse;
+}
+
+.journey-node.badge-above .journey-node-badge {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
 .journey-node-badge {
   background: rgba(10, 14, 28, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -364,7 +373,11 @@ body, html {
   font-weight: 700;
   color: white;
   margin-top: 6px;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 140px;
+  text-align: center;
+  line-height: 1.25;
+  word-break: break-word;
   backdrop-filter: blur(8px);
 }
 
