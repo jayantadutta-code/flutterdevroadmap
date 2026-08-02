@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dart Interactive 3D FlipBook & Masterclass Guide</title>
-  <meta name="description" content="Master Dart step-by-step with an authentic 3D page-flipping book, live code simulator playground, 105-question Q&A quest arena, and topic search!" />
+  <meta name="description" content="Master Dart step-by-step with an authentic 3D page-flipping book, live code simulator playground, 700-question Q&A quest arena, and topic search!" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
           <i class="fa-solid fa-terminal"></i> Playground
         </button>
         <button class="nav-tab" id="tab-quiz-btn" onclick="switchMainView('quiz')">
-          <i class="fa-solid fa-gamepad"></i> Quest Arena <span class="badge-pill">105 MCQs</span>
+          <i class="fa-solid fa-gamepad"></i> Quest Arena <span class="badge-pill">700 MCQs</span>
         </button>
       </div>
 
@@ -113,21 +113,369 @@
         <div class="paper-stack-right"></div>
         <div class="book-spine"></div>
         <div class="book-3d at-cover" id="book3d">
-          <!-- Paper sheets rendered dynamically by app.js -->
+
+          <!-- SHEET 0: COVER -->
+          <div class="paper-sheet cover-sheet" id="sheet-0" style="z-index: 8;">
+            <div class="page-face page-front">
+              <div class="cover-content">
+                <div class="cover-badge">GOOGLE DART 3 MASTERCLASS</div>
+                <h1 class="cover-title">DART<br/><span class="cover-highlight">COOKBOOK</span></h1>
+                <p class="cover-subtitle">Interactive 3D Master Guide & 700-Question Quiz Arena</p>
+                <div class="cover-meta">
+                  <span>7 Core Parts</span> • <span>37 Subtopics</span> • <span>35 Level Exams</span>
+                </div>
+                <button class="btn btn-primary" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()">
+                  <span>Open Cookbook</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-inner">
+                <h2 class="page-h2">Welcome to the Dart Masterclass</h2>
+                <p class="page-p">
+                  This interactive 3D cookbook covers the complete Dart language specification: from foundational syntax, OOP, and Sound Null Safety to Advanced Async Streams, Dart 3 Patterns, and Background Thread Isolates.
+                </p>
+                <div class="tip-box">
+                  <i class="fa-solid fa-compass"></i>
+                  <strong>Navigation Tip:</strong> Click any page or corner hint to flip pages, use Left/Right arrow keys, or open the Index drawer to jump to any topic!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 1: PART 1 BASICS -->
+          <div class="paper-sheet" id="sheet-1" style="z-index: 7;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 1</span>
+                <span class="page-chapter-title">Basics (Topics 1.1 - 1.4)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">1.1 Introduction to Dart</h2>
+                <p class="page-p"><strong>Dart</strong> is a client-optimized, strongly-typed language developed by Google. Powers Flutter for mobile, web, and desktop apps.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Hello World</span><code>void main() {
+  print('Welcome to Dart Programming!');
+}</code></pre>
+
+                <h2 class="page-h2">1.2 Comments</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Comments</span><code>// Single-line comment
+/* Multi-line block */
+/// Doc comment for API documentation</code></pre>
+
+                <h2 class="page-h2">1.3 Variables & Data Types</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Variables</span><code>var name = 'Alex'; // Inferred String
+final DateTime now = DateTime.now(); // Runtime const
+const double pi = 3.14159; // Compile-time const</code></pre>
+
+                <h2 class="page-h2">1.4 Numbers</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Numbers</span><code>int val = int.parse('42');
+double rate = 9.99;
+print(val.isEven); // true</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 1 (Cont.)</span>
+                <span class="page-chapter-title">Basics (Topics 1.5 - 1.10)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">1.5 Strings & 1.6 RegExp</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Strings & RegEx</span><code>String msg = 'I love ${"Flutter"}!';
+RegExp email = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+print(email.hasMatch('dev@flutter.dev')); // true</code></pre>
+
+                <h2 class="page-h2">1.7 StringBuffer</h2>
+                <pre class="book-code-block"><span class="code-header-badge">StringBuffer</span><code>var sb = StringBuffer();
+sb.writeAll(['Flutter ', 'is ', 'awesome!']);
+print(sb.toString());</code></pre>
+
+                <h2 class="page-h2">1.8 Operators, 1.9 Conditions & 1.10 Loops</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Control Flow</span><code>int div = 10 ~/ 3; // Truncating division = 3
+if (div > 2) print('Greater');
+for (var i = 0; i < 3; i++) { print('Count: $i'); }</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 2: PART 2 CORE DART -->
+          <div class="paper-sheet" id="sheet-2" style="z-index: 6;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 2</span>
+                <span class="page-chapter-title">Core Dart (Functions)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">2.1 Functions & 2.2 Function Advance</h2>
+                <p class="page-p">Functions are first-class objects. Supports arrow syntax, named parameters, default values, and closures.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Functions</span><code>// Arrow Function
+int add(int a, int b) => a + b;
+
+// Named Parameters
+void createUser({required String name, int age = 18}) {
+  print('$name ($age)');
+}
+
+void main() {
+  createUser(name: 'Alex', age: 25);
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 2 (Cont.)</span>
+                <span class="page-chapter-title">Core Dart (List, Set, Map)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">2.3 Lists, 2.4 Sets & 2.5 Maps</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Collections</span><code>// List & Spread operator
+List<int> nums = [1, 2];
+List<int> expanded = [0, ...nums, 3]; // [0, 1, 2, 3]
+
+// Unique Set
+Set<String> tags = {'dart', 'flutter', 'dart'}; // 2 items
+
+// Map
+Map<String, int> scores = {'Alex': 95};
+scores.putIfAbsent('Sam', () => 90);</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 3: PART 3 OOP -->
+          <div class="paper-sheet" id="sheet-3" style="z-index: 5;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 3</span>
+                <span class="page-chapter-title">OOP (Classes, Constructors, Inheritance)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">3.1 Classes, 3.2 Constructors & 3.3 Inheritance</h2>
+                <pre class="book-code-block"><span class="code-header-badge">OOP Fundamentals</span><code>class Person {
+  final String name;
+  const Person(this.name); // Const constructor
+}
+
+class Animal {
+  void speak() => print('Animal sound');
+}
+
+class Dog extends Animal {
+  @override
+  void speak() => print('Bark!');
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 3 (Cont.)</span>
+                <span class="page-chapter-title">OOP (Abstract, Interfaces, Mixins, Static)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">3.4 Abstract, 3.5 Interfaces, 3.6 Mixins & 3.7 Static</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Advanced OOP</span><code>abstract class Printable {
+  void printData();
+}
+
+mixin Swimmer {
+  void swim() => print('Swimming fast!');
+}
+
+class Duck extends Animal with Swimmer implements Printable {
+  @override
+  void printData() => print('Duck item');
+}
+
+class Config {
+  static const String version = '1.0.0';
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 4: PART 4 SAFETY & CONTROL -->
+          <div class="paper-sheet" id="sheet-4" style="z-index: 4;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 4</span>
+                <span class="page-chapter-title">Safety & Control (Null Safety)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">4.1 Sound Null Safety</h2>
+                <p class="page-p">Types are non-nullable by default. Append <code>?</code> for nullable variables.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Null Safety</span><code>String? nickname; // Nullable
+late String bio; // Deferred init
+
+void main() {
+  bio = 'Dart Developer';
+  print(nickname?.length ?? 0); // Null-aware & coalescing
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 4 (Cont.)</span>
+                <span class="page-chapter-title">Safety & Control (Exceptions & Enums)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">4.2 Exception Handling & 4.3 Enhanced Enums</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Exceptions & Enums</span><code>try {
+  int res = 10 ~/ 0;
+} on UnsupportedError {
+  print('Caught error!');
+} finally {
+  print('Cleanup executed.');
+}
+
+enum Status {
+  pending(100), success(200);
+  final int code;
+  const Status(this.code);
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 5: PART 5 ASYNCHRONOUS -->
+          <div class="paper-sheet" id="sheet-5" style="z-index: 3;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 5</span>
+                <span class="page-chapter-title">Asynchronous (Futures, Async, Await, Stream)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">5.1 Futures, 5.2 Async, 5.3 Await & 5.4 Streams</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Futures & Streams</span><code>Future<String> fetchData() async {
+  await Future.delayed(Duration(milliseconds: 500));
+  return 'Data Loaded!';
+}
+
+void main() async {
+  print(await fetchData());
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 5 (Cont.)</span>
+                <span class="page-chapter-title">Generators & Event Loop</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">5.5 Generators (async*) & 5.6 Event Loop</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Generators & Event Loop</span><code>Stream<int> countStream(int max) async* {
+  for (int i = 1; i <= max; i++) {
+    yield i; // Emit to stream
+  }
+}
+
+void main() {
+  print('1. Sync');
+  scheduleMicrotask(() => print('2. Microtask'));
+  Future(() => print('3. Event Queue'));
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 6: PART 6 ADVANCE -->
+          <div class="paper-sheet" id="sheet-6" style="z-index: 2;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 6</span>
+                <span class="page-chapter-title">Advance (Generics, Extension, Lambda/FP)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">6.1 Generics, 6.2 Extensions & 6.3 Lambda/FP</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Generics & Extensions</span><code>class Box<T extends num> {
+  T val;
+  Box(this.val);
+}
+
+extension StringUpper on String {
+  String get shout => '${this.toUpperCase()}!';
+}
+
+print('flutter'.shout); // FLUTTER!</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 6 (Cont.)</span>
+                <span class="page-chapter-title">File Handling & Dart 3 Features</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">6.4 File Handling (dart:io) & 6.5 Dart 3 Features</h2>
+                <pre class="book-code-block"><span class="code-header-badge">Dart 3 Records & Patterns</span><code>(String, int) getUser() => ('Alex', 2026);
+
+String describe(Object obj) => switch (obj) {
+  (String name, int age) => 'User $name is $age',
+  _ => 'Unknown'
+};
+
+void main() {
+  var (name, year) = getUser();
+  print('$name in $year');
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 7: PART 7 CONCURRENCY & BACK COVER -->
+          <div class="paper-sheet" id="sheet-7" style="z-index: 1;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">Part 7</span>
+                <span class="page-chapter-title">Concurrency (Isolates)</span>
+              </div>
+              <div class="page-inner">
+                <h2 class="page-h2">7.1 Isolates & Multithreading</h2>
+                <p class="page-p">Isolates are memory-isolated threads running on independent CPU cores.</p>
+                <pre class="book-code-block"><span class="code-header-badge">Isolate.run()</span><code>import 'dart:isolate';
+
+int heavyTask(int count) {
+  int sum = 0;
+  for (int i = 0; i < count; i++) sum += i;
+  return sum;
+}
+
+void main() async {
+  int result = await Isolate.run(() => heavyTask(1000000));
+  print('Background Isolate Result: $result');
+}</code></pre>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-inner" style="text-align: center; justify-content: center; padding: 2rem;">
+                <i class="fa-solid fa-trophy" style="font-size: 3rem; color: #ffb703; margin-bottom: 1rem;"></i>
+                <h2 class="page-h2" style="border: none; padding: 0;">Dart Masterclass Complete!</h2>
+                <p class="page-p">You have explored all 7 Parts and 37 Subtopics of Dart 3.</p>
+                <button class="btn btn-primary" onclick="switchMainView('quiz')" style="margin: 1rem auto;">
+                  <i class="fa-solid fa-gamepad"></i> Launch 700 MCQ Quest Arena
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <div class="reader-toolbar">
-        <button class="btn btn-secondary" id="prevPageBtn"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <button class="btn btn-secondary" id="prevPageBtn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnPrev()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
         <span class="page-indicator" id="currentPageNum">Spread 0 (Front Cover)</span>
-        <button class="btn btn-primary" id="nextPageBtn">Next <i class="fa-solid fa-arrow-right"></i></button>
+        <button class="btn btn-primary" id="nextPageBtn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()">Next <i class="fa-solid fa-arrow-right"></i></button>
       </div>
     </section>
 
     <!-- View 2: Interactive Dart Code Playground -->
     <section class="view-section" id="view-playground">
       <div class="playground-layout">
-        <!-- Editor Card -->
         <div class="playground-editor-card">
           <div class="card-header">
             <span><i class="fa-solid fa-code"></i> Dart Code Editor</span>
@@ -140,7 +488,6 @@
           </div>
         </div>
 
-        <!-- Output Console Card -->
         <div class="playground-console-card">
           <div class="card-header">
             <span><i class="fa-solid fa-terminal"></i> Console Output</span>
@@ -170,9 +517,7 @@
       </div>
 
       <!-- Dynamic Level Cards Container for Selected Part -->
-      <div class="quiz-grid" id="quizLevelGrid">
-        <!-- Rendered dynamically by quiz.js -->
-      </div>
+      <div class="quiz-grid" id="quizLevelGrid"></div>
     </section>
 
   </main>
@@ -181,7 +526,7 @@
   <div id="quiz-arena-modal" class="quiz-arena-modal hidden">
     <div class="quiz-card">
       <div class="arena-header">
-        <div id="arena-level-title" class="level-indicator">Level 1 • Question 1 of 15</div>
+        <div id="arena-level-title" class="level-indicator">Level 1 • Question 1 of 20</div>
         <div id="arena-xp-reward" class="xp-reward">+50 XP</div>
       </div>
 

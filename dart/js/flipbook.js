@@ -1,11 +1,12 @@
 /* ==========================================================================
-   Dart Cookbook - 3D FlipBook Engine
+   Dart Cookbook - 3D FlipBook Physics & Navigation Engine
    ========================================================================== */
 
 class FlipBookEngine {
   constructor() {
     this.currentSheet = 0;
-    this.totalSheets = 7;
+    this.maxSheetIndex = 7;
+    this.totalParts = 7;
     this.isFlipping = false;
 
     this.searchDatabase = [
@@ -112,11 +113,11 @@ class FlipBookEngine {
       }
     }
 
-    if (this.prevBtn) this.prevBtn.disabled = this.currentSheet === 0;
-    if (this.nextBtn) this.nextBtn.disabled = this.currentSheet === this.maxSheetIndex;
+    if (this.prevBtn) this.prevBtn.disabled = (this.currentSheet === 0);
+    if (this.nextBtn) this.nextBtn.disabled = (this.currentSheet === this.maxSheetIndex);
   }
 
-  nextPage() {
+  turnNext() {
     if (this.currentSheet < this.maxSheetIndex && !this.isFlipping) {
       this.isFlipping = true;
       if (window.soundEngine) window.soundEngine.playPageFlip();
@@ -126,7 +127,11 @@ class FlipBookEngine {
     }
   }
 
-  prevPage() {
+  nextPage() {
+    this.turnNext();
+  }
+
+  turnPrev() {
     if (this.currentSheet > 0 && !this.isFlipping) {
       this.isFlipping = true;
       if (window.soundEngine) window.soundEngine.playPageFlip();
@@ -134,6 +139,10 @@ class FlipBookEngine {
       this.updateBookState();
       setTimeout(() => { this.isFlipping = false; }, 600);
     }
+  }
+
+  prevPage() {
+    this.turnPrev();
   }
 
   jumpToModule(moduleIndex) {
@@ -145,15 +154,39 @@ class FlipBookEngine {
   }
 
   bindEvents() {
-    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prevPage());
-    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.nextPage());
+    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.turnPrev());
+    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.turnNext());
+
+    // Page Face & Corner Curl Click Listeners
+    this.sheets.forEach((sheet) => {
+      const frontFace = sheet.querySelector('.page-front');
+      const backFace = sheet.querySelector('.page-back');
+
+      if (frontFace) {
+        frontFace.addEventListener('click', (e) => {
+          if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input') || e.target.closest('select') || e.target.closest('textarea')) return;
+          const selection = window.getSelection();
+          if (selection && selection.toString().length > 0) return;
+          this.turnNext();
+        });
+      }
+
+      if (backFace) {
+        backFace.addEventListener('click', (e) => {
+          if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input') || e.target.closest('select') || e.target.closest('textarea')) return;
+          const selection = window.getSelection();
+          if (selection && selection.toString().length > 0) return;
+          this.turnPrev();
+        });
+      }
+    });
 
     // Keyboard Arrow navigation
     document.addEventListener('keydown', (e) => {
       const activeView = document.querySelector('.view-section.active');
       if (activeView && activeView.id === 'view-book') {
-        if (e.key === 'ArrowRight' || e.key === 'PageDown') this.nextPage();
-        if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.prevPage();
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') this.turnNext();
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.turnPrev();
       }
     });
 
