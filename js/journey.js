@@ -52,7 +52,7 @@ class JourneyEngine {
     this.svgPath.setAttribute('d', pathD);
   }
 
-  // --- RENDER 13 MILESTONE NODES ALONG PATH ---
+  // --- RENDER 16 MILESTONE NODES ALONG PATH ---
   renderMilestoneNodes() {
     if (!this.nodesContainer || !this.container) return;
     this.nodesContainer.innerHTML = '';
@@ -60,6 +60,7 @@ class JourneyEngine {
     const W = this.container.clientWidth || window.innerWidth;
     const H = this.container.clientHeight || 500;
 
+    MILESTONES_DATA.forEach((ms, index) => {
       // Smart badge vertical position (above vs below icon) to prevent text collision
       let isAbove = false;
       if (ms.yPos >= 60) {
