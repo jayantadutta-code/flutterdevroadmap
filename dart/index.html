@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dart Cookbook - Interactive Flipbook & Mastery Platform</title>
+  <meta name="description" content="Master Dart programming from basics to advanced concurrency with an interactive 3D flipbook and 700 MCQ level exams.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Code Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="theme-dark">
+
+  <!-- Main Top Bar Nav -->
+  <header class="app-header">
+    <div class="header-left">
+      <button id="btn-toggle-toc" class="icon-btn" title="Table of Contents (Alt+T)">
+        <i class="fa-solid fa-book-bookmark"></i>
+      </button>
+      <div class="brand">
+        <i class="fa-solid fa-book-open-reader brand-icon"></i>
+        <span class="brand-title">Dart <span class="accent-text">Cookbook</span></span>
+        <span class="badge-edition">Dart 3.x Edition</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="page-indicator">
+        <span id="current-part-label">Part 1: Basic</span>
+        <span class="divider">•</span>
+        <span id="current-page-num">Page 1 of 50</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button id="btn-mode-toggle" class="mode-btn" title="Toggle Flipbook / Reader Mode">
+        <i class="fa-solid fa-book-open"></i>
+        <span class="btn-text">Flipbook</span>
+      </button>
+      <button id="btn-search" class="icon-btn" title="Search Cookbook (Ctrl+K)">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button id="btn-sound-toggle" class="icon-btn" title="Toggle Sound Effects">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+      <button id="btn-theme-toggle" class="icon-btn" title="Toggle Light/Dark Theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button id="btn-bookmarks" class="icon-btn" title="View Bookmarks">
+        <i class="fa-solid fa-bookmark"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar: Table of Contents -->
+  <aside id="sidebar-toc" class="sidebar">
+    <div class="sidebar-header">
+      <h3><i class="fa-solid fa-list-ol"></i> Table of Contents</h3>
+      <button class="close-sidebar-btn" id="btn-close-toc">&times;</button>
+    </div>
+    <div class="toc-progress-bar">
+      <div class="toc-progress-fill" id="toc-progress-fill"></div>
+    </div>
+    <div class="toc-content" id="toc-tree">
+      <!-- Generated dynamically -->
+    </div>
+  </aside>
+
+  <!-- Sidebar: Search -->
+  <aside id="sidebar-search" class="sidebar">
+    <div class="sidebar-header">
+      <h3><i class="fa-solid fa-magnifying-glass"></i> Search Cookbook</h3>
+      <button class="close-sidebar-btn" id="btn-close-search">&times;</button>
+    </div>
+    <div class="search-input-wrapper">
+      <input type="text" id="search-input" placeholder="Search topics, syntax, async, isolates..." autocomplete="off">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+    </div>
+    <div class="search-results" id="search-results-list">
+      <p class="search-hint">Type a keyword to instantly search concepts and code snippets across all 7 parts.</p>
+    </div>
+  </aside>
+
+  <!-- Sidebar: Bookmarks -->
+  <aside id="sidebar-bookmarks" class="sidebar">
+    <div class="sidebar-header">
+      <h3><i class="fa-solid fa-bookmark"></i> Bookmarks</h3>
+      <button class="close-sidebar-btn" id="btn-close-bookmarks">&times;</button>
+    </div>
+    <div class="bookmarks-list" id="bookmarks-list">
+      <!-- Populated dynamically -->
+    </div>
+  </aside>
+
+  <!-- Main View Container -->
+  <main class="app-main">
+    
+    <!-- FLIPBOOK VIEW MODE -->
+    <div id="flipbook-wrapper" class="flipbook-wrapper active-mode">
+      <div class="flipbook-controls left-controls">
+        <button id="btn-prev-page" class="nav-arrow-btn" title="Previous Page (Left Arrow)">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+      </div>
+
+      <!-- Book Container -->
+      <div id="book-container" class="book-container">
+        <!-- 3D Flipbook Pages Rendered Here -->
+        <div id="flipbook" class="flipbook">
+          <!-- Dynamic Left & Right Pages -->
+          <div class="book-page left-page" id="page-left">
+            <div class="page-corner page-corner-tl"></div>
+            <div class="page-header-strip">
+              <span class="chapter-tag" id="left-header-tag">DART COOKBOOK</span>
+              <button class="btn-bookmark-page" id="btn-bookmark-left" title="Bookmark Page">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+            <div class="page-inner-content" id="left-page-body">
+              <!-- Content inserted dynamically -->
+            </div>
+            <div class="page-footer-strip">
+              <span class="page-num" id="left-page-num">1</span>
+            </div>
+          </div>
+
+          <div class="book-spine"></div>
+
+          <div class="book-page right-page" id="page-right">
+            <div class="page-corner page-corner-tr"></div>
+            <div class="page-header-strip">
+              <button class="btn-bookmark-page" id="btn-bookmark-right" title="Bookmark Page">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+              <span class="chapter-tag" id="right-header-tag">PART 1: BASIC</span>
+            </div>
+            <div class="page-inner-content" id="right-page-body">
+              <!-- Content inserted dynamically -->
+            </div>
+            <div class="page-footer-strip">
+              <span class="page-num" id="right-page-num">2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flipbook-controls right-controls">
+        <button id="btn-next-page" class="nav-arrow-btn" title="Next Page (Right Arrow)">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- READER / SCROLL VIEW MODE -->
+    <div id="reader-wrapper" class="reader-wrapper">
+      <div class="reader-container" id="reader-container">
+        <!-- Full scrollable content rendered here -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation & Scrub Bar -->
+  <footer class="app-footer">
+    <div class="footer-left">
+      <button id="btn-first-page" class="footer-btn" title="First Page"><i class="fa-solid fa-backward-step"></i></button>
+      <button id="btn-prev-chapter" class="footer-btn" title="Previous Part"><i class="fa-solid fa-backward"></i></button>
+    </div>
+
+    <div class="footer-center">
+      <input type="range" id="page-scrubber" min="1" max="1" value="1" class="scrubber-slider">
+      <span id="scrubber-val" class="scrubber-text">1 / 1</span>
+    </div>
+
+    <div class="footer-right">
+      <button id="btn-next-chapter" class="footer-btn" title="Next Part"><i class="fa-solid fa-forward"></i></button>
+      <button id="btn-last-page" class="footer-btn" title="Last Page"><i class="fa-solid fa-forward-step"></i></button>
+      <button id="btn-launch-mcq" class="mcq-exam-btn" title="Launch Part Exam">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Take MCQ Exam</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- CODE RUNNER MODAL SIMULATOR -->
+  <div id="code-modal" class="modal-overlay">
+    <div class="modal-card code-modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-terminal"></i> Interactive Dart Playground</h3>
+        <button class="close-modal-btn" id="btn-close-code-modal">&times;</button>
+      </div>
+      <div class="modal-body code-modal-body">
+        <div class="code-editor-pane">
+          <div class="pane-title"><i class="fa-solid fa-code"></i> Dart Source Code</div>
+          <textarea id="code-input" class="code-textarea" spellcheck="false"></textarea>
+        </div>
+        <div class="code-output-pane">
+          <div class="pane-title"><i class="fa-solid fa-laptop-code"></i> Execution Terminal</div>
+          <div id="code-output" class="terminal-output">Ready to execute...</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-reset-code" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i> Reset Code</button>
+        <button id="btn-run-dart-code" class="btn btn-primary"><i class="fa-solid fa-play"></i> Run Dart Code</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MCQ EXAM LEVEL SELECTION & QUIZ MODAL -->
+  <div id="quiz-modal" class="modal-overlay">
+    <div class="modal-card quiz-modal-card">
+      <div class="modal-header">
+        <div id="quiz-modal-title" class="quiz-title-group">
+          <h3><i class="fa-solid fa-graduation-cap"></i> <span id="quiz-part-name">Part 1: Basic</span> Exam</h3>
+          <span id="quiz-level-badge" class="level-pill">Level 1: Novice</span>
+        </div>
+        <button class="close-modal-btn" id="btn-close-quiz-modal">&times;</button>
+      </div>
+
+      <!-- Level Selector Screen -->
+      <div id="quiz-level-select-screen" class="quiz-screen active-screen">
+        <div class="level-select-header">
+          <h2>Select Exam Difficulty Level</h2>
+          <p>Each level consists of 20 multiple choice questions. Pass to unlock higher levels and earn your Part Mastery Certificate.</p>
+        </div>
+        <div class="levels-grid" id="levels-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Active Quiz Screen -->
+      <div id="quiz-active-screen" class="quiz-screen">
+        <div class="quiz-top-bar">
+          <div class="question-tracker">
+            Question <span id="q-current-index">1</span> of <span id="q-total-count">20</span>
+          </div>
+          <div class="quiz-timer" id="quiz-timer">
+            <i class="fa-solid fa-clock"></i> <span id="timer-display">15:00</span>
+          </div>
+          <div class="score-live-tracker">
+            Score: <span id="live-score">0</span>
+          </div>
+        </div>
+
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+        </div>
+
+        <div class="question-container">
+          <h4 id="question-text" class="question-text">Question text goes here</h4>
+          <div id="options-container" class="options-container">
+            <!-- 4 Options rendered here -->
+          </div>
+        </div>
+
+        <!-- Question Grid Navigator -->
+        <div class="q-grid-container">
+          <div class="q-grid-label">Question Jump Matrix:</div>
+          <div id="question-matrix" class="question-matrix">
+            <!-- 20 Question Pills -->
+          </div>
+        </div>
+
+        <div class="explanation-box" id="explanation-box">
+          <div class="explanation-title"><i class="fa-solid fa-circle-info"></i> Explanation:</div>
+          <div class="explanation-body" id="explanation-text">Detailed explanation text here...</div>
+        </div>
+
+        <div class="quiz-action-bar">
+          <button id="btn-prev-question" class="btn btn-secondary" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
+          <button id="btn-submit-answer" class="btn btn-primary"><i class="fa-solid fa-check"></i> Submit Answer</button>
+          <button id="btn-next-question" class="btn btn-primary" style="display:none;">Next <i class="fa-solid fa-arrow-right"></i></button>
+          <button id="btn-finish-quiz" class="btn btn-success" style="display:none;"><i class="fa-solid fa-flag-checkered"></i> Finish Exam</button>
+        </div>
+      </div>
+
+      <!-- Quiz Results Screen -->
+      <div id="quiz-results-screen" class="quiz-screen">
+        <div class="results-card">
+          <div class="results-badge" id="results-badge-icon">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <h2 id="results-title">Congratulations! Exam Passed!</h2>
+          <p id="results-subtitle" class="results-subtitle">You have successfully mastered Level 1 of Part 1.</p>
+          
+          <div class="score-circle-wrapper">
+            <div class="score-circle">
+              <span id="final-percentage" class="score-percent">95%</span>
+              <span class="score-sub">Accuracy</span>
+            </div>
+          </div>
+
+          <div class="stats-summary-grid">
+            <div class="stat-card">
+              <span class="stat-num" id="stat-correct">19</span>
+              <span class="stat-label">Correct</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num" id="stat-wrong">1</span>
+              <span class="stat-label">Incorrect</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num" id="stat-time">04:32</span>
+              <span class="stat-label">Time Taken</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num" id="stat-level-pass">Level 1</span>
+              <span class="stat-label">Status</span>
+            </div>
+          </div>
+
+          <div class="results-actions">
+            <button id="btn-retry-level" class="btn btn-secondary"><i class="fa-solid fa-rotate"></i> Retake Level</button>
+            <button id="btn-select-level-again" class="btn btn-secondary"><i class="fa-solid fa-layer-group"></i> Change Level</button>
+            <button id="btn-view-certificate" class="btn btn-accent"><i class="fa-solid fa-certificate"></i> View Certificate</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CERTIFICATE MODAL -->
+  <div id="certificate-modal" class="modal-overlay">
+    <div class="modal-card cert-modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-award"></i> Certificate of Achievement</h3>
+        <button class="close-modal-btn" id="btn-close-cert-modal">&times;</button>
+      </div>
+      <div class="cert-wrapper" id="cert-printable-area">
+        <div class="cert-border">
+          <div class="cert-inner">
+            <div class="cert-header">
+              <i class="fa-solid fa-book-open-reader cert-logo"></i>
+              <h1>DART COOKBOOK</h1>
+              <h3>OFFICIAL CERTIFICATE OF MASTERY</h3>
+            </div>
+            <div class="cert-body">
+              <p>This is to certify that</p>
+              <h2 id="cert-user-name" class="cert-name">Dart Master Developer</h2>
+              <p>has successfully demonstrated outstanding technical competence and passed all 5 levels of the comprehensive exam in</p>
+              <h3 id="cert-part-title" class="cert-topic">Part 1: Basic Dart Engineering</h3>
+              <p class="cert-meta">Verified standard across 100 Multiple Choice Questions with high accuracy.</p>
+            </div>
+            <div class="cert-footer">
+              <div class="cert-seal">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>VERIFIED</span>
+              </div>
+              <div class="cert-signature">
+                <span class="sig-line">Dart Cookbook Engineering</span>
+                <span class="sig-title">Mastery Assessment Board</span>
+              </div>
+              <div class="cert-date">
+                <span id="cert-issue-date">Date: August 2, 2026</span>
+                <span id="cert-id" class="cert-code">ID: DCB-2026-PART1-PASS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-print-cert" class="btn btn-primary"><i class="fa-solid fa-print"></i> Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-dart.min.js"></script>
+  
+  <script src="js/sound.js"></script>
+  <script src="js/content/part1_basic.js"></script>
+  <script src="js/content/part2_core.js"></script>
+  <script src="js/content/part3_oop.js"></script>
+  <script src="js/content/part4_safety.js"></script>
+  <script src="js/content/part5_async.js"></script>
+  <script src="js/content/part6_advance.js"></script>
+  <script src="js/content/part7_concurrency.js"></script>
+
+  <script src="js/questions/mcq_bank.js"></script>
+  <script src="js/code_runner.js"></script>
+  <script src="js/quiz_engine.js"></script>
+  <script src="js/flipbook.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
