@@ -1,370 +1,456 @@
 /* ==========================================================================
-   Dart Quest Arena - 7 Main Parts x 5 Levels per Part x 20 MCQs per Level
-   Total: 35 Levels, 700 MCQs
+   YAML FlipBook - Gamified Q&A Arena & Achievements Engine (38-Topic Cheat Sheet Edition)
    ========================================================================== */
 
-// Helper function to build 20 MCQs dynamically per part & level
-function generatePartQuestions(partId, levelNum) {
-  const partTitles = {
-    1: "Basics (Intro, Comments, Variables, Numbers, Strings, RegEx, StringBuffer, Operators, Conditions, Loops)",
-    2: "Core Dart (Function, Function Advance, List, Set, Map)",
-    3: "OOP (Classes, Constructor, Inheritance, Abstract, Interfaces, Mixins, Static/Const)",
-    4: "Safety & Control (Null Safety, Exception Handling, Enums)",
-    5: "Asynchronous (Futures, Async, Await, Stream, Generators async*, Event Loop)",
-    6: "Advance (Generics, Extension, Lambda/FP, File Handling, Dart 3 Features)",
-    7: "Concurrency (Isolates, Ports, Parallel Execution)"
-  };
-
-  const topicName = partTitles[partId] || "Dart Topic";
-  const xpBase = levelNum * 10 + 40;
-
-  // Templates pool for generating 20 precise questions per level
-  const templates = [
+const QUIZ_QUESTIONS = {
+  1: [ // Level 1: Basics, Comments & Data Types
     {
-      p: `[Part ${partId} • Level ${levelNum} - Q1] What is a core principle of ${topicName} in Dart?`,
-      opts: ["It ensures type safety and predictable runtime execution", "It disables compiler checks", "It forces global state", "It is deprecated in Dart 3"],
-      a: 0,
-      exp: `Understanding foundational semantics of Part ${partId} ensures reliable application behavior.`
+      id: "l1_q1",
+      prompt: "What is 'The Golden Rule' of YAML indentation?",
+      options: [
+        "Use tabs for speed, spaces for alignment",
+        "Whitespace indentation must use spaces only; tabs are strictly forbidden",
+        "Indentation can mix 2 and 4 spaces freely",
+        "Keys must always be enclosed in double quotes"
+      ],
+      answer: 1,
+      xp: 50,
+      explanation: "YAML uses spaces ONLY for indentation. Tabs cause immediate parsing errors because tab widths differ across text editors."
     },
     {
-      p: `[Part ${partId} • Level ${levelNum} - Q2] Which syntax is recommended when working with ${topicName}?`,
-      opts: ["Standard canonical Dart syntax following official guidelines", "Ad-hoc untyped syntax", "Pre-Dart 1.0 syntax", "JavaScript dynamic syntax"],
-      a: 0,
-      exp: `Following effective Dart guidelines produces clean, maintainable code.`
+      id: "l1_q2",
+      prompt: "Which of the following is NOT a valid representation of null in YAML?",
+      options: [
+        "middleName: null",
+        "nickname: ~",
+        "city: ",
+        "country: nil"
+      ],
+      answer: 3,
+      xp: 50,
+      explanation: "YAML uses 'null', '~', or leaving the value blank for null. 'nil' is Ruby syntax and evaluates as the string 'nil' in YAML."
     },
     {
-      p: `[Part ${partId} • Level ${levelNum} - Q3] What is the expected behavior in Level ${levelNum} of Part ${partId}?`,
-      opts: ["Sound evaluation with compile-time or runtime correctness", "Silent crash", "Infinite loop", "Memory leak"],
-      a: 0,
-      exp: `Dart's sound type system enforces safety guarantees across all execution paths.`
+      id: "l1_q3",
+      prompt: "What will unquoted 'distance: 2e5' evaluate to in a standard YAML parser?",
+      options: [
+        "String '2e5'",
+        "Float 200000 (Scientific Notation)",
+        "Syntax error",
+        "Integer 25"
+      ],
+      answer: 1,
+      xp: 50,
+      explanation: "YAML automatically parses 2e5 in scientific notation as a float value 200000.0."
     },
     {
-      p: `[Part ${partId} • Level ${levelNum} - Q4] How does Dart optimize performance for Part ${partId} operations?`,
-      opts: ["Via AOT/JIT compiler optimizations and efficient memory layout", "By ignoring types at runtime", "By disabling garbage collection", "By compiling to XML"],
-      a: 0,
-      exp: `Dart's compiler pipelines optimize bytecode for fast execution on mobile, web, and desktop.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q5] In Part ${partId}, what happens when an invalid operation occurs?`,
-      opts: ["An exception or compile error is thrown immediately to prevent bugs", "The program ignores it silently", "The OS reboots", "A warning is printed without error"],
-      a: 0,
-      exp: `Immediate error reporting prevents subtle bugs from propagating deep into execution.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q6] Which feature of Part ${partId} helps developers write robust code?`,
-      opts: ["Strict type system and static analysis rules", "Dynamic type coercion", "Global mutable pointers", "Implicit type conversions"],
-      a: 0,
-      exp: `Static analysis catches potential bugs during code editing before deployment.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q7] When refactoring code related to Part ${partId}, what is the best practice?`,
-      opts: ["Maintain clean immutability and modular separation", "Global variable mutation", "Deep nesting without comments", "Hardcoded magic values"],
-      a: 0,
-      exp: `Modular separation and immutability reduce side effects and make testing straightforward.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q8] What key performance advantage does Dart offer in Part ${partId}?`,
-      opts: ["Fast execution and memory efficiency tailored for client UIs", "Slow interpreted execution", "High thread contention", "Heavy reflection overhead"],
-      a: 0,
-      exp: `Dart is specifically designed from the ground up for responsive 60/120 FPS client applications.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q9] What is the scope of variables in Part ${partId}?`,
-      opts: ["Lexical scoping bounded by enclosing curly braces {}", "Global window scope only", "Random scoping", "Function hoist scope"],
-      a: 0,
-      exp: `Dart uses lexical scoping, meaning variable visibility is determined by the code structure.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q10] How does Part ${partId} handle resource allocation?`,
-      opts: ["Generates managed objects cleaned up by generational garbage collection", "Manual malloc/free", "Unmanaged raw pointers", "Disk swap files"],
-      a: 0,
-      exp: `Dart utilizes a fast generational garbage collector optimized for frequent short-lived object allocations.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q11] What is a common pitfall to avoid in Part ${partId}?`,
-      opts: ["Ignoring null checks or suppressing static analyzer warnings", "Writing unit tests", "Using const constructors", "Marking variables final"],
-      a: 0,
-      exp: `Ignoring analyzer warnings often leads to subtle runtime exceptions or degraded performance.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q12] Which operator or keyword is essential in Part ${partId} Level ${levelNum}?`,
-      opts: ["Primary standard operators tailored for this topic", "Deprecated keywords", "C-preprocessor directives", "Unsupported syntax"],
-      a: 0,
-      exp: `Mastering canonical keywords and operators is necessary for high developer proficiency.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q13] How does Dart 3 enhance functionality for Part ${partId}?`,
-      opts: ["With pattern matching, records, and sound null safety enforcement", "By removing classes", "By disabling async await", "By removing generics"],
-      a: 0,
-      exp: `Dart 3 introduced major features like Records, Patterns, and Switch expressions to elevate expressiveness.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q14] What is the return behavior of functions in Part ${partId}?`,
-      opts: ["Explicitly typed returns or soundly inferred return values", "Implicit void for all functions", "String always", "Dynamic cast"],
-      a: 0,
-      exp: `Strong return types allow the compiler to optimize call sites and guarantee type contracts.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q15] In Part ${partId}, why is immutability preferred?`,
-      opts: ["Immutability prevents accidental state mutation and simplifies state management", "It slows down execution", "It uses more memory", "It causes compiler errors"],
-      a: 0,
-      exp: `Immutable data structures make state changes explicit and thread-safe.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q16] Which method is best for transforming collections in Part ${partId}?`,
-      opts: ["Higher-order methods like map(), where(), and fold()", "Manual index mutation inside nested loops", "Converting to string and back", "Global arrays"],
-      a: 0,
-      exp: `Declarative collection transformations are clean, readable, and less error-prone.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q17] How should asynchronous errors in Part ${partId} be handled?`,
-      opts: ["Using try-catch blocks with await or .catchError() listeners", "Ignoring them completely", "Restarting the app", "Using print statements only"],
-      a: 0,
-      exp: `Proper error handling prevents unhandled exceptions from crashing background pipelines.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q18] What benefit does const provide in Part ${partId}?`,
-      opts: ["Canonicalizes identical instances into a single compile-time constant in memory", "Re-allocates objects on every frame", "Makes code run slower", "Requires runtime evaluation"],
-      a: 0,
-      exp: `Const objects are allocated once at compile time, reducing memory churn and garbage collection.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q19] What is the role of static analysis in Part ${partId}?`,
-      opts: ["Enforces language rules, lint recommendations, and type safety before compilation", "Formats HTML files", "Compiles code to native binary", "Manages database tables"],
-      a: 0,
-      exp: `Static analysis continuously validates code correctness directly inside your IDE.`
-    },
-    {
-      p: `[Part ${partId} • Level ${levelNum} - Q20] What master-level insight applies to Part ${partId} Level ${levelNum}?`,
-      opts: ["Combining clean architecture, sound typing, and effective Dart best practices", "Writing all code in a single file", "Avoiding functions", "Using dynamic for all variables"],
-      a: 0,
-      exp: `Mastery comes from understanding both language mechanics and production architectural patterns.`
+      id: "l1_q4",
+      prompt: "Which tag explicitly casts a value to a string data type?",
+      options: [
+        "!!string 123",
+        "!!str 123",
+        "@str 123",
+        "cast:string 123"
+      ],
+      answer: 1,
+      xp: 50,
+      explanation: "Double exclamation tag '!!str 123' explicitly forces the integer 123 to be parsed as a string '123'."
     }
-  ];
+  ],
 
-  return templates.map((t, idx) => ({
-    id: `p${partId}_l${levelNum}_q${idx + 1}`,
-    prompt: t.p,
-    options: t.opts,
-    answer: t.a,
-    xp: xpBase,
-    explanation: t.exp
-  }));
-}
+  2: [ // Level 2: Multiline Strings, Lists & Objects
+    {
+      id: "l2_q1",
+      prompt: "What is the difference between Literal '|' and Folded '>' multiline strings?",
+      options: [
+        "Literal (|) preserves newlines; Folded (>) converts newlines to spaces",
+        "Literal (|) converts newlines to spaces; Folded (>) preserves them",
+        "Literal (|) only allows numbers",
+        "Folded (>) deletes all text"
+      ],
+      answer: 0,
+      xp: 75,
+      explanation: "Literal (|) preserves newlines exactly as typed (great for scripts), while Folded (>) folds single newlines into spaces (great for paragraphs)."
+    },
+    {
+      id: "l2_q2",
+      prompt: "What does the strip chomping indicator '|-' do?",
+      options: [
+        "Strips all trailing newlines at the end of the block scalar",
+        "Keeps extra newlines at the end",
+        "Removes all spaces between words",
+        "Converts uppercase letters to lowercase"
+      ],
+      answer: 0,
+      xp: 75,
+      explanation: "The '-' chomping indicator (|- or >-) strips all trailing newlines from the block scalar output."
+    },
+    {
+      id: "l2_q3",
+      prompt: "What is the correct syntax for an inline Flow Style list in YAML?",
+      options: [
+        "fruits: (Apple, Mango, Banana)",
+        "fruits: [Apple, Mango, Banana]",
+        "fruits: {Apple, Mango, Banana}",
+        "fruits: <Apple, Mango, Banana>"
+      ],
+      answer: 1,
+      xp: 75,
+      explanation: "Flow Style lists use square brackets [Item1, Item2, Item3], identical to JSON arrays."
+    }
+  ],
 
-// Generate complete 7 Parts x 5 Levels x 20 MCQs database (700 total MCQs)
-const QUEST_ARENA_DATABASE = {};
-for (let p = 1; p <= 7; p++) {
-  QUEST_ARENA_DATABASE[p] = {};
-  for (let l = 1; l <= 5; l++) {
-    QUEST_ARENA_DATABASE[p][l] = generatePartQuestions(p, l);
-  }
-}
+  3: [ // Level 3: Anchors, Aliases & Merge Keys
+    {
+      id: "l3_q1",
+      prompt: "Which symbol defines a YAML Anchor for code reusability?",
+      options: [
+        "An asterisk (*)",
+        "An ampersand (&)",
+        "A percent sign (%)",
+        "An exclamation mark (!)"
+      ],
+      answer: 1,
+      xp: 100,
+      explanation: "An ampersand (&name) defines an Anchor. An asterisk (*name) references the alias."
+    },
+    {
+      id: "l3_q2",
+      prompt: "What does the merge key '<<: *base' accomplish in a dictionary?",
+      options: [
+        "Deletes the base object",
+        "Merges all key-value pairs from the anchored base dictionary into the current object",
+        "Converts the dictionary into a list",
+        "Encodes the data into Base64"
+      ],
+      answer: 1,
+      xp: 100,
+      explanation: "The merge key '<<: *base' merges the key-value pairs of the referenced anchor into the current dictionary."
+    },
+    {
+      id: "l3_q3",
+      prompt: "How are multiple YAML documents separated within a single file?",
+      options: [
+        "Using triple dashes (---)",
+        "Using triple dots (...)",
+        "Using equals signs (===)",
+        "Using double hashes (##)"
+      ],
+      answer: 0,
+      xp: 100,
+      explanation: "YAML uses three dashes '---' to separate multiple documents in a single stream file."
+    }
+  ],
+
+  4: [ // Level 4: DevOps & Real-World Configurations
+    {
+      id: "l4_q1",
+      prompt: "In Docker Compose, why is port mapping '80:80' usually enclosed in double quotes?",
+      options: [
+        "To prevent YAML parsers from evaluating 80:80 as a base-60 (sexagesimal) number",
+        "Docker will crash without quotes",
+        "Quotes make the port run faster",
+        "It is required by Linux kernel"
+      ],
+      answer: 0,
+      xp: 150,
+      explanation: "Unquoted 80:80 can be interpreted by YAML 1.1 parsers as sexagesimal (base 60) numbers! Quoting '80:80' ensures it remains a string."
+    },
+    {
+      id: "l4_q2",
+      prompt: "Which file relies on YAML for Flutter project dependencies and metadata?",
+      options: [
+        "pubspec.yaml",
+        "flutter.config.json",
+        "build.gradle.yaml",
+        "CMakeLists.yaml"
+      ],
+      answer: 0,
+      xp: 150,
+      explanation: "Flutter projects use 'pubspec.yaml' to specify package metadata, Dart SDK requirements, dependencies, and assets."
+    },
+    {
+      id: "l4_q3",
+      prompt: "What is a major advantage of YAML over JSON for configuration files?",
+      options: [
+        "YAML supports single-line (#) comments while standard JSON does not",
+        "JSON is faster to read for humans",
+        "JSON does not require quotes",
+        "YAML can only be used in Python"
+      ],
+      answer: 0,
+      xp: 150,
+      explanation: "YAML supports native single-line comments (#) and cleaner indentation without mandatory brackets, making it ideal for human configuration."
+    }
+  ]
+};
+
+const ALL_BADGES = [
+  { id: "badge_first", title: "First Step", desc: "Answer your first quiz question correctly", icon: "fa-solid fa-seedling" },
+  { id: "badge_indent", title: "Indent Specialist", desc: "Complete Level 1 Basics", icon: "fa-solid fa-ruler-combined" },
+  { id: "badge_bug", title: "Multiline Master", desc: "Master block scalars & chomping", icon: "fa-solid fa-align-left" },
+  { id: "badge_anchor", title: "Anchor Architect", desc: "Master YAML Anchors & Merge keys", icon: "fa-solid fa-anchor" },
+  { id: "badge_devops", title: "DevOps & Flutter Hero", desc: "Conquer K8s, Docker & pubspec.yaml challenges", icon: "fa-solid fa-cubes" },
+  { id: "badge_grandmaster", title: "YAML Grandmaster", desc: "Reach 500+ Total XP", icon: "fa-solid fa-crown" }
+];
 
 class QuizEngine {
   constructor() {
-    this.currentPart = 1;
     this.currentLevel = 1;
-    this.currentQuestionIdx = 0;
-    this.userScore = 0;
-    this.userXP = parseInt(localStorage.getItem('dart_cookbook_xp') || '0', 10);
+    this.currentQuestionIndex = 0;
+    this.userXP = parseInt(localStorage.getItem('yaml_user_xp') || '0');
     this.streak = 0;
+    this.totalAnswered = 0;
+    this.totalCorrect = 0;
+    this.unlockedBadges = JSON.parse(localStorage.getItem('yaml_unlocked_badges') || '[]');
 
     this.init();
   }
 
   init() {
-    this.updateXPDisplay();
-    this.switchPart(1);
-    this.bindModalEvents();
+    this.renderHeaderStats();
+    this.renderBadgesGrid();
+    this.loadQuestion();
+    this.bindEvents();
   }
 
-  updateXPDisplay() {
-    const xpDisplay = document.getElementById('user-xp-display');
-    const rankDisplay = document.getElementById('user-rank-display');
-
-    if (xpDisplay) xpDisplay.textContent = this.userXP;
-
-    if (rankDisplay) {
-      let rank = "Dart Novice";
-      if (this.userXP >= 10000) rank = "Dart Master Grandmaster 👑";
-      else if (this.userXP >= 5000) rank = "Dart Specialist ⚡";
-      else if (this.userXP >= 2500) rank = "Dart Architect 🏛️";
-      else if (this.userXP >= 1000) rank = "Dart Developer 👨‍💻";
-
-      rankDisplay.textContent = rank;
-    }
+  setLevel(levelNum) {
+    this.currentLevel = levelNum;
+    this.currentQuestionIndex = 0;
+    this.loadQuestion();
+    this.updateLevelTabsUI();
   }
 
-  switchPart(partId) {
-    this.currentPart = partId;
-
-    // Update active part selector tabs
-    document.querySelectorAll('.part-tab-btn').forEach(btn => {
-      const p = parseInt(btn.getAttribute('data-part'), 10);
-      if (p === partId) {
-        btn.classList.add('active');
+  updateLevelTabsUI() {
+    const tabs = document.querySelectorAll('.level-btn');
+    tabs.forEach(tab => {
+      const level = parseInt(tab.getAttribute('data-level'));
+      if (level === this.currentLevel) {
+        tab.classList.add('active');
       } else {
-        btn.classList.remove('active');
+        tab.classList.remove('active');
       }
     });
-
-    this.renderLevelGrid();
   }
 
-  renderLevelGrid() {
-    const grid = document.getElementById('quizLevelGrid');
-    if (!grid) return;
-
-    const levelDescs = {
-      1: "Level 1: Novice Foundations (20 MCQs) • Basic definitions & syntax rules",
-      2: "Level 2: Intermediate Code (20 MCQs) • Practical usage & core methods",
-      3: "Level 3: Deep Dive (20 MCQs) • Architecture & implementation patterns",
-      4: "Level 4: Complex Scenarios (20 MCQs) • Edge cases, performance & control flow",
-      5: "Level 5: Master Examination (20 MCQs) • Advanced pitfalls, performance & Dart 3"
-    };
-
-    let html = '';
-    for (let l = 1; l <= 5; l++) {
-      html += `
-        <div class="quiz-level-card" onclick="window.quizEngine.startQuiz(${this.currentPart}, ${l})">
-          <span class="level-badge">Level ${l} of 5 • 20 Questions</span>
-          <div class="level-card-title">Part ${this.currentPart} • Level ${l} Exam</div>
-          <div class="level-card-desc">${levelDescs[l]}</div>
-        </div>
-      `;
-    }
-    grid.innerHTML = html;
-  }
-
-  startQuiz(partId, levelNum) {
-    if (!QUEST_ARENA_DATABASE[partId] || !QUEST_ARENA_DATABASE[partId][levelNum]) return;
-
-    this.currentPart = partId;
-    this.currentLevel = levelNum;
-    this.currentQuestionIdx = 0;
-    this.userScore = 0;
-    this.streak = 0;
-
-    const modal = document.getElementById('quiz-arena-modal');
-    if (modal) modal.classList.remove('hidden');
-
-    this.renderQuestion();
-  }
-
-  renderQuestion() {
-    const questions = QUEST_ARENA_DATABASE[this.currentPart][this.currentLevel];
-    if (!questions || this.currentQuestionIdx >= questions.length) {
-      this.finishQuiz();
+  loadQuestion() {
+    const levelQuestions = QUIZ_QUESTIONS[this.currentLevel];
+    if (!levelQuestions || this.currentQuestionIndex >= levelQuestions.length) {
+      this.renderLevelCompletion();
       return;
     }
 
-    const q = questions[this.currentQuestionIdx];
+    const q = levelQuestions[this.currentQuestionIndex];
 
-    const levelTitle = document.getElementById('arena-level-title');
-    const xpReward = document.getElementById('arena-xp-reward');
-    const promptEl = document.getElementById('question-prompt');
-    const optionsContainer = document.getElementById('options-container');
-    const expBox = document.getElementById('explanation-box');
-    const nextBtn = document.getElementById('next-question-btn');
+    // Card elements
+    document.getElementById('q-category-tag').textContent = `Level ${this.currentLevel}: Challenge ${this.currentQuestionIndex + 1}`;
+    document.getElementById('q-counter-text').textContent = `Question ${this.currentQuestionIndex + 1} of ${levelQuestions.length}`;
+    document.getElementById('q-xp-value').textContent = q.xp;
+    document.getElementById('q-prompt-text').textContent = q.prompt;
 
-    if (levelTitle) levelTitle.textContent = `Part ${this.currentPart} • Level ${this.currentLevel} — Q${this.currentQuestionIdx + 1} of ${questions.length}`;
-    if (xpReward) xpReward.textContent = `+${q.xp} XP`;
-    if (promptEl) promptEl.textContent = q.prompt;
-    if (expBox) expBox.classList.add('hidden');
-    if (nextBtn) nextBtn.classList.add('hidden');
-
-    if (optionsContainer) {
-      optionsContainer.innerHTML = q.options.map((opt, idx) => `
-        <button class="option-btn" onclick="window.quizEngine.submitAnswer(${idx})">
-          <span class="opt-prefix">${String.fromCharCode(65 + idx)}</span>
-          <span class="opt-text">${opt}</span>
-        </button>
-      `).join('');
+    // Code container
+    const codeContainer = document.getElementById('q-code-container');
+    const codeBlock = document.getElementById('q-code-block');
+    if (q.code) {
+      codeBlock.textContent = q.code;
+      codeContainer.classList.remove('hidden');
+    } else {
+      codeContainer.classList.add('hidden');
     }
+
+    // Explanation Box & Next Btn
+    document.getElementById('explanation-box').classList.add('hidden');
+    document.getElementById('next-q-btn').classList.add('hidden');
+
+    // Options Grid
+    const optionsGrid = document.getElementById('options-grid');
+    optionsGrid.innerHTML = '';
+
+    q.options.forEach((optText, idx) => {
+      const optionCard = document.createElement('div');
+      optionCard.className = 'option-card';
+      optionCard.innerHTML = `
+        <span class="option-prefix">${String.fromCharCode(65 + idx)}</span>
+        <span class="option-text">${optText}</span>
+      `;
+      optionCard.addEventListener('click', () => this.handleOptionClick(idx, optionCard, q));
+      optionsGrid.appendChild(optionCard);
+    });
   }
 
-  submitAnswer(selectedIdx) {
-    const questions = QUEST_ARENA_DATABASE[this.currentPart][this.currentLevel];
-    const q = questions[this.currentQuestionIdx];
-    const options = document.querySelectorAll('.option-btn');
+  handleOptionClick(selectedIdx, cardElement, q) {
+    const cards = document.querySelectorAll('.option-card');
+    if (cards[0].classList.contains('disabled')) return;
 
-    options.forEach((btn, idx) => {
-      btn.disabled = true;
-      if (idx === q.answer) {
-        btn.classList.add('correct');
-      } else if (idx === selectedIdx) {
-        btn.classList.add('wrong');
-      }
-    });
-
-    const expBox = document.getElementById('explanation-box');
-    const expText = document.getElementById('explanation-text');
-    const nextBtn = document.getElementById('next-question-btn');
+    cards.forEach(c => c.classList.add('disabled'));
+    this.totalAnswered++;
 
     if (selectedIdx === q.answer) {
-      if (window.soundEngine) window.soundEngine.playSuccess();
-      this.userScore++;
+      cardElement.classList.add('correct');
+      soundEngine.playCorrect();
       this.streak++;
-      this.userXP += q.xp;
-      localStorage.setItem('dart_cookbook_xp', this.userXP.toString());
-      this.updateXPDisplay();
+      this.totalCorrect++;
 
-      if (expText) expText.innerHTML = `<strong>Correct! 🎉</strong> ${q.explanation}`;
+      const earnedXP = q.xp + (this.streak > 1 ? 20 : 0);
+      this.addXP(earnedXP);
+
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+      }
+
+      this.checkBadges();
     } else {
-      if (window.soundEngine) window.soundEngine.playError();
+      cardElement.classList.add('wrong');
+      cards[q.answer].classList.add('correct');
+      soundEngine.playWrong();
       this.streak = 0;
-      if (expText) expText.innerHTML = `<strong>Incorrect.</strong> ${q.explanation}`;
     }
 
-    if (expBox) expBox.classList.remove('hidden');
-    if (nextBtn) nextBtn.classList.remove('hidden');
+    const expBox = document.getElementById('explanation-box');
+    const expText = document.getElementById('exp-text');
+    expText.textContent = q.explanation;
+    expBox.classList.remove('hidden');
+
+    document.getElementById('next-q-btn').classList.remove('hidden');
+    this.renderHeaderStats();
   }
 
   nextQuestion() {
-    this.currentQuestionIdx++;
-    this.renderQuestion();
+    this.currentQuestionIndex++;
+    this.loadQuestion();
   }
 
-  finishQuiz() {
-    const questions = QUEST_ARENA_DATABASE[this.currentPart][this.currentLevel];
-    const total = questions.length;
-    const pct = Math.round((this.userScore / total) * 100);
+  renderLevelCompletion() {
+    const prompt = document.getElementById('q-prompt-text');
+    const codeContainer = document.getElementById('q-code-container');
+    const optionsGrid = document.getElementById('options-grid');
+    const expBox = document.getElementById('explanation-box');
+    const nextBtn = document.getElementById('next-q-btn');
 
-    if (window.soundEngine) window.soundEngine.playFanfare();
+    codeContainer.classList.add('hidden');
+    expBox.classList.add('hidden');
+    nextBtn.classList.add('hidden');
 
-    if (typeof confetti === 'function') {
-      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+    prompt.innerHTML = `<i class="fa-solid fa-trophy" style="color:#f59e0b;"></i> Level ${this.currentLevel} Completed!`;
+
+    optionsGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border-color);">
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Great job! You have mastered Level ${this.currentLevel}.</p>
+        <button class="action-btn primary-btn" onclick="selectNextLevel()">
+          Continue to Next Level <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    `;
+  }
+
+  addXP(amount) {
+    this.userXP += amount;
+    localStorage.setItem('yaml_user_xp', this.userXP);
+    this.renderHeaderStats();
+  }
+
+  checkBadges() {
+    const newUnlocked = [];
+
+    if (this.totalCorrect >= 1 && !this.unlockedBadges.includes('badge_first')) {
+      newUnlocked.push('badge_first');
+    }
+    if (this.currentLevel >= 1 && this.totalCorrect >= 3 && !this.unlockedBadges.includes('badge_indent')) {
+      newUnlocked.push('badge_indent');
+    }
+    if (this.currentLevel >= 2 && !this.unlockedBadges.includes('badge_bug')) {
+      newUnlocked.push('badge_bug');
+    }
+    if (this.currentLevel >= 3 && !this.unlockedBadges.includes('badge_anchor')) {
+      newUnlocked.push('badge_anchor');
+    }
+    if (this.currentLevel >= 4 && !this.unlockedBadges.includes('badge_devops')) {
+      newUnlocked.push('badge_devops');
+    }
+    if (this.userXP >= 500 && !this.unlockedBadges.includes('badge_grandmaster')) {
+      newUnlocked.push('badge_grandmaster');
     }
 
-    const promptEl = document.getElementById('question-prompt');
-    const optionsContainer = document.getElementById('options-container');
-    const expBox = document.getElementById('explanation-box');
-    const nextBtn = document.getElementById('next-question-btn');
+    if (newUnlocked.length > 0) {
+      this.unlockedBadges.push(...newUnlocked);
+      localStorage.setItem('yaml_unlocked_badges', JSON.stringify(this.unlockedBadges));
+      this.renderBadgesGrid();
+    }
+  }
 
-    if (promptEl) promptEl.textContent = `Part ${this.currentPart} • Level ${this.currentLevel} Complete! 🏆`;
-    if (optionsContainer) {
-      optionsContainer.innerHTML = `
-        <div class="level-summary-card">
-          <h2>Score: ${this.userScore} / ${total} (${pct}%)</h2>
-          <p>${pct >= 80 ? 'Mastery achieved! Outstanding score! 🌟' : 'Good effort! Re-read the Cookbook pages and try again for 100%! 🚀'}</p>
+  getUserRank() {
+    if (this.userXP >= 600) return "YAML Grandmaster";
+    if (this.userXP >= 400) return "DevOps Architect";
+    if (this.userXP >= 250) return "Anchor Master";
+    if (this.userXP >= 100) return "YAML Apprentice";
+    return "YAML Novice";
+  }
+
+  renderHeaderStats() {
+    document.getElementById('user-xp-display').textContent = this.userXP;
+    document.getElementById('user-rank-display').textContent = this.getUserRank();
+    document.getElementById('quiz-streak-count').textContent = this.streak;
+    document.getElementById('unlocked-badges-count').textContent = `${this.unlockedBadges.length}/${ALL_BADGES.length}`;
+
+    const acc = this.totalAnswered > 0 ? Math.round((this.totalCorrect / this.totalAnswered) * 100) : 100;
+    document.getElementById('quiz-accuracy-score').textContent = `${acc}%`;
+
+    const modalXP = document.getElementById('modal-player-xp');
+    const modalRank = document.getElementById('modal-player-rank');
+    if (modalXP) modalXP.textContent = this.userXP;
+    if (modalRank) modalRank.textContent = this.getUserRank();
+  }
+
+  renderBadgesGrid() {
+    const grid = document.getElementById('badges-grid');
+    const modalGrid = document.getElementById('modal-badges-container');
+    if (!grid) return;
+
+    let html = '';
+    ALL_BADGES.forEach(b => {
+      const isUnlocked = this.unlockedBadges.includes(b.id);
+      html += `
+        <div class="badge-card ${isUnlocked ? 'unlocked' : 'locked'}">
+          <div class="badge-icon"><i class="${b.icon}"></i></div>
+          <div class="badge-info">
+            <div class="badge-name">${b.title}</div>
+            <div class="badge-desc">${b.desc}</div>
+          </div>
         </div>
       `;
-    }
-    if (expBox) expBox.classList.add('hidden');
-    if (nextBtn) nextBtn.classList.add('hidden');
+    });
+
+    grid.innerHTML = html;
+    if (modalGrid) modalGrid.innerHTML = html;
   }
 
-  bindModalEvents() {
-    // Handled via window function wrappers exitQuizArena and nextQuizQuestion
+  bindEvents() {
+    document.getElementById('player-stats-btn').addEventListener('click', () => {
+      document.getElementById('badges-modal').classList.remove('hidden');
+    });
   }
 }
 
-function exitQuizArena() {
-  const modal = document.getElementById('quiz-arena-modal');
-  if (modal) modal.classList.add('hidden');
+// Global functions for quiz UI controls
+function selectQuizLevel(levelNum) {
+  if (window.quizEngine) {
+    window.quizEngine.setLevel(levelNum);
+  }
 }
 
-function nextQuizQuestion() {
-  if (window.quizEngine) window.quizEngine.nextQuestion();
+function selectNextLevel() {
+  if (window.quizEngine) {
+    const nextLvl = Math.min(4, window.quizEngine.currentLevel + 1);
+    window.quizEngine.setLevel(nextLvl);
+  }
+}
+
+function handleNextQuestion() {
+  if (window.quizEngine) {
+    window.quizEngine.nextQuestion();
+  }
+}
+
+function closeBadgesModal() {
+  document.getElementById('badges-modal').classList.add('hidden');
 }

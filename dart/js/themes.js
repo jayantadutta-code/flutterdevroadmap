@@ -1,45 +1,49 @@
 /* ==========================================================================
-   Dart Cookbook - Dynamic Theme Engine
+   YAML FlipBook - Dynamic Theme Switcher Engine
    ========================================================================== */
 
-class ThemeEngine {
+const THEMES = {
+  cyberpunk: "Cyberpunk Dark",
+  obsidian: "Obsidian Slate",
+  solarized: "Solarized Light",
+  synthwave: "Synthwave Sunset",
+  emerald: "Emerald Forest"
+};
+
+class ThemeManager {
   constructor() {
-    this.currentTheme = localStorage.getItem('dart_cookbook_theme') || 'cyberpunk';
+    this.currentTheme = localStorage.getItem('yaml_active_theme') || 'cyberpunk';
     this.init();
   }
 
   init() {
-    this.applyTheme(this.currentTheme);
-    this.bindThemeDropdown();
+    this.setTheme(this.currentTheme);
+    this.bindEvents();
   }
 
-  applyTheme(themeId) {
+  setTheme(themeId) {
+    if (!THEMES[themeId]) themeId = 'cyberpunk';
     this.currentTheme = themeId;
     document.documentElement.setAttribute('data-theme', themeId);
-    localStorage.setItem('dart_cookbook_theme', themeId);
+    localStorage.setItem('yaml_active_theme', themeId);
 
-    const currentThemeNameEl = document.getElementById('current-theme-name');
-    if (currentThemeNameEl) {
-      const names = {
-        'cyberpunk': 'Cyberpunk Dark',
-        'fluttersky': 'Flutter Sky',
-        'obsidian': 'Obsidian Slate',
-        'solarized': 'Solarized Light'
-      };
-      currentThemeNameEl.textContent = names[themeId] || 'Cyberpunk Dark';
+    // Update Dropdown UI Label
+    const themeNameSpan = document.getElementById('current-theme-name');
+    if (themeNameSpan) {
+      themeNameSpan.textContent = THEMES[themeId];
     }
 
-    // Update active dropdown items
-    document.querySelectorAll('.theme-option').forEach(opt => {
-      if (opt.getAttribute('data-theme-id') === themeId) {
-        opt.classList.add('active');
+    // Update active highlight in menu
+    document.querySelectorAll('.theme-option').forEach(option => {
+      if (option.getAttribute('data-theme-id') === themeId) {
+        option.classList.add('active');
       } else {
-        opt.classList.remove('active');
+        option.classList.remove('active');
       }
     });
   }
 
-  bindThemeDropdown() {
+  bindEvents() {
     const themeBtn = document.getElementById('theme-btn');
     const themeMenu = document.getElementById('theme-menu');
 
@@ -49,15 +53,16 @@ class ThemeEngine {
         themeMenu.classList.toggle('show');
       });
 
+      // Close menu when clicking outside
       document.addEventListener('click', () => {
         themeMenu.classList.remove('show');
       });
 
-      document.querySelectorAll('.theme-option').forEach(opt => {
-        opt.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const themeId = opt.getAttribute('data-theme-id');
-          this.applyTheme(themeId);
+      // Option selection
+      document.querySelectorAll('.theme-option').forEach(option => {
+        option.addEventListener('click', () => {
+          const themeId = option.getAttribute('data-theme-id');
+          this.setTheme(themeId);
           themeMenu.classList.remove('show');
         });
       });
@@ -65,4 +70,4 @@ class ThemeEngine {
   }
 }
 
-window.themeEngine = new ThemeEngine();
+const themeManager = new ThemeManager();

@@ -1,463 +1,635 @@
 /* ==========================================================================
-   Dart Cookbook - 7 Main Parts & 37 Subtopics Curriculum Data
+   YAML FlipBook - Complete YAML Cheat Sheet Curriculum (Strict Serial 1 to 38)
+   YAML (YAML Ain't Markup Language)
    ========================================================================== */
 
-const DART_MODULES = [
+const YAML_MODULES = [
   {
     id: 1,
-    chapterNum: "Part 1",
-    title: "Basics (10 Topics)",
-    summary: "Introduction, Comments, Variables, Numbers, Strings, RegEx, StringBuffer, Operators, Conditions, Loops.",
+    chapterNum: "Module 1",
+    title: "Points 1-5: Basics, Comments, Key-Values, Strings & Numbers",
+    summary: "YAML basics, single & multi-line comments, key-value pairs, string quoting, and numeric types.",
     pageLeft: `
       <div class="context-index-card">
-        <h3><i class="fa-solid fa-list-ol"></i> Table of Contents (7 Parts)</h3>
+        <h3><i class="fa-solid fa-list-ol"></i> Table of Contents (Click Topic to Jump)</h3>
         <div class="context-grid">
-          <button class="context-btn active" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(0)">Part 1: Basics</button>
-          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(1)">Part 2: Core Dart</button>
-          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(2)">Part 3: OOP</button>
-          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(3)">Part 4: Safety & Control</button>
-          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(4)">Part 5: Asynchronous</button>
-          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(5)">Part 6: Advance</button>
-          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(6)">Part 7: Concurrency</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(0)">Points 1-5: Basics &amp; Numbers</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(1)">Points 6-9: Booleans &amp; Lists</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(2)">Points 10-14: Objects &amp; Mixed</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(3)">Points 15-19: Indent &amp; Anchors</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(4)">Points 20-24: Types &amp; Dates</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(5)">Points 25-28: K8s &amp; Flutter</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(6)">Points 29-32: Mistakes &amp; JSON</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(7)">Points 33-36: Types &amp; Chomping</button>
+          <button class="context-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(8)">Points 37-38: Cheat Sheet</button>
         </div>
       </div>
 
-      <h2 class="page-h2">1.1 Introduction to Dart</h2>
+      <h2 class="page-h2">1. YAML Basics</h2>
       <p class="page-p">
-        <strong>Dart</strong> is a client-optimized, strongly-typed programming language developed by Google. It powers Flutter for building multi-platform apps (iOS, Android, Web, Desktop). Dart compiles to ARM/x64 machine code for native performance and JavaScript/WebAssembly for web.
+        <strong>YAML</strong> (YAML Ain't Markup Language) is a human-readable data serialization language. It is commonly used for configuration files, Kubernetes, Docker Compose, CI/CD pipelines, Ansible, Flutter's <code>pubspec.yaml</code>, GitHub Actions, and many more.
       </p>
+      <p class="page-p"><strong>File Extension:</strong> <code>.yaml</code> or <code>.yml</code></p>
+      
+      <pre class="book-code-block"><span class="code-header-badge">YAML Example</span><code>name: Jayanta
+age: 22
+country: India</code></pre>
 
-      <pre class="book-code-block"><span class="code-header-badge">Hello World</span><code>void main() {
-  print('Welcome to Dart Programming!');
+      <pre class="book-code-block"><span class="code-header-badge">Equivalent JSON</span><code>{
+  "name": "Jayanta",
+  "age": 22,
+  "country": "India"
 }</code></pre>
 
-      <h2 class="page-h2">1.2 Comments</h2>
-      <p class="page-p">Dart supports single-line, multi-line, and documentation comments.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Comment Types</span><code>// Single-line comment
+      <h2 class="page-h2" style="margin-top: 0.8rem;">2. Comments</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Comments Syntax</span><code># Single-line comment
 
-/* Multi-line
-   comment block */
+name: Jayanta
 
-/// Documentation comment for doc generators
-void calculateScore() {}</code></pre>
+# Multiple comments
+# User Information
+# Created by Admin
+name: Jayanta</code></pre>
 
-      <h2 class="page-h2">1.3 Variables & Data Types</h2>
-      <p class="page-p">Dart features sound type inference with <code>var</code>, plus explicit types (<code>int</code>, <code>String</code>, <code>bool</code>), <code>final</code> (single assignment at runtime), and <code>const</code> (compile-time constant).</p>
-      <pre class="book-code-block"><span class="code-header-badge">Variables</span><code>var name = 'Alex'; // Inferred as String
-int age = 25;
-final DateTime createdAt = DateTime.now(); // Runtime const
-const double pi = 3.14159; // Compile-time const</code></pre>
-
-      <h2 class="page-h2">1.4 Numbers</h2>
-      <p class="page-p">Dart numbers inherit from <code>num</code>: <code>int</code> (64-bit integer) and <code>double</code> (64-bit IEEE 754 float).</p>
-      <pre class="book-code-block"><span class="code-header-badge">Number Methods</span><code>int val = int.parse('42');
-double rate = 9.99;
-print(val.isEven); // true
-print(rate.round()); // 10</code></pre>
+      <h2 class="page-h2" style="margin-top: 0.8rem;">3. Key-Value Pair</h2>
+      <p class="page-p">Syntax: <code>key: value</code></p>
+      <pre class="book-code-block"><span class="code-header-badge">Key-Value Example</span><code>language: YAML
+creator: Clark Evans
+year: 2001</code></pre>
     `,
     pageRight: `
-      <h2 class="page-h2">1.5 Strings</h2>
-      <p class="page-p">Strings are UTF-16 code unit sequences. Supports string interpolation (<code>$var</code>, <code>${expr}</code>) and raw strings (<code>r'...'</code>).</p>
-      <pre class="book-code-block"><span class="code-header-badge">String Interpolation</span><code>String framework = 'Flutter';
-String msg = 'I love $framework and Dart ${2 + 1}.0!';
-String multiline = '''
-Line 1
-Line 2''';</code></pre>
+      <h2 class="page-h2">4. Strings</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Quotes Comparison</span><code># Without Quotes
+name: Jayanta
 
-      <h2 class="page-h2">1.6 Regular Expressions (RegExp)</h2>
-      <p class="page-p">Dart uses <code>RegExp</code> for pattern matching, validation, and search/replace.</p>
-      <pre class="book-code-block"><span class="code-header-badge">RegExp Example</span><code>final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-bool isValid = emailRegExp.hasMatch('dev@flutter.dev'); // true</code></pre>
+# Double Quotes
+name: "Jayanta Dutta"
 
-      <h2 class="page-h2">1.7 StringBuffer</h2>
-      <p class="page-p">Efficiently constructs strings inside loops without creating intermediate string objects in memory.</p>
-      <pre class="book-code-block"><span class="code-header-badge">StringBuffer</span><code>var sb = StringBuffer();
-sb.write('Flutter ');
-sb.writeAll(['is ', 'awesome!']);
-print(sb.toString()); // Flutter is awesome!</code></pre>
+# Single Quotes
+name: 'Jayanta Dutta'</code></pre>
 
-      <h2 class="page-h2">1.8 Operators</h2>
-      <p class="page-p">Includes arithmetic, equality, relational, cascade (<code>..</code>), null-aware (<code>??</code>, <code>??=</code>, <code>?.</code>).</p>
-      <pre class="book-code-block"><span class="code-header-badge">Operators</span><code>int a = 10 ~/ 3; // Truncating division = 3
-String? name;
-String user = name ?? 'Guest'; // Null-coalescing</code></pre>
+      <pre class="book-code-block"><span class="code-header-badge">Multiline String (Literal |)</span><code># Keeps line breaks
+bio: |
+  Flutter Developer
+  Dart Programmer
+  YouTuber
 
-      <h2 class="page-h2">1.9 Conditions & 1.10 Loops</h2>
-      <pre class="book-code-block"><span class="code-header-badge">Control Flow</span><code>// Condition
-if (age >= 18) print('Adult'); else print('Minor');
+# Output:
+# Flutter Developer
+# Dart Programmer
+# YouTuber</code></pre>
 
-// Loops
-for (var i = 0; i < 3; i++) { print('Count: $i'); }
-for (var item in ['A', 'B']) { print(item); }</code></pre>
+      <pre class="book-code-block"><span class="code-header-badge">Folded Style (&gt;)</span><code># Converts line breaks into spaces
+bio: >
+  Flutter Developer
+  Dart Programmer
+  YouTuber
+
+# Output:
+# Flutter Developer Dart Programmer YouTuber</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">5. Numbers</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Numbers</span><code># Integer
+age: 22
+
+# Float
+pi: 3.14159
+
+# Scientific
+distance: 2e5
+
+# Negative
+temperature: -12</code></pre>
     `
   },
+
   {
     id: 2,
-    chapterNum: "Part 2",
-    title: "Core Dart (5 Topics)",
-    summary: "Function, Function Advance, List, Set, Map.",
+    chapterNum: "Module 2",
+    title: "Points 6-9: Booleans, Nulls & Lists (Arrays)",
+    summary: "Boolean values, null representations, single lists, nested lists, and matrices.",
     pageLeft: `
-      <h2 class="page-h2">2.1 Functions</h2>
-      <p class="page-p">Functions are first-class objects in Dart. They can be assigned to variables or passed as parameters.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Function & Arrow Syntax</span><code>int add(int a, int b) {
-  return a + b;
-}
+      <h2 class="page-h2">6. Boolean</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Booleans</span><code>isAdmin: true
+isStudent: false
 
-// Arrow Syntax (single line expressions)
-int multiply(int a, int b) => a * b;</code></pre>
+# Also accepted
+yes
+no
+on
+off</code></pre>
 
-      <h2 class="page-h2">2.2 Function Advance</h2>
-      <p class="page-p">Dart supports positional parameters, named parameters (with <code>required</code> & default values), and higher-order functions.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Named & Optional Parameters</span><code>// Named parameters with default values
-void createUser({required String name, int age = 18, String? role}) {
-  print('$name ($age) - Role: ${role ?? "User"}');
-}
+      <h2 class="page-h2" style="margin-top: 0.8rem;">7. Null</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Null Representations</span><code>middleName: null
 
-void main() {
-  createUser(name: 'Alex', role: 'Admin');
+nickname: ~
+
+city:
+# All mean null.</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">8. List (Array)</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Dash List</span><code>fruits:
+  - Apple
+  - Mango
+  - Banana</code></pre>
+
+      <pre class="book-code-block"><span class="code-header-badge">Equivalent JSON</span><code>{
+  "fruits": [
+    "Apple",
+    "Mango",
+    "Banana"
+  ]
 }</code></pre>
+
+      <p class="page-p"><strong>Inline List:</strong></p>
+      <pre class="book-code-block"><span class="code-header-badge">Inline List</span><code>fruits: [Apple, Mango, Banana]</code></pre>
     `,
     pageRight: `
-      <h2 class="page-h2">2.3 Lists</h2>
-      <p class="page-p">An ordered collection of objects (Arrays). Supports collection <code>if</code>, collection <code>for</code>, and spread operator (<code>...</code>).</p>
-      <pre class="book-code-block"><span class="code-header-badge">List Methods & Spreads</span><code>List<int> nums = [1, 2, 3];
-nums.add(4);
+      <h2 class="page-h2">9. Nested List</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Nested Items &amp; List of Lists</span><code>students:
+  - Jayanta
+  - Rahul
+  - Amit
 
-bool includeExtra = true;
-List<int> combined = [
-  0,
-  ...nums,
-  if (includeExtra) 5
-]; // [0, 1, 2, 3, 4, 5]</code></pre>
+# List of Lists (Matrix)
+matrix:
+  - [1, 2, 3]
+  - [4, 5, 6]</code></pre>
 
-      <h2 class="page-h2">2.4 Sets</h2>
-      <p class="page-p">An unordered collection of unique items.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Set Operations</span><code>Set<String> tags = {'dart', 'flutter', 'dart'};
-print(tags.length); // 2 (duplicates ignored)
-
-Set<String> extra = {'flutter', 'web'};
-print(tags.union(extra)); // {'dart', 'flutter', 'web'}</code></pre>
-
-      <h2 class="page-h2">2.5 Maps</h2>
-      <p class="page-p">An object that associates keys and values. Keys must be unique.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Map Manipulation</span><code>Map<String, int> scores = {'Alex': 95, 'Sam': 88};
-scores['Taylor'] = 92;
-scores.putIfAbsent('Jordan', () => 90);
-
-scores.forEach((key, val) => print('$key: $val'));</code></pre>
-    `
-  },
-  {
-    id: 3,
-    chapterNum: "Part 3",
-    title: "OOP (7 Topics)",
-    summary: "Classes & Objects, Constructors, Inheritance, Abstract classes, Interfaces, Mixins, Static & Constant members.",
-    pageLeft: `
-      <h2 class="page-h2">3.1 Classes and Objects</h2>
-      <p class="page-p">Dart is an object-oriented language with classes and mixin-based inheritance.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Class Declaration</span><code>class Car {
-  String brand;
-  int speed;
-
-  Car(this.brand, this.speed);
-
-  void drive() => print('$brand driving at $speed km/h');
-}</code></pre>
-
-      <h2 class="page-h2">3.2 Constructors</h2>
-      <p class="page-p">Supports generative, named, redirecting, <code>const</code>, and <code>factory</code> constructors.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Constructor Types</span><code>class Point {
-  final double x, y;
-  const Point(this.x, this.y); // Const constructor
-
-  Point.origin() : this(0, 0); // Named & redirecting
-
-  factory Point.fromJson(Map<String, dynamic> json) {
-    return Point(json['x'] as double, json['y'] as double);
-  }
-}</code></pre>
-
-      <h2 class="page-h2">3.3 Inheritance</h2>
-      <p class="page-p">Use <code>extends</code> to create a subclass, and <code>super</code> to access parent members.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Subclassing</span><code>class Animal {
-  void speak() => print('Animal sound');
-}
-
-class Dog extends Animal {
-  @override
-  void speak() => print('Bark!');
-}</code></pre>
-    `,
-    pageRight: `
-      <h2 class="page-h2">3.4 Abstract Classes & 3.5 Interfaces</h2>
-      <p class="page-p">Abstract classes cannot be instantiated. Every class implicitly defines an interface!</p>
-      <pre class="book-code-block"><span class="code-header-badge">Abstract & Interface</span><code>abstract class Shape {
-  double get area; // Abstract getter
-}
-
-class Circle implements Shape {
-  final double radius;
-  Circle(this.radius);
-
-  @override
-  double get area => 3.14159 * radius * radius;
-}</code></pre>
-
-      <h2 class="page-h2">3.6 Mixins</h2>
-      <p class="page-p">Mixins allow reusing code in multiple class hierarchies without subclassing. Use <code>mixin</code> and <code>with</code>.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Mixin Example</span><code>mixin Swimmer {
-  void swim() => print('Swimming fast!');
-}
-
-class Duck extends Animal with Swimmer {}
-
-void main() {
-  Duck().swim(); // Swimming fast!
-}</code></pre>
-
-      <h2 class="page-h2">3.7 Static and Constant Members</h2>
-      <p class="page-p"><code>static</code> variables and methods are shared across all instances of a class.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Static Members</span><code>class AppConfig {
-  static const String appName = 'Flutter Roadmap';
-  static int buildNumber = 101;
-
-  static void printVersion() => print('$appName v$buildNumber');
-}</code></pre>
-    `
-  },
-  {
-    id: 4,
-    chapterNum: "Part 4",
-    title: "Safety & Control (3 Topics)",
-    summary: "Null Safety, Exception Handling, Enums.",
-    pageLeft: `
-      <h2 class="page-h2">4.1 Sound Null Safety</h2>
-      <p class="page-p">Dart's null safety is sound: types are non-nullable by default unless explicitly marked with <code>?</code>.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Null Safety Operators</span><code>String? nickname; // Nullable String
-late String description; // Initialized later
-
-void init() {
-  description = 'Dart Cookbook';
-}
-
-print(nickname?.length); // Null-aware call
-String display = nickname ?? 'No Nickname'; // Coalescing
-// String forced = nickname!; // Assertion operator (throws if null)</code></pre>
-
-      <h2 class="page-h2">4.2 Exception Handling</h2>
-      <p class="page-p">Dart provides <code>try</code>, <code>on</code>, <code>catch</code>, <code>finally</code>, and <code>throw</code> for robust error management.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Try-Catch-Finally</span><code>try {
-  int result = 10 ~/ 0;
-} on IntegerDivisionByZeroException catch (e) {
-  print('Caught division by zero!');
-} catch (e, stackTrace) {
-  print('Unexpected error: $e');
-} finally {
-  print('Cleanup executed always.');
-}</code></pre>
-    `,
-    pageRight: `
-      <h2 class="page-h2">4.3 Enums & Enhanced Enums</h2>
-      <p class="page-p">Enhanced enums (Dart 2.17+) support custom fields, constructors, getters, and methods!</p>
-      <pre class="book-code-block"><span class="code-header-badge">Enhanced Enum</span><code>enum Status {
-  pending(100, 'Processing'),
-  success(200, 'Completed'),
-  error(500, 'Failed');
-
-  final int code;
-  final String label;
-  const Status(this.code, this.label);
-
-  bool get isDone => this == Status.success || this == Status.error;
-}
-
-void main() {
-  var st = Status.success;
-  print('${st.label} (Code ${st.code}) - Done? ${st.isDone}');
-}</code></pre>
-
-      <div class="tip-box">
-        <i class="fa-solid fa-lightbulb"></i>
-        <strong>Best Practice:</strong> Always handle all enum values in <code>switch</code> statements so compiler checks enforce completeness.
+      <div class="key-takeaway-card" style="border-left-color: var(--accent-primary); margin-top: 1rem;">
+        <strong><i class="fa-solid fa-layer-group"></i> List Tip:</strong><br>
+        In YAML, each list item begins with a dash and a space (<code>- </code>). Inline lists use square brackets (<code>[a, b, c]</code>) identical to JSON.
       </div>
     `
   },
+
+  {
+    id: 3,
+    chapterNum: "Module 3",
+    title: "Points 10-14: Dictionaries, Objects & Mixed Data",
+    summary: "Dictionaries (objects), nested objects, list of objects, inline objects, and complex mixed structures.",
+    pageLeft: `
+      <h2 class="page-h2">10. Dictionary (Object)</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Dictionary Syntax</span><code>person:
+  name: Jayanta
+  age: 22
+  city: Kolkata</code></pre>
+
+      <pre class="book-code-block"><span class="code-header-badge">Equivalent JSON</span><code>{
+  "person": {
+    "name": "Jayanta",
+    "age": 22,
+    "city": "Kolkata"
+  }
+}</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">11. Nested Objects</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Deep Nesting</span><code>person:
+  name: Jayanta
+
+  address:
+    city: Kolkata
+    state: West Bengal
+    country: India</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">12. List of Objects</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Sequence of Maps</span><code>employees:
+  - name: Alice
+    age: 25
+
+  - name: Bob
+    age: 28
+
+  - name: Charlie
+    age: 35</code></pre>
+    `,
+    pageRight: `
+      <h2 class="page-h2">13. Inline Object</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Flow Style Object</span><code>person: {name: Jayanta, age: 22}</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 1rem;">14. Mixed Data</h2>
+      <p class="page-p">Combining scalar values, lists, and nested objects into a cohesive schema:</p>
+      <pre class="book-code-block"><span class="code-header-badge">Mixed Data Structure</span><code>user:
+  name: Jayanta
+  skills:
+    - Flutter
+    - Dart
+    - Firebase
+
+  address:
+    city: Kolkata
+    country: India</code></pre>
+    `
+  },
+
+  {
+    id: 4,
+    chapterNum: "Module 4",
+    title: "Points 15-19: Indentation, Documents, Anchors, Aliases & Merges",
+    summary: "Golden indentation rules, multi-document streams (---), anchors (&), aliases (*), and merge keys (<<).",
+    pageLeft: `
+      <h2 class="page-h2">15. Indentation</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Correct vs Wrong</span><code># Correct
+person:
+  name: Jayanta
+  age: 22
+
+# Wrong
+person:
+    name: Jayanta
+  age: 22</code></pre>
+
+      <div class="key-takeaway-card" style="border-left-color: #f59e0b;">
+        <strong><i class="fa-solid fa-ruler-combined"></i> Rules:</strong>
+        <ul style="margin-top: 0.3rem; padding-left: 1.2rem; line-height: 1.5;">
+          <li>✔ Use spaces</li>
+          <li>❌ Never use tabs</li>
+          <li>✔ Usually 2 spaces</li>
+        </ul>
+      </div>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">16. Multiple Documents</h2>
+      <p class="page-p">Separate documents using <code>---</code>:</p>
+      <pre class="book-code-block"><span class="code-header-badge">Multi-Document Stream</span><code>name: First
+---
+name: Second
+---
+name: Third</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">17. Anchors (<code>&amp;</code>)</h2>
+      <p class="page-p">Reuse data using an anchor <code>&amp;anchor_name</code>:</p>
+      <pre class="book-code-block"><span class="code-header-badge">Anchor Definition</span><code>default: &default
+
+  name: Jayanta
+  country: India
+
+user1:
+  <<: *default
+  age: 22
+
+user2:
+  <<: *default
+  age: 25</code></pre>
+    `,
+    pageRight: `
+      <h2 class="page-h2">18. Alias (<code>*</code>)</h2>
+      <p class="page-p">Reference anchored nodes using <code>*alias_name</code>:</p>
+      <pre class="book-code-block"><span class="code-header-badge">Alias Example</span><code>developer: &dev
+
+  language: Dart
+  framework: Flutter
+
+employee1:
+  skills: *dev
+
+employee2:
+  skills: *dev</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 1rem;">19. Merge Key (<code>&lt;&lt;</code>)</h2>
+      <p class="page-p">Merge base properties into a new map:</p>
+      <pre class="book-code-block"><span class="code-header-badge">Merge Key Example</span><code>base: &base
+
+  language: Dart
+  framework: Flutter
+
+developer:
+  <<: *base
+  experience: 3</code></pre>
+    `
+  },
+
   {
     id: 5,
-    chapterNum: "Part 5",
-    title: "Asynchronous (6 Topics)",
-    summary: "Futures, Async, Await, Stream, Generators async*, Event loop.",
+    chapterNum: "Module 5",
+    title: "Points 20-24: Explicit Types, Special Chars, Dates & Env Vars",
+    summary: "Explicit data tags (!!), escaping & unicode, date, timestamp formats, and environment variable expansion.",
     pageLeft: `
-      <h2 class="page-h2">5.1 Futures, 5.2 Async & 5.3 Await</h2>
-      <p class="page-p">A <code>Future</code> represents a computation that completes asynchronously with a value or error.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Future & Async/Await</span><code>Future<String> fetchUserData() async {
-  await Future.delayed(Duration(seconds: 1));
-  return 'User: Alex';
-}
+      <h2 class="page-h2">20. Explicit Data Types</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Explicit Tags (!!)</span><code># String
+name: !!str 123
 
-void main() async {
-  print('Fetching...');
-  String user = await fetchUserData();
-  print('Result: $user');
-}</code></pre>
+# Integer
+age: !!int "22"
 
-      <h2 class="page-h2">5.4 Streams</h2>
-      <p class="page-p">A <code>Stream</code> is an asynchronous sequence of data events (single-subscription or broadcast).</p>
-      <pre class="book-code-block"><span class="code-header-badge">Stream & Controller</span><code>import 'dart:async';
+# Float
+price: !!float "10.5"
 
-final controller = StreamController<int>();
+# Boolean
+active: !!bool "true"</code></pre>
 
-controller.stream.listen((data) => print('Stream Data: $data'));
+      <h2 class="page-h2" style="margin-top: 0.8rem;">21. Special Characters</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Escape Sequences &amp; Unicode</span><code># Escape
+message: "Hello\\nWorld"
 
-controller.add(10);
-controller.add(20);
-controller.close();</code></pre>
+# Tab
+message: "Hello\\tWorld"
+
+# Unicode
+heart: "\\u2764"</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">22. Date</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Date Format</span><code>today: 2025-06-10</code></pre>
     `,
     pageRight: `
-      <h2 class="page-h2">5.5 Generators (sync* & async*)</h2>
-      <p class="page-p">Generators produce sequences lazily: <code>sync*</code> returns <code>Iterable</code>, <code>async*</code> returns <code>Stream</code>.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Async Generator</span><code>Stream<int> countStream(int max) async* {
-  for (int i = 1; i <= max; i++) {
-    await Future.delayed(Duration(milliseconds: 300));
-    yield i; // Emit item to stream
-  }
-}
+      <h2 class="page-h2">23. Timestamp</h2>
+      <pre class="book-code-block"><span class="code-header-badge">ISO Timestamp</span><code>created: 2025-06-10T18:45:00Z</code></pre>
 
-void main() async {
-  await for (var num in countStream(3)) {
-    print('Yielded: $num');
-  }
-}</code></pre>
-
-      <h2 class="page-h2">5.6 The Event Loop</h2>
-      <p class="page-p">Dart runs single-threaded with an Event Loop managing <strong>Microtask Queue</strong> (higher priority) and <strong>Event Queue</strong> (I/O, timers).</p>
-      <pre class="book-code-block"><span class="code-header-badge">Queue Execution Order</span><code>void main() {
-  print('1. Sync Start');
-  Future(() => print('4. Event Queue'));
-  scheduleMicrotask(() => print('3. Microtask Queue'));
-  print('2. Sync End');
-}
-// Output order: 1, 2, 3, 4</code></pre>
+      <h2 class="page-h2" style="margin-top: 1rem;">24. Environment Variables (Common Pattern)</h2>
+      <p class="page-p">
+        YAML itself doesn't expand environment variables, but many tools (Docker Compose, Helm, etc.) do:
+      </p>
+      <pre class="book-code-block"><span class="code-header-badge">Env Var Templating</span><code>database:
+  host: \${DB_HOST}
+  user: \${DB_USER}</code></pre>
     `
   },
+
   {
     id: 6,
-    chapterNum: "Part 6",
-    title: "Advance (5 Topics)",
-    summary: "Generics, Extension, Lambda + FP, File handling, Dart 3 features.",
+    chapterNum: "Module 6",
+    title: "Points 25-28: Kubernetes, Docker, GitHub Actions & Flutter",
+    summary: "Real-world production configs for Kubernetes, Docker Compose, GitHub Actions, and Flutter pubspec.yaml.",
     pageLeft: `
-      <h2 class="page-h2">6.1 Generics</h2>
-      <p class="page-p">Generics ensure type safety across classes, methods, and data structures with optional bounds.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Generic Class</span><code>class Box<T extends num> {
-  T value;
-  Box(this.value);
+      <h2 class="page-h2">25. Kubernetes Example</h2>
+      <pre class="book-code-block"><span class="code-header-badge">pod.yaml</span><code>apiVersion: v1
 
-  T add(T other) => (value + other) as T;
-}</code></pre>
+kind: Pod
 
-      <h2 class="page-h2">6.2 Extension Methods</h2>
-      <p class="page-p">Add new functionality to existing libraries and types without inheritance.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Extension on String</span><code>extension StringUtils on String {
-  String get capitalize => 
-    isEmpty ? '' : '${this[0].toUpperCase()}${substring(1)}';
-}
+metadata:
+  name: nginx
 
-print('flutter'.capitalize); // Flutter</code></pre>
+spec:
+  containers:
+    - name: nginx
+      image: nginx:latest</code></pre>
 
-      <h2 class="page-h2">6.3 Lambda & Functional Programming</h2>
-      <p class="page-p">Higher-order methods like <code>map</code>, <code>where</code>, <code>fold</code>, <code>reduce</code> enable functional pipelines.</p>
-      <pre class="book-code-block"><span class="code-header-badge">FP Pipeline</span><code>List<int> numbers = [1, 2, 3, 4, 5];
-int sumOfEvens = numbers
-  .where((n) => n.isEven)
-  .map((n) => n * n)
-  .fold(0, (prev, curr) => prev + curr); // 4 + 16 = 20</code></pre>
+      <h2 class="page-h2" style="margin-top: 1rem;">26. Docker Compose Example</h2>
+      <pre class="book-code-block"><span class="code-header-badge">docker-compose.yml</span><code>services:
+
+  web:
+    image: nginx
+
+  db:
+    image: mysql</code></pre>
     `,
     pageRight: `
-      <h2 class="page-h2">6.4 File Handling (dart:io)</h2>
-      <p class="page-p">Read and write files synchronously or asynchronously using <code>dart:io</code>.</p>
-      <pre class="book-code-block"><span class="code-header-badge">File Read & Write</span><code>import 'dart:io';
+      <h2 class="page-h2">27. GitHub Actions Example</h2>
+      <pre class="book-code-block"><span class="code-header-badge">.github/workflows/build.yml</span><code>name: Build
 
-Future<void> saveLog(String message) async {
-  final file = File('app.log');
-  await file.writeAsString('$message\n', mode: FileMode.append);
-  String contents = await file.readAsString();
-  print('Log: $contents');
-}</code></pre>
+on:
+  push:
 
-      <h2 class="page-h2">6.5 Dart 3 Features</h2>
-      <p class="page-p">Dart 3 introduces Records, Patterns, Switch Expressions, and Sealed class hierarchies.</p>
-      <pre class="book-code-block"><span class="code-header-badge">Records, Patterns & Switch</span><code>// Records
-(String, int) getUser() => ('Alex', 25);
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-// Switch Expression & Pattern Matching
-String describe(Object obj) => switch (obj) {
-  (String name, int age) => 'User $name is $age',
-  int n when n > 0 => 'Positive integer $n',
-  _ => 'Unknown'
-};
+    steps:
+      - uses: actions/checkout@v4
 
-void main() {
-  final user = getUser();
-  print(describe(user)); // User Alex is 25
-}</code></pre>
+      - run: echo "Hello YAML"</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 1rem;">28. Flutter pubspec.yaml</h2>
+      <pre class="book-code-block"><span class="code-header-badge">pubspec.yaml</span><code>name: learn_dart
+
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter</code></pre>
     `
   },
+
   {
     id: 7,
-    chapterNum: "Part 7",
-    title: "Concurrency (1 Topic)",
-    summary: "Isolates & Background Thread Processing.",
+    chapterNum: "Module 7",
+    title: "Points 29-32: Reserved Chars, Mistakes, Best Practices & YAML vs JSON",
+    summary: "Reserved characters, common syntax mistakes, production best practices, and YAML vs JSON matrix.",
     pageLeft: `
-      <h2 class="page-h2">7.1 Isolates</h2>
+      <h2 class="page-h2">29. Reserved Characters</h2>
       <p class="page-p">
-        Dart isolates are independent threads with their own private memory heaps and event loops. Because isolates share no memory, they communicate exclusively via message passing (ports).
+        Reserved characters: <code>: # - ? &amp; * ! | &gt; @ &#96; % {} [] ,</code><br>
+        <strong>Rule:</strong> Quote values if they contain reserved characters.
       </p>
+      <pre class="book-code-block"><span class="code-header-badge">Quoted Reserved String</span><code>password: "abc:123"</code></pre>
 
-      <pre class="book-code-block"><span class="code-header-badge">Isolate.run (Dart 2.19+)</span><code>import 'dart:isolate';
+      <h2 class="page-h2" style="margin-top: 0.8rem;">30. Common Mistakes</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Common Pitfalls</span><code>❌ Using tabs
+name:
+<TAB>Jayanta
 
-// Heavy CPU computation function
-int heavyFibonacci(int n) {
-  if (n <= 1) return n;
-  return heavyFibonacci(n - 1) + heavyFibonacci(n - 2);
-}
+✅ Correct spaces
+name:
+  Jayanta
 
-void main() async {
-  print('Starting heavy computation on background Isolate...');
-  
-  // Spawns isolate, runs function, returns result without blocking main UI thread
-  int result = await Isolate.run(() => heavyFibonacci(40));
-  
-  print('Fibonacci result: $result');
-}</code></pre>
+❌ Missing space after colon
+name:Jayanta
+
+✅ Space after colon
+name: Jayanta
+
+❌ Wrong indentation
+person:
+ name: Jayanta
+   age: 22</code></pre>
     `,
     pageRight: `
-      <h2 class="page-h2">Bi-directional Isolate Communication</h2>
-      <p class="page-p">Use <code>ReceivePort</code> and <code>SendPort</code> for persistent long-running background workers.</p>
+      <h2 class="page-h2">31. Best Practices</h2>
+      <ul style="padding-left: 1.2rem; font-size: 0.85rem; line-height: 1.6;">
+        <li>✔ Use 2 spaces</li>
+        <li>✔ Use meaningful keys</li>
+        <li>✔ Keep nesting shallow</li>
+        <li>✔ Quote special strings</li>
+        <li>✔ Use comments</li>
+        <li>✔ Validate YAML</li>
+        <li>✔ Keep files modular</li>
+      </ul>
 
-      <pre class="book-code-block"><span class="code-header-badge">ReceivePort & SendPort</span><code>import 'dart:isolate';
+      <h2 class="page-h2" style="margin-top: 0.8rem;">32. YAML vs JSON</h2>
+      <table class="comparison-table" style="width: 100%; border-collapse: collapse; font-size: 0.8rem;">
+        <thead>
+          <tr style="background: rgba(255,255,255,0.05); text-align: left;">
+            <th style="padding: 5px; border: 1px solid var(--border-color);">Feature</th>
+            <th style="padding: 5px; border: 1px solid var(--border-color);">YAML</th>
+            <th style="padding: 5px; border: 1px solid var(--border-color);">JSON</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Human Readable</td><td style="padding: 4px; border: 1px solid var(--border-color);">✅</td><td style="padding: 4px; border: 1px solid var(--border-color);">❌</td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Comments</td><td style="padding: 4px; border: 1px solid var(--border-color);">✅</td><td style="padding: 4px; border: 1px solid var(--border-color);">❌</td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Less Syntax</td><td style="padding: 4px; border: 1px solid var(--border-color);">✅</td><td style="padding: 4px; border: 1px solid var(--border-color);">❌</td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Curly Braces</td><td style="padding: 4px; border: 1px solid var(--border-color);">❌</td><td style="padding: 4px; border: 1px solid var(--border-color);">✅</td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Lists</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>- item</code></td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>[]</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Objects</td><td style="padding: 4px; border: 1px solid var(--border-color);">Indentation</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>{}</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Used For</td><td style="padding: 4px; border: 1px solid var(--border-color);">Configurations</td><td style="padding: 4px; border: 1px solid var(--border-color);">APIs, Data</td></tr>
+        </tbody>
+      </table>
+    `
+  },
 
-void worker(SendPort mainSendPort) {
-  final workerReceivePort = ReceivePort();
-  mainSendPort.send(workerReceivePort.sendPort);
+  {
+    id: 8,
+    chapterNum: "Module 8",
+    title: "Points 33-36: Data Types, Flow Style, Multiline Chomping & Ecosystem",
+    summary: "Data types summary, flow style vs block style, advanced multiline chomping, and real-world usage.",
+    pageLeft: `
+      <h2 class="page-h2">33. YAML Data Types</h2>
+      <table class="comparison-table" style="width: 100%; border-collapse: collapse; font-size: 0.8rem;">
+        <thead>
+          <tr style="background: rgba(255,255,255,0.05); text-align: left;">
+            <th style="padding: 5px; border: 1px solid var(--border-color);">Type</th>
+            <th style="padding: 5px; border: 1px solid var(--border-color);">Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">String</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>"Hello"</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Integer</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>42</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Float</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>3.14</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Boolean</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>true</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Null</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>null, ~</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">List</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>- Apple</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Object</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>name: John</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Date</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>2026-08-02</code></td></tr>
+          <tr><td style="padding: 4px; border: 1px solid var(--border-color);">Timestamp</td><td style="padding: 4px; border: 1px solid var(--border-color);"><code>2026-08-02T12:30:00Z</code></td></tr>
+        </tbody>
+      </table>
 
-  workerReceivePort.listen((message) {
-    print('Worker received: $message');
-    mainSendPort.send('Processed: $message');
-  });
-}
+      <h2 class="page-h2" style="margin-top: 0.8rem;">34. YAML Flow Style</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Block vs Flow Style</span><code># Block style (most common):
+colors:
+  - red
+  - green
+  - blue
 
-void main() async {
-  final receivePort = ReceivePort();
-  await Isolate.spawn(worker, receivePort.sendPort);
+# Flow style:
+colors: [red, green, blue]
 
-  // Listen for worker's SendPort
-  final SendPort workerSendPort = await receivePort.first;
-  workerSendPort.send('Parse 10MB JSON Data');
-}</code></pre>
+# Objects:
+user: {name: Jayanta, age: 22}</code></pre>
+    `,
+    pageRight: `
+      <h2 class="page-h2">35. Advanced Multiline Strings</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Chomping Controls</span><code># Strip final newline (|-):
+message: |-
+  Line 1
+  Line 2
 
-      <div class="tip-box">
-        <i class="fa-solid fa-bolt"></i>
-        <strong>Performance Rule:</strong> Use <code>Isolate.run()</code> for heavy JSON parsing or encryption in Flutter to keep frame rate at 60/120 FPS!
+# Keep extra newlines (|+):
+message: |+
+  Line 1
+  Line 2
+
+# Fold with strip (>-):
+message: >-
+  This long
+  sentence becomes
+  one line.</code></pre>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">36. Common Real-World Uses</h2>
+      <ul style="padding-left: 1.2rem; font-size: 0.82rem; line-height: 1.6;">
+        <li>✅ Kubernetes manifests</li>
+        <li>✅ Docker Compose (<code>docker-compose.yml</code>)</li>
+        <li>✅ GitHub Actions workflows</li>
+        <li>✅ GitLab CI/CD</li>
+        <li>✅ Azure Pipelines</li>
+        <li>✅ CircleCI</li>
+        <li>✅ Ansible playbooks</li>
+        <li>✅ Flutter pubspec.yaml</li>
+        <li>✅ Home Assistant</li>
+        <li>✅ Helm charts</li>
+        <li>✅ Static site generators (Jekyll, Hugo)</li>
+        <li>✅ Application configuration files</li>
+      </ul>
+    `
+  },
+
+  {
+    id: 9,
+    chapterNum: "Module 9",
+    title: "Points 37-38: Quick Reference, Roadmap & Cheat Sheet Summary",
+    summary: "All-in-one quick reference code block, learning roadmap, and complete summary takeaway.",
+    pageLeft: `
+      <h2 class="page-h2">37. Quick Reference</h2>
+      <pre class="book-code-block"><span class="code-header-badge">All-In-One Code Reference</span><code># Comment
+
+name: John           # String
+age: 25              # Integer
+price: 19.99         # Float
+active: true         # Boolean
+empty: null          # Null
+
+skills:
+  - Dart
+  - Flutter
+
+address:
+  city: Kolkata
+  country: India
+
+colors: [Red, Green, Blue]
+
+user: {name: John, age: 25}
+
+message: |
+  Multiple
+  Lines
+
+summary: >
+  Folded
+  Text
+
+default: &default
+  country: India
+
+user1:
+  <<: *default
+  name: Alice
+
+---
+name: Another Document</code></pre>
+    `,
+    pageRight: `
+      <h2 class="page-h2">38. YAML Learning Roadmap</h2>
+      <div style="font-size: 0.82rem; line-height: 1.5;">
+        <div style="background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 0.4rem 0.6rem; border-radius: 4px; margin-bottom: 0.4rem;">
+          <strong style="color: #38bdf8;">Beginner:</strong> What YAML is, syntax, comments, key-value pairs, strings, numbers, booleans, null, lists, objects, indentation.
+        </div>
+        <div style="background: rgba(245, 158, 11, 0.1); border-left: 3px solid #f59e0b; padding: 0.4rem 0.6rem; border-radius: 4px; margin-bottom: 0.4rem;">
+          <strong style="color: #f59e0b;">Intermediate:</strong> Nested structures, multiline strings, flow style, multiple documents, anchors, aliases, merge keys, explicit types.
+        </div>
+        <div style="background: rgba(168, 85, 247, 0.1); border-left: 3px solid #a855f7; padding: 0.4rem 0.6rem; border-radius: 4px;">
+          <strong style="color: #a855f7;">Advanced:</strong> Kubernetes, Docker Compose, GitHub Actions, CI/CD pipelines, Flutter pubspec.yaml, YAML validation &amp; linting, Helm/Ansible templating.
+        </div>
+      </div>
+
+      <h2 class="page-h2" style="margin-top: 0.8rem;">Cheat Sheet Summary</h2>
+      <pre class="book-code-block"><span class="code-header-badge">Cheat Sheet Summary</span><code># Comment
+key: value
+list:
+  - item1
+  - item2
+object:
+  key: value
+inlineList: [a, b, c]
+inlineObject: {x: 1, y: 2}
+literal: |
+  Keep Newlines
+folded: >
+  Join Lines
+anchor: &base
+  language: Dart
+copy:
+  <<: *base
+---
+another: document</code></pre>
+
+      <div style="margin-top: 1rem; text-align: center; padding: 0.85rem; background: rgba(255,255,255,0.03); border: 1px dashed var(--accent-primary); border-radius: 8px;">
+        <p style="font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-main);"><strong>🎉 End of YAML Masterclass &amp; Cheat Sheet!</strong></p>
+        <button class="action-btn primary-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.closeBook()">
+          <i class="fa-solid fa-book-bookmark"></i> Finish &amp; Close Book
+        </button>
       </div>
     `
   }

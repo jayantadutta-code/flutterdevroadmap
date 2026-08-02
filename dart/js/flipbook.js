@@ -1,64 +1,52 @@
 /* ==========================================================================
-   Dart Cookbook - 3D FlipBook Engine (YAML & Git-GitHub Spec Engine)
+   YAML 3D FlipBook Engine - Multi-Sheet 3D Physics & Navigation Engine
    ========================================================================== */
 
 class FlipBookEngine {
   constructor() {
     this.currentSheet = 0;
-    this.totalSheets = 10;
+    this.totalSheets = 12;
     this.isFlipping = false;
 
     this.searchDatabase = [
-      // Part 1: Basics (Sheet 2)
-      { id: 1, title: "1.1 Introduction to Dart", sheet: 2, moduleIdx: 0, exp: "Dart origins, client optimization, native & web compilation.", keywords: ["intro", "introduction", "dart", "jit", "aot"] },
-      { id: 2, title: "1.2 Comments", sheet: 2, moduleIdx: 0, exp: "Single-line //, multi-line /* */, doc comments ///.", keywords: ["comments", "//", "doc", "documentation"] },
-      { id: 3, title: "1.3 Variables and Data Types", sheet: 2, moduleIdx: 0, exp: "var, final, const, explicit types int, String, bool.", keywords: ["variables", "types", "var", "final", "const"] },
-      { id: 4, title: "1.4 Number", sheet: 2, moduleIdx: 0, exp: "int, double, num, parsing and rounding methods.", keywords: ["number", "int", "double", "num", "parse"] },
-      { id: 5, title: "1.5 String", sheet: 2, moduleIdx: 0, exp: "String interpolation $var, ${expr}, multiline ''' strings.", keywords: ["string", "text", "interpolation", "multiline"] },
-      { id: 6, title: "1.6 Regular Expression", sheet: 2, moduleIdx: 0, exp: "RegExp pattern matching, email & text validation.", keywords: ["regex", "regexp", "pattern", "matching"] },
-      { id: 7, title: "1.7 String Buffer", sheet: 2, moduleIdx: 0, exp: "StringBuffer for memory-efficient string concatenation.", keywords: ["stringbuffer", "buffer", "write", "performance"] },
-      { id: 8, title: "1.8 Operators", sheet: 2, moduleIdx: 0, exp: "Arithmetic, relational, cascade .., null-aware ?? and ??=.", keywords: ["operators", "cascade", "null-coalescing", "arithmetic"] },
-      { id: 9, title: "1.9 Conditions", sheet: 2, moduleIdx: 0, exp: "if, else if, else, ternary operator ? :.", keywords: ["conditions", "if", "else", "ternary"] },
-      { id: 10, title: "1.10 Loops", sheet: 2, moduleIdx: 0, exp: "for, for-in, forEach, while, do-while, break, continue.", keywords: ["loops", "for", "while", "foreach", "break"] },
-
-      // Part 2: Core Dart (Sheet 3)
-      { id: 11, title: "2.1 Function", sheet: 3, moduleIdx: 1, exp: "Function signatures, parameters, return types, arrow => syntax.", keywords: ["function", "arrow", "return", "params"] },
-      { id: 12, title: "2.2 Function Advance", sheet: 3, moduleIdx: 1, exp: "Named params {required}, positional, default values, higher-order.", keywords: ["named parameters", "positional", "required", "closure"] },
-      { id: 13, title: "2.3 List", sheet: 3, moduleIdx: 1, exp: "List methods, spread operator ..., collection if/for.", keywords: ["list", "array", "spread", "collection"] },
-      { id: 14, title: "2.4 Set", sheet: 3, moduleIdx: 1, exp: "Unordered collection of unique items, set union & intersection.", keywords: ["set", "unique", "union", "intersection"] },
-      { id: 15, title: "2.5 Map", sheet: 3, moduleIdx: 1, exp: "Key-value dictionary mapping, putIfAbsent, entries iteration.", keywords: ["map", "dictionary", "key", "value"] },
-
-      // Part 3: OOP (Sheet 4)
-      { id: 16, title: "3.1 Classes and Object", sheet: 4, moduleIdx: 2, exp: "Class fields, methods, instantiation of objects.", keywords: ["class", "object", "instance", "method"] },
-      { id: 17, title: "3.2 Constructor", sheet: 4, moduleIdx: 2, exp: "Generative, named, redirecting, const, factory constructors.", keywords: ["constructor", "factory", "named", "const constructor"] },
-      { id: 18, title: "3.3 Inheritance", sheet: 4, moduleIdx: 2, exp: "Subclassing with extends, super keyword, @override.", keywords: ["inheritance", "extends", "super", "override"] },
-      { id: 19, title: "3.4 Abstract Classes", sheet: 4, moduleIdx: 2, exp: "abstract class blueprints, abstract methods & getters.", keywords: ["abstract", "class", "blueprint", "shape"] },
-      { id: 20, title: "3.5 Interfaces", sheet: 4, moduleIdx: 2, exp: "Implicit interfaces, implements keyword, multi-interface contracts.", keywords: ["interface", "implements", "contract"] },
-      { id: 21, title: "3.6 Mixins", sheet: 4, moduleIdx: 2, exp: "Code reuse with mixin and with keywords, on constraints.", keywords: ["mixin", "with", "multiple inheritance", "reuse"] },
-      { id: 22, title: "3.7 Static and Constant Member", sheet: 4, moduleIdx: 2, exp: "static variables & methods, class-level static const memory.", keywords: ["static", "const member", "class variable"] },
-
-      // Part 4: Safety & Control (Sheet 5)
-      { id: 23, title: "4.1 Null Safety", sheet: 5, moduleIdx: 3, exp: "Sound null safety, nullable ?, late, null assertion !, ??, ?. operators.", keywords: ["null safety", "nullable", "late", "null check"] },
-      { id: 24, title: "4.2 Exception Handling", sheet: 5, moduleIdx: 3, exp: "try, on Exception, catch (e, s), finally, throw custom errors.", keywords: ["exception", "try catch", "finally", "throw", "error"] },
-      { id: 25, title: "4.3 Enums", sheet: 5, moduleIdx: 3, exp: "Simple enums and enhanced enums with properties, getters & constructors.", keywords: ["enum", "enhanced enum", "values", "switch"] },
-
-      // Part 5: Asynchronous (Sheet 6)
-      { id: 26, title: "5.1 Futures", sheet: 6, moduleIdx: 4, exp: "Future<T>, completed vs uncompleted, delayed, then, catchError.", keywords: ["future", "async", "promise", "delay"] },
-      { id: 27, title: "5.2 Async", sheet: 6, moduleIdx: 4, exp: "async keyword returning futures implicitly.", keywords: ["async", "keyword", "function"] },
-      { id: 28, title: "5.3 Await", sheet: 6, moduleIdx: 4, exp: "await keyword pausing execution for async completion.", keywords: ["await", "blocking async", "wait"] },
-      { id: 29, title: "5.4 Stream", sheet: 6, moduleIdx: 4, exp: "Stream<T>, StreamController, single-subscription vs broadcast.", keywords: ["stream", "streamcontroller", "listen", "reactive"] },
-      { id: 30, title: "5.5 Generators (async*)", sheet: 6, moduleIdx: 4, exp: "sync* with yield for Iterable, async* with yield for Stream.", keywords: ["generator", "async*", "sync*", "yield"] },
-      { id: 31, title: "5.6 Event Loop", sheet: 6, moduleIdx: 4, exp: "Event loop execution semantics, Microtask queue vs Event queue.", keywords: ["event loop", "microtask", "queue", "scheduleMicrotask"] },
-
-      // Part 6: Advance (Sheet 7)
-      { id: 32, title: "6.1 Generics", sheet: 7, moduleIdx: 5, exp: "Generic type safety <T>, generic classes & methods, bounds T extends num.", keywords: ["generics", "template", "<T>", "type bound"] },
-      { id: 33, title: "6.2 Extension", sheet: 7, moduleIdx: 5, exp: "extension on Type syntax adding methods to built-in types.", keywords: ["extension", "extension methods", "utility"] },
-      { id: 34, title: "6.3 Lambda + Functional Programming", sheet: 7, moduleIdx: 5, exp: "Higher-order functions, map, where, fold, reduce, immutability.", keywords: ["lambda", "functional programming", "map", "where", "fold"] },
-      { id: 35, title: "6.4 File Handling", sheet: 7, moduleIdx: 5, exp: "dart:io File, Directory reading and writing text & bytes.", keywords: ["file handling", "dart:io", "readAsString", "writeAsString"] },
-      { id: 36, title: "6.5 Dart 3 Features", sheet: 7, moduleIdx: 5, exp: "Records (a, b), pattern matching, switch expressions, sealed classes.", keywords: ["dart 3", "records", "patterns", "switch expression", "sealed"] },
-
-      // Part 7: Concurrency (Sheet 8)
-      { id: 37, title: "7.1 Isolates", sheet: 8, moduleIdx: 6, exp: "Isolate.run(), ReceivePort, SendPort background thread concurrency.", keywords: ["isolates", "concurrency", "multithreading", "receiveport", "sendport"] }
+      { id: 1, title: "1. YAML Basics", sheet: 2, exp: "YAML Ain't Markup Language introduction and syntax.", keywords: ["yaml", "basics", "extension", "yml"] },
+      { id: 2, title: "2. Comments", sheet: 2, exp: "# Single-line and multi-line comment syntax.", keywords: ["comments", "#", "hash", "note"] },
+      { id: 3, title: "3. Key-Value Pairs", sheet: 2, exp: "Basic key: value association syntax.", keywords: ["key", "value", "pair", "colon"] },
+      { id: 4, title: "4. Strings & Quoting", sheet: 2, exp: "Unquoted, single quotes, double quotes, and escapes.", keywords: ["string", "quotes", "text", "escape"] },
+      { id: 5, title: "5. Numbers (Int, Float, Sci)", sheet: 2, exp: "Integers, floats, negative numbers, and scientific 2e5.", keywords: ["number", "int", "float", "scientific", "math"] },
+      { id: 6, title: "6. Booleans", sheet: 3, exp: "true, false, yes, no, on, off values.", keywords: ["boolean", "bool", "true", "false", "yes", "no"] },
+      { id: 7, title: "7. Null Values", sheet: 3, exp: "null, ~ (tilde), and blank representations.", keywords: ["null", "tilde", "blank", "none", "empty"] },
+      { id: 8, title: "8. Lists & Arrays", sheet: 3, exp: "Block style (- item) and flow style [a, b].", keywords: ["list", "array", "dash", "sequence"] },
+      { id: 9, title: "9. Nested Lists & Matrices", sheet: 3, exp: "List of lists and multidimensional matrices.", keywords: ["matrix", "nested list", "multidimensional"] },
+      { id: 10, title: "10. Dictionaries (Objects)", sheet: 4, exp: "Mapping objects and key-value dictionaries.", keywords: ["object", "dictionary", "map", "dict"] },
+      { id: 11, title: "11. Nested Objects", sheet: 4, exp: "Deeply nested key-value objects.", keywords: ["nested object", "hierarchy", "deep"] },
+      { id: 12, title: "12. List of Objects", sheet: 4, exp: "Sequence of maps/objects.", keywords: ["list of objects", "records", "items"] },
+      { id: 13, title: "13. Inline Objects", sheet: 4, exp: "Flow style object syntax {x: 1, y: 2}.", keywords: ["inline object", "flow object", "braces"] },
+      { id: 14, title: "14. Mixed Data Structures", sheet: 4, exp: "Combining lists, scalars, and objects.", keywords: ["mixed", "complex", "schema"] },
+      { id: 15, title: "15. Indentation Rules", sheet: 5, exp: "Golden rule: use spaces only, NEVER tabs!", keywords: ["indentation", "spaces", "tabs", "rule"] },
+      { id: 16, title: "16. Multi-Document Stream (---)", sheet: 5, exp: "Separating multiple YAML documents with ---.", keywords: ["multi-document", "stream", "---", "separator"] },
+      { id: 17, title: "17. Anchors (&anchor)", sheet: 5, exp: "Defining reusable data nodes with &.", keywords: ["anchor", "&", "reuse", "dry"] },
+      { id: 18, title: "18. Aliases (*alias)", sheet: 5, exp: "Referencing anchored nodes with *.", keywords: ["alias", "*", "reference", "link"] },
+      { id: 19, title: "19. Merge Keys (<<)", sheet: 5, exp: "Merging base maps with <<.", keywords: ["merge", "<<", "combine", "override"] },
+      { id: 20, title: "20. Explicit Types (!!)", sheet: 6, exp: "Explicit data tags !!str, !!int, !!float, !!bool.", keywords: ["explicit", "tags", "!!", "type casting"] },
+      { id: 21, title: "21. Special Chars & Unicode", sheet: 6, exp: "Escape sequences \\n, \\t, and \\u2764.", keywords: ["unicode", "escape", "special chars"] },
+      { id: 22, title: "22. Dates", sheet: 6, exp: "ISO date format YYYY-MM-DD.", keywords: ["date", "calendar", "day"] },
+      { id: 23, title: "23. Timestamps", sheet: 6, exp: "ISO-8601 UTC timestamps.", keywords: ["timestamp", "time", "iso8601"] },
+      { id: 24, title: "24. Env Vars Templating", sheet: 6, exp: "${DB_HOST} environment variable expansion.", keywords: ["env", "environment", "variable", "template"] },
+      { id: 25, title: "25. Kubernetes Pods", sheet: 7, exp: "k8s apiVersion, kind, metadata, spec.", keywords: ["kubernetes", "k8s", "pod", "devops"] },
+      { id: 26, title: "26. Docker Compose", sheet: 7, exp: "services, image, ports, docker-compose.", keywords: ["docker", "compose", "container", "services"] },
+      { id: 27, title: "27. GitHub Actions Workflow", sheet: 7, exp: "name, on, jobs, steps, action workflows.", keywords: ["github actions", "cicd", "workflow", "jobs"] },
+      { id: 28, title: "28. Flutter pubspec.yaml", sheet: 7, exp: "name, version, environment, dependencies.", keywords: ["flutter", "pubspec", "dart", "dependencies"] },
+      { id: 29, title: "29. Reserved Characters", sheet: 8, exp: "Special characters requiring quotes.", keywords: ["reserved", "special", "quote rule"] },
+      { id: 30, title: "30. Common Mistakes", sheet: 8, exp: "Tabs, missing spaces after colons, indentation errors.", keywords: ["mistakes", "pitfalls", "errors", "bugs"] },
+      { id: 31, title: "31. Best Practices", sheet: 8, exp: "Production guidelines and code clean habits.", keywords: ["best practices", "guidelines", "clean code"] },
+      { id: 32, title: "32. YAML vs JSON", sheet: 8, exp: "Feature matrix comparison.", keywords: ["json", "vs", "comparison", "contrast"] },
+      { id: 33, title: "33. Data Types Summary", sheet: 9, exp: "Complete data types summary table.", keywords: ["types", "summary", "overview"] },
+      { id: 34, title: "34. Block vs Flow Style", sheet: 9, exp: "Readability vs inline brevity.", keywords: ["block", "flow", "style", "inline"] },
+      { id: 35, title: "35. Multiline Chomping (|- |+)", sheet: 9, exp: "Strip (-) and keep (+) chomping indicators.", keywords: ["chomping", "multiline", "strip", "keep"] },
+      { id: 36, title: "36. Ecosystem Uses", sheet: 9, exp: "Real-world tech stack tools.", keywords: ["ecosystem", "ansible", "helm", "devops"] },
+      { id: 37, title: "37. Quick Reference", sheet: 10, exp: "All-in-one comprehensive YAML reference code block.", keywords: ["cheat sheet", "reference", "all in one"] },
+      { id: 38, title: "38. Learning Roadmap", sheet: 10, exp: "Beginner, Intermediate, Advanced mastery roadmap.", keywords: ["roadmap", "learning", "guide", "mastery"] }
     ];
 
     this.init();
@@ -66,11 +54,16 @@ class FlipBookEngine {
 
   init() {
     this.sheets = Array.from(document.querySelectorAll('.paper-sheet'));
-    this.totalSheets = this.sheets.length; // 10 (Sheets 0 to 9)
+    this.totalSheets = this.sheets.length;
     this.book3d = document.getElementById('book3d');
     this.prevBtn = document.getElementById('prevPageBtn');
     this.nextBtn = document.getElementById('nextPageBtn');
     this.currentPageNumEl = document.getElementById('currentPageNum');
+    this.totalPagesNumEl = document.getElementById('totalPagesNum');
+
+    if (this.totalPagesNumEl) {
+      this.totalPagesNumEl.textContent = this.totalSheets - 1;
+    }
 
     this.updateBookState();
     this.buildTOCDrawer();
@@ -101,98 +94,62 @@ class FlipBookEngine {
     if (this.currentPageNumEl) {
       if (this.currentSheet === 0) {
         this.currentPageNumEl.textContent = 'Spread 0 (Front Cover)';
-      } else if (this.currentSheet === 1) {
-        this.currentPageNumEl.textContent = 'Spread 1 (Master Index)';
       } else if (this.currentSheet === this.totalSheets) {
         this.currentPageNumEl.textContent = 'Book Closed (Rear Cover)';
       } else {
-        this.currentPageNumEl.textContent = `Part ${this.currentSheet - 1} of 7`;
+        this.currentPageNumEl.textContent = `Spread ${this.currentSheet}`;
       }
     }
 
     if (this.prevBtn) this.prevBtn.disabled = (this.currentSheet === 0);
     if (this.nextBtn) this.nextBtn.disabled = (this.currentSheet === this.totalSheets);
+
+    this.updateTOCState();
   }
 
   turnNext() {
     if (this.isFlipping || this.currentSheet >= this.totalSheets) return;
     this.isFlipping = true;
 
-    if (window.soundEngine) window.soundEngine.playPageFlip();
+    if (window.soundEngine) window.soundEngine.playPageTurn();
 
     this.currentSheet++;
     this.updateBookState();
 
     setTimeout(() => {
       this.isFlipping = false;
-    }, 600);
-  }
-
-  nextPage() {
-    this.turnNext();
+    }, 850);
   }
 
   turnPrev() {
     if (this.isFlipping || this.currentSheet <= 0) return;
     this.isFlipping = true;
 
-    if (window.soundEngine) window.soundEngine.playPageFlip();
+    if (window.soundEngine) window.soundEngine.playPageTurn();
 
     this.currentSheet--;
     this.updateBookState();
 
     setTimeout(() => {
       this.isFlipping = false;
-    }, 600);
-  }
-
-  prevPage() {
-    this.turnPrev();
+    }, 850);
   }
 
   jumpToSheet(sheetIndex) {
     if (sheetIndex < 0 || sheetIndex > this.totalSheets) return;
     if (this.currentSheet === sheetIndex) return;
 
-    if (window.soundEngine) window.soundEngine.playPageFlip();
+    if (window.soundEngine) window.soundEngine.playPageTurn();
     this.currentSheet = sheetIndex;
     this.updateBookState();
+
+    // Close TOC drawer if open
     this.closeTOC();
   }
 
-  jumpToModule(moduleIndex) {
-    if (moduleIndex < 0 || moduleIndex >= 7) return;
-    const targetSheet = moduleIndex + 2; // Module 0 is Sheet 2
-    this.jumpToSheet(targetSheet);
-  }
-
-  toggleTOC() {
-    const drawer = document.getElementById('toc-drawer');
-    if (drawer) {
-      drawer.classList.toggle('open');
-    }
-  }
-
-  closeTOC() {
-    const drawer = document.getElementById('toc-drawer');
-    if (drawer) {
-      drawer.classList.remove('open');
-    }
-  }
-
   bindEvents() {
-    if (this.prevBtn) {
-      this.prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.turnPrev();
-      });
-    }
-    if (this.nextBtn) {
-      this.nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.turnNext();
-      });
-    }
+    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.turnPrev());
+    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.turnNext());
 
     // Page Face & Corner Curl Click Listeners
     this.sheets.forEach((sheet) => {
@@ -201,41 +158,148 @@ class FlipBookEngine {
 
       if (frontFace) {
         frontFace.addEventListener('click', (e) => {
-          if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input') || e.target.closest('select') || e.target.closest('textarea') || e.target.closest('.toc-card')) return;
+          if (e.target.closest('button') || 
+              e.target.closest('input') || 
+              e.target.closest('a') || 
+              e.target.closest('select') || 
+              e.target.closest('textarea') || 
+              e.target.closest('.code-actions') || 
+              e.target.closest('.toc-card') || 
+              e.target.closest('.search-box')) return;
+
           const selection = window.getSelection();
           if (selection && selection.toString().length > 0) return;
+
           this.turnNext();
         });
       }
 
       if (backFace) {
         backFace.addEventListener('click', (e) => {
-          if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input') || e.target.closest('select') || e.target.closest('textarea') || e.target.closest('.toc-card')) return;
+          if (e.target.closest('button') || 
+              e.target.closest('input') || 
+              e.target.closest('a') || 
+              e.target.closest('select') || 
+              e.target.closest('textarea') || 
+              e.target.closest('.code-actions') || 
+              e.target.closest('.toc-card') || 
+              e.target.closest('.search-box')) return;
+
           const selection = window.getSelection();
           if (selection && selection.toString().length > 0) return;
+
           this.turnPrev();
         });
       }
     });
 
-    // Keyboard Arrow navigation
+    // Keyboard Arrow Keys & Page Navigation
     document.addEventListener('keydown', (e) => {
-      const activeView = document.querySelector('.view-section.active');
-      if (activeView && activeView.id === 'view-book') {
-        if (e.key === 'ArrowRight' || e.key === 'PageDown') this.turnNext();
-        if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.turnPrev();
+      const activeSection = document.querySelector('.view-section.active');
+      if (!activeSection || activeSection.id !== 'view-book') return;
+
+      // Don't trigger if user is typing in search input
+      if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        this.turnNext();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        this.turnPrev();
       }
     });
 
-    // Search Engine
-    const searchInput = document.getElementById('commandSearchInput');
-    const searchDropdown = document.getElementById('searchSearchResults');
+    // Mouse Wheel Scroll Page Turning
+    let lastWheelTime = 0;
+    const wheelCooldown = 550; // ms between wheel page turns
 
-    if (searchInput && searchDropdown) {
+    const handleWheelScroll = (e) => {
+      const activeSection = document.querySelector('.view-section.active');
+      if (!activeSection || activeSection.id !== 'view-book') return;
+
+      // Don't flip if TOC drawer is open
+      if (document.getElementById('toc-drawer')?.classList.contains('open')) return;
+
+      // Check if user is scrolling inside an overflowing page-content div
+      const scrollableContent = e.target.closest('.page-content');
+      if (scrollableContent) {
+        const { scrollTop, scrollHeight, clientHeight } = scrollableContent;
+        const isOverflowing = scrollHeight > clientHeight + 5;
+        if (isOverflowing) {
+          const atBottom = scrollTop + clientHeight >= scrollHeight - 5;
+          const atTop = scrollTop <= 5;
+          if (e.deltaY > 0 && !atBottom) return; // scroll down inside content
+          if (e.deltaY < 0 && !atTop) return;    // scroll up inside content
+        }
+      }
+
+      const now = Date.now();
+      if (now - lastWheelTime < wheelCooldown) return;
+
+      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (Math.abs(delta) < 15) return; // ignore micro-scrolls
+
+      if (delta > 0) {
+        lastWheelTime = now;
+        this.turnNext();
+      } else if (delta < 0) {
+        lastWheelTime = now;
+        this.turnPrev();
+      }
+    };
+
+    const bookContainer = document.querySelector('.flipbook-wrapper') || document;
+    bookContainer.addEventListener('wheel', handleWheelScroll, { passive: true });
+
+    // Mouse Drag / Swipe Page Turning
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let isDragging = false;
+
+    const bookViewport = document.querySelector('.book-viewport') || bookContainer;
+
+    bookViewport.addEventListener('mousedown', (e) => {
+      if (e.target.closest('button, input, select, textarea, a, .code-actions, .toc-card')) return;
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) return;
+
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diffX = e.clientX - dragStartX;
+      const diffY = e.clientY - dragStartY;
+
+      if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < 0) {
+          this.turnNext();
+        } else {
+          this.turnPrev();
+        }
+      }
+    });
+
+    // TOC Toggle
+    const tocBtn = document.getElementById('toc-toggle-btn');
+    const tocCloseBtn = document.getElementById('toc-close-btn');
+    const tocBackdrop = document.getElementById('toc-backdrop');
+
+    if (tocBtn) tocBtn.addEventListener('click', () => this.toggleTOC());
+    if (tocCloseBtn) tocCloseBtn.addEventListener('click', () => this.closeTOC());
+    if (tocBackdrop) tocBackdrop.addEventListener('click', () => this.closeTOC());
+
+    // Search Input Logic
+    const searchInput = document.getElementById('commandSearchInput');
+    const searchResults = document.getElementById('searchSearchResults');
+
+    if (searchInput && searchResults) {
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase().trim();
-        if (query.length < 2) {
-          searchDropdown.classList.add('hidden');
+        if (!query) {
+          searchResults.classList.add('hidden');
           return;
         }
 
@@ -246,38 +310,139 @@ class FlipBookEngine {
         );
 
         if (matches.length === 0) {
-          searchDropdown.innerHTML = `<div class="search-item-empty">No matching Dart topic found for "${query}"</div>`;
+          searchResults.innerHTML = `<div class="search-item"><small>No matching YAML topic found.</small></div>`;
         } else {
-          searchDropdown.innerHTML = matches.map(item => `
-            <div class="search-item" onclick="window.flipbookEngine.jumpToModule(${item.moduleIdx}); document.getElementById('searchSearchResults').classList.add('hidden');">
-              <div class="search-item-title">${item.title}</div>
-              <div class="search-item-exp">${item.exp}</div>
+          searchResults.innerHTML = matches.map(item => `
+            <div class="search-item" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(${item.sheet})">
+              <code>${item.title}</code>
+              <small>${item.exp} (Sheet ${item.sheet})</small>
             </div>
           `).join('');
         }
-        searchDropdown.classList.remove('hidden');
+
+        searchResults.classList.remove('hidden');
       });
 
+      // Close dropdown when clicking outside
       document.addEventListener('click', (e) => {
-        if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
-          searchDropdown.classList.add('hidden');
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+          searchResults.classList.add('hidden');
         }
       });
     }
   }
 
-  buildTOCDrawer() {
-    const tocListContainer = document.getElementById('toc-list-container');
-    if (!tocListContainer) return;
+  toggleTOC() {
+    const drawer = document.getElementById('toc-drawer');
+    const backdrop = document.getElementById('toc-backdrop');
+    if (drawer && backdrop) {
+      drawer.classList.toggle('open');
+      backdrop.classList.toggle('open');
+    }
+  }
 
-    tocListContainer.innerHTML = DART_MODULES.map((mod, idx) => `
-      <div class="toc-item" onclick="window.flipbookEngine.jumpToModule(${idx}); window.flipbookEngine.closeTOC();">
-        <span class="toc-num">${mod.chapterNum}</span>
-        <div class="toc-info">
-          <div class="toc-title">${mod.title}</div>
-          <div class="toc-summary">${mod.summary}</div>
-        </div>
-      </div>
+  closeTOC() {
+    const drawer = document.getElementById('toc-drawer');
+    const backdrop = document.getElementById('toc-backdrop');
+    if (drawer && backdrop) {
+      drawer.classList.remove('open');
+      backdrop.classList.remove('open');
+    }
+  }
+
+  buildTOCDrawer() {
+    const list = document.getElementById('toc-list');
+    if (!list) return;
+
+    const modules = [
+      { num: "Cover", title: "Book Cover & Preface", sheet: 0 },
+      { num: "Index", title: "Master Table of Contents", sheet: 1 },
+      { num: "Mod 1", title: "Basics, Comments & Numbers", sheet: 2 },
+      { num: "Mod 2", title: "Booleans, Nulls & Lists", sheet: 3 },
+      { num: "Mod 3", title: "Dictionaries & Mixed Data", sheet: 4 },
+      { num: "Mod 4", title: "Indentation, Anchors & Merges", sheet: 5 },
+      { num: "Mod 5", title: "Explicit Types & Timestamps", sheet: 6 },
+      { num: "Mod 6", title: "K8s, Docker, GitHub & Flutter", sheet: 7 },
+      { num: "Mod 7", title: "Mistakes, Best Practices & JSON", sheet: 8 },
+      { num: "Mod 8", title: "Data Types & Multiline Chomping", sheet: 9 },
+      { num: "Mod 9", title: "Quick Reference & Roadmap", sheet: 10 },
+      { num: "Rear", title: "Rear Cover & Credits", sheet: 11 }
+    ];
+
+    list.innerHTML = modules.map(m => `
+      <li class="toc-item" id="toc-item-${m.sheet}" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToSheet(${m.sheet})">
+        <div class="toc-item-title">${m.num}: ${m.title}</div>
+        <div class="toc-item-meta">Spread ${m.sheet}</div>
+      </li>
     `).join('');
   }
+
+  updateTOCState() {
+    const percent = Math.round((this.currentSheet / (this.totalSheets - 1)) * 100);
+    const percentSpan = document.getElementById('toc-progress-percent');
+    const barFill = document.getElementById('toc-progress-bar');
+
+    if (percentSpan) percentSpan.textContent = `${percent}%`;
+    if (barFill) barFill.style.width = `${percent}%`;
+
+    document.querySelectorAll('.toc-item').forEach((item, idx) => {
+      if (idx === this.currentSheet) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Global Code Action Helpers (Copy & Try in Playground)
+   -------------------------------------------------------------------------- */
+function copyCodeBlock(btn) {
+  const codeBlock = btn.closest('.book-code-block');
+  if (!codeBlock) return;
+  const codeText = codeBlock.querySelector('code').innerText;
+
+  navigator.clipboard.writeText(codeText).then(() => {
+    showToast('<i class="fa-solid fa-check"></i> Code copied to clipboard!');
+  }).catch(() => {
+    showToast('Failed to copy code.');
+  });
+}
+
+function tryCodeInPlayground(btn) {
+  const codeBlock = btn.closest('.book-code-block');
+  if (!codeBlock) return;
+  const codeText = codeBlock.querySelector('code').innerText;
+
+  // Switch View to Playground
+  switchMainView('playground');
+
+  // Populate Editor & Validate
+  const editor = document.getElementById('yaml-input-editor');
+  if (editor) {
+    editor.value = codeText;
+    if (window.playgroundEngine) {
+      window.playgroundEngine.validateAndParse();
+    }
+  }
+
+  showToast('<i class="fa-solid fa-flask"></i> Loaded snippet into Live Playground!');
+}
+
+function showToast(msg) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = msg;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
 }

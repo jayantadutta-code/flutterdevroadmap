@@ -28,7 +28,8 @@
   -webkit-user-select: none;
 }
 
-body, html {
+body,
+html {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -61,7 +62,7 @@ body, html {
   pointer-events: none;
 }
 
-.navbar > * {
+.navbar>* {
   pointer-events: auto;
 }
 
@@ -158,7 +159,7 @@ body, html {
   pointer-events: none;
 }
 
-.hud-container > * {
+.hud-container>* {
   pointer-events: auto;
 }
 
@@ -171,15 +172,15 @@ body, html {
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
 .biome-badge {
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,7 +207,7 @@ body, html {
   display: flex;
   align-items: center;
   gap: 28px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
 .stat-item {
@@ -292,8 +293,13 @@ body, html {
 }
 
 @keyframes avatarFloat {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-8px);
+  }
 }
 
 .avatar-label {
@@ -306,7 +312,7 @@ body, html {
   color: white;
   margin-top: 6px;
   white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
 }
 
 /* 13 TIMELINE NODES ALONG JOURNEY PATH */
@@ -345,7 +351,7 @@ body, html {
   justify-content: center;
   font-size: 22px;
   backdrop-filter: blur(12px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
   transition: all 0.3s ease;
 }
 
@@ -394,7 +400,7 @@ body, html {
   pointer-events: none;
 }
 
-.bottom-bar > * {
+.bottom-bar>* {
   pointer-events: auto;
 }
 
@@ -407,7 +413,7 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
 .progress-header {
@@ -456,7 +462,7 @@ body, html {
   display: flex;
   flex-direction: column;
   transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: -15px 0 50px rgba(0,0,0,0.9);
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.9);
 }
 
 .drawer.open {
@@ -465,7 +471,7 @@ body, html {
 
 .drawer-header {
   padding: 24px 28px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -494,8 +500,8 @@ body, html {
 
 .search-input {
   width: 100%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
   padding: 12px 18px;
   color: white;
@@ -518,8 +524,8 @@ body, html {
 }
 
 .milestone-item-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 16px;
   display: flex;
@@ -540,7 +546,7 @@ body, html {
   width: 46px;
   height: 46px;
   border-radius: 12px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -592,7 +598,7 @@ body, html {
   max-height: 88vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.95);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95);
   overflow: hidden;
   transform: scale(0.94);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -604,8 +610,8 @@ body, html {
 
 .modal-header {
   padding: 28px 36px;
-  background: linear-gradient(135deg, rgba(1, 117, 194, 0.25), rgba(0,0,0,0.5));
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(135deg, rgba(1, 117, 194, 0.25), rgba(0, 0, 0, 0.5));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -622,12 +628,12 @@ body, html {
   width: 60px;
   height: 60px;
   border-radius: 16px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 .modal-title {
@@ -649,8 +655,8 @@ body, html {
 /* Modal Tabs */
 .modal-tabs {
   display: flex;
-  background: rgba(0,0,0,0.35);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0 36px;
 }
 
@@ -692,8 +698,8 @@ body, html {
 }
 
 .submilestone-item {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 16px 20px;
   display: flex;
@@ -704,7 +710,7 @@ body, html {
 }
 
 .submilestone-item:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .submilestone-checkbox {
@@ -755,8 +761,8 @@ body, html {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
   padding: 6px 12px;
   border-radius: 6px;
@@ -771,7 +777,7 @@ body, html {
 
 .code-block {
   background: #080C16;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
   padding: 20px;
   font-family: 'JetBrains Mono', monospace;
@@ -794,8 +800,8 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 14px 20px;
   border-radius: var(--radius-md);
   color: var(--flutter-sky);
@@ -812,8 +818,8 @@ body, html {
 
 .modal-footer {
   padding: 20px 36px;
-  background: rgba(0,0,0,0.35);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0, 0, 0, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -867,7 +873,7 @@ body, html {
   border: 1px solid var(--panel-border);
   padding: 14px 20px;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .digital-book-info {
@@ -900,5 +906,5 @@ body, html {
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-md);
   background: #0d1117;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }

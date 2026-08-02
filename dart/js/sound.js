@@ -1,22 +1,21 @@
 /* ==========================================================================
-   Dart Cookbook - Web Audio API Sound Synthesizer
+   YAML FlipBook - Web Audio API Synthetic Sound Engine
+   Zero external MP3 audio file downloads needed!
    ========================================================================== */
 
 class SoundEngine {
   constructor() {
     this.audioCtx = null;
-    this.isMuted = false;
-    this.initAudioContext();
+    this.isMuted = localStorage.getItem('yaml_sound_muted') === 'true';
   }
 
-  initAudioContext() {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (AudioContext) {
-      this.audioCtx = new AudioContext();
+  initContext() {
+    if (!this.audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        this.audioCtx = new AudioContext();
+      }
     }
-  }
-
-  resumeContext() {
     if (this.audioCtx && this.audioCtx.state === 'suspended') {
       this.audioCtx.resume();
     }
@@ -24,53 +23,56 @@ class SoundEngine {
 
   toggleMute() {
     this.isMuted = !this.isMuted;
+    localStorage.setItem('yaml_sound_muted', this.isMuted);
     return this.isMuted;
   }
 
-  // Realistic Page Flip Sound
-  playPageFlip() {
+  /* 1. Page Turn Sound Effect */
+  playPageTurn() {
     if (this.isMuted) return;
-    this.resumeContext();
+    this.initContext();
     if (!this.audioCtx) return;
 
     try {
       const now = this.audioCtx.currentTime;
+
+      // Noise buffer for realistic paper rustle
       const bufferSize = this.audioCtx.sampleRate * 0.15;
       const buffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
-      const output = buffer.getChannelData(0);
-
+      const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
-        output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
+        data[i] = Math.random() * 2 - 1;
       }
 
-      const whiteNoise = this.audioCtx.createBufferSource();
-      whiteNoise.buffer = buffer;
+      const noise = this.audioCtx.createBufferSource();
+      noise.buffer = buffer;
 
+      // Filter to simulate soft paper frequency
       const filter = this.audioCtx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(1200, now);
+      filter.frequency.setValueAtTime(800, now);
       filter.frequency.exponentialRampToValueAtTime(300, now + 0.15);
-      filter.Q.value = 3.0;
+      filter.Q.setValueAtTime(1.5, now);
 
       const gain = this.audioCtx.createGain();
-      gain.gain.setValueAtTime(0.3, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
 
-      whiteNoise.connect(filter);
+      noise.connect(filter);
       filter.connect(gain);
       gain.connect(this.audioCtx.destination);
 
-      whiteNoise.start(now);
-      whiteNoise.stop(now + 0.15);
+      noise.start(now);
+      noise.stop(now + 0.15);
     } catch (e) {
-      console.warn("Audio play failed:", e);
+      console.warn("Audio play blocked", e);
     }
   }
 
-  // Button Click Sound
-  playClick() {
+  /* 2. Correct Answer Sound */
+  playCorrect() {
     if (this.isMuted) return;
-    this.resumeContext();
+    this.initContext();
     if (!this.audioCtx) return;
 
     try {
@@ -79,52 +81,25 @@ class SoundEngine {
       const gain = this.audioCtx.createGain();
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, now);
-      osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+      osc.frequency.setValueAtTime(523.25, now); // C5
+      osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+      osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
 
-      gain.gain.setValueAtTime(0.15, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
 
       osc.connect(gain);
       gain.connect(this.audioCtx.destination);
 
       osc.start(now);
-      osc.stop(now + 0.05);
-    } catch (e) {}
+      osc.stop(now + 0.35);
+    } catch (e) { }
   }
 
-  // Correct Answer Chime
-  playSuccess() {
+  /* 3. Wrong Answer Sound */
+  playWrong() {
     if (this.isMuted) return;
-    this.resumeContext();
-    if (!this.audioCtx) return;
-
-    try {
-      const now = this.audioCtx.currentTime;
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-      notes.forEach((freq, idx) => {
-        const osc = this.audioCtx.createOscillator();
-        const gain = this.audioCtx.createGain();
-
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-
-        gain.gain.setValueAtTime(0.2, now + idx * 0.08);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.3);
-
-        osc.connect(gain);
-        gain.connect(this.audioCtx.destination);
-
-        osc.start(now + idx * 0.08);
-        osc.stop(now + idx * 0.08 + 0.3);
-      });
-    } catch (e) {}
-  }
-
-  // Wrong Answer Sound
-  playError() {
-    if (this.isMuted) return;
-    this.resumeContext();
+    this.initContext();
     if (!this.audioCtx) return;
 
     try {
@@ -133,47 +108,63 @@ class SoundEngine {
       const gain = this.audioCtx.createGain();
 
       osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(160, now);
-      osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+      osc.frequency.setValueAtTime(220, now); // A3
+      osc.frequency.setValueAtTime(180, now + 0.12); // Lower tone
 
-      gain.gain.setValueAtTime(0.25, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
 
       osc.connect(gain);
       gain.connect(this.audioCtx.destination);
 
       osc.start(now);
-      osc.stop(now + 0.25);
-    } catch (e) {}
+      osc.stop(now + 0.3);
+    } catch (e) { }
   }
 
-  // Level Complete Fanfare
-  playFanfare() {
+  /* 4. Level Up / Badge Unlock Fanfare */
+  playLevelUp() {
     if (this.isMuted) return;
-    this.resumeContext();
+    this.initContext();
     if (!this.audioCtx) return;
 
     try {
       const now = this.audioCtx.currentTime;
-      const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
-      notes.forEach((freq, idx) => {
+      const notes = [440, 554.37, 659.25, 880]; // A4, C#5, E5, A5
+      notes.forEach((freq, index) => {
         const osc = this.audioCtx.createOscillator();
         const gain = this.audioCtx.createGain();
 
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+        osc.type = 'triangle';
+        osc.frequency.value = freq;
 
-        gain.gain.setValueAtTime(0.25, now + idx * 0.1);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.5);
+        const startTime = now + index * 0.09;
+        gain.gain.setValueAtTime(0.15, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
 
         osc.connect(gain);
         gain.connect(this.audioCtx.destination);
 
-        osc.start(now + idx * 0.1);
-        osc.stop(now + idx * 0.1 + 0.5);
+        osc.start(startTime);
+        osc.stop(startTime + 0.25);
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 
-window.soundEngine = new SoundEngine();
+const soundEngine = new SoundEngine();
+window.soundEngine = soundEngine;
+
+// Unlock AudioContext on first user interaction anywhere on page
+const unlockAudioContext = () => {
+  if (window.soundEngine) {
+    window.soundEngine.initContext();
+  }
+  document.removeEventListener('click', unlockAudioContext);
+  document.removeEventListener('keydown', unlockAudioContext);
+  document.removeEventListener('touchstart', unlockAudioContext);
+};
+document.addEventListener('click', unlockAudioContext);
+document.addEventListener('keydown', unlockAudioContext);
+document.addEventListener('touchstart', unlockAudioContext);
+
