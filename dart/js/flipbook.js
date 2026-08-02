@@ -66,7 +66,8 @@ class FlipBookEngine {
 
   init() {
     this.sheets = Array.from(document.querySelectorAll('.paper-sheet'));
-    this.totalSheets = this.sheets.length;
+    this.maxSheetIndex = this.sheets.length - 1; // 7 (Sheets 0 to 7)
+    this.totalParts = 7;
     this.book3d = document.getElementById('book3d');
     this.prevBtn = document.getElementById('prevPageBtn');
     this.nextBtn = document.getElementById('nextPageBtn');
@@ -74,7 +75,7 @@ class FlipBookEngine {
     this.totalPagesNumEl = document.getElementById('totalPagesNum');
 
     if (this.totalPagesNumEl) {
-      this.totalPagesNumEl.textContent = this.totalSheets;
+      this.totalPagesNumEl.textContent = this.totalParts;
     }
 
     this.updateBookState();
@@ -87,7 +88,7 @@ class FlipBookEngine {
 
     if (this.currentSheet === 0) {
       this.book3d.className = 'book-3d at-cover';
-    } else if (this.currentSheet === this.totalSheets) {
+    } else if (this.currentSheet === this.maxSheetIndex) {
       this.book3d.className = 'book-3d at-back-cover';
     } else {
       this.book3d.className = 'book-3d';
@@ -99,7 +100,7 @@ class FlipBookEngine {
         sheet.style.zIndex = idx;
       } else {
         sheet.classList.remove('flipped');
-        sheet.style.zIndex = this.totalSheets - idx;
+        sheet.style.zIndex = (this.maxSheetIndex + 1) - idx;
       }
     });
 
@@ -107,16 +108,16 @@ class FlipBookEngine {
       if (this.currentSheet === 0) {
         this.currentPageNumEl.textContent = 'Spread 0 (Front Cover)';
       } else {
-        this.currentPageNumEl.textContent = `Part ${this.currentSheet} of ${this.totalSheets}`;
+        this.currentPageNumEl.textContent = `Part ${this.currentSheet} of ${this.totalParts}`;
       }
     }
 
     if (this.prevBtn) this.prevBtn.disabled = this.currentSheet === 0;
-    if (this.nextBtn) this.nextBtn.disabled = this.currentSheet === this.totalSheets;
+    if (this.nextBtn) this.nextBtn.disabled = this.currentSheet === this.maxSheetIndex;
   }
 
   nextPage() {
-    if (this.currentSheet < this.totalSheets && !this.isFlipping) {
+    if (this.currentSheet < this.maxSheetIndex && !this.isFlipping) {
       this.isFlipping = true;
       if (window.soundEngine) window.soundEngine.playPageFlip();
       this.currentSheet++;
@@ -136,7 +137,7 @@ class FlipBookEngine {
   }
 
   jumpToModule(moduleIndex) {
-    if (moduleIndex >= 0 && moduleIndex < this.totalSheets) {
+    if (moduleIndex >= 0 && moduleIndex < this.totalParts) {
       if (window.soundEngine) window.soundEngine.playPageFlip();
       this.currentSheet = moduleIndex + 1;
       this.updateBookState();

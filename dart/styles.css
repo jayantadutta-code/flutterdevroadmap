@@ -389,7 +389,7 @@ body {
 #view-book {
   align-items: center;
   justify-content: center;
-  perspective: 2000px;
+  perspective: 2200px;
   min-height: calc(100vh - 64px);
 }
 
@@ -407,6 +407,78 @@ body {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.book-3d.at-cover {
+  transform: translateX(-25%);
+}
+
+.book-3d.at-cover .paper-stack-left,
+.book-3d.at-cover .paper-stack-right,
+.book-3d.at-cover .book-spine {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.book-3d.at-cover .paper-sheet:not(#sheet-0) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.book-3d.at-back-cover {
+  transform: translateX(25%);
+}
+
+.book-3d.at-back-cover .paper-stack-left,
+.book-3d.at-back-cover .paper-stack-right,
+.book-3d.at-back-cover .book-spine {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.book-3d.at-back-cover .paper-sheet:not(#sheet-7) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.book-spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 24px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.15) 35%, rgba(255, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.15) 65%, rgba(0, 0, 0, 0.45) 100%);
+  z-index: 20;
+  pointer-events: none;
+  border-radius: 3px;
+  transition: opacity 0.4s ease;
+}
+
+.paper-stack-left,
+.paper-stack-right {
+  position: absolute;
+  top: 6px;
+  width: 49.5%;
+  height: 98.2%;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  z-index: 0;
+  transition: opacity 0.4s ease;
+}
+
+.paper-stack-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 2%, var(--bg-primary) 5%);
+  border-left: 6px solid rgba(0, 0, 0, 0.4);
+}
+
+.paper-stack-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 2%, var(--bg-primary) 5%);
+  border-right: 6px solid rgba(0, 0, 0, 0.4);
 }
 
 .paper-sheet {
