@@ -1,23 +1,24 @@
 /* ==========================================================================
-   Dart Cookbook - Master Theme & 3D Flipbook Stylesheet (Safari / WebKit Fix)
+   Dart Interactive Cookbook - 3D FlipBook & Masterclass Stylesheet
    ========================================================================== */
 
 :root {
   /* Default Cyberpunk Dark Theme */
   --bg-primary: #0b0f19;
   --bg-secondary: #131b2e;
-  --bg-card: rgba(19, 27, 46, 0.8);
+  --bg-card: rgba(19, 27, 46, 0.85);
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --accent-cyan: #00e5ff;
   --accent-blue: #0175c2;
   --accent-sky: #13b9fd;
   --accent-pink: #ec4899;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.12);
   --paper-bg: #0f172a;
   --paper-text: #e2e8f0;
   --code-bg: #020617;
   --shadow-color: rgba(0, 0, 0, 0.6);
+  --transition-flip: 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 [data-theme="fluttersky"] {
@@ -387,14 +388,13 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   3D Flipbook View (WebKit / Safari Optimized)
+   3D Flipbook Stage (Matching YAML & Git-GitHub engines)
    -------------------------------------------------------------------------- */
 #view-book {
   align-items: center;
   justify-content: center;
-  perspective: 2200px;
-  -webkit-perspective: 2200px;
   min-height: calc(100vh - 64px);
+  padding: 1rem;
 }
 
 .book-viewport {
@@ -445,7 +445,7 @@ body {
   pointer-events: none;
 }
 
-.book-3d.at-back-cover .paper-sheet:not(#sheet-7) {
+.book-3d.at-back-cover .paper-sheet:not(#sheet-9) {
   opacity: 0;
   pointer-events: none;
 }
@@ -489,19 +489,16 @@ body {
 }
 
 .paper-sheet {
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 50%;
   height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
   transform-origin: left center;
   -webkit-transform-origin: left center;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-  -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  border-radius: 0 12px 12px 0;
+  transition: transform var(--transition-flip), -webkit-transform var(--transition-flip);
   cursor: pointer;
 }
 
@@ -510,16 +507,14 @@ body {
   -webkit-transform: rotateY(-180deg);
 }
 
-/* Page Faces with Safari WebKit translateZ Depth Hints */
-.page, .page-face {
+/* Page Faces */
+.page-face {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   background: var(--paper-bg);
   color: var(--paper-text);
   padding: 1.75rem;
@@ -527,19 +522,18 @@ body {
   flex-direction: column;
   overflow-y: auto;
   border: 1px solid var(--border-color);
-  z-index: 2;
 }
 
 .page-front {
-  transform: rotateY(0deg) translateZ(1px);
-  -webkit-transform: rotateY(0deg) translateZ(1px);
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
   border-radius: 0 12px 12px 0;
   box-shadow: inset 18px 0 30px rgba(0, 0, 0, 0.4), 8px 12px 25px rgba(0, 0, 0, 0.3);
 }
 
 .page-back {
-  transform: rotateY(180deg) translateZ(1px);
-  -webkit-transform: rotateY(180deg) translateZ(1px);
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
   border-radius: 12px 0 0 12px;
   box-shadow: inset -18px 0 30px rgba(0, 0, 0, 0.4), -8px 12px 25px rgba(0, 0, 0, 0.3);
 }
@@ -613,6 +607,49 @@ body {
   opacity: 0.85;
   color: #e2e8f0 !important;
   margin-bottom: 2rem;
+}
+
+/* Table of Contents Grid Cards inside Book Sheet 1 */
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.toc-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: all 0.2s;
+}
+.toc-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-sky);
+  transform: translateY(-1px);
+}
+.toc-number {
+  background: var(--accent-blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+
+}
+.toc-info h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--paper-text);
+}
+.toc-info p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
 
 /* Page Content Formatting */

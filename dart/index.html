@@ -106,16 +106,16 @@
   <!-- Main View Content Area -->
   <main class="app-container">
 
-    <!-- View 1: 3D Page-Flipping Book -->
+    <!-- View 1: 3D Page-Flipping Book Stage (Matching YAML & Git-GitHub) -->
     <section class="view-section active" id="view-book">
       <div class="book-viewport">
-        <div class="paper-stack-left"></div>
-        <div class="paper-stack-right"></div>
-        <div class="book-spine"></div>
         <div class="book-3d at-cover" id="book3d">
+          <div class="book-spine"></div>
+          <div class="paper-stack-left"></div>
+          <div class="paper-stack-right"></div>
 
-          <!-- SHEET 0: COVER -->
-          <div class="paper-sheet cover-sheet" id="sheet-0" style="z-index: 8;">
+          <!-- SHEET 0: FRONT COVER -->
+          <div class="paper-sheet sheet-cover" id="sheet-0" style="z-index: 10;">
             <div class="page-face page-front">
               <div class="cover-content">
                 <div class="cover-badge">GOOGLE DART 3 MASTERCLASS</div>
@@ -144,8 +144,82 @@
             </div>
           </div>
 
-          <!-- SHEET 1: PART 1 BASICS -->
-          <div class="paper-sheet" id="sheet-1" style="z-index: 7;">
+          <!-- SHEET 1: MASTER TABLE OF CONTENTS INDEX -->
+          <div class="paper-sheet" id="sheet-1" style="z-index: 9;">
+            <div class="page-face page-front">
+              <div class="page-header">
+                <span class="page-chapter-tag">INDEX (PART 1 - 4)</span>
+                <span class="page-chapter-title">Master Curriculum Index</span>
+              </div>
+              <div class="page-inner">
+                <div class="toc-grid">
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(0)">
+                    <div class="toc-number">Part 1</div>
+                    <div class="toc-info">
+                      <h4>Basics & Syntax</h4>
+                      <p>Topics 1.1 to 1.10</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(1)">
+                    <div class="toc-number">Part 2</div>
+                    <div class="toc-info">
+                      <h4>Core Dart Collections</h4>
+                      <p>Topics 2.1 to 2.5</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(2)">
+                    <div class="toc-number">Part 3</div>
+                    <div class="toc-info">
+                      <h4>Object Oriented (OOP)</h4>
+                      <p>Topics 3.1 to 3.7</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(3)">
+                    <div class="toc-number">Part 4</div>
+                    <div class="toc-info">
+                      <h4>Safety & Control</h4>
+                      <p>Topics 4.1 to 4.3</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="corner-curl-hint">Flip Page <i class="fa-solid fa-turn-up"></i></div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-header">
+                <span class="page-chapter-tag">INDEX (PART 5 - 7)</span>
+                <span class="page-chapter-title">Advanced Curriculum Index</span>
+              </div>
+              <div class="page-inner">
+                <div class="toc-grid">
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(4)">
+                    <div class="toc-number">Part 5</div>
+                    <div class="toc-info">
+                      <h4>Asynchronous Programming</h4>
+                      <p>Topics 5.1 to 5.6</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(5)">
+                    <div class="toc-number">Part 6</div>
+                    <div class="toc-info">
+                      <h4>Advance & Dart 3</h4>
+                      <p>Topics 6.1 to 6.5</p>
+                    </div>
+                  </div>
+                  <div class="toc-card" onclick="if(window.flipbookEngine) window.flipbookEngine.jumpToModule(6)">
+                    <div class="toc-number">Part 7</div>
+                    <div class="toc-info">
+                      <h4>Concurrency (Isolates)</h4>
+                      <p>Topic 7.1</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 2: PART 1 BASICS -->
+          <div class="paper-sheet" id="sheet-2" style="z-index: 8;">
             <div class="page-face page-front">
               <div class="page-header">
                 <span class="page-chapter-tag">Part 1</span>
@@ -199,8 +273,8 @@ for (var i = 0; i < 3; i++) { print('Count: $i'); }</code></pre>
             </div>
           </div>
 
-          <!-- SHEET 2: PART 2 CORE DART -->
-          <div class="paper-sheet" id="sheet-2" style="z-index: 6;">
+          <!-- SHEET 3: PART 2 CORE DART -->
+          <div class="paper-sheet" id="sheet-3" style="z-index: 7;">
             <div class="page-face page-front">
               <div class="page-header">
                 <span class="page-chapter-tag">Part 2</span>
@@ -244,8 +318,8 @@ scores.putIfAbsent('Sam', () => 90);</code></pre>
             </div>
           </div>
 
-          <!-- SHEET 3: PART 3 OOP -->
-          <div class="paper-sheet" id="sheet-3" style="z-index: 5;">
+          <!-- SHEET 4: PART 3 OOP -->
+          <div class="paper-sheet" id="sheet-4" style="z-index: 6;">
             <div class="page-face page-front">
               <div class="page-header">
                 <span class="page-chapter-tag">Part 3</span>
@@ -296,8 +370,8 @@ class Config {
             </div>
           </div>
 
-          <!-- SHEET 4: PART 4 SAFETY & CONTROL -->
-          <div class="paper-sheet" id="sheet-4" style="z-index: 4;">
+          <!-- SHEET 5: PART 4 SAFETY & CONTROL -->
+          <div class="paper-sheet" id="sheet-5" style="z-index: 5;">
             <div class="page-face page-front">
               <div class="page-header">
                 <span class="page-chapter-tag">Part 4</span>
@@ -340,8 +414,8 @@ enum Status {
             </div>
           </div>
 
-          <!-- SHEET 5: PART 5 ASYNCHRONOUS -->
-          <div class="paper-sheet" id="sheet-5" style="z-index: 3;">
+          <!-- SHEET 6: PART 5 ASYNCHRONOUS -->
+          <div class="paper-sheet" id="sheet-6" style="z-index: 4;">
             <div class="page-face page-front">
               <div class="page-header">
                 <span class="page-chapter-tag">Part 5</span>
@@ -382,8 +456,8 @@ void main() {
             </div>
           </div>
 
-          <!-- SHEET 6: PART 6 ADVANCE -->
-          <div class="paper-sheet" id="sheet-6" style="z-index: 2;">
+          <!-- SHEET 7: PART 6 ADVANCE -->
+          <div class="paper-sheet" id="sheet-7" style="z-index: 3;">
             <div class="page-face page-front">
               <div class="page-header">
                 <span class="page-chapter-tag">Part 6</span>
@@ -426,8 +500,8 @@ void main() {
             </div>
           </div>
 
-          <!-- SHEET 7: PART 7 CONCURRENCY & BACK COVER -->
-          <div class="paper-sheet" id="sheet-7" style="z-index: 1;">
+          <!-- SHEET 8: PART 7 CONCURRENCY -->
+          <div class="paper-sheet" id="sheet-8" style="z-index: 2;">
             <div class="page-face page-front">
               <div class="page-header">
                 <span class="page-chapter-tag">Part 7</span>
@@ -453,12 +527,29 @@ void main() async {
             </div>
             <div class="page-face page-back">
               <div class="page-inner" style="text-align: center; justify-content: center; padding: 2rem;">
+                <i class="fa-solid fa-medal" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 1rem;"></i>
+                <h2 class="page-h2" style="border: none; padding: 0;">Dart Language Certificate</h2>
+                <p class="page-p">You have mastered all 7 Core Parts & 37 Subtopics of Dart 3!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHEET 9: BACK COVER -->
+          <div class="paper-sheet sheet-cover" id="sheet-9" style="z-index: 1;">
+            <div class="page-face page-front">
+              <div class="page-inner" style="text-align: center; justify-content: center; padding: 2rem;">
                 <i class="fa-solid fa-trophy" style="font-size: 3rem; color: #ffb703; margin-bottom: 1rem;"></i>
-                <h2 class="page-h2" style="border: none; padding: 0;">Dart Masterclass Complete!</h2>
-                <p class="page-p">You have explored all 7 Parts and 37 Subtopics of Dart 3.</p>
+                <h2 class="page-h2" style="border: none; padding: 0;">Ready for Quest Arena?</h2>
+                <p class="page-p">Test your knowledge with 700 questions across 35 level examinations!</p>
                 <button class="btn btn-primary" onclick="switchMainView('quiz')" style="margin: 1rem auto;">
-                  <i class="fa-solid fa-gamepad"></i> Launch 700 MCQ Quest Arena
+                  <i class="fa-solid fa-gamepad"></i> Launch Quest Arena
                 </button>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-inner" style="text-align: center; justify-content: center; padding: 2rem;">
+                <h3>Dart 3 Masterclass Flipbook</h3>
+                <p>Google Flutter Developer Roadmap 2026</p>
               </div>
             </div>
           </div>
