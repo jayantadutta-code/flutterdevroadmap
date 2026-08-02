@@ -148,55 +148,27 @@
       </div>
     </section>
 
-    <!-- View 3: Gamified Quest Arena (105 MCQs) -->
+    <!-- View 3: Gamified Quest Arena (7 Parts x 5 Levels x 20 MCQs = 700 Questions) -->
     <section class="view-section" id="view-quiz">
       <div style="text-align: center; margin-bottom: 1rem;">
-        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: var(--accent-cyan);">Dart Masterclass Quest Arena</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">7 Level-Graded Examinations • 15 Questions Each • Earn XP & Unlock Developer Ranks!</p>
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: var(--accent-cyan);">Dart Quest Arena Examination</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">7 Main Parts • 5 Levels Per Part • 20 MCQs Per Level (700 Total Questions)</p>
       </div>
 
-      <div class="quiz-grid">
-        <div class="quiz-level-card" data-level="1">
-          <span class="level-badge">Level 1 • 15 Questions</span>
-          <div class="level-card-title">Part 1: Basics Exam</div>
-          <div class="level-card-desc">Intro, Comments, Variables, Numbers, Strings, RegEx, StringBuffer, Operators, Conditions & Loops.</div>
-        </div>
+      <!-- Part Selector Navigation Bar -->
+      <div class="quiz-part-selector" id="quizPartSelector">
+        <button class="part-tab-btn active" data-part="1" onclick="window.quizEngine.switchPart(1)">Part 1: Basics</button>
+        <button class="part-tab-btn" data-part="2" onclick="window.quizEngine.switchPart(2)">Part 2: Core Dart</button>
+        <button class="part-tab-btn" data-part="3" onclick="window.quizEngine.switchPart(3)">Part 3: OOP</button>
+        <button class="part-tab-btn" data-part="4" onclick="window.quizEngine.switchPart(4)">Part 4: Safety & Control</button>
+        <button class="part-tab-btn" data-part="5" onclick="window.quizEngine.switchPart(5)">Part 5: Asynchronous</button>
+        <button class="part-tab-btn" data-part="6" onclick="window.quizEngine.switchPart(6)">Part 6: Advance</button>
+        <button class="part-tab-btn" data-part="7" onclick="window.quizEngine.switchPart(7)">Part 7: Concurrency</button>
+      </div>
 
-        <div class="quiz-level-card" data-level="2">
-          <span class="level-badge">Level 2 • 15 Questions</span>
-          <div class="level-card-title">Part 2: Core Dart Exam</div>
-          <div class="level-card-desc">Functions, Named Parameters, Lists, Sets, Maps, Spreads & Collection methods.</div>
-        </div>
-
-        <div class="quiz-level-card" data-level="3">
-          <span class="level-badge">Level 3 • 15 Questions</span>
-          <div class="level-card-title">Part 3: OOP Exam</div>
-          <div class="level-card-desc">Classes, Generative/Factory Constructors, Inheritance, Abstract classes, Interfaces, Mixins & Static members.</div>
-        </div>
-
-        <div class="quiz-level-card" data-level="4">
-          <span class="level-badge">Level 4 • 15 Questions</span>
-          <div class="level-card-title">Part 4: Safety & Control Exam</div>
-          <div class="level-card-desc">Sound Null Safety, Null operators (?, !, late, ??), Exception handling (try-on-catch) & Enhanced Enums.</div>
-        </div>
-
-        <div class="quiz-level-card" data-level="5">
-          <span class="level-badge">Level 5 • 15 Questions</span>
-          <div class="level-card-title">Part 5: Asynchronous Exam</div>
-          <div class="level-card-desc">Futures, Async, Await, Single/Broadcast Streams, Async* Generators & Event Loop queues.</div>
-        </div>
-
-        <div class="quiz-level-card" data-level="6">
-          <span class="level-badge">Level 6 • 15 Questions</span>
-          <div class="level-card-title">Part 6: Advance Exam</div>
-          <div class="level-card-desc">Generics, Extensions, Lambda & FP pipelines, dart:io File handling, Records & Dart 3 features.</div>
-        </div>
-
-        <div class="quiz-level-card" data-level="7">
-          <span class="level-badge">Level 7 • 15 Questions</span>
-          <div class="level-card-title">Part 7: Concurrency Exam</div>
-          <div class="level-card-desc">Isolate.run(), Isolate.spawn(), ReceivePort, SendPort background thread architecture.</div>
-        </div>
+      <!-- Dynamic Level Cards Container for Selected Part -->
+      <div class="quiz-grid" id="quizLevelGrid">
+        <!-- Rendered dynamically by quiz.js -->
       </div>
     </section>
 

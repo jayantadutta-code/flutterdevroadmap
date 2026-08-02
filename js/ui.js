@@ -144,10 +144,25 @@ class UIController {
       codeTabHeader.innerText = ms.customTabName || "Code Example";
     }
 
-    // Story Card
+    // Story Card & Digital Book Banner
     const storyCard = document.getElementById('storyCard');
     if (storyCard) {
-      storyCard.innerHTML = `<strong>📖 The Developer Story:</strong> ${ms.story}`;
+      let bookBanner = '';
+      if (ms.hasDigitalBook || ms.id === 'dart-language' || ms.id === 'flutter-framework' || ms.id === 'git-github') {
+        const bookUrl = ms.digitalBookUrl || (ms.id === 'dart-language' ? 'dart/index.html' : (ms.id === 'flutter-framework' ? 'YAML/index.html' : 'git-github/index.html'));
+        bookBanner = `
+          <div style="margin-top: 12px; padding: 12px 16px; background: linear-gradient(135deg, rgba(1,117,194,0.2), rgba(0,229,255,0.15)); border: 1px solid var(--flutter-sky); border-radius: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <div>
+              <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">📚 ${ms.customTabName || 'Interactive 3D FlipBook Available'}</div>
+              <div style="font-size: 0.8rem; color: #CBD5E1;">Explore 3D flip pages, interactive code simulator & Quest Arena!</div>
+            </div>
+            <button onclick="uiController.switchModalTab('code')" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.85rem; white-space: nowrap;">
+              Open FlipBook 📖
+            </button>
+          </div>
+        `;
+      }
+      storyCard.innerHTML = `<strong>📖 The Developer Story:</strong> ${ms.story}${bookBanner}`;
     }
 
     if (this.modalDescription) this.modalDescription.innerText = ms.description;
@@ -188,7 +203,7 @@ class UIController {
 
         if (ms.id === 'dart-language') {
           bookTitle = 'The Dart Masterclass Interactive 3D FlipBook (37 Topics)';
-          bookSubtitle = 'Interactive 3D page-flipping book with Dart simulator & 105-question Quiz Arena';
+          bookSubtitle = 'Interactive 3D page-flipping book with Dart simulator & 700-question Quiz Arena';
         } else if (ms.id === 'flutter-framework') {
           bookTitle = 'The YAML Interactive 3D FlipBook (38 Topics)';
           bookSubtitle = 'Interactive 3D page-flipping book with YAML parser, validator & quest arena';
@@ -236,7 +251,11 @@ class UIController {
       `).join('');
     }
 
-    this.switchModalTab('overview');
+    if (ms.hasDigitalBook || ms.id === 'dart-language') {
+      this.switchModalTab('code');
+    } else {
+      this.switchModalTab('overview');
+    }
     if (this.modalOverlay) this.modalOverlay.classList.add('open');
   }
 
