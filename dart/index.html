@@ -108,6 +108,12 @@
 
     <!-- View 1: 3D Page-Flipping Book Stage (Matching YAML & Git-GitHub) -->
     <section class="view-section active" id="view-book">
+      <!-- Page Flip Control - Left/Prev (Matching YAML) -->
+      <button id="prevPageBtn" class="nav-corner nav-left" aria-label="Previous Page (Flip Reverse)" title="Previous Page (Left Arrow)">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span class="corner-hint">Reverse Flip</span>
+      </button>
+
       <div class="book-viewport">
         <div class="book-3d at-cover" id="book3d">
           <div class="book-spine"></div>
@@ -557,10 +563,23 @@ void main() async {
         </div>
       </div>
 
+      <!-- Page Flip Control - Right/Next (Matching YAML) -->
+      <button id="nextPageBtn" class="nav-corner nav-right" aria-label="Next Page (Flip Next)" title="Next Page (Right Arrow)">
+        <i class="fa-solid fa-chevron-right"></i>
+        <span class="corner-hint">Flip Next</span>
+      </button>
+
+      <!-- Floating Reader Toolbar (Matching YAML) -->
       <div class="reader-toolbar">
-        <button class="btn btn-secondary" id="prevPageBtn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnPrev()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnPrev()" title="Previous Page (Left Arrow)">
+          <i class="fa-solid fa-chevron-left"></i> Previous
+        </button>
+        <div class="reader-divider"></div>
         <span class="page-indicator" id="currentPageNum">Spread 0 (Front Cover)</span>
-        <button class="btn btn-primary" id="nextPageBtn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()">Next <i class="fa-solid fa-arrow-right"></i></button>
+        <div class="reader-divider"></div>
+        <button class="reader-btn" onclick="if(window.flipbookEngine) window.flipbookEngine.turnNext()" title="Next Page (Right Arrow)">
+          Next <i class="fa-solid fa-chevron-right"></i>
+        </button>
       </div>
     </section>
 

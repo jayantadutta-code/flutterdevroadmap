@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Dart Interactive Cookbook - 3D FlipBook & Masterclass Stylesheet
+   Dart Interactive Cookbook - 3D FlipBook & Masterclass Stylesheet (YAML Spec)
    ========================================================================== */
 
 :root {
@@ -388,13 +388,60 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   3D Flipbook Stage (Matching YAML & Git-GitHub engines)
+   3D Flipbook Stage & Floating Navigation Controls (Matching YAML Spec)
    -------------------------------------------------------------------------- */
 #view-book {
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 64px);
   padding: 1rem;
+  position: relative;
+}
+
+.nav-corner {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 120px;
+  background: rgba(17, 24, 39, 0.85);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.nav-left {
+  left: 20px;
+  border-radius: 0 16px 16px 0;
+}
+
+.nav-right {
+  right: 20px;
+  border-radius: 16px 0 0 16px;
+}
+
+.nav-corner:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  width: 72px;
+  box-shadow: 0 0 25px rgba(1, 117, 194, 0.6);
+}
+
+.corner-hint {
+  font-size: 0.62rem;
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  opacity: 0.85;
 }
 
 .book-viewport {
@@ -639,7 +686,6 @@ body {
   font-size: 0.75rem;
   padding: 4px 8px;
   border-radius: 6px;
-
 }
 .toc-info h4 {
   font-size: 0.85rem;
@@ -744,13 +790,45 @@ body {
   color: var(--text-muted);
 }
 
-/* Reader Toolbar */
+/* Floating Reader Toolbar (Matching YAML Spec) */
 .reader-toolbar {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  gap: 0.8rem;
+  padding: 8px 18px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  z-index: 60;
+}
+.reader-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+.reader-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-cyan);
+}
+.reader-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border-color);
 }
 .page-indicator {
   font-size: 0.85rem;
