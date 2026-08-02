@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Dart Cookbook - Master Theme & 3D Flipbook Stylesheet
+   Dart Cookbook - Master Theme & 3D Flipbook Stylesheet (Safari / WebKit Fix)
    ========================================================================== */
 
 :root {
@@ -63,7 +63,7 @@
   --accent-sky: #2aa198;
   --accent-pink: #d33682;
   --border-color: rgba(7, 54, 66, 0.15);
-  --paper-bg: #fdf6e3;
+  --paper-bg: #fffbf0;
   --paper-text: #073642;
   --code-bg: #002b36;
 }
@@ -387,12 +387,13 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   3D Flipbook View
+   3D Flipbook View (WebKit / Safari Optimized)
    -------------------------------------------------------------------------- */
 #view-book {
   align-items: center;
   justify-content: center;
   perspective: 2200px;
+  -webkit-perspective: 2200px;
   min-height: calc(100vh - 64px);
 }
 
@@ -402,6 +403,8 @@ body {
   height: 640px;
   position: relative;
   margin: 0 auto;
+  perspective: 2200px;
+  -webkit-perspective: 2200px;
 }
 
 .book-3d {
@@ -409,6 +412,7 @@ body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
@@ -474,13 +478,13 @@ body {
 
 .paper-stack-left {
   left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 2%, var(--bg-primary) 5%);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 2%, var(--paper-bg) 5%);
   border-left: 6px solid rgba(0, 0, 0, 0.4);
 }
 
 .paper-stack-right {
   right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 2%, var(--bg-primary) 5%);
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 2%, var(--paper-bg) 5%);
   border-right: 6px solid rgba(0, 0, 0, 0.4);
 }
 
@@ -491,7 +495,9 @@ body {
   right: 0;
   top: 0;
   transform-origin: left center;
+  -webkit-transform-origin: left center;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   border-radius: 0 12px 12px 0;
@@ -500,9 +506,10 @@ body {
 
 .paper-sheet.flipped {
   transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
 }
 
-/* Page Faces */
+/* Page Faces with Safari WebKit translateZ Depth Hints */
 .page, .page-face {
   position: absolute;
   inset: 0;
@@ -510,6 +517,8 @@ body {
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   background: var(--paper-bg);
   color: var(--paper-text);
   padding: 1.75rem;
@@ -517,16 +526,19 @@ body {
   flex-direction: column;
   overflow-y: auto;
   border: 1px solid var(--border-color);
+  z-index: 2;
 }
 
 .page-front {
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) translateZ(1px);
+  -webkit-transform: rotateY(0deg) translateZ(1px);
   border-radius: 0 12px 12px 0;
   box-shadow: inset 18px 0 30px rgba(0, 0, 0, 0.4), 8px 12px 25px rgba(0, 0, 0, 0.3);
 }
 
 .page-back {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
+  -webkit-transform: rotateY(180deg) translateZ(1px);
   border-radius: 12px 0 0 12px;
   box-shadow: inset -18px 0 30px rgba(0, 0, 0, 0.4), -8px 12px 25px rgba(0, 0, 0, 0.3);
 }
@@ -552,8 +564,8 @@ body {
 
 /* Cover Sheet */
 .cover-sheet .page-front {
-  background: linear-gradient(135deg, #091e3a 0%, #2f80ed 50%, #2d9cdb 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #091e3a 0%, #2f80ed 50%, #2d9cdb 100%) !important;
+  color: #ffffff !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -561,9 +573,15 @@ body {
 }
 .cover-content {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff !important;
 }
 .cover-badge {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -578,18 +596,21 @@ body {
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;
+  color: #ffffff !important;
 }
 .cover-highlight {
-  color: #00e5ff;
+  color: #00e5ff !important;
 }
 .cover-subtitle {
   font-size: 1rem;
-  opacity: 0.9;
+  opacity: 0.95;
+  color: #f1f5f9 !important;
   margin-bottom: 2rem;
 }
 .cover-meta {
   font-size: 0.8rem;
-  opacity: 0.8;
+  opacity: 0.85;
+  color: #e2e8f0 !important;
   margin-bottom: 2rem;
 }
 
@@ -645,6 +666,7 @@ body {
   font-size: 0.78rem;
   overflow-x: auto;
   position: relative;
+  color: #00e5ff;
 }
 .code-header-badge {
   position: absolute;

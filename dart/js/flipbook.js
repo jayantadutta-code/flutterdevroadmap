@@ -96,11 +96,16 @@ class FlipBookEngine {
     }
 
     this.sheets.forEach((sheet, idx) => {
+      const depthOffset = (this.maxSheetIndex + 1 - idx) * 2;
       if (idx < this.currentSheet) {
         sheet.classList.add('flipped');
+        sheet.style.transform = `rotateY(-180deg) translateZ(${depthOffset}px)`;
+        sheet.style.webkitTransform = `rotateY(-180deg) translateZ(${depthOffset}px)`;
         sheet.style.zIndex = idx;
       } else {
         sheet.classList.remove('flipped');
+        sheet.style.transform = `rotateY(0deg) translateZ(${depthOffset}px)`;
+        sheet.style.webkitTransform = `rotateY(0deg) translateZ(${depthOffset}px)`;
         sheet.style.zIndex = (this.maxSheetIndex + 1) - idx;
       }
     });
