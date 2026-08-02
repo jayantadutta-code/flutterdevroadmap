@@ -26,19 +26,14 @@ const MILESTONES_DATA = [
       { id: "dart-4", title: "Dart Collections & Collection Methods (`map`, `where`, `reduce`, `fold`)", completed: false },
       { id: "dart-5", title: "Records, Patterns & Switch Expressions (Dart 3+ features)", completed: false }
     ],
-    codeSnippet: `// Chapter 1: Alex's First Dart 3 Script
-(String, int) getDeveloperInfo() => ('Alex (Common Man)', 1);
-
-void main() {
-  final (name, level) = getDeveloperInfo();
-  print('Developer Journey Started: $name, Chapter: $level');
-
-  switch (name) {
-    case 'Alex (Common Man)': print('Welcome to the Flutter World!');
-    case _: print('Keep Learning!');
-  }
-}`,
+    customTabName: "Dart FlipBook 📚",
+    hasDigitalBook: true,
+    digitalBookUrl: "dart/index.html",
+    codeSnippet: `// Chapter 1: Google Dart Masterclass & 3D FlipBook Guide
+// Open the interactive Dart 3D FlipBook to explore 37 topics, playground simulator, and 105-question Quiz Arena!
+URL: dart/index.html`,
     resources: [
+      { name: "📖 Interactive Dart 3D FlipBook (37 Topics & 105-Question Quiz Arena)", url: "dart/index.html" },
       { name: "Dart Official Documentation", url: "https://dart.dev/guides" },
       { name: "Dart Language Tour", url: "https://dart.dev/language" },
       { name: "Dart Pad (Interactive Sandbox)", url: "https://dartpad.dev" }

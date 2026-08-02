@@ -181,10 +181,21 @@ class UIController {
     // Code Example / Digital Book Tab Content
     const tabCodeEl = document.getElementById('tab-code');
     if (tabCodeEl) {
-      if (ms.hasDigitalBook || ms.id === 'git-github' || ms.id === 'flutter-framework') {
-        const bookUrl = ms.digitalBookUrl || (ms.id === 'flutter-framework' ? 'YAML/index.html' : 'git-github/index.html');
-        const bookTitle = ms.id === 'flutter-framework' ? 'The YAML Interactive 3D FlipBook (38 Topics)' : 'The Git & GitHub Flipbook Guide (28 Chapters)';
-        const bookSubtitle = ms.id === 'flutter-framework' ? 'Interactive 3D page-flipping book with YAML parser, validator & quest arena' : 'Interactive 3D page-flipping book with live terminal & command quizzes';
+      if (ms.hasDigitalBook || ms.id === 'git-github' || ms.id === 'flutter-framework' || ms.id === 'dart-language') {
+        const bookUrl = ms.digitalBookUrl || (ms.id === 'dart-language' ? 'dart/index.html' : (ms.id === 'flutter-framework' ? 'YAML/index.html' : 'git-github/index.html'));
+        let bookTitle = 'Interactive Masterclass 3D FlipBook';
+        let bookSubtitle = 'Interactive 3D page-flipping book with live simulator & quest arena';
+
+        if (ms.id === 'dart-language') {
+          bookTitle = 'The Dart Masterclass Interactive 3D FlipBook (37 Topics)';
+          bookSubtitle = 'Interactive 3D page-flipping book with Dart simulator & 105-question Quiz Arena';
+        } else if (ms.id === 'flutter-framework') {
+          bookTitle = 'The YAML Interactive 3D FlipBook (38 Topics)';
+          bookSubtitle = 'Interactive 3D page-flipping book with YAML parser, validator & quest arena';
+        } else if (ms.id === 'git-github') {
+          bookTitle = 'The Git & GitHub Flipbook Guide (28 Chapters)';
+          bookSubtitle = 'Interactive 3D page-flipping book with live terminal & command quizzes';
+        }
         tabCodeEl.innerHTML = `
           <div class="digital-book-modal-wrapper">
             <div class="digital-book-modal-header">

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dart Interactive 3D FlipBook & Masterclass Guide</title>
+  <meta name="description" content="Master Dart step-by-step with an authentic 3D page-flipping book, live code simulator playground, 105-question Q&A quest arena, and topic search!" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons & Canvas Confetti -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Top Global Navigation Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-code"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">Dart<span class="highlight">FlipBook</span></span>
+          <span class="brand-tagline">37-Topic Master Guide</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Navigation Tabs & Topic Search -->
+    <div class="header-center">
+      <div class="view-tab-group">
+        <button class="nav-tab active" id="tab-book-btn" onclick="switchMainView('book')">
+          <i class="fa-solid fa-book-open"></i> FlipBook
+        </button>
+        <button class="nav-tab" id="tab-playground-btn" onclick="switchMainView('playground')">
+          <i class="fa-solid fa-terminal"></i> Playground
+        </button>
+        <button class="nav-tab" id="tab-quiz-btn" onclick="switchMainView('quiz')">
+          <i class="fa-solid fa-gamepad"></i> Quest Arena <span class="badge-pill">105 MCQs</span>
+        </button>
+      </div>
+
+      <!-- Search Input -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="commandSearchInput" placeholder="Search Dart topic... (e.g. Isolates, Mixin, Records)" autocomplete="off">
+        <div id="searchSearchResults" class="search-results-dropdown hidden"></div>
+      </div>
+    </div>
+
+    <!-- Right Header Controls -->
+    <div class="header-right">
+      <div class="player-stats-pill" id="player-stats-btn" onclick="switchMainView('quiz')" title="View Badges & XP">
+        <div class="xp-badge"><i class="fa-solid fa-bolt"></i> <span id="user-xp-display">0</span> XP</div>
+        <div class="rank-badge" id="user-rank-display">Dart Novice</div>
+      </div>
+
+      <button id="toc-toggle-btn" class="icon-btn" title="Table of Contents">
+        <i class="fa-solid fa-list-ol"></i> Index
+      </button>
+
+      <button id="sound-toggle-btn" class="icon-btn" title="Toggle Sound">
+        <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+        <span id="sound-text">Sound On</span>
+      </button>
+
+      <!-- Theme Selector Dropdown -->
+      <div class="theme-selector-container">
+        <button id="theme-btn" class="theme-dropdown-btn" title="Change Theme">
+          <i class="fa-solid fa-palette"></i>
+          <span id="current-theme-name">Cyberpunk</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="theme-dropdown-menu" id="theme-menu">
+          <div class="theme-option active" data-theme-id="cyberpunk">
+            <span class="theme-dot cyberpunk-dot"></span> Cyberpunk Dark
+          </div>
+          <div class="theme-option" data-theme-id="fluttersky">
+            <span class="theme-dot fluttersky-dot"></span> Flutter Sky
+          </div>
+          <div class="theme-option" data-theme-id="obsidian">
+            <span class="theme-dot obsidian-dot"></span> Obsidian Slate
+          </div>
+          <div class="theme-option" data-theme-id="solarized">
+            <span class="theme-dot solarized-dot"></span> Solarized Light
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Table of Contents Slide-Out Drawer -->
+  <div id="toc-drawer" class="toc-drawer">
+    <div class="toc-header">
+      <h3><i class="fa-solid fa-list"></i> Table of Contents</h3>
+      <button id="toc-close-btn" class="icon-btn">&times;</button>
+    </div>
+    <div id="toc-list-container" class="toc-list"></div>
+  </div>
+
+  <!-- Main View Content Area -->
+  <main class="app-container">
+
+    <!-- View 1: 3D Page-Flipping Book -->
+    <section class="view-section active" id="view-book">
+      <div class="book-viewport">
+        <div class="book-3d at-cover" id="book3d">
+          <!-- Paper sheets rendered dynamically by app.js -->
+        </div>
+      </div>
+
+      <div class="reader-toolbar">
+        <button class="btn btn-secondary" id="prevPageBtn"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <span class="page-indicator" id="currentPageNum">Spread 0 (Front Cover)</span>
+        <button class="btn btn-primary" id="nextPageBtn">Next <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </section>
+
+    <!-- View 2: Interactive Dart Code Playground -->
+    <section class="view-section" id="view-playground">
+      <div class="playground-layout">
+        <!-- Editor Card -->
+        <div class="playground-editor-card">
+          <div class="card-header">
+            <span><i class="fa-solid fa-code"></i> Dart Code Editor</span>
+            <select id="playgroundPresetSelect" class="preset-select"></select>
+          </div>
+          <textarea id="playgroundCodeInput" class="code-editor-textarea" spellcheck="false"></textarea>
+          <div class="card-actions">
+            <button class="btn btn-secondary" id="copyPlaygroundCodeBtn"><i class="fa-solid fa-copy"></i> Copy Code</button>
+            <button class="btn btn-primary" id="runCodeBtn"><i class="fa-solid fa-play"></i> Run Code</button>
+          </div>
+        </div>
+
+        <!-- Output Console Card -->
+        <div class="playground-console-card">
+          <div class="card-header">
+            <span><i class="fa-solid fa-terminal"></i> Console Output</span>
+            <button class="btn btn-secondary" id="clearConsoleBtn" style="padding: 4px 8px; font-size: 0.75rem;">Clear</button>
+          </div>
+          <pre id="playgroundConsoleOutput" class="console-output-box">Press "Run Code" to execute script in simulated Dart runtime...</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- View 3: Gamified Quest Arena (105 MCQs) -->
+    <section class="view-section" id="view-quiz">
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: var(--accent-cyan);">Dart Masterclass Quest Arena</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">7 Level-Graded Examinations • 15 Questions Each • Earn XP & Unlock Developer Ranks!</p>
+      </div>
+
+      <div class="quiz-grid">
+        <div class="quiz-level-card" data-level="1">
+          <span class="level-badge">Level 1 • 15 Questions</span>
+          <div class="level-card-title">Part 1: Basics Exam</div>
+          <div class="level-card-desc">Intro, Comments, Variables, Numbers, Strings, RegEx, StringBuffer, Operators, Conditions & Loops.</div>
+        </div>
+
+        <div class="quiz-level-card" data-level="2">
+          <span class="level-badge">Level 2 • 15 Questions</span>
+          <div class="level-card-title">Part 2: Core Dart Exam</div>
+          <div class="level-card-desc">Functions, Named Parameters, Lists, Sets, Maps, Spreads & Collection methods.</div>
+        </div>
+
+        <div class="quiz-level-card" data-level="3">
+          <span class="level-badge">Level 3 • 15 Questions</span>
+          <div class="level-card-title">Part 3: OOP Exam</div>
+          <div class="level-card-desc">Classes, Generative/Factory Constructors, Inheritance, Abstract classes, Interfaces, Mixins & Static members.</div>
+        </div>
+
+        <div class="quiz-level-card" data-level="4">
+          <span class="level-badge">Level 4 • 15 Questions</span>
+          <div class="level-card-title">Part 4: Safety & Control Exam</div>
+          <div class="level-card-desc">Sound Null Safety, Null operators (?, !, late, ??), Exception handling (try-on-catch) & Enhanced Enums.</div>
+        </div>
+
+        <div class="quiz-level-card" data-level="5">
+          <span class="level-badge">Level 5 • 15 Questions</span>
+          <div class="level-card-title">Part 5: Asynchronous Exam</div>
+          <div class="level-card-desc">Futures, Async, Await, Single/Broadcast Streams, Async* Generators & Event Loop queues.</div>
+        </div>
+
+        <div class="quiz-level-card" data-level="6">
+          <span class="level-badge">Level 6 • 15 Questions</span>
+          <div class="level-card-title">Part 6: Advance Exam</div>
+          <div class="level-card-desc">Generics, Extensions, Lambda & FP pipelines, dart:io File handling, Records & Dart 3 features.</div>
+        </div>
+
+        <div class="quiz-level-card" data-level="7">
+          <span class="level-badge">Level 7 • 15 Questions</span>
+          <div class="level-card-title">Part 7: Concurrency Exam</div>
+          <div class="level-card-desc">Isolate.run(), Isolate.spawn(), ReceivePort, SendPort background thread architecture.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Question Arena Modal Overlay -->
+  <div id="quiz-arena-modal" class="quiz-arena-modal hidden">
+    <div class="quiz-card">
+      <div class="arena-header">
+        <div id="arena-level-title" class="level-indicator">Level 1 • Question 1 of 15</div>
+        <div id="arena-xp-reward" class="xp-reward">+50 XP</div>
+      </div>
+
+      <div class="question-body">
+        <h3 id="question-prompt" class="question-prompt">Question Text Here</h3>
+        <div id="options-container" class="options-grid"></div>
+      </div>
+
+      <div id="explanation-box" class="explanation-box hidden">
+        <p id="explanation-text"></p>
+      </div>
+
+      <div class="arena-footer">
+        <button class="btn btn-secondary" onclick="exitQuizArena()"><i class="fa-solid fa-arrow-left"></i> Exit Arena</button>
+        <button id="next-question-btn" class="btn btn-primary hidden" onclick="nextQuizQuestion()">Next Question <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/sound.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/flipbook.js"></script>
+  <script src="js/playground.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
