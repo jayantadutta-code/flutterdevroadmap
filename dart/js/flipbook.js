@@ -67,7 +67,7 @@ class FlipBookEngine {
 
   init() {
     this.sheets = Array.from(document.querySelectorAll('.paper-sheet'));
-    this.maxSheetIndex = this.sheets.length - 1; // 7 (Sheets 0 to 7)
+    this.maxSheetIndex = this.sheets.length - 1; // 7
     this.totalParts = 7;
     this.book3d = document.getElementById('book3d');
     this.prevBtn = document.getElementById('prevPageBtn');
@@ -96,16 +96,11 @@ class FlipBookEngine {
     }
 
     this.sheets.forEach((sheet, idx) => {
-      const depthOffset = (this.maxSheetIndex + 1 - idx) * 2;
       if (idx < this.currentSheet) {
         sheet.classList.add('flipped');
-        sheet.style.transform = `rotateY(-180deg) translateZ(${depthOffset}px)`;
-        sheet.style.webkitTransform = `rotateY(-180deg) translateZ(${depthOffset}px)`;
         sheet.style.zIndex = idx;
       } else {
         sheet.classList.remove('flipped');
-        sheet.style.transform = `rotateY(0deg) translateZ(${depthOffset}px)`;
-        sheet.style.webkitTransform = `rotateY(0deg) translateZ(${depthOffset}px)`;
         sheet.style.zIndex = (this.maxSheetIndex + 1) - idx;
       }
     });
@@ -123,13 +118,17 @@ class FlipBookEngine {
   }
 
   turnNext() {
-    if (this.currentSheet < this.maxSheetIndex && !this.isFlipping) {
-      this.isFlipping = true;
-      if (window.soundEngine) window.soundEngine.playPageFlip();
-      this.currentSheet++;
-      this.updateBookState();
-      setTimeout(() => { this.isFlipping = false; }, 600);
-    }
+    if (this.isFlipping || this.currentSheet >= this.maxSheetIndex) return;
+    this.isFlipping = true;
+
+    if (window.soundEngine) window.soundEngine.playPageFlip();
+
+    this.currentSheet++;
+    this.updateBookState();
+
+    setTimeout(() => {
+      this.isFlipping = false;
+    }, 650);
   }
 
   nextPage() {
@@ -137,13 +136,17 @@ class FlipBookEngine {
   }
 
   turnPrev() {
-    if (this.currentSheet > 0 && !this.isFlipping) {
-      this.isFlipping = true;
-      if (window.soundEngine) window.soundEngine.playPageFlip();
-      this.currentSheet--;
-      this.updateBookState();
-      setTimeout(() => { this.isFlipping = false; }, 600);
-    }
+    if (this.isFlipping || this.currentSheet <= 0) return;
+    this.isFlipping = true;
+
+    if (window.soundEngine) window.soundEngine.playPageFlip();
+
+    this.currentSheet--;
+    this.updateBookState();
+
+    setTimeout(() => {
+      this.isFlipping = false;
+    }, 650);
   }
 
   prevPage() {
@@ -151,11 +154,13 @@ class FlipBookEngine {
   }
 
   jumpToModule(moduleIndex) {
-    if (moduleIndex >= 0 && moduleIndex < this.totalParts) {
-      if (window.soundEngine) window.soundEngine.playPageFlip();
-      this.currentSheet = moduleIndex + 1;
-      this.updateBookState();
-    }
+    if (moduleIndex < 0 || moduleIndex >= this.totalParts) return;
+    const targetSheet = moduleIndex + 1;
+    if (this.currentSheet === targetSheet) return;
+
+    if (window.soundEngine) window.soundEngine.playPageFlip();
+    this.currentSheet = targetSheet;
+    this.updateBookState();
   }
 
   bindEvents() {
