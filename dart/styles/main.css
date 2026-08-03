@@ -1649,3 +1649,176 @@ h1, h2, h3, h4, h5, h6 {
   .stats-summary-grid { grid-template-columns: repeat(2, 1fr); }
   .scrubber-slider { width: 120px; }
 }
+
+/* History Timeline & Framework Cards */
+.history-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.6rem 0;
+}
+
+.history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.45rem 0.7rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.82rem;
+  transition: var(--transition-fast);
+}
+
+.history-item:hover {
+  background: rgba(0, 229, 255, 0.07);
+  transform: translateX(4px);
+}
+
+.history-badge {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.15);
+  color: var(--accent-cyan);
+  white-space: nowrap;
+  min-width: 95px;
+  text-align: center;
+}
+
+.history-content {
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.framework-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  margin: 0.6rem 0;
+}
+
+@media (max-width: 600px) {
+  .framework-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.framework-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  transition: var(--transition-fast);
+}
+
+.framework-card:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(0, 229, 255, 0.04);
+}
+
+.framework-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.framework-icon {
+  color: var(--accent-cyan);
+  font-size: 0.9rem;
+}
+
+.framework-card h4 {
+  font-size: 0.88rem;
+  color: var(--text-main);
+}
+
+.framework-card p {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.compilation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  margin: 0.6rem 0;
+}
+
+@media (max-width: 700px) {
+  .compilation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.compilation-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+}
+
+.comp-badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.12rem 0.38rem;
+  border-radius: 4px;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.comp-badge.jit {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+.comp-badge.aot {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.comp-badge.web {
+  background: rgba(0, 229, 255, 0.2);
+  color: #00e5ff;
+}
+
+.compilation-card h4 {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.compilation-card p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.philosophy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0.6rem 0;
+}
+
+.philosophy-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  padding: 0.55rem 0.7rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.philosophy-icon {
+  color: var(--accent-cyan);
+  margin-top: 0.12rem;
+  font-size: 0.85rem;
+}
+

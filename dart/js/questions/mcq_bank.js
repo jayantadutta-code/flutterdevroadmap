@@ -29,7 +29,7 @@ class MCQBank {
   generateQuestionsForLevel(part, level) {
     const list = [];
     const topicsMap = {
-      1: ["Introduction & Comments", "Variables & Types", "Numbers", "Strings & StringBuffer", "RegExp", "Operators", "Conditions", "Loops"],
+      1: ["Dart History & Today Ecosystem", "Introduction & Comments", "Variables & Types", "Numbers", "Strings & StringBuffer", "RegExp", "Operators", "Conditions", "Loops"],
       2: ["Functions", "Named Parameters", "Closures", "Typedefs", "List Operations", "Set Operations", "Map Data Structure"],
       3: ["Classes & Objects", "Generative Constructors", "Named & Factory Constructors", "Inheritance", "Abstract Classes", "Implicit Interfaces", "Mixins"],
       4: ["Sound Null Safety", "Null-aware Operators", "Late Variables", "Exception Handling", "Custom Exceptions", "Enhanced Enums"],
@@ -54,6 +54,18 @@ class MCQBank {
     const questionsDatabase = {
       // PART 1 - BASIC
       "p1_l1": [
+        {
+          q: "Who led the development of Dart when Google began creating the language in 2010?",
+          options: ["Guido van Rossum & James Gosling", "Lars Bak & Kasper Lund", "Brendan Eich & Anders Hejlsberg", "Rich Hickey & Rob Pike"],
+          correct: 1,
+          explanation: "Dart development began in 2010 at Google, led by Danish software engineers Lars Bak and Kasper Lund."
+        },
+        {
+          q: "When was Dart 3 officially released with Records, Patterns, and Class Modifiers?",
+          options: ["October 2011", "November 2019", "May 2023", "August 2018"],
+          correct: 2,
+          explanation: "Dart 3 was officially released in May 2023, introducing Records, Pattern Matching, and Class Modifiers."
+        },
         {
           q: "What is the mandatory entry point function for any Dart command-line or client application?",
           options: ["void start()", "void main()", "void init()", "int run()"],

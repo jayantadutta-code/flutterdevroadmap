@@ -18,6 +18,227 @@ window.part1Content = {
       `
     },
     {
+      pageId: "p1_history",
+      header: "0.1 SHORT HISTORY OF DART",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-clock-rotate-left"></i> Short History of Dart Programming Language</h2>
+        <p class="topic-paragraph">
+          Dart was created by Google to provide a modern, highly performant, and client-optimized programming language capable of targeting multiple platforms seamlessly from a single codebase.
+        </p>
+
+        <div class="history-timeline">
+          <div class="history-item">
+            <div class="history-badge">2010</div>
+            <div class="history-content">
+              Google began developing <strong>Dart</strong>, led by <strong>Lars Bak</strong> and <strong>Kasper Lund</strong>, two <strong>Danish software engineers</strong>, to create a modern, fast, and scalable programming language.
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-badge">10–12 Oct 2011</div>
+            <div class="history-content">
+              Dart was officially announced at the <strong>GOTO Conference</strong> in Aarhus, Denmark.
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-badge">14 Nov 2013</div>
+            <div class="history-content">
+              <strong>Dart 1.0</strong>, the first stable version, was officially released.
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-badge">2015</div>
+            <div class="history-content">
+              Google shifted Dart's focus from a browser VM to compiling Dart into JavaScript for better web compatibility.
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-badge">2017</div>
+            <div class="history-content">
+              Google introduced <strong>Flutter</strong>, making Dart its official language for cross-platform app development.
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-badge">August 2018</div>
+            <div class="history-content">
+              <strong>Dart 2.0</strong> introduced a stronger type system and several language improvements.
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-badge">November 2019</div>
+            <div class="history-content">
+              <strong>Dart 2.6</strong> introduced <strong>dart2native</strong>, allowing developers to compile Dart applications directly into native executables for Windows, macOS, and Linux.
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-badge">May 2023</div>
+            <div class="history-content">
+              <strong>Dart 3</strong> was released with powerful features such as <strong>Records</strong>, <strong>Patterns</strong>, and <strong>Class Modifiers</strong>.
+            </div>
+          </div>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_today",
+      header: "0.2 DART TODAY & FRAMEWORKS",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> Today: Modern Dart Ecosystem</h2>
+        <p class="topic-paragraph">
+          Dart is an open-source, client-optimized programming language developed by Google. Although it is best known as the language behind <strong>Flutter</strong>, it is also used by several other frameworks and platforms, including:
+        </p>
+
+        <div class="framework-grid">
+          <div class="framework-card">
+            <div class="framework-header">
+              <i class="fa-solid fa-mobile-screen-button framework-icon"></i>
+              <h4>Flutter</h4>
+            </div>
+            <p>Cross-platform mobile, web, desktop, and embedded apps with high-performance rendering.</p>
+          </div>
+
+          <div class="framework-card">
+            <div class="framework-header">
+              <i class="fa-solid fa-server framework-icon"></i>
+              <h4>Serverpod</h4>
+            </div>
+            <p>Backend development for Dart and Flutter applications with ORM & streaming sockets.</p>
+          </div>
+
+          <div class="framework-card">
+            <div class="framework-header">
+              <i class="fa-solid fa-laptop-code framework-icon"></i>
+              <h4>Jaspr</h4>
+            </div>
+            <p>Modern web application framework inspired by Flutter for building reactive web UIs.</p>
+          </div>
+
+          <div class="framework-card">
+            <div class="framework-header">
+              <i class="fa-solid fa-frog framework-icon"></i>
+              <h4>dart_frog</h4>
+            </div>
+            <p>Lightweight backend web framework for building fast APIs and microservice servers.</p>
+          </div>
+
+          <div class="framework-card">
+            <div class="framework-header">
+              <i class="fa-solid fa-cubes framework-icon"></i>
+              <h4>Shelf</h4>
+            </div>
+            <p>Middleware-based web server framework for composing HTTP services and routing.</p>
+          </div>
+
+          <div class="framework-card">
+            <div class="framework-header">
+              <i class="fa-solid fa-cloud-bolt framework-icon"></i>
+              <h4>Angel3</h4>
+            </div>
+            <p>Full-stack web framework for REST APIs and server-side applications.</p>
+          </div>
+        </div>
+
+        <div class="callout-box tip" style="margin-top: 0.8rem;">
+          <i class="fa-solid fa-globe callout-icon"></i>
+          <div>
+            <strong>Multi-Platform Reach:</strong> Dart enables developers to build applications for <strong>Android, iOS, Web, Windows, macOS, Linux, servers, and embedded devices</strong> using a modern, fast, and type-safe language.
+          </div>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_compilation",
+      header: "0.3 DART ARCHITECTURE & COMPILATION",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-gears"></i> Dart Execution Models: JIT, AOT & Web</h2>
+        <p class="topic-paragraph">
+          Dart's architecture combines developer velocity with maximum production native performance through its multi-compiler architecture:
+        </p>
+
+        <div class="compilation-grid">
+          <div class="compilation-card">
+            <span class="comp-badge jit">Development</span>
+            <h4>Just-In-Time (JIT)</h4>
+            <p>Executes code in Dart VM dynamically. Powers sub-second <strong>Stateful Hot Reload</strong> while preserving app state during development.</p>
+          </div>
+
+          <div class="compilation-card">
+            <span class="comp-badge aot">Production</span>
+            <h4>Ahead-Of-Time (AOT)</h4>
+            <p>Compiles Dart directly into native machine code (ARM, x64). Guarantees fast startup, zero warm-up, and butter-smooth 60/120 FPS UI.</p>
+          </div>
+
+          <div class="compilation-card">
+            <span class="comp-badge web">Web Target</span>
+            <h4>JS & Wasm Compilers</h4>
+            <p><code>dart2js</code> compiles Dart to optimized JavaScript. <code>dart2wasm</code> target generates WebAssembly bytecode for web performance.</p>
+          </div>
+        </div>
+
+        <div class="code-snippet-box" style="margin-top: 0.8rem;">
+          <div class="code-snippet-header">
+            <span>dart_history_info.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  const String language = 'Dart';
+  const String creator = 'Google (Lars Bak & Kasper Lund)';
+  const int announcedYear = 2011;
+  const String latestVersion = 'Dart 3.x';
+
+  print('$language created by $creator');
+  print('Announced in $announcedYear | Current: $latestVersion');
+}</code></pre>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_philosophy",
+      header: "0.4 DART PHILOSOPHY & ADVANTAGES",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-shield-halved"></i> Key Language Philosophies</h2>
+        <p class="topic-paragraph">
+          Dart was crafted with specific design philosophies to maximize developer efficiency and deliver predictable application safety:
+        </p>
+
+        <div class="philosophy-list">
+          <div class="philosophy-item">
+            <i class="fa-solid fa-shield-cat philosophy-icon"></i>
+            <div>
+              <strong>100% Sound Null Safety:</strong> Eliminates null pointer crash errors at compile time. Variables default to non-nullable unless explicitly declared optional with <code>?</code>.
+            </div>
+          </div>
+
+          <div class="philosophy-item">
+            <i class="fa-solid fa-bolt philosophy-icon"></i>
+            <div>
+              <strong>Single-Threaded Event Loop & Isolates:</strong> Asynchronous execution runs efficiently on a single thread event loop. CPU-intensive operations use memory-isolated <strong>Isolates</strong> without data race locks.
+            </div>
+          </div>
+
+          <div class="philosophy-item">
+            <i class="fa-solid fa-cubes-stacked philosophy-icon"></i>
+            <div>
+              <strong>Rich Package Ecosystem (pub.dev):</strong> Access over 50,000 open-source packages for networking, UI components, state management, database storage, and AI interop.
+            </div>
+          </div>
+
+          <div class="philosophy-item">
+            <i class="fa-solid fa-wand-magic-sparkles philosophy-icon"></i>
+            <div>
+              <strong>Modern Pattern Matching & Records (Dart 3):</strong> Destructure tuples, enforce exhaustive pattern matching in switches, and utilize sealed class hierarchies for domain modeling.
+            </div>
+          </div>
+        </div>
+      `
+    },
+    {
       pageId: "p1_intro",
       header: "1.1 INTRODUCTION & COMMENTS",
       content: `
