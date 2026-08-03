@@ -359,6 +359,8 @@ class FlipbookEngine {
 
   goToSheet(targetSheet) {
     if (targetSheet < 0 || targetSheet > this.totalSheets || this.isFlipping) return;
+    if (targetSheet === this.currentSheet) return;
+
     this.isFlipping = true;
     window.soundEngine?.playPageFlip();
 
@@ -366,14 +368,22 @@ class FlipbookEngine {
     const sheets = Array.from(flipbookEl.querySelectorAll(".paper-sheet"));
 
     const flipCount = (targetSheet === this.totalSheets) ? sheets.length : targetSheet;
+    const startSheet = Math.min(this.currentSheet, targetSheet);
+    const endSheet = Math.max(this.currentSheet, targetSheet);
 
     sheets.forEach((sheet, i) => {
+      const isTurning = i >= startSheet && i < endSheet;
+      if (isTurning) {
+        sheet.classList.add("turning");
+        sheet.style.zIndex = 250 + i; // Raise turning sheet high above stack during 3D arc
+      }
+
       if (i < flipCount) {
         sheet.classList.add("flipped");
-        sheet.style.zIndex = 10 + i;
+        if (!isTurning) sheet.style.zIndex = 10 + i;
       } else {
         sheet.classList.remove("flipped");
-        sheet.style.zIndex = (sheets.length + 10) - i;
+        if (!isTurning) sheet.style.zIndex = (sheets.length + 10) - i;
       }
     });
 
@@ -381,8 +391,16 @@ class FlipbookEngine {
     this.updateBookState();
 
     setTimeout(() => {
+      sheets.forEach((sheet, i) => {
+        sheet.classList.remove("turning");
+        if (i < flipCount) {
+          sheet.style.zIndex = 10 + i;
+        } else {
+          sheet.style.zIndex = (sheets.length + 10) - i;
+        }
+      });
       this.isFlipping = false;
-    }, 850);
+    }, 750);
   }
 
   prevPage() {
