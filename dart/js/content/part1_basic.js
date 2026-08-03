@@ -194,10 +194,37 @@ window.part1Content = {
         </div>
 
         <h3 class="section-h3" style="margin-top: 1rem;">6.4 Key Dart Compilers</h3>
-        <ul style="margin-left: 1.2rem; font-size: 0.83rem;">
-          <li><code>dartdevc</code>: The Dart Development Compiler, primarily used during fast web development iteration.</li>
-          <li><code>dart2native</code>: A command-line tool used to compile Dart code into self-contained, native machine executables for Windows, macOS, and Linux.</li>
-        </ul>
+        <table class="content-table" style="margin-top: 0.5rem;">
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Development</th>
+              <th>Release</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Desktop (Windows/macOS/Linux)</strong></td>
+              <td><strong>Dart VM (JIT)</strong></td>
+              <td><strong>dart compile exe</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Android</strong></td>
+              <td><strong>Dart VM (JIT)</strong></td>
+              <td><strong>gen_snapshot (AOT)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>iOS</strong></td>
+              <td><strong>Dart VM (JIT)</strong></td>
+              <td><strong>gen_snapshot (AOT)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Web</strong></td>
+              <td><strong>dartdevc (DDC)</strong></td>
+              <td><strong>dart2js</strong></td>
+            </tr>
+          </tbody>
+        </table>
       `
     },
     {
