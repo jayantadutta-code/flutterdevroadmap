@@ -3146,36 +3146,491 @@ Multi-line String""";
       `
     },
     {
-      pageId: "p1_loops_cond",
-      header: "1.5 CONDITIONS & LOOPS",
+      pageId: "p1_operators_fundamentals",
+      header: "1.5 OPERATORS IN DART (PART 1)",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-rotate"></i> 5. Control Flow: Conditions & Loops</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-calculator"></i> 5. Operators in Dart</h2>
+        
+        <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
-          Standard flow statements include <code>if/else</code>, ternary <code>?:</code>, <code>switch</code>, <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>.
+          An <strong>operator</strong> is a special symbol that performs an operation on one or more operands and produces a result.
         </p>
 
         <div class="code-snippet-box">
           <div class="code-snippet-header">
-            <span>control_flow.dart</span>
+            <span>operator_concept.dart</span>
             <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
           </div>
           <pre><code class="language-dart">void main() {
-  final items = ['Basic', 'Core', 'OOP', 'Safety'];
+  int sum = 10 + 20; // 10 and 20 are operands, + is operator, 10 + 20 is expression, 30 is result
+  print('Sum: \$sum');
+}</code></pre>
+        </div>
+
+        <h3 class="section-h3">Types of Operators in Dart (Types 1 to 6)</h3>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">1. Arithmetic Operators</h4>
+        <p class="topic-paragraph">Perform mathematical calculations.</p>
+        <table class="content-table">
+          <thead>
+            <tr>
+              <th>Operator</th>
+              <th>Name</th>
+              <th>Description &amp; Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>+</code></td>
+              <td>Addition</td>
+              <td>Adds two numbers (<code>10 + 5 == 15</code>)</td>
+            </tr>
+            <tr>
+              <td><code>-</code></td>
+              <td>Subtraction</td>
+              <td>Subtracts right from left (<code>10 - 5 == 5</code>)</td>
+            </tr>
+            <tr>
+              <td><code>*</code></td>
+              <td>Multiplication</td>
+              <td>Multiplies two numbers (<code>10 * 5 == 50</code>)</td>
+            </tr>
+            <tr>
+              <td><code>/</code></td>
+              <td>Division</td>
+              <td>Divides and returns a <code>double</code> (<code>10 / 4 == 2.5</code>)</td>
+            </tr>
+            <tr>
+              <td><code>%</code></td>
+              <td>Modulus</td>
+              <td>Returns remainder of integer division (<code>10 % 3 == 1</code>)</td>
+            </tr>
+            <tr>
+              <td><code>~/</code></td>
+              <td>Integer Division</td>
+              <td>Divides and returns truncated integer (<code>10 ~/ 4 == 2</code>)</td>
+            </tr>
+            <tr>
+              <td><code>++</code></td>
+              <td>Increment</td>
+              <td>Increases value by 1 (<code>a++</code> or <code>++a</code>)</td>
+            </tr>
+            <tr>
+              <td><code>--</code></td>
+              <td>Decrement</td>
+              <td>Decreases value by 1 (<code>a--</code> or <code>--a</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">2. Assignment Operators</h4>
+        <p class="topic-paragraph">Assign values to variables, with shorthand compound variations.</p>
+        <p class="topic-paragraph">
+          <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>~/=</code>, <code>&amp;=</code>, <code>|=</code>, <code>^=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>??=</code>
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">3. Relational (Comparison) Operators</h4>
+        <p class="topic-paragraph">Compare two values and return a boolean result (<code>true</code> / <code>false</code>).</p>
+        <p class="topic-paragraph">
+          <code>==</code> (Equal), <code>!=</code> (Not Equal), <code>&gt;</code> (Greater than), <code>&lt;</code> (Less than), <code>&gt;=</code> (Greater or equal), <code>&lt;=</code> (Less or equal)
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">4. Logical Operators</h4>
+        <p class="topic-paragraph">Combine or negate boolean expressions.</p>
+        <p class="topic-paragraph">
+          <code>&amp;&amp;</code> (Logical AND), <code>||</code> (Logical OR), <code>!</code> (Logical NOT)
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">5. Bitwise Operators</h4>
+        <p class="topic-paragraph">Perform operations on individual bits of binary numbers.</p>
+        <p class="topic-paragraph">
+          <code>&amp;</code> (AND), <code>|</code> (OR), <code>^</code> (XOR), <code>~</code> (NOT), <code>&lt;&lt;</code> (Left Shift), <code>&gt;&gt;</code> (Right Shift), <code>&gt;&gt;&gt;</code> (Unsigned Right Shift)
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">6. Conditional (Ternary) Operators</h4>
+        <p class="topic-paragraph">
+          <code>condition ? value1 : value2</code> (Evaluates condition and returns value1 if true, value2 if false)<br>
+          <code>??</code> (Null-Coalescing: returns left operand if non-null, else right operand)
+        </p>
+      `
+    },
+    {
+      pageId: "p1_operators_advanced",
+      header: "1.6 ADVANCED OPERATORS IN DART (PART 2)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-wand-magic-sparkles"></i> 6. Advanced &amp; Specialized Operators</h2>
+        
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">7. Null-Aware Operators</h4>
+        <p class="topic-paragraph">Work safely with nullable values to prevent Null Pointer Exceptions.</p>
+        <table class="content-table">
+          <thead>
+            <tr>
+              <th>Operator</th>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>?.</code></td>
+              <td>Null-aware Access</td>
+              <td>Accesses property/method only if target is not null (e.g. <code>user?.name</code>)</td>
+            </tr>
+            <tr>
+              <td><code>?[]</code></td>
+              <td>Null-aware Index Access</td>
+              <td>Accesses collection index only if target is not null (e.g. <code>list?[0]</code>)</td>
+            </tr>
+            <tr>
+              <td><code>??</code></td>
+              <td>Default Value</td>
+              <td>Returns default fallback if left operand is null (e.g. <code>name ?? "Guest"</code>)</td>
+            </tr>
+            <tr>
+              <td><code>??=</code></td>
+              <td>Assign if Null</td>
+              <td>Assigns value to variable only if it currently holds null (e.g. <code>name ??= "Guest"</code>)</td>
+            </tr>
+            <tr>
+              <td><code>!</code></td>
+              <td>Null Assertion</td>
+              <td>Casts nullable expression to non-null type (throws runtime error if null)</td>
+            </tr>
+            <tr>
+              <td><code>...?</code></td>
+              <td>Null-aware Spread</td>
+              <td>Spreads collection elements into another only if list is non-null</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">8. Type Test &amp; Cast Operators</h4>
+        <p class="topic-paragraph">Check or cast object types at runtime.</p>
+        <p class="topic-paragraph">
+          <code>is</code> (True if object has specified type), <code>is!</code> (True if object does NOT have type), <code>as</code> (Typecast object to specified subtype)
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">9. Cascade Operators</h4>
+        <p class="topic-paragraph">Perform a sequence of operations on members of the same object without temporary variables.</p>
+        <p class="topic-paragraph">
+          <code>..</code> (Cascade notation), <code>?..</code> (Null-aware cascade notation)
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">10. Spread Operators</h4>
+        <p class="topic-paragraph">Insert all elements from one collection into another collection.</p>
+        <p class="topic-paragraph">
+          <code>...</code> (Spread operator), <code>...?</code> (Null-aware spread operator)
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">11. Object &amp; Member Access Operators</h4>
+        <p class="topic-paragraph">
+          <code>.</code> (Member access), <code>?.</code> (Null-aware member access), <code>[]</code> (Index access), <code>?[]</code> (Null-aware index access), <code>()</code> (Function call invocation)
+        </p>
+
+        <h4 style="color: var(--primary-accent); margin-top: 1rem;">12. Other Operators</h4>
+        <p class="topic-paragraph">
+          <code>const</code> (Compile-time constant creation), <code>await</code> (Asynchronous Future resolution), <code>=&gt;</code> (Arrow function single-expression return), <code>[]</code> (List/Map index), <code>[]=</code> (Index assignment)
+        </p>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>advanced_operators.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  // 1. Null-aware assignment
+  String? username;
+  username ??= 'GuestUser';
+  print('Username: \$username');
+
+  // 2. Cascade operator
+  final buffer = StringBuffer()
+    ..write('Flutter ')
+    ..write('Dart ')
+    ..writeln('3.0');
+  print('Cascade Output:\n\$buffer');
+
+  // 3. Type test
+  dynamic val = 42;
+  if (val is int) {
+    print('Value is integer: \${val.abs()}');
+  }
+}</code></pre>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_conditions_mastery",
+      header: "1.7 CONDITIONS & DECISION MAKING",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-code-branch"></i> 7. Conditions in Dart</h2>
+        
+        <h3 class="section-h3">Definition</h3>
+        <p class="topic-paragraph">
+          <strong>Conditions</strong> are used to make decisions in a program. They evaluate a Boolean expression (<code>true</code> or <code>false</code>) and execute different blocks of code based on the result.
+        </p>
+
+        <h3 class="section-h3">Types of Conditional Statements in Dart</h3>
+
+        <div class="qa-card">
+          <h4>1. if Statement</h4>
+          <p>Executes a block of code only if the condition is <code>true</code>.</p>
+          <pre><code class="language-dart">if (condition) {
+  // code executed if condition is true
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>2. if...else Statement</h4>
+          <p>Executes one block if the condition is <code>true</code>; otherwise, executes another block.</p>
+          <pre><code class="language-dart">if (condition) {
+  // code if true
+} else {
+  // code if false
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>3. if...else if...else Statement</h4>
+          <p>Checks multiple conditions sequentially.</p>
+          <pre><code class="language-dart">if (score &gt;= 90) {
+  print('Grade A');
+} else if (score &gt;= 80) {
+  print('Grade B');
+} else {
+  print('Grade C');
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>4. Nested if Statement</h4>
+          <p>Places one <code>if</code> statement inside another <code>if</code> statement.</p>
+          <pre><code class="language-dart">if (isLoggedIn) {
+  if (hasPermission) {
+    print('Access Granted');
+  }
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>5. switch Statement</h4>
+          <p>Compares a single expression against multiple matching cases using <code>break</code>.</p>
+          <pre><code class="language-dart">switch (day) {
+  case 1:
+    print('Monday');
+    break;
+  case 2:
+    print('Tuesday');
+    break;
+  default:
+    print('Weekend');
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>6. switch Expression (Dart 3)</h4>
+          <p>Returns a value directly from a pattern-matching <code>switch</code> expression.</p>
+          <pre><code class="language-dart">String result = switch (day) {
+  1 =&gt; "Monday",
+  2 =&gt; "Tuesday",
+  _ =&gt; "Unknown",
+};</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>7. Ternary (Conditional) Operator (?:)</h4>
+          <p>A concise inline form of <code>if...else</code>.</p>
+          <pre><code class="language-dart">String result = age &gt;= 18 ? "Adult" : "Minor";</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>8. Null-Coalescing Operator (??)</h4>
+          <p>Returns a fallback value if the left operand evaluates to <code>null</code>.</p>
+          <pre><code class="language-dart">String name = userName ?? "Guest";</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>9. Null-Aware Assignment (??=)</h4>
+          <p>Assigns a value to a variable only if it currently holds <code>null</code>.</p>
+          <pre><code class="language-dart">name ??= "Guest";</code></pre>
+        </div>
+
+        <h3 class="section-h3">Comparison &amp; Logical Operators Summary</h3>
+        <table class="content-table">
+          <thead>
+            <tr>
+              <th>Comparison Operator</th>
+              <th>Meaning</th>
+              <th>Logical Operator</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>==</code></td>
+              <td>Equal to</td>
+              <td><code>&amp;&amp;</code></td>
+              <td>Logical AND</td>
+            </tr>
+            <tr>
+              <td><code>!=</code></td>
+              <td>Not equal to</td>
+              <td><code>||</code></td>
+              <td>Logical OR</td>
+            </tr>
+            <tr>
+              <td><code>&gt;</code></td>
+              <td>Greater than</td>
+              <td><code>!</code></td>
+              <td>Logical NOT</td>
+            </tr>
+            <tr>
+              <td><code>&lt;</code></td>
+              <td>Less than</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><code>&gt;=</code></td>
+              <td>Greater than or equal to</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><code>&lt;=</code></td>
+              <td>Less than or equal to</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>conditions.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  int day = 2;
   
-  // Standard for-in loop
-  for (final item in items) {
-    if (item == 'OOP') break;
-    print('Item: $item');
+  // Dart 3 switch expression
+  String dayName = switch (day) {
+    1 =&gt; 'Monday',
+    2 =&gt; 'Tuesday',
+    _ =&gt; 'Other Day',
+  };
+  print('Day \$day is \$dayName');
+
+  // Ternary check
+  int age = 20;
+  print('Status: \${age &gt;= 18 ? "Adult" : "Minor"}');
+}</code></pre>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_loops_mastery",
+      header: "1.8 LOOPS & ITERATION IN DART",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-rotate"></i> 8. Loops in Dart</h2>
+        
+        <h3 class="section-h3">Definition</h3>
+        <p class="topic-paragraph">
+          A <strong>loop</strong> is a control flow statement that repeatedly executes a block of code as long as a specified condition is <code>true</code> or until all elements in a collection have been processed.
+        </p>
+
+        <h3 class="section-h3">Types of Loops in Dart</h3>
+
+        <div class="qa-card">
+          <h4>1. for Loop</h4>
+          <p>Used when the exact number of iterations is known in advance.</p>
+          <pre><code class="language-dart">for (int i = 0; i &lt; 5; i++) {
+  print('Iteration \$i');
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>2. for-in Loop</h4>
+          <p>Iterates over elements of an Iterable collection (List, Set, etc.).</p>
+          <pre><code class="language-dart">final fruits = ['Apple', 'Banana', 'Mango'];
+for (var fruit in fruits) {
+  print('Fruit: \$fruit');
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>3. forEach() Method</h4>
+          <p>Higher-order method provided by iterable collections to execute a function for each element.</p>
+          <pre><code class="language-dart">fruits.forEach((fruit) =&gt; print('Item: \$fruit'));</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>4. while Loop</h4>
+          <p>Repeatedly executes code while the condition evaluates to <code>true</code> (condition tested BEFORE execution).</p>
+          <pre><code class="language-dart">int count = 0;
+while (count &lt; 3) {
+  print('Count: \$count');
+  count++;
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+          <h4>5. do...while Loop</h4>
+          <p>Executes code block at least once, then continues repeating while condition evaluates to <code>true</code> (condition tested AFTER execution).</p>
+          <pre><code class="language-dart">int num = 5;
+do {
+  print('Number: \$num');
+  num++;
+} while (num &lt; 5); // Executes 1 time</code></pre>
+        </div>
+
+        <h3 class="section-h3">Loop Control Statements</h3>
+        <p class="topic-paragraph">
+          <strong>1. break:</strong> Immediately terminates loop execution and transfers control to statement following the loop.<br>
+          <strong>2. continue:</strong> Skips remaining statements in current iteration and moves directly to next iteration update.
+        </p>
+
+        <h3 class="section-h3">Nested Loops &amp; Labeled Loops</h3>
+        <p class="topic-paragraph">
+          A loop can be placed inside another loop. <strong>Labeled Loops</strong> assign an identifier to an outer loop so <code>break</code> or <code>continue</code> can target a specific outer loop hierarchy.
+        </p>
+
+        <pre><code class="language-dart">outerLoop:
+for (int i = 1; i &lt;= 3; i++) {
+  for (int j = 1; j &lt;= 3; j++) {
+    if (i == 2 &amp;&amp; j == 2) break outerLoop; // Breaks entire outer loop!
+    print('i=\$i, j=\$j');
+  }
+}</code></pre>
+
+        <h3 class="section-h3">Asynchronous Loops (await for)</h3>
+        <p class="topic-paragraph">
+          Iterates asynchronously over events emitted by a Dart <code>Stream</code>.
+        </p>
+
+        <pre><code class="language-dart">await for (var value in stream) {
+  print('Received Stream Event: \$value');
+}</code></pre>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>loops.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  // Labeled loop demo
+  outerLoop:
+  for (int r = 1; r &lt;= 3; r++) {
+    for (int c = 1; c &lt;= 3; c++) {
+      if (r == 2 &amp;&amp; c == 2) break outerLoop;
+      print('Row \$r - Col \$c');
+    }
   }
 
-  // Switch statement
-  String mode = 'active';
-  switch (mode) {
-    case 'active':
-      print('Status: System Active');
-      break;
-    default:
-      print('Status: Idle');
+  // for-in loop over List
+  final languages = ['Dart', 'Flutter', 'C++'];
+  for (final lang in languages) {
+    print('Lang: \$lang');
   }
 }</code></pre>
         </div>
@@ -3183,3 +3638,4 @@ Multi-line String""";
     }
   ]
 };
+
