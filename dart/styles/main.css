@@ -1822,3 +1822,87 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.85rem;
 }
 
+/* Content Table Styling */
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6rem 0;
+  font-size: 0.8rem;
+}
+
+.content-table th, .content-table td {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.content-table th {
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--accent-cyan);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.content-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Q&A Accordion/Card Box */
+.qa-card {
+  background: rgba(255, 255, 255, 0.025);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 0 6px 6px 0;
+  padding: 0.55rem 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.qa-card h4 {
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.qa-card p {
+  font-size: 0.78rem;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+/* Enterprise Case Study Grid */
+.enterprise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  margin: 0.6rem 0;
+}
+
+@media (max-width: 700px) {
+  .enterprise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.enterprise-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+}
+
+.enterprise-card h4 {
+  color: var(--accent-gold);
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.enterprise-card p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+
