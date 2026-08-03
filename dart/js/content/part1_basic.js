@@ -67,7 +67,7 @@ window.part1Content = {
             <tr>
               <td><strong>Execution</strong></td>
               <td>Compiled (translates entire codebase upfront) vs. Interpreted (translates line-by-line at runtime).</td>
-              <td>C++ (Compiled)<br>Python (Interpreted)</td>
+              <td>C++ (Compiled)<br>Bash (Interpreted)</td>
             </tr>
           </tbody>
         </table>
