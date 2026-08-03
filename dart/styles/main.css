@@ -751,8 +751,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-gold);
 }
 
-.page-inner-content {
-  flex: 1;
+.page-inner-content,
+.page-front .page-inner-content,
+.page-back .page-inner-content {
+  flex: 1 1 auto !important;
+  min-height: 0 !important; /* Critical for flexbox scroll boundary on both odd & even pages */
   overflow-y: auto !important;
   padding-top: 1rem;
   padding-right: 0.5rem;
@@ -764,7 +767,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Enable vertical scrolling on all overflowed page containers & hide scrollbars visually */
 .page-inner-content,
+.page-front .page-inner-content,
+.page-back .page-inner-content,
 .page-face,
+.page-front,
+.page-back,
 .cover-container,
 .chapter-title-page,
 .reader-container,
@@ -783,7 +790,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hide scrollbars visually for Chrome, Safari, Opera, WebKit */
 .page-inner-content::-webkit-scrollbar,
+.page-front .page-inner-content::-webkit-scrollbar,
+.page-back .page-inner-content::-webkit-scrollbar,
 .page-face::-webkit-scrollbar,
+.page-front::-webkit-scrollbar,
+.page-back::-webkit-scrollbar,
 .cover-container::-webkit-scrollbar,
 .chapter-title-page::-webkit-scrollbar,
 .reader-container::-webkit-scrollbar,
