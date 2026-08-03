@@ -172,16 +172,18 @@ window.part1Content = {
         <div class="compilation-grid">
           <div class="compilation-card">
             <span class="comp-badge jit">Development Mode</span>
-            <h4>6.1 JIT Compilation</h4>
-            <p><strong>How it works:</strong> Source code is compiled dynamically on-the-fly while the application is running inside the Dart VM.</p>
-            <p style="margin-top: 0.4rem;"><strong>The Benefit:</strong> Powers Flutter's sub-second <strong>Stateful Hot Reload</strong>. Update UI code and hit save without restarting app state.</p>
+            <h4 style="font-size: 1.05rem; color: var(--primary-accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-bolt"></i> 6.1 JIT Compilation (Just-In-Time)</h4>
+            <p><strong>Definition:</strong> Dynamic compilation mode used during application development.</p>
+            <p style="margin-top: 0.3rem;"><strong>How it works:</strong> Source code is compiled dynamically on-the-fly while the application runs inside the Dart VM.</p>
+            <p style="margin-top: 0.3rem;"><strong>Key Benefit:</strong> Powers Flutter's sub-second <strong>Stateful Hot Reload</strong>—update code &amp; UI instantly without losing app state.</p>
           </div>
 
           <div class="compilation-card">
             <span class="comp-badge aot">Production Mode</span>
-            <h4>6.2 AOT Compilation</h4>
-            <p><strong>How it works:</strong> The entire codebase is compiled upfront directly into native machine code (ARM, x64) before release.</p>
-            <p style="margin-top: 0.4rem;"><strong>The Benefit:</strong> Zero compiler/VM overhead on user devices. Delivers instant app startup and smooth 60/120 FPS UI.</p>
+            <h4 style="font-size: 1.05rem; color: var(--primary-accent); margin-bottom: 0.5rem;"><i class="fa-solid fa-shield-halved"></i> 6.2 AOT Compilation (Ahead-Of-Time)</h4>
+            <p><strong>Definition:</strong> Native static compilation mode used when building release artifacts.</p>
+            <p style="margin-top: 0.3rem;"><strong>How it works:</strong> The entire codebase is compiled upfront directly into ARM or x64 native machine code before release.</p>
+            <p style="margin-top: 0.3rem;"><strong>Key Benefit:</strong> Eliminates VM compiler overhead on user devices, delivering instant app launch and smooth 60/120 FPS UI.</p>
           </div>
         </div>
 
@@ -297,7 +299,12 @@ window.part1Content = {
       pageId: "p0_concurrency_isolates",
       header: "0.6 CONCURRENCY & ISOLATES",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-diagram-project"></i> 10 & 11. Concurrency & Isolate Architecture</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-diagram-project"></i> 10. Concurrency in Dart</h2>
+        <p class="topic-paragraph">
+          Concurrency is the ability of an application to execute multiple tasks independently so that intensive background work does not freeze the main user interface.
+        </p>
+
+        <h2 class="section-h2" style="margin-top: 1rem;"><i class="fa-solid fa-cubes"></i> 11. Isolate Architecture</h2>
 
         <div class="qa-card">
           <h4><i class="fa-solid fa-circle-question"></i> Q1: What is Concurrency?</h4>
@@ -564,7 +571,7 @@ void main() async {
       pageId: "p0_enterprise_career",
       header: "0.11 ENTERPRISE & CAREER OUTLOOK",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-chart-line"></i> 18. Enterprise Adoption & Career Outlook</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-chart-line"></i> 17. Enterprise Adoption & Career Outlook</h2>
 
         <h3 class="section-h3">Global Enterprise Case Studies</h3>
         <div class="enterprise-grid">
@@ -603,7 +610,7 @@ void main() async {
       pageId: "p0_limitations",
       header: "0.12 LIMITATIONS OF DART & FLUTTER",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-triangle-exclamation"></i> 19. Limitations of Dart & Flutter</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-triangle-exclamation"></i> 18. Limitations of Dart & Flutter</h2>
         <p class="topic-paragraph">
           Dart requires Platform Channels or FFI plugins to communicate with low-level native Java/Kotlin or Swift APIs.
         </p>
@@ -644,7 +651,7 @@ void main() async {
       pageId: "p1_history",
       header: "0.13 SHORT HISTORY OF DART",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-clock-rotate-left"></i> Short History of Dart Programming Language</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-clock-rotate-left"></i> 19. Short History of Dart Programming Language</h2>
         <p class="topic-paragraph">
           Dart was created by Google to provide a modern, highly performant, and client-optimized programming language capable of targeting multiple platforms seamlessly from a single codebase.
         </p>
@@ -712,7 +719,7 @@ void main() async {
       pageId: "p1_today",
       header: "0.14 DART TODAY & FRAMEWORKS",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> Today: Modern Dart Ecosystem</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> 20. Modern Dart Ecosystem & Frameworks</h2>
         <p class="topic-paragraph">
           Dart is an open-source, client-optimized programming language developed by Google. Although it is best known as the language behind <strong>Flutter</strong>, it is also used by several other frameworks and platforms, including:
         </p>
@@ -779,7 +786,7 @@ void main() async {
       pageId: "p1_compilation",
       header: "0.15 DART ARCHITECTURE & COMPILATION",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-gears"></i> Dart Execution Models: JIT, AOT & Web</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-gears"></i> 21. Dart Execution Models (JIT, AOT & Web)</h2>
         <p class="topic-paragraph">
           Dart's architecture combines developer velocity with maximum production native performance through its multi-compiler architecture:
         </p>
@@ -825,7 +832,7 @@ void main() async {
       pageId: "p1_philosophy",
       header: "0.16 DART PHILOSOPHY & ADVANTAGES",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-shield-halved"></i> Key Language Philosophies</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-shield-halved"></i> 22. Key Language Philosophies</h2>
         <p class="topic-paragraph">
           Dart was crafted with specific design philosophies to maximize developer efficiency and deliver predictable application safety:
         </p>
@@ -865,7 +872,7 @@ void main() async {
       pageId: "p1_intro",
       header: "1.1 INTRODUCTION & COMMENTS",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-code"></i> 1. Introduction to Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-code"></i> 23. Introduction & Comments in Dart</h2>
         <p class="topic-paragraph">
           Dart is a client-optimized, object-oriented language developed by Google. Designed for multi-platform development (mobile, web, desktop, and server), Dart features Ahead-Of-Time (AOT) compilation for fast native machine code performance and Just-In-Time (JIT) compilation for lightning-fast hot reload during development.
         </p>
@@ -914,7 +921,7 @@ void main() {
       pageId: "p1_vars",
       header: "1.2.1 VARIABLES DEFINITION, NAMING & PATTERNS",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-cube"></i> 2. Variables: Definition, Naming & Creation Patterns</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-cube"></i> 24. Variables: Definition, Naming & Creation Patterns</h2>
         <p class="topic-paragraph">
           In Dart, a <strong>variable</strong> is a named reference to a memory location used to store values during program execution. Since everything in Dart is an object, a variable stores a reference pointing to an object in memory.
         </p>
@@ -995,7 +1002,7 @@ void main() {
       pageId: "p1_vars_types",
       header: "1.2.2 DATA TYPES, SINGLE VS MULTIPLE VALUES & DIFFERENCE",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> Data Types: Definitions & Classifications</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> 25. Data Types: Definitions & Classifications</h2>
         <p class="topic-paragraph">
           A <strong>Data Type</strong> is an attribute of data that tells the compiler or interpreter how the programmer intends to use the data, how much memory space to allocate, and what operations can be legally performed on it.
         </p>
@@ -1070,7 +1077,7 @@ void main() {
       pageId: "p1_vars_flex",
       header: "1.2.3 VAR VS DYNAMIC VS OBJECT",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-diagram-project"></i> Type Flexibility: var vs dynamic vs Object</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-diagram-project"></i> 26. Type Flexibility: var vs dynamic vs Object</h2>
         <p class="topic-paragraph">
           Understanding the differences between <code>var</code>, <code>dynamic</code>, and <code>Object</code> is essential for writing robust, type-safe Dart code.
         </p>
@@ -1168,7 +1175,7 @@ void main() {
       pageId: "p1_vars_scopes",
       header: "1.2.4 VARIABLE SCOPES: LOCAL, GLOBAL & STATIC",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-eye"></i> Variable Scopes: Local, Global & Static</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-eye"></i> 27. Variable Scopes: Local, Global & Static</h2>
         <p class="topic-paragraph">
           The <strong>scope</strong> of a variable defines where in the codebase the variable can be accessed for reading or writing.
         </p>
@@ -1249,7 +1256,7 @@ void main() {
       pageId: "p1_vars_qa1",
       header: "1.2.5 CONCEPT CLEARING Q&A ARENA (Q1 - Q10)",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Variables Master Q&A Arena: Part 1 (Q1 &ndash; Q10)</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> 28. Variables Master Q&A Arena: Part 1 (Q1 &ndash; Q10)</h2>
         <p class="topic-paragraph">Test and clear your fundamental concepts on variable definitions, memory layout, and naming rules:</p>
 
         <div class="qa-card">
@@ -1539,7 +1546,7 @@ void main() {
       pageId: "p1_num_str",
       header: "1.4.1 NUMBERS IN DART (num, int, double)",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-hashtag"></i> 3. Numbers in Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-hashtag"></i> 29. Numbers in Dart (num, int, double)</h2>
         <p class="topic-paragraph">
           Numbers in Dart are represented by the <code>num</code> type, which has two primary subtypes: <code>int</code> and <code>double</code>.
         </p>
@@ -1639,7 +1646,7 @@ Object
       pageId: "p1_string_fundamentals",
       header: "1.4.2 STRING IN DART: FUNDAMENTALS",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-font"></i> String in Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-font"></i> 30. String in Dart: Fundamentals</h2>
         <p class="topic-paragraph">
           A <code>String</code> is a sequence of characters used to store text in Dart. Strings are enclosed in single quotes (<code>' '</code>), double quotes (<code>" "</code>), triple single quotes (<code>''' '''</code>), or triple double quotes (<code>""" """</code>).
         </p>
@@ -1744,7 +1751,7 @@ Multi-line String""";
       pageId: "p1_string_methods_conversions",
       header: "1.4.3 STRING PROPERTIES, METHODS & CONVERSIONS",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-sliders"></i> String Properties, Methods & Conversions</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-sliders"></i> 31. String Properties, Methods & Conversions</h2>
 
         <h3 class="section-h3">7. Common String Properties</h3>
         <ul style="margin-left: 1.2rem; margin-bottom: 0.6rem; font-size: 0.85rem;">
@@ -1833,7 +1840,7 @@ Multi-line String""";
       pageId: "p1_string_buffer",
       header: "1.4.4 STRINGBUFFER IN DART",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> StringBuffer in Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> 32. StringBuffer in Dart</h2>
 
         <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
@@ -1927,7 +1934,7 @@ Multi-line String""";
       pageId: "p1_regexp_fundamentals",
       header: "1.4.5 REGULAR EXPRESSION (REGEXP): FUNDAMENTALS",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-magnifying-glass"></i> Regular Expression (RegExp) in Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-magnifying-glass"></i> 33. Regular Expression (RegExp) in Dart</h2>
 
         <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
@@ -2012,7 +2019,7 @@ Multi-line String""";
       pageId: "p1_regexp_patterns_options",
       header: "1.4.6 REGEXP PATTERNS, CONSTRUCTOR & VALIDATION",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-code"></i> RegExp Patterns, Options & Practical Examples</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-code"></i> 34. RegExp Patterns, Options & Practical Examples</h2>
 
         <h3 class="section-h3">Common RegExp Patterns</h3>
         <div style="max-height: 220px; overflow-y: auto; margin-bottom: 0.8rem;">
@@ -2093,7 +2100,7 @@ Multi-line String""";
       pageId: "p1_qa_numbers_1",
       header: "1.5.1 NUMBERS MASTERY Q&A (Q1 – Q25)",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Numbers in Dart: Q&A (Part 1: Q1–Q25)</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> 35. Numbers, Strings, StringBuffer & RegExp Q&A: Part 1 (Q1–Q25)</h2>
 
         <div class="qa-card">
           <h4><i class="fa-solid fa-circle-question"></i> Q1. What is the base class for all numeric types in Dart?</h4>
@@ -3149,7 +3156,7 @@ Multi-line String""";
       pageId: "p1_operators_fundamentals",
       header: "1.6.1 OPERATORS IN DART (PART 1)",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-calculator"></i> 6. Operators in Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-calculator"></i> 36. Operators in Dart (Part 1: Types 1 to 6)</h2>
         
         <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
@@ -3258,7 +3265,7 @@ Multi-line String""";
       pageId: "p1_operators_advanced",
       header: "1.6.2 ADVANCED OPERATORS IN DART (PART 2)",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-wand-magic-sparkles"></i> 6. Advanced &amp; Specialized Operators</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-wand-magic-sparkles"></i> 37. Advanced & Specialized Operators (Part 2: Types 7 to 12)</h2>
         
         <h4 style="color: var(--primary-accent); margin-top: 1rem;">7. Null-Aware Operators</h4>
         <p class="topic-paragraph">Work safely with nullable values to prevent Null Pointer Exceptions.</p>
@@ -3363,7 +3370,7 @@ Multi-line String""";
       pageId: "p1_conditions_mastery",
       header: "1.6.3 CONDITIONS & DECISION MAKING",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-code-branch"></i> 7. Conditions in Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-code-branch"></i> 38. Conditions & Decision Making in Dart</h2>
         
         <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
@@ -3532,7 +3539,7 @@ Multi-line String""";
       pageId: "p1_loops_mastery",
       header: "1.6.4 LOOPS & ITERATION IN DART",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-rotate"></i> 8. Loops in Dart</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-rotate"></i> 39. Loops & Iteration in Dart</h2>
         
         <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
@@ -3640,7 +3647,7 @@ for (int i = 1; i &lt;= 3; i++) {
       pageId: "p1_qa_operators_1",
       header: "1.7.1 OPERATORS MASTERY Q&A (Q1 – Q25)",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Operators in Dart: Q&A (Part 1: Q1–Q25)</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> 40. Operators, Conditions & Loops Q&A: Part 1 (Q1–Q25)</h2>
 
         <div class="qa-card">
           <h4><i class="fa-solid fa-circle-question"></i> Q1. What is an operator in Dart?</h4>
