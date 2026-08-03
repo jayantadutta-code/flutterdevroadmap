@@ -1305,8 +1305,8 @@ void main() {
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q10. What does a leading underscore <code>_</code> signify on a variable name in Dart?</h4>
-          <p><strong>Answer:</strong> In Dart, a leading underscore marks a variable, function, or class as <strong>library-private</strong> (accessible only inside the defining <code>.dart</code> file).</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q10. What does a leading underscore (<code>_</code>) signify on a variable, function, or class name in Dart?</h4>
+          <p><strong>Answer:</strong> In Dart, a leading underscore (<code>_</code>) marks an identifier as <strong>library-private</strong>, restricting its access strictly to the defining <code>.dart</code> file.</p>
         </div>
       `
     },
@@ -1333,8 +1333,8 @@ void main() {
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q14. Can you assign an integer value to a <code>var</code> initialized with a String?</h4>
-          <p><strong>Answer:</strong> No. Once initialized, the type is locked. Assigning <code>x = 100</code> to <code>var x = 'abc'</code> results in a compile-time error: <em>A value of type 'int' can't be assigned to a variable of type 'String'</em>.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q14. Can you assign an integer (<code>int</code>) value to a variable declared with <code>var</code> and initialized with a <code>String</code>?</h4>
+          <p><strong>Answer:</strong> No. Once initialized, the variable's type is locked to <code>String</code> by static inference. Assigning an <code>int</code> value produces a compile-time error.</p>
         </div>
 
         <div class="qa-card">
@@ -1348,8 +1348,8 @@ void main() {
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q17. What type is inferred if you declare <code>var x;</code> without an initial value?</h4>
-          <p><strong>Answer:</strong> If declared without an initializer, <code>var x;</code> defaults to <code>dynamic</code> type and <code>null</code> value.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q17. What data type and initial value are assigned if you declare <code>var x;</code> without an initial value?</h4>
+          <p><strong>Answer:</strong> If declared without an initializer, <code>var x;</code> defaults to the <code>dynamic</code> data type and an initial value of <code>null</code>.</p>
         </div>
 
         <div class="qa-card">
@@ -1444,43 +1444,43 @@ void main() {
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q33. What is the difference between <code>Object</code> and <code>Object?</code> in Dart?</h4>
-          <p><strong>Answer:</strong> <code>Object</code> accepts any non-null instance. <code>Object?</code> accepts any instance PLUS <code>null</code> (the root of the entire Dart type system).</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q33. What is the structural difference between <code>Object</code> and <code>Object?</code> in Dart's sound type system?</h4>
+          <p><strong>Answer:</strong> <code>Object</code> represents the root superclass of all non-nullable types. <code>Object?</code> represents the root of the entire type system including <code>null</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q34. Compare <code>Object</code> vs <code>dynamic</code> regarding static compile-time type safety.</h4>
-          <p><strong>Answer:</strong> <code>Object</code> is static and type-safe (compiler ensures method existence). <code>dynamic</code> bypasses compile-time verification completely.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q34. How do <code>Object</code> and <code>dynamic</code> compare regarding static compile-time type safety?</h4>
+          <p><strong>Answer:</strong> <code>Object</code> is statically checked for method existence at compile time. <code>dynamic</code> completely disables compile-time type verification.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q35. What happens if you call <code>.toUpperCase()</code> on an <code>Object x = 'hello';</code> variable without casting?</h4>
-          <p><strong>Answer:</strong> Compile-time error! The compiler only allows methods defined on <code>Object</code> (like <code>toString()</code>). You must cast it first: <code>(x as String).toUpperCase()</code>.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q35. What occurs if you invoke <code>toUpperCase()</code> directly on a variable declared as <code>Object x = 'hello';</code> without type casting?</h4>
+          <p><strong>Answer:</strong> Emits a compile-time error because <code>toUpperCase()</code> is not defined on <code>Object</code>. You must cast it first via <code>(x as String).toUpperCase()</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q36. What happens if you call <code>.nonExistentMethod()</code> on a <code>dynamic</code> variable?</h4>
-          <p><strong>Answer:</strong> It compiles without errors, but throws a <code>NoSuchMethodError</code> exception at runtime when executed.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q36. What occurs at compile time and runtime if you invoke a non-existent method on a <code>dynamic</code> variable?</h4>
+          <p><strong>Answer:</strong> It compiles without any error, but throws a <code>NoSuchMethodError</code> exception at runtime when executed.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q37. Which is preferred for receiving arbitrary JSON data: <code>Object?</code> or <code>dynamic</code>? Why?</h4>
-          <p><strong>Answer:</strong> <code>Object?</code> (or typed models) is preferred because it forces explicit type checking/casting before usage, preventing silent runtime crashes.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q37. Why is <code>Object?</code> preferred over <code>dynamic</code> when handling arbitrary JSON payloads?</h4>
+          <p><strong>Answer:</strong> <code>Object?</code> forces explicit type checks or type casting before accessing properties, preventing unexpected <code>NoSuchMethodError</code> runtime crashes.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q38. Can a variable typed as <code>Object</code> be reassigned to a value of another type?</h4>
-          <p><strong>Answer:</strong> Yes! <code>Object x = 10; x = 'now a string';</code> is valid because both <code>int</code> and <code>String</code> inherit from <code>Object</code>.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q38. Can a variable declared as <code>Object</code> be reassigned to a value of a different data type?</h4>
+          <p><strong>Answer:</strong> Yes. <code>Object x = 10; x = 'Dart';</code> is valid because both <code>int</code> and <code>String</code> inherit from <code>Object</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q39. Does <code>dynamic</code> provide IDE code autocompletion support?</h4>
-          <p><strong>Answer:</strong> No. Since the compiler doesn't know what type <code>dynamic</code> holds until runtime, IDEs cannot offer method autocompletion hints.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q39. Why does <code>dynamic</code> disable IDE method autocompletion and static code navigation?</h4>
+          <p><strong>Answer:</strong> Because the static analyzer cannot infer the runtime type of a <code>dynamic</code> variable during editing, disabling method suggestions.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q40. How does method call performance compare between <code>Object</code> and <code>dynamic</code>?</h4>
-          <p><strong>Answer:</strong> Calls on <code>Object</code> (or cast types) use fast direct vtable method dispatch. Calls on <code>dynamic</code> use dynamic call sites, which incur minor invocation overhead.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q40. How does runtime method call performance compare between <code>Object</code> and <code>dynamic</code>?</h4>
+          <p><strong>Answer:</strong> Calls on <code>Object</code> (or cast types) use fast direct vtable method dispatch. Calls on <code>dynamic</code> use dynamic call sites with runtime lookups.</p>
         </div>
       `
     },
@@ -1527,8 +1527,8 @@ void main() {
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q48. What happens if you read a <code>late</code> variable before initializing it?</h4>
-          <p><strong>Answer:</strong> It throws a runtime <code>LateInitializationError</code> exception (e.g. <em>Field 'x' has not been initialized</em>).</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q48. What specific runtime exception occurs if you access a <code>late</code> variable before assigning its initial value?</h4>
+          <p><strong>Answer:</strong> Throws a runtime <code>LateInitializationError</code> exception (e.g. <code>LateInitializationError: Field 'x' has not been initialized</code>).</p>
         </div>
 
         <div class="qa-card">
