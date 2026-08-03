@@ -513,22 +513,45 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background: var(--bg-paper-page);
   color: var(--text-main);
   padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  touch-action: pan-y;
 }
 .page-front {
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) translateZ(1px);
   border-radius: 0 12px 12px 0;
   box-shadow: inset 18px 0 30px rgba(0, 0, 0, 0.3), 8px 12px 25px rgba(0, 0, 0, 0.3);
 }
 .page-back {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   border-radius: 12px 0 0 12px;
   box-shadow: inset -18px 0 30px rgba(0, 0, 0, 0.3), -8px 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* 3D WebKit Trackpad 2-Finger Hit-Testing & Pointer-Events Fix for Odd & Even Pages */
+.paper-sheet:not(.flipped) .page-front {
+  pointer-events: auto !important;
+  visibility: visible !important;
+  transform: rotateY(0deg) translateZ(2px);
+}
+.paper-sheet:not(.flipped) .page-back {
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.paper-sheet.flipped .page-back {
+  pointer-events: auto !important;
+  visibility: visible !important;
+  transform: rotateY(180deg) translateZ(2px);
+}
+.paper-sheet.flipped .page-front {
+  pointer-events: none !important;
+  visibility: hidden !important;
 }
 
 .corner-curl-hint {

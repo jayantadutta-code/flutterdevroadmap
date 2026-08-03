@@ -342,6 +342,16 @@ class FlipbookEngine {
       });
     });
 
+    // Attach 2-finger MacBook trackpad wheel scroll listener to all inner page containers (both odd & even)
+    flipbookEl.querySelectorAll(".page-inner-content, .page-face").forEach(container => {
+      container.addEventListener("wheel", (e) => {
+        if (container.scrollHeight > container.clientHeight) {
+          container.scrollTop += e.deltaY;
+          e.stopPropagation();
+        }
+      }, { passive: true });
+    });
+
     if (window.Prism) {
       window.Prism.highlightAllUnder(flipbookEl);
     }
