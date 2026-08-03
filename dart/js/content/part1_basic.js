@@ -3635,7 +3635,1059 @@ for (int i = 1; i &lt;= 3; i++) {
 }</code></pre>
         </div>
       `
+    },
+    {
+      pageId: "p1_qa_operators_1",
+      header: "1.5.1 OPERATORS MASTERY Q&A (Q1 – Q25)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Operators in Dart: Q&A (Part 1: Q1–Q25)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q1. What is an operator in Dart?</h4>
+          <p><strong>Answer:</strong> A special symbol that performs an operation on one or more operands to produce a calculated result.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q2. What is an operand?</h4>
+          <p><strong>Answer:</strong> The data values or variables on which an operator performs its operation (e.g. in <code>a + b</code>, <code>a</code> and <code>b</code> are operands).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q3. What is an expression?</h4>
+          <p><strong>Answer:</strong> A combination of operands and operators that evaluates to a single value (e.g. <code>10 + 20</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q4. What are the two unary arithmetic increment operators?</h4>
+          <p><strong>Answer:</strong> Prefix increment (<code>++a</code>) and postfix increment (<code>a++</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q5. What is the difference between prefix ++a and postfix a++?</h4>
+          <p><strong>Answer:</strong> Prefix <code>++a</code> increments value before returning it; postfix <code>a++</code> returns original value before incrementing.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q6. What does division / always return in Dart?</h4>
+          <p><strong>Answer:</strong> Always returns a <code>double</code>, even if both operands are integers (e.g. <code>10 / 2 == 5.0</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q7. What operator performs integer truncating division in Dart?</h4>
+          <p><strong>Answer:</strong> <code>~/</code> (e.g. <code>10 ~/ 3 == 3</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q8. What does modulus % return?</h4>
+          <p><strong>Answer:</strong> Returns the remainder of division (e.g. <code>10 % 3 == 1</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q9. What does compound assignment += do?</h4>
+          <p><strong>Answer:</strong> Adds right value to left variable and assigns result (e.g. <code>a += 5</code> is shorthand for <code>a = a + 5</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q10. What does compound assignment ~/= do?</h4>
+          <p><strong>Answer:</strong> Performs integer division and assigns truncated result to variable (e.g. <code>a ~/= 2</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q11. What is the return type of relational operators (==, !=, &gt;, &lt;, &gt;=, &lt;=)?</h4>
+          <p><strong>Answer:</strong> Always returns a <code>bool</code> (<code>true</code> or <code>false</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q12. How does equality == work for primitive object values in Dart?</h4>
+          <p><strong>Answer:</strong> Tests value equality by invoking <code>operator ==</code> method on left operand.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q13. How do you check reference identity (same memory instance)?</h4>
+          <p><strong>Answer:</strong> Use <code>identical(a, b)</code> function from core library.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q14. What does logical AND &amp;&amp; return?</h4>
+          <p><strong>Answer:</strong> Returns <code>true</code> only if both operands evaluate to <code>true</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q15. What does logical OR || return?</h4>
+          <p><strong>Answer:</strong> Returns <code>true</code> if at least one operand evaluates to <code>true</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q16. What does logical NOT ! do?</h4>
+          <p><strong>Answer:</strong> Inverts boolean value (<code>!true == false</code>, <code>!false == true</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q17. How does short-circuit evaluation work for &amp;&amp;?</h4>
+          <p><strong>Answer:</strong> If left operand is <code>false</code>, right operand is never evaluated.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q18. How does short-circuit evaluation work for ||?</h4>
+          <p><strong>Answer:</strong> If left operand is <code>true</code>, right operand is never evaluated.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q19. What bitwise operator performs bitwise AND?</h4>
+          <p><strong>Answer:</strong> <code>&amp;</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q20. What bitwise operator performs bitwise OR?</h4>
+          <p><strong>Answer:</strong> <code>|</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q21. What bitwise operator performs bitwise XOR?</h4>
+          <p><strong>Answer:</strong> <code>^</code> (returns 1 if bits differ, 0 if identical).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q22. What bitwise operator performs bitwise NOT?</h4>
+          <p><strong>Answer:</strong> <code>~</code> (inverts all bits).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q23. What does bitwise left shift &lt;&lt; do?</h4>
+          <p><strong>Answer:</strong> Shifts binary bits left by specified count, padding with 0s (equivalent to multiplying by 2^n).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q24. What does bitwise right shift &gt;&gt; do?</h4>
+          <p><strong>Answer:</strong> Shifts binary bits right, preserving sign bit (equivalent to integer division by 2^n).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q25. What does unsigned right shift &gt;&gt;&gt; do in Dart 2.14+?</h4>
+          <p><strong>Answer:</strong> Shifts bits right filling leftmost positions with zeros regardless of sign.</p>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_qa_operators_2",
+      header: "1.5.2 NULL-AWARE & SPECIAL OPERATORS Q&A (Q26 – Q50)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Operators in Dart: Q&A (Part 2: Q26–Q50)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q26. What is the ternary operator syntax in Dart?</h4>
+          <p><strong>Answer:</strong> <code>condition ? valueIfTrue : valueIfFalse</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q27. What does null-coalescing operator ?? do?</h4>
+          <p><strong>Answer:</strong> Returns left operand if not null, otherwise returns right fallback operand (e.g. <code>a ?? b</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q28. What does null-aware assignment operator ??= do?</h4>
+          <p><strong>Answer:</strong> Assigns right value to variable only if variable is currently null (e.g. <code>x ??= 10</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q29. What does null-aware property access operator ?. do?</h4>
+          <p><strong>Answer:</strong> Accesses member only if target is non-null, evaluating to null if target is null (e.g. <code>user?.name</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q30. What does null-aware index operator ?[] do?</h4>
+          <p><strong>Answer:</strong> Accesses collection element only if collection reference is non-null (e.g. <code>list?[0]</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q31. What is the null assertion operator !?</h4>
+          <p><strong>Answer:</strong> Casts nullable expression <code>T?</code> to non-nullable type <code>T</code> (throws <code>TypeError</code> if null).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q32. What does null-aware spread operator ...? do?</h4>
+          <p><strong>Answer:</strong> Spreads collection items into another collection only if collection is non-null.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q33. What does type test operator is do?</h4>
+          <p><strong>Answer:</strong> Checks if object is an instance of specified type (e.g. <code>obj is String</code> returns bool).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q34. What does negated type test operator is! do?</h4>
+          <p><strong>Answer:</strong> Checks if object is NOT an instance of specified type (e.g. <code>obj is! int</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q35. What does typecast operator as do?</h4>
+          <p><strong>Answer:</strong> Casts object to target type (throws <code>TypeError</code> if object is incompatible).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q36. Does Dart perform automatic type smart casting after an is check?</h4>
+          <p><strong>Answer:</strong> Yes! After <code>if (x is String)</code>, Dart automatically promotes <code>x</code> to <code>String</code> in that scope.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q37. What is the cascade operator .. in Dart?</h4>
+          <p><strong>Answer:</strong> Allows chaining multiple operations on member properties/methods of the same object.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q38. What does null-aware cascade operator ?.. do?</h4>
+          <p><strong>Answer:</strong> Performs cascade operations only if target object reference is non-null.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q39. What is the spread operator ... used for?</h4>
+          <p><strong>Answer:</strong> Unpacks and inserts all elements of an iterable into another collection literal.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q40. What operator accesses instance members or calls methods on an object?</h4>
+          <p><strong>Answer:</strong> Dot operator <code>.</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q41. What operator invokes a function or constructor?</h4>
+          <p><strong>Answer:</strong> Parentheses <code>()</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q42. What operator accesses or assigns values in a List or Map by key/index?</h4>
+          <p><strong>Answer:</strong> Index bracket operator <code>[]</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q43. What operator assigns a value at a collection index?</h4>
+          <p><strong>Answer:</strong> Index assignment operator <code>[]=</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q44. What operator defines single-expression arrow functions?</h4>
+          <p><strong>Answer:</strong> Arrow operator <code>=&gt;</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q45. What operator creates compile-time constant objects/collections?</h4>
+          <p><strong>Answer:</strong> <code>const</code> keyword operator.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q46. What operator pauses execution until a Future completes in async functions?</h4>
+          <p><strong>Answer:</strong> <code>await</code> keyword operator.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q47. Can custom Dart classes overload operators?</h4>
+          <p><strong>Answer:</strong> Yes, using <code>operator</code> keyword (e.g. <code>Vector operator +(Vector v)</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q48. Which operators CANNOT be overloaded in Dart?</h4>
+          <p><strong>Answer:</strong> <code>!=</code>, <code>&amp;&amp;</code>, <code>||</code>, <code>?.</code>, <code>??</code>, <code>is</code>, <code>as</code>, <code>..</code>, <code>=</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q49. What is the precedence order between arithmetic multiplication * and addition +?</h4>
+          <p><strong>Answer:</strong> Multiplication <code>*</code> has higher precedence and is evaluated before addition <code>+</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q50. How can you override operator precedence in complex expressions?</h4>
+          <p><strong>Answer:</strong> Wrap sub-expressions in parentheses <code>()</code>.</p>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_qa_operators_3",
+      header: "1.5.3 OPERATOR PRECEDENCE & OVERLOADING Q&A (Q51 – Q75)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Operators in Dart: Q&A (Part 3: Q51–Q75)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q51. What happens if you chain null-aware accesses like user?.address?.city?</h4>
+          <p><strong>Answer:</strong> Short-circuits: if any property in chain is null, entire expression safely evaluates to null.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q52. What is the result of true || false &amp;&amp; false in Dart operator precedence?</h4>
+          <p><strong>Answer:</strong> Evaluates to <code>true</code> because <code>&amp;&amp;</code> has higher precedence than <code>||</code> (evaluates <code>false &amp;&amp; false</code> first).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q53. What does 5 &amp; 3 evaluate to in bitwise AND?</h4>
+          <p><strong>Answer:</strong> <code>1</code> (binary <code>0101 &amp; 0011 == 0001</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q54. What does 5 | 3 evaluate to in bitwise OR?</h4>
+          <p><strong>Answer:</strong> <code>7</code> (binary <code>0101 | 0011 == 0111</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q55. What does 5 ^ 3 evaluate to in bitwise XOR?</h4>
+          <p><strong>Answer:</strong> <code>6</code> (binary <code>0101 ^ 0011 == 0110</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q56. What does 1 &lt;&lt; 3 evaluate to?</h4>
+          <p><strong>Answer:</strong> <code>8</code> (shifts 1 left by 3 bits: <code>1 * 2^3</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q57. What does 16 &gt;&gt; 2 evaluate to?</h4>
+          <p><strong>Answer:</strong> <code>4</code> (shifts 16 right by 2 bits: <code>16 / 2^2</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q58. Can operator overloading change the number of operands an operator takes?</h4>
+          <p><strong>Answer:</strong> No, binary operators must remain binary and unary operators must remain unary.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q59. What method signature overloads the + operator in a custom class Point?</h4>
+          <p><strong>Answer:</strong> <code>Point operator +(Point other) =&gt; Point(x + other.x, y + other.y);</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q60. What method signature overloads equality operator ==?</h4>
+          <p><strong>Answer:</strong> <code>@override bool operator ==(Object other)</code> (must also override <code>hashCode</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q61. What happens if you override == without overriding hashCode?</h4>
+          <p><strong>Answer:</strong> Causes bugs in hash-based collections like <code>Set</code> and <code>Map</code> (violates hash contract).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q62. What does identical(a, b) check?</h4>
+          <p><strong>Answer:</strong> Checks whether two references point to the exact same object instance in memory.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q63. What is the evaluation order of cascade operations?</h4>
+          <p><strong>Answer:</strong> From top-to-bottom / left-to-right, returning original target object instance after each member call.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q64. Can cascades be nested in Dart?</h4>
+          <p><strong>Answer:</strong> Yes, nested cascades allow complex object graph initialization.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q65. What is the return value of a cascade expression obj..doA()..doB()?</h4>
+          <p><strong>Answer:</strong> Evaluates to <code>obj</code> instance, ignoring return values of <code>doA()</code> and <code>doB()</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q66. What happens if null assertion ! is used on a null variable at runtime?</h4>
+          <p><strong>Answer:</strong> Throws a runtime <code>TypeError</code> (or <code>NullThrownError</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q67. What is the difference between ?? and ||?</h4>
+          <p><strong>Answer:</strong> <code>??</code> checks for <code>null</code>; <code>||</code> checks for boolean <code>false</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q68. What operator is used to cast an object to a specific type?</h4>
+          <p><strong>Answer:</strong> Typecast operator <code>as</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q69. What happens if as cast fails at runtime?</h4>
+          <p><strong>Answer:</strong> Throws a <code>TypeError</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q70. Why is is preferred over as for safe casting?</h4>
+          <p><strong>Answer:</strong> <code>is</code> returns a boolean flag safely without throwing an exception.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q71. How does type promotion work with logically inverted checks if (x is! String) return;?</h4>
+          <p><strong>Answer:</strong> Dart promotes <code>x</code> to <code>String</code> for all statements following the <code>if</code> block.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q72. Does Dart support operator precedence for custom overloaded operators?</h4>
+          <p><strong>Answer:</strong> Fixed precedence: overloaded operators retain built-in operator precedence rules.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q73. What operator defines subscript indexing [] in custom classes?</h4>
+          <p><strong>Answer:</strong> <code>operator [](int index)</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q74. What operator defines subscript assignment []= in custom classes?</h4>
+          <p><strong>Answer:</strong> <code>operator []=(int index, ValueType value)</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q75. Summary of operator best practice in Dart:</h4>
+          <p><strong>Answer:</strong> Use null-aware operators (<code>?.</code>, <code>??</code>, <code>??=</code>) and cascades (<code>..</code>) to write clean, crash-resilient code.</p>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_qa_conditions_1",
+      header: "1.6.1 CONDITIONS & DECISION MAKING Q&A (Q76 – Q100)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Conditions in Dart: Q&A (Part 1: Q76–Q100)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q76. What is a condition in programming?</h4>
+          <p><strong>Answer:</strong> A control statement that evaluates a boolean expression to decide which code path to execute.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q77. Does Dart accept non-boolean truthy/falsy values (like 1, 0, null, "") in if conditions?</h4>
+          <p><strong>Answer:</strong> No! Dart strictly enforces boolean types (<code>bool</code>) in condition expressions (compilation error otherwise).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q78. How do you write a basic if statement in Dart?</h4>
+          <p><strong>Answer:</strong> <code>if (condition) { /* code */ }</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q79. When does the else block execute in an if...else statement?</h4>
+          <p><strong>Answer:</strong> Executes when the <code>if</code> condition evaluates to <code>false</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q80. How does an if...else if...else chain execute?</h4>
+          <p><strong>Answer:</strong> Tests conditions sequentially from top to bottom, executing the first matching <code>true</code> block and skipping the rest.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q81. Is the final else block mandatory in an if...else if structure?</h4>
+          <p><strong>Answer:</strong> No, the default <code>else</code> fallback block is optional.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q82. What is a nested if statement?</h4>
+          <p><strong>Answer:</strong> An <code>if</code> statement placed inside the body of another <code>if</code> statement.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q83. Can single-line if statement blocks omit curly braces {} in Dart?</h4>
+          <p><strong>Answer:</strong> Yes (e.g. <code>if (isReady) print('Go');</code>), but curly braces are recommended for style guidelines.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q84. What is dead code in conditional statements?</h4>
+          <p><strong>Answer:</strong> Code inside a block that can never be reached/executed (e.g. <code>if (false) { ... }</code> generates analyzer warnings).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q85. How do you rewrite if (x != null) y = x; using null-aware operators?</h4>
+          <p><strong>Answer:</strong> Use null-coalescing assignment: <code>y ??= x;</code> or <code>y = x ?? defaultVal;</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q86. What is the ternary operator syntax as an inline condition?</h4>
+          <p><strong>Answer:</strong> <code>var result = condition ? expr1 : expr2;</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q87. Can ternary operators be nested in Dart?</h4>
+          <p><strong>Answer:</strong> Yes (e.g. <code>cond1 ? val1 : (cond2 ? val2 : val3)</code>), though complex nesting reduces readability.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q88. What types can be evaluated in a traditional switch statement in Dart?</h4>
+          <p><strong>Answer:</strong> Compile-time constants of <code>int</code>, <code>String</code>, <code>enum</code>, or objects implementing <code>==</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q89. Why was break required in traditional Dart switch cases?</h4>
+          <p><strong>Answer:</strong> Prevents non-empty case fall-through to subsequent case blocks.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q90. How do empty switch cases behave without a break statement?</h4>
+          <p><strong>Answer:</strong> Empty case statements naturally fall through to the next case (combining multiple match values).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q91. What keyword specifies the default fallback in a switch statement?</h4>
+          <p><strong>Answer:</strong> <code>default:</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q92. What major feature was introduced to switch statements in Dart 3.0?</h4>
+          <p><strong>Answer:</strong> Pattern matching, pattern matching expressions (<code>switch</code> expressions), and break elimination.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q93. Is break statement required in Dart 3 switch statements/expressions?</h4>
+          <p><strong>Answer:</strong> No! Fall-through is disabled by default in Dart 3, so <code>break</code> is unnecessary.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q94. What represents the default wildcard match in a Dart 3 switch expression?</h4>
+          <p><strong>Answer:</strong> The underscore wildcard <code>_</code> (e.g. <code>_ =&gt; defaultValue</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q95. What arrow symbol is used in Dart 3 switch expressions?</h4>
+          <p><strong>Answer:</strong> Fat arrow <code>=&gt;</code> (e.g. <code>case 1 =&gt; "One"</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q96. How do guard clauses work in Dart 3 switch statements?</h4>
+          <p><strong>Answer:</strong> Append <code>when</code> clause to case pattern (e.g. <code>case int n when n &gt; 10 =&gt; ...</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q97. Are switch expressions required to be exhaustive in Dart 3?</h4>
+          <p><strong>Answer:</strong> Yes! Switch expressions must cover all possible values of input type or include a <code>_</code> wildcard.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q98. How does exhaustiveness checking work for enum types in switch?</h4>
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q99. What happens if an enum case is missing in an exhaustive switch expression without wildcard?</h4>
+          <p><strong>Answer:</strong> Triggers a compile-time error: "The type is not exhaustively matched".</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q100. How do you combine multiple conditions with logical AND in an if statement?</h4>
+          <p><strong>Answer:</strong> Use <code>&amp;&amp;</code> (e.g. <code>if (age &gt;= 18 &amp;&amp; hasId) { ... }</code>).</p>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_qa_conditions_2",
+      header: "1.6.2 ADVANCED CONDITIONS & SWITCH Q&A (Q101 – Q125)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Conditions in Dart: Q&A (Part 2: Q101–Q125)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q101. How do you combine multiple conditions with logical OR?</h4>
+          <p><strong>Answer:</strong> Use <code>||</code> (e.g. <code>if (isAdmin || isSuperUser) { ... }</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q102. What happens when short-circuit evaluation triggers in if (A || B)?</h4>
+          <p><strong>Answer:</strong> If <code>A</code> evaluates to <code>true</code>, <code>B</code> is never executed/evaluated.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q103. What happens when short-circuit evaluation triggers in if (A &amp;&amp; B)?</h4>
+          <p><strong>Answer:</strong> If <code>A</code> evaluates to <code>false</code>, <code>B</code> is never executed/evaluated.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q104. How do null checks in if statements enable type promotion?</h4>
+          <p><strong>Answer:</strong> <code>if (name != null)</code> automatically promotes <code>String?</code> to non-nullable <code>String</code> inside the block.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q105. Can local variables declared inside an if block be accessed outside that block?</h4>
+          <p><strong>Answer:</strong> No, local variables are lexically scoped to the block in which they are declared.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q106. What is a guard statement in function control flow?</h4>
+          <p><strong>Answer:</strong> Early return check at beginning of function (e.g. <code>if (input == null) return;</code>) to avoid nested <code>if</code> trees.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q107. What does the continue statement do with labels inside switch cases?</h4>
+          <p><strong>Answer:</strong> <code>continue labelName;</code> jumps execution directly to another labeled case in traditional switch statements.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q108. How do relational patterns work in Dart 3 switch cases?</h4>
+          <p><strong>Answer:</strong> Matches numbers against comparative operators (e.g. <code>case &gt;= 90 =&gt; 'A'</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q109. How do logical OR patterns work in Dart 3 switch cases?</h4>
+          <p><strong>Answer:</strong> Combine multiple patterns using <code>|</code> (e.g. <code>case 'Mon' | 'Tue' =&gt; 'Workday'</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q110. How do logical AND patterns work in Dart 3 switch cases?</h4>
+          <p><strong>Answer:</strong> Combine patterns using <code>&amp;</code> (e.g. <code>case int n &amp; &gt; 0 =&gt; 'Positive Int'</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q111. What is pattern destructuring in Dart 3 switch statements?</h4>
+          <p><strong>Answer:</strong> Unpacks complex records/objects directly into local variables (e.g. <code>case (var x, var y) =&gt; ...</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q112. Can a switch expression return a value directly into a variable assignment?</h4>
+          <p><strong>Answer:</strong> Yes! (e.g. <code>final status = switch(code) { 200 =&gt; 'OK', _ =&gt; 'Error' };</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q113. What happens if a traditional switch statement does not match any case and has no default?</h4>
+          <p><strong>Answer:</strong> Execution silently falls through past the switch statement without doing anything.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q114. How do sealed classes enforce exhaustiveness in Dart 3 switch statements?</h4>
+          <p><strong>Answer:</strong> The compiler verifies that all direct subtypes of a <code>sealed</code> class are covered in the switch cases.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q115. Can conditions inside if statements assign values using assignment operators?</h4>
+          <p><strong>Answer:</strong> Assignment expressions return assigned values, but Dart requires explicit boolean conditions in <code>if(...)</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q116. How do collection if expressions work inside List literals?</h4>
+          <p><strong>Answer:</strong> Dynamically includes elements based on condition (e.g. <code>[1, 2, if (hasBonus) 3]</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q117. How do collection if-else expressions work inside List literals?</h4>
+          <p><strong>Answer:</strong> Chooses between elements (e.g. <code>[if (isAdmin) 'Delete' else 'View']</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q118. What is the precedence of ! (Logical NOT) compared to &amp;&amp; and ||?</h4>
+          <p><strong>Answer:</strong> <code>!</code> has higher precedence than both <code>&amp;&amp;</code> and <code>||</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q119. What is De Morgan's Law for !(A &amp;&amp; B)?</h4>
+          <p><strong>Answer:</strong> <code>!(A &amp;&amp; B)</code> is logically equivalent to <code>!A || !B</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q120. What is De Morgan's Law for !(A || B)?</h4>
+          <p><strong>Answer:</strong> <code>!(A || B)</code> is logically equivalent to <code>!A &amp;&amp; !B</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q121. Can boolean variables be negated using != false?</h4>
+          <p><strong>Answer:</strong> Yes, <code>flag != false</code> is equivalent to <code>flag == true</code> or simply <code>flag</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q122. How do you check if a String is neither null nor empty?</h4>
+          <p><strong>Answer:</strong> <code>if (str != null &amp;&amp; str.isNotEmpty) { ... }</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q123. Can null-aware check str?.isNotEmpty == true be used in if condition?</h4>
+          <p><strong>Answer:</strong> Yes, evaluates to true only if <code>str</code> is non-null AND non-empty.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q124. What does expression (x ?? false) do in an if condition?</h4>
+          <p><strong>Answer:</strong> Converts nullable boolean <code>bool? x</code> safely to non-null bool defaulting to <code>false</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q125. Summary of condition best practice in Dart:</h4>
+          <p><strong>Answer:</strong> Leverage Dart 3 switch expressions, pattern matching, and guard clauses for concise decision-making.</p>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_qa_loops_1",
+      header: "1.7.1 LOOPS FUNDAMENTALS Q&A (Q126 – Q150)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Loops in Dart: Q&A (Part 1: Q126–Q150)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q126. What is a loop in programming?</h4>
+          <p><strong>Answer:</strong> A control structure that repeatedly executes a block of code based on a condition or collection iteration.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q127. What are the three parts of a standard for loop header?</h4>
+          <p><strong>Answer:</strong> Initialization, condition test, and iteration update (e.g. <code>for (int i = 0; i &lt; 10; i++)</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q128. Is the index variable declared in a for loop header scoped to the loop?</h4>
+          <p><strong>Answer:</strong> Yes, <code>i</code> is scoped locally to the loop block and cannot be accessed outside it.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q129. What happens if the condition in a for loop is initially false?</h4>
+          <p><strong>Answer:</strong> The loop body is skipped entirely and executes 0 times.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q130. What is a for-in loop in Dart?</h4>
+          <p><strong>Answer:</strong> A specialized loop for sequentially iterating over elements of an Iterable (e.g. List, Set).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q131. What collections can be iterated with for-in loops?</h4>
+          <p><strong>Answer:</strong> Any class implementing <code>Iterable&lt;E&gt;</code> interface (List, Set, Queue, etc.).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q132. Can a Map be iterated directly using for-in loop for (var x in map)?</h4>
+          <p><strong>Answer:</strong> No, you must iterate over <code>map.keys</code>, <code>map.values</code>, or <code>map.entries</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q133. What is the forEach() method on Iterables?</h4>
+          <p><strong>Answer:</strong> Higher-order collection method taking a callback function executed for every element.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q134. Can you use break or continue statements inside a forEach() callback function?</h4>
+          <p><strong>Answer:</strong> No! <code>break</code> and <code>continue</code> are loop statements and cannot be used inside anonymous callback functions.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q135. How do you return early from a forEach() iteration?</h4>
+          <p><strong>Answer:</strong> Using <code>return;</code> inside callback skips remainder of current element function (acts like <code>continue</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q136. What is a while loop?</h4>
+          <p><strong>Answer:</strong> An entry-controlled loop that repeats code while its condition evaluates to <code>true</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q137. When is the condition evaluated in a while loop?</h4>
+          <p><strong>Answer:</strong> Before each iteration (at top of loop).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q138. What is a do-while loop?</h4>
+          <p><strong>Answer:</strong> An exit-controlled loop that executes body first, then tests condition.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q139. What is the minimum number of times a do-while loop will execute?</h4>
+          <p><strong>Answer:</strong> Guaranteed to execute at least 1 time regardless of condition initial value.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q140. What does the break statement do inside a loop?</h4>
+          <p><strong>Answer:</strong> Immediately terminates loop execution and jumps to statement after loop body.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q141. What does the continue statement do inside a loop?</h4>
+          <p><strong>Answer:</strong> Skips remaining statements in current iteration and moves directly to next iteration check/update.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q142. What happens if update expression in a for loop is omitted or incorrect?</h4>
+          <p><strong>Answer:</strong> Can cause an infinite loop if termination condition is never reached.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q143. How do you write an intentional infinite loop in Dart?</h4>
+          <p><strong>Answer:</strong> <code>while (true) { /* ... */ }</code> or <code>for (;;) { /* ... */ }</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q144. How do you break out of an intentional infinite loop?</h4>
+          <p><strong>Answer:</strong> Execute a <code>break;</code> or <code>return;</code> statement conditionally inside body.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q145. What is an index variable convention in nested loops?</h4>
+          <p><strong>Answer:</strong> Outer loop uses <code>i</code>, inner loop uses <code>j</code>, <code>k</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q146. How does break behave inside a nested loop without labels?</h4>
+          <p><strong>Answer:</strong> Terminates only the innermost loop in which the <code>break</code> statement appears.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q147. How does continue behave inside nested loops without labels?</h4>
+          <p><strong>Answer:</strong> Skips to next iteration of innermost loop only.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q148. What is a collection for expression inside a List literal?</h4>
+          <p><strong>Answer:</strong> Constructs collection elements dynamically by iterating (e.g. <code>[for (var i in items) i * 2]</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q149. Can collection for and collection if be combined inside a List literal?</h4>
+          <p><strong>Answer:</strong> Yes! (e.g. <code>[for (var n in list) if (n.isEven) n]</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q150. Is collection for preferred over list.map().toList() for readable UI building?</h4>
+          <p><strong>Answer:</strong> Yes, Flutter design guidelines prefer collection <code>for</code> inside widget lists.</p>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_qa_loops_2",
+      header: "1.7.2 LABELED & ADVANCED LOOPS Q&A (Q151 – Q175)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Loops in Dart: Q&A (Part 2: Q151–Q175)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q151. What is a Labeled Loop in Dart?</h4>
+          <p><strong>Answer:</strong> Assigning an identifier label to a loop (e.g. <code>myLabel: for (...)</code>) to target it with <code>break</code> or <code>continue</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q152. How do you break out of an outer loop from inside an inner nested loop?</h4>
+          <p><strong>Answer:</strong> Use labeled break: <code>break outerLoopLabel;</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q153. How do you continue the next iteration of an outer loop from inside an inner loop?</h4>
+          <p><strong>Answer:</strong> Use labeled continue: <code>continue outerLoopLabel;</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q154. What exception occurs if you modify a List size while iterating over it with for-in?</h4>
+          <p><strong>Answer:</strong> Throws a <code>ConcurrentModificationError</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q155. How can you safely remove elements from a List while iterating?</h4>
+          <p><strong>Answer:</strong> Use <code>list.removeWhere((item) =&gt; condition)</code> or iterate backwards with index for loop.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q156. How do you iterate over a List with both index and value?</h4>
+          <p><strong>Answer:</strong> Use indexed loop <code>for (int i=0; i&lt;list.length; i++)</code> or <code>list.asMap().entries</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q157. What is an asynchronous loop in Dart?</h4>
+          <p><strong>Answer:</strong> A loop using <code>await for</code> to process values emitted by a <code>Stream</code> asynchronously.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q158. What keyword precedes for in an asynchronous stream loop?</h4>
+          <p><strong>Answer:</strong> <code>await</code> (e.g. <code>await for (var event in stream) { ... }</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q159. Must a function containing await for loop be marked with async?</h4>
+          <p><strong>Answer:</strong> Yes, function header must have <code>async</code> modifier.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q160. How does break work inside an await for loop?</h4>
+          <p><strong>Answer:</strong> Immediately cancels stream subscription and exits loop.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q161. What is a synchronous generator function in Dart?</h4>
+          <p><strong>Answer:</strong> Function marked with <code>sync*</code> returning an <code>Iterable</code> using <code>yield</code> statements.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q162. What is an asynchronous generator function in Dart?</h4>
+          <p><strong>Answer:</strong> Function marked with <code>async*</code> returning a <code>Stream</code> using <code>yield</code> statements.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q163. What does yield statement do in generator loops?</h4>
+          <p><strong>Answer:</strong> Emits a single value to caller while pausing function execution until next value is requested.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q164. What does yield* statement do?</h4>
+          <p><strong>Answer:</strong> Delegates generation by yielding all elements of another Iterable or Stream recursively.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q165. How does time complexity of iterating N items compare between List and Set?</h4>
+          <p><strong>Answer:</strong> Iteration time complexity is O(N) for both <code>List</code> and <code>Set</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q166. What happens if loop condition is never updated in a while loop?</h4>
+          <p><strong>Answer:</strong> Causes infinite loop that freezes thread/event loop unless interrupted.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q167. Can multiple variables be initialized in a for loop header?</h4>
+          <p><strong>Answer:</strong> Yes (e.g. <code>for (int i = 0, j = 10; i &lt; j; i++, j--)</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q168. How do you step by 2 in a for loop?</h4>
+          <p><strong>Answer:</strong> Update with <code>i += 2</code> (e.g. <code>for (int i = 0; i &lt; 10; i += 2)</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q169. How do you iterate backwards from N down to 0 in a for loop?</h4>
+          <p><strong>Answer:</strong> <code>for (int i = n; i &gt;= 0; i--)</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q170. What is the difference between for-in loop and list.map()?</h4>
+          <p><strong>Answer:</strong> <code>for-in</code> executes imperative side-effects; <code>map()</code> lazily transforms elements returning a new Iterable.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q171. Why are lazy Iterables generated by map() not evaluated until iterated?</h4>
+          <p><strong>Answer:</strong> Functional operators in Dart evaluate on-demand to save memory allocations.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q172. How do you force evaluation of a lazy mapped Iterable?</h4>
+          <p><strong>Answer:</strong> Call <code>.toList()</code> or <code>.toSet()</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q173. What is the efficiency of nested loops with N outer iterations and M inner iterations?</h4>
+          <p><strong>Answer:</strong> O(N * M) time complexity.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q174. What is the efficiency of nested loops where N == M?</h4>
+          <p><strong>Answer:</strong> O(N^2) quadratic time complexity.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q175. How can you optimize O(N^2) double loops when searching elements?</h4>
+          <p><strong>Answer:</strong> Use a <code>Set</code> or <code>Map</code> lookup to reduce inner loop time from O(N) to O(1).</p>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_qa_loops_3",
+      header: "1.7.3 ADVANCED ITERATION & STREAM LOOPS Q&A (Q176 – Q200)",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Loops in Dart: Q&A (Part 3: Q176–Q200)</h2>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q176. Can continue statement be used inside a switch case?</h4>
+          <p><strong>Answer:</strong> Yes, <code>continue caseLabel;</code> jumps execution to another case within traditional switch statements.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q177. How does Dart garbage collector handle variables declared inside loop iterations?</h4>
+          <p><strong>Answer:</strong> Fresh variable instance is bound per iteration, garbage collected efficiently once iteration scope exits.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q178. What happens if a closure captures a for loop index variable declared with var/int?</h4>
+          <p><strong>Answer:</strong> Dart creates a fresh binding per iteration, so each closure captures its iteration's specific value.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q179. How do you iterate over Map key-value entries with for-in?</h4>
+          <p><strong>Answer:</strong> <code>for (var entry in map.entries) { print('\${entry.key}: \${entry.value}'); }</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q180. How do you iterate over Map entries using forEach()?</h4>
+          <p><strong>Answer:</strong> <code>map.forEach((key, value) =&gt; print('\$key: \$value'));</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q181. What happens if an exception is thrown inside a loop body?</h4>
+          <p><strong>Answer:</strong> Unless caught by <code>try-catch</code> inside body, exception unwinds stack and terminates loop immediately.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q182. How do you handle per-item errors without breaking the whole loop?</h4>
+          <p><strong>Answer:</strong> Wrap loop body interior code in a <code>try-catch</code> block.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q183. What is the reduction method fold() on Iterables?</h4>
+          <p><strong>Answer:</strong> Iterates collection accumulating a single result starting from an initial value.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q184. How do you calculate sum of numbers using fold()?</h4>
+          <p><strong>Answer:</strong> <code>numbers.fold(0, (prev, element) =&gt; prev + element);</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q185. What is reduce() method on Iterables?</h4>
+          <p><strong>Answer:</strong> Combines elements using first item as initial accumulator (throws error if collection is empty).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q186. How do you check if ALL items in a collection satisfy a condition?</h4>
+          <p><strong>Answer:</strong> Use <code>every()</code> method (e.g. <code>numbers.every((n) =&gt; n &gt; 0)</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q187. How do you check if AT LEAST ONE item satisfies a condition?</h4>
+          <p><strong>Answer:</strong> Use <code>any()</code> method (e.g. <code>numbers.any((n) =&gt; n.isEven)</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q188. How do you filter elements from a collection without manual loops?</h4>
+          <p><strong>Answer:</strong> Use <code>where()</code> method (e.g. <code>list.where((item) =&gt; condition).toList()</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q189. What does firstWhere() return if no element matches condition?</h4>
+          <p><strong>Answer:</strong> Throws <code>StateError</code> unless <code>orElse</code> callback parameter is provided.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q190. What does singleWhere() return?</h4>
+          <p><strong>Answer:</strong> Returns single matching element (throws error if 0 or more than 1 elements match).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q191. How do you take the first N items of an Iterable?</h4>
+          <p><strong>Answer:</strong> Use <code>list.take(N)</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q192. How do you skip the first N items of an Iterable?</h4>
+          <p><strong>Answer:</strong> Use <code>list.skip(N)</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q193. What is takeWhile()?</h4>
+          <p><strong>Answer:</strong> Takes leading elements as long as condition remains true, stopping at first false element.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q194. What is skipWhile()?</h4>
+          <p><strong>Answer:</strong> Skips leading elements as long as condition is true, returning rest of collection starting from first false element.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q195. Can an await for stream loop block the UI thread in Flutter?</h4>
+          <p><strong>Answer:</strong> No, because <code>await</code> yields control back to event loop while waiting for stream events.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q196. How do broadcast streams handle multiple await for loops?</h4>
+          <p><strong>Answer:</strong> Broadcast streams allow multiple listeners to listen asynchronously simultaneously.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q197. What happens to single-subscription streams if listened to by two loops?</h4>
+          <p><strong>Answer:</strong> Throws a <code>StateError: Stream has already been listened to</code>.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q198. How do collection spreads ... and collection loops interact in list literals?</h4>
+          <p><strong>Answer:</strong> You can embed spread operators inside collection for loops (e.g. <code>[for (var sub in lists) ...sub]</code>).</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q199. What is recursion and how does it compare to loops?</h4>
+          <p><strong>Answer:</strong> A function calling itself; can replace loops but risks <code>StackOverflowError</code> if call depth is large.</p>
+        </div>
+
+        <div class="qa-card">
+          <h4><i class="fa-solid fa-circle-question"></i> Q200. Summary of control flow in Dart:</h4>
+          <p><strong>Answer:</strong> Combine modern operators, sound boolean conditions, collection loops, and functional methods to build performant, readable applications.</p>
+        </div>
+      `
     }
   ]
 };
-
