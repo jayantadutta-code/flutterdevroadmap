@@ -52,7 +52,7 @@ class JourneyEngine {
     this.svgPath.setAttribute('d', pathD);
   }
 
-  // --- RENDER 16 MILESTONE NODES ALONG PATH ---
+  // --- RENDER 15 MILESTONE NODES ALONG PATH ---
   renderMilestoneNodes() {
     if (!this.nodesContainer || !this.container) return;
     this.nodesContainer.innerHTML = '';

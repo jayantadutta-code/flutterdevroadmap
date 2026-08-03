@@ -40,54 +40,12 @@ URL: dart/index.html`,
     ]
   },
   {
-    id: "async-programming",
-    title: "2. Asynchronous Programming",
-    badge: "Chapter 2 • Mastering Time",
-    icon: "⚡",
-    color: "#0288D1",
-    xPos: 10.0,
-    yPos: 52,
-    story: "Alex learns that real-world apps must fetch data without freezing the screen. He conquers Futures, async/await, and Streams. Now, when data arrives from the web, his app stays smooth and responsive!",
-    description: "Handle non-blocking operations in Dart using Futures, async/await, Streams, StreamControllers, and Isolates for high performance.",
-    topics: [
-      "The Event Loop & Microtask Queue",
-      "Futures & `async` / `await` Syntax",
-      "Single-Subscription vs Broadcast Streams",
-      "StreamControllers & Stream Transformers",
-      "Isolates & Background Thread Processing"
-    ],
-    subMilestones: [
-      { id: "async-1", title: "Understanding Event Loop, Event Queue & Microtasks", completed: false },
-      { id: "async-2", title: "Futures, `then()`, `catchError()`, and `async/await` syntax", completed: false },
-      { id: "async-3", title: "Streams & StreamControllers (Sink & Stream listeners)", completed: false },
-      { id: "async-4", title: "Stream Transformers (`asyncMap`, `debounce`, `distinct`)", completed: false },
-      { id: "async-5", title: "Multithreading using `Isolate.run()` and `ReceivePort`", completed: false }
-    ],
-    codeSnippet: `// Chapter 2: Reactive Stream Example
-Stream<int> studySessionTracker(int hours) async* {
-  for (int i = 1; i <= hours; i++) {
-    await Future.delayed(Duration(milliseconds: 500));
-    yield i;
-  }
-}
-
-void main() async {
-  await for (final hour in studySessionTracker(5)) {
-    print('Alex studied Async Dart for $hour hour(s)');
-  }
-}`,
-    resources: [
-      { name: "Asynchronous Programming in Dart", url: "https://dart.dev/codelabs/async-await" },
-      { name: "Streams in Dart Guide", url: "https://dart.dev/articles/libraries/creating-streams" }
-    ]
-  },
-  {
     id: "discrete-math",
-    title: "3. Discrete Mathematics & Logic",
-    badge: "Chapter 3 • Mathematical Mind",
+    title: "2. Discrete Mathematics & Logic",
+    badge: "Chapter 2 • Mathematical Mind",
     icon: "📐",
     color: "#E91E63",
-    xPos: 16.0,
+    xPos: 10.0,
     yPos: 76,
     story: "To understand complex algorithms, computer architecture, and state machines, Alex dives into Discrete Mathematics! He masters Mathematical Logic, Set Theory, Combinatorics, Boolean Algebra, and Finite State Machines.",
     description: "Build the foundational mathematical mindset: Propositional Logic, Truth Tables, Set Operations, Combinatorics, Graph Theory, and Finite Automata.",
@@ -106,7 +64,7 @@ void main() async {
       { id: "math-4", title: "Boolean Algebra, De Morgan's Laws & Logic Simplification", completed: false },
       { id: "math-5", title: "Graph Theory (Nodes, Edges, Paths) & Finite State Machines", completed: false }
     ],
-    codeSnippet: `// Chapter 3: State Machine Logic & Set Algebra in Dart
+    codeSnippet: `// Chapter 2: State Machine Logic & Set Algebra in Dart
 class StateMachine {
   final Set<String> states = {'Idle', 'Loading', 'Success', 'Error'};
   final Map<String, String> transitions = {
@@ -128,11 +86,11 @@ void main() {
   },
   {
     id: "dsa-in-dart",
-    title: "4. DSA in Dart",
-    badge: "Chapter 4 • The Brain Gym",
+    title: "3. DSA in Dart",
+    badge: "Chapter 3 • The Brain Gym",
     icon: "🔮",
     color: "#9C27B0",
-    xPos: 22.0,
+    xPos: 16.0,
     yPos: 50,
     story: "Armed with Discrete Math logic, Alex trains in Data Structures & Algorithms. He implements Stacks, Queues, Binary Search Trees, and Graph traversals natively in Dart.",
     description: "Master Data Structures and Algorithms implemented natively in Dart to solve complex problems and optimize Flutter app performance.",
@@ -151,7 +109,7 @@ void main() {
       { id: "dsa-4", title: "Binary Trees & BST Search/Insert Algorithms", completed: false },
       { id: "dsa-5", title: "Graph Adjacency Lists, BFS & DFS Traversals", completed: false }
     ],
-    codeSnippet: `// Chapter 4: Custom Stack for Undo History
+    codeSnippet: `// Chapter 3: Custom Stack for Undo History
 class Stack<T> {
   final List<T> _items = [];
 
@@ -163,7 +121,7 @@ class Stack<T> {
 void main() {
   final history = Stack<String>();
   history.push('Chapter 1: Dart');
-  history.push('Chapter 3: Discrete Math');
+  history.push('Chapter 2: Discrete Math');
   print('Current Learning: \${history.pop()}');
 }`,
     resources: [
@@ -172,11 +130,11 @@ void main() {
   },
   {
     id: "flutter-framework",
-    title: "5. Flutter Framework & YAML Config",
-    badge: "Chapter 5 • Building UI & Config",
+    title: "4. Flutter Framework & YAML Config",
+    badge: "Chapter 4 • Building UI & Config",
     icon: "💙",
     color: "#02569B",
-    xPos: 28.0,
+    xPos: 22.0,
     yPos: 22,
     story: "Alex opens Flutter for the first time! He learns that 'Everything is a Widget' and masters project configuration via `pubspec.yaml`, `analysis_options.yaml`, and `l10n.yaml` for assets, fonts, dependencies, and lint rules.",
     description: "Understand the core UI framework and project configuration: Widgets, Constraints, Layouts, RenderTree, and project configuration using YAML files.",
@@ -199,7 +157,7 @@ void main() {
     customTabName: "YAML FlipBook 📚",
     hasDigitalBook: true,
     digitalBookUrl: "YAML/index.html",
-    codeSnippet: `# Chapter 5: YAML Project Configuration & 3D FlipBook Guide
+    codeSnippet: `# Chapter 4: YAML Project Configuration & 3D FlipBook Guide
 # Open the interactive YAML 3D FlipBook to learn syntax, anchors, chomping & validator!
 URL: YAML/index.html`,
     resources: [
@@ -211,11 +169,11 @@ URL: YAML/index.html`,
   },
   {
     id: "native-interop",
-    title: "6. Native Platform Integration & Interop",
-    badge: "Chapter 6 • Bridging Native Power",
+    title: "5. Native Platform Integration & Interop",
+    badge: "Chapter 5 • Bridging Native Power",
     icon: "🔌",
     color: "#FF6F00",
-    xPos: 34.0,
+    xPos: 28.0,
     yPos: 50,
     story: "Alex encounters a challenge: his app requires custom hardware sensors, iOS Live Activities, and Android Foreground Services. He masters `MethodChannel` & `EventChannel`, type-safe interop with `Pigeon`, and C/C++ interop via `dart:ffi`!",
     description: "Bridge Flutter with native Swift/Objective-C (iOS) and Kotlin/Java (Android) codebases using Method Channels, Event Channels, Pigeon, and FFI.",
@@ -234,7 +192,7 @@ URL: YAML/index.html`,
       { id: "native-4", title: "Android Foreground Services & iOS Live Activities", completed: false },
       { id: "native-5", title: "Calling C/C++ Native Code using `dart:ffi`", completed: false }
     ],
-    codeSnippet: `// Chapter 6: Flutter MethodChannel Native Integration
+    codeSnippet: `// Chapter 5: Flutter MethodChannel Native Integration
 import 'package:flutter/services.dart';
 
 class BatteryService {
@@ -258,11 +216,11 @@ class BatteryService {
   },
   {
     id: "clean-architecture",
-    title: "7. Clean Architecture & Modularization",
-    badge: "Chapter 7 • Enterprise Scalability",
+    title: "6. Clean Architecture & Modularization",
+    badge: "Chapter 6 • Enterprise Scalability",
     icon: "🏛️",
     color: "#673AB7",
-    xPos: 40.0,
+    xPos: 34.0,
     yPos: 76,
     story: "Alex lands a role on a large engineering team! To keep code clean and scalable, he structures the app into Presentation, Domain, and Data layers. He uses `get_it` for Dependency Injection and structures multi-package workspaces with `melos`.",
     description: "Architect production Flutter applications using 3-layer Clean Architecture (Presentation, Domain, Data), Dependency Injection, and Multi-Package Monorepos.",
@@ -281,7 +239,7 @@ class BatteryService {
       { id: "clean-4", title: "Feature-First Project Directory Structure", completed: false },
       { id: "clean-5", title: "Modularizing Large Apps into Monorepos with `melos`", completed: false }
     ],
-    codeSnippet: `// Chapter 7: Dependency Injection & Use Case Contract
+    codeSnippet: `// Chapter 6: Dependency Injection & Use Case Contract
 abstract class UserRepository {
   Future<User> getUserProfile(String userId);
 }
@@ -307,11 +265,11 @@ void setupLocator() {
   },
   {
     id: "state-management",
-    title: "8. State Management",
-    badge: "Chapter 8 • Architecting Control",
+    title: "7. State Management",
+    badge: "Chapter 7 • Architecting Control",
     icon: "🧠",
     color: "#00B0FF",
-    xPos: 46.0,
+    xPos: 40.0,
     yPos: 50,
     story: "As Alex's app grows, passing variables down 10 widget levels becomes messy. Alex learns Riverpod and BLoC to separate UI from business logic cleanly.",
     description: "Manage global application state cleanly, decouple business logic from presentation, and optimize UI re-rendering efficiency.",
@@ -329,11 +287,11 @@ void setupLocator() {
       { id: "state-4", title: "BLoC Architecture (Events, States, Transitions)", completed: false },
       { id: "state-5", title: "Cubit for Streamlined State Transitions", completed: false }
     ],
-    codeSnippet: `// Chapter 8: Riverpod 2.0 State Notifier
+    codeSnippet: `// Chapter 7: Riverpod 2.0 State Notifier
 @riverpod
 class LearningProgressNotifier extends _$LearningProgressNotifier {
   @override
-  int build() => 8;
+  int build() => 7;
 
   void nextChapter() => state++;
 }`,
@@ -344,11 +302,11 @@ class LearningProgressNotifier extends _$LearningProgressNotifier {
   },
   {
     id: "local-database",
-    title: "9. Local DB & Offline-First Strategy",
-    badge: "Chapter 9 • Offline Storage & Sync",
+    title: "8. Local DB & Offline-First Strategy",
+    badge: "Chapter 8 • Offline Storage & Sync",
     icon: "💾",
     color: "#4CAF50",
-    xPos: 52.0,
+    xPos: 46.0,
     yPos: 22,
     story: "Alex wants his users to access their data seamless offline. He masters `shared_preferences`, secure encrypted storage, relational SQLite (`drift`), fast NoSQL (`Hive` & `Isar`), and cache-first offline synchronization.",
     description: "Store persistent user data locally using key-value stores, relational databases, fast NoSQL databases, and implement cache-first sync.",
@@ -366,7 +324,7 @@ class LearningProgressNotifier extends _$LearningProgressNotifier {
       { id: "db-4", title: "High-Speed NoSQL with `Hive` & `Isar`", completed: false },
       { id: "db-5", title: "Offline Syncing & Cache-First Repository Patterns", completed: false }
     ],
-    codeSnippet: `// Chapter 9: Hive Local Storage Initialization
+    codeSnippet: `// Chapter 8: Hive Local Storage Initialization
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
@@ -382,11 +340,11 @@ void main() async {
   },
   {
     id: "rest-api-deep-links",
-    title: "10. REST APIs, Deep Links & Payments",
-    badge: "Chapter 10 • Connecting & Monetizing",
+    title: "9. REST APIs, Deep Links & Payments",
+    badge: "Chapter 9 • Connecting & Monetizing",
     icon: "🌐",
     color: "#26A69A",
-    xPos: 58.0,
+    xPos: 52.0,
     yPos: 50,
     story: "Alex connects his app to cloud web servers, adds deep linking for marketing campaigns, configures multi-environment YAML configurations (`env.yaml`), and implements in-app purchases!",
     description: "Connect to REST APIs with Dio, handle immutable JSON code generation (`freezed`), support Universal Deep Links, multi-environment YAML configs, and RevenueCat payments.",
@@ -405,7 +363,7 @@ void main() async {
       { id: "api-4", title: "Deep Linking & Universal Links Handling (`app_links`)", completed: false },
       { id: "api-5", title: "In-App Subscriptions & Monetization with RevenueCat", completed: false }
     ],
-    codeSnippet: `# Chapter 10: Multi-Environment env.yaml & Dio Client
+    codeSnippet: `# Chapter 9: Multi-Environment env.yaml & Dio Client
 # env.yaml
 API_BASE_URL: "https://api.alexapp.com/v1"
 TIMEOUT_SECONDS: 30
@@ -427,11 +385,11 @@ dio.interceptors.add(InterceptorsWrapper(
   },
   {
     id: "firebase-supabase",
-    title: "11. Firebase & Supabase",
-    badge: "Chapter 11 • Cloud Superpowers",
+    title: "10. Firebase & Supabase",
+    badge: "Chapter 10 • Cloud Superpowers",
     icon: "🔥",
     color: "#FF9800",
-    xPos: 64.0,
+    xPos: 58.0,
     yPos: 76,
     story: "Alex discovers BaaS platforms! He adds Google & Apple social sign-in, Cloud Firestore real-time database listeners, FCM push notifications, and Supabase PostgreSQL.",
     description: "Accelerate app development with Backend-as-a-Service platforms for Auth, Cloud Databases, Realtime Streams, Push Notifications, and Storage.",
@@ -449,7 +407,7 @@ dio.interceptors.add(InterceptorsWrapper(
       { id: "baas-4", title: "Supabase PostgreSQL Database & Auth Setup", completed: false },
       { id: "baas-5", title: "FCM Push Notifications Setup", completed: false }
     ],
-    codeSnippet: `// Chapter 11: Real-Time Stream Listener with Supabase
+    codeSnippet: `// Chapter 10: Real-Time Stream Listener with Supabase
 final supabase = Supabase.instance.client;
 
 void listenToCommunityChat() {
@@ -467,11 +425,11 @@ void listenToCommunityChat() {
   },
   {
     id: "git-github",
-    title: "12. Git & GitHub",
-    badge: "Chapter 12 • Team Collaboration",
+    title: "11. Git & GitHub",
+    badge: "Chapter 11 • Team Collaboration",
     icon: "🐙",
     color: "#E0E0E0",
-    xPos: 70.0,
+    xPos: 64.0,
     yPos: 50,
     story: "Alex collaborates seamlessly using Git branching strategies, opening Pull Requests on GitHub, resolving merge conflicts, and conducting code reviews.",
     description: "Manage source code versions effectively, collaborate using Git workflows, resolve merge conflicts, and utilize GitHub Pull Requests.",
@@ -503,11 +461,11 @@ URL: git-github/index.html`,
   },
   {
     id: "performance-devtools",
-    title: "13. Performance & DevTools Profiling",
-    badge: "Chapter 13 • Speed & Memory Mastery",
+    title: "12. Performance & DevTools Profiling",
+    badge: "Chapter 12 • Speed & Memory Mastery",
     icon: "⚡",
     color: "#FF4081",
-    xPos: 76.0,
+    xPos: 70.0,
     yPos: 22,
     story: "Alex becomes a master of performance! He uses Flutter DevTools to profile CPU usage, inspect memory allocations, track widget rebuilds, and eliminate UI jank. He optimizes app bundle size down to perfection.",
     description: "Profile, debug, and optimize Flutter applications using DevTools, timeline analysis, memory leak detection, RepaintBoundary, and R8/Proguard binary shrinking.",
@@ -525,7 +483,7 @@ URL: git-github/index.html`,
       { id: "perf-4", title: "Detecting & Fixing Memory Leaks in ViewModels", completed: false },
       { id: "perf-5", title: "Minifying APK/IPA sizes with R8, Proguard & Deferred Loading", completed: false }
     ],
-    codeSnippet: `// Chapter 13: RepaintBoundary & Performance Optimization
+    codeSnippet: `// Chapter 12: RepaintBoundary & Performance Optimization
 import 'package:flutter/material.dart';
 
 class HeavySubtree extends StatelessWidget {
@@ -548,11 +506,11 @@ class HeavySubtree extends StatelessWidget {
   },
   {
     id: "ci-cd-github-actions",
-    title: "14. CI / CD GitHub Actions & YAML",
-    badge: "Chapter 14 • Automation Robot",
+    title: "13. CI / CD GitHub Actions & YAML",
+    badge: "Chapter 13 • Automation Robot",
     icon: "🚀",
     color: "#2088FF",
-    xPos: 82.0,
+    xPos: 76.0,
     yPos: 50,
     story: "No more manual building! Alex writes GitHub Actions YAML workflows (`.github/workflows/*.yml`) so every push runs `dart analyze`, executes tests, and auto-builds APK/IPA files using Fastlane.",
     description: "Automate code quality checks, static analysis, unit test runs, and APK/IPA build deployments using GitHub Actions YAML workflow pipelines.",
@@ -570,7 +528,7 @@ class HeavySubtree extends StatelessWidget {
       { id: "cicd-4", title: "Building Android APK & iOS IPA automatically in Cloud CI", completed: false },
       { id: "cicd-5", title: "Integrating Fastlane to auto-deploy to Play Store & TestFlight", completed: false }
     ],
-    codeSnippet: `# Chapter 14: .github/workflows/flutter_ci.yml
+    codeSnippet: `# Chapter 13: .github/workflows/flutter_ci.yml
 name: Flutter CI/CD Pipeline
 
 on:
@@ -598,11 +556,11 @@ jobs:
   },
   {
     id: "docker-kubernetes",
-    title: "15. Docker, Kubernetes & DevOps YAML",
-    badge: "Chapter 15 • Cloud DevOps YAML",
+    title: "14. Docker, Kubernetes & DevOps YAML",
+    badge: "Chapter 14 • Cloud DevOps YAML",
     icon: "🐳",
     color: "#0288D1",
-    xPos: 88.0,
+    xPos: 82.0,
     yPos: 76,
     story: "Alex expands his skills into Full-Stack DevOps! He packages Flutter Web apps into Docker containers, writes `docker-compose.yml`, and deploys them to Kubernetes clusters using YAML manifests.",
     description: "Containerize Flutter Web apps and backend APIs with Docker, write compose configurations, and orchestrate cloud deployments with Kubernetes YAML manifests.",
@@ -620,7 +578,7 @@ jobs:
       { id: "docker-4", title: "Nginx Ingress Controller & Auto TLS Certificates", completed: false },
       { id: "docker-5", title: "Deployment Auto-Scaling (HPA) and Rolling Updates", completed: false }
     ],
-    codeSnippet: `# Chapter 15: Kubernetes deployment.yaml for Flutter Web
+    codeSnippet: `# Chapter 14: Kubernetes deployment.yaml for Flutter Web
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -647,11 +605,11 @@ spec:
   },
   {
     id: "app-publishing",
-    title: "16. Testing, Publishing & Launch",
-    badge: "Chapter 16 • Victory & App Launch",
+    title: "15. Testing, Publishing & Launch",
+    badge: "Chapter 15 • Victory & App Launch",
     icon: "🏆",
     color: "#FFD700",
-    xPos: 94.0,
+    xPos: 88.0,
     yPos: 48,
     story: "The ultimate milestone! Alex writes robust test suites, generates release keystores, signs Android AAB & iOS IPA packages, and launches his app on Google Play Store & Apple App Store. Millions of users now enjoy his app daily!",
     description: "Ensure complete quality with Unit/Widget/Golden tests, sign production packages, submit to Google Play Store & Apple App Store, and monitor Crashlytics.",
@@ -669,7 +627,7 @@ spec:
       { id: "pub-4", title: "iOS Xcode Release Signing & App Store Connect Upload", completed: false },
       { id: "pub-5", title: "Integrating Firebase Crashlytics & Real-time Telemetry", completed: false }
     ],
-    codeSnippet: `# Chapter 16: Building Production Release Assets
+    codeSnippet: `# Chapter 15: Building Production Release Assets
 # Android App Bundle (.aab)
 flutter build appbundle --release
 
@@ -689,7 +647,7 @@ flutter build web --release`,
 const DEVELOPER_RANKS = [
   { threshold: 0, title: "Beginner Explorer 🐣", badge: "Chapter 1-3" },
   { threshold: 20, title: "Math & Dart Specialist 📐", badge: "Chapter 4-6" },
-  { threshold: 45, title: "Flutter Architect 💙", badge: "Chapter 7-10" },
-  { threshold: 70, title: "Full-Stack & DevOps Engineer 🚀", badge: "Chapter 11-14" },
+  { threshold: 45, title: "Flutter Architect 💙", badge: "Chapter 7-9" },
+  { threshold: 70, title: "Full-Stack & DevOps Engineer 🚀", badge: "Chapter 10-13" },
   { threshold: 90, title: "Senior Flutter Leader 🏆", badge: "Mastery Completed" }
 ];
