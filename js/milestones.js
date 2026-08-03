@@ -8,7 +8,7 @@ const MILESTONES_DATA = [
     icon: "🎯",
     color: "#0175C2",
     xPos: 4.0,
-    yPos: 22,
+    yPos: 32,
     story: "Meet Alex, a common man working a 9-to-5 job with no prior programming experience. One rainy evening, inspired to build his own mobile app, Alex opens a laptop and writes his very first 'Hello World' in Dart. He discovers Dart's clean syntax, strong type safety, and sound null safety.",
     description: "Master Dart - the fast, object-oriented, type-safe language optimized for client applications across mobile, web, and desktop.",
     topics: [
@@ -46,7 +46,7 @@ URL: dart/index.html`,
     icon: "📐",
     color: "#E91E63",
     xPos: 10.0,
-    yPos: 76,
+    yPos: 66,
     story: "To understand complex algorithms, computer architecture, and state machines, Alex dives into Discrete Mathematics! He masters Mathematical Logic, Set Theory, Combinatorics, Boolean Algebra, and Finite State Machines.",
     description: "Build the foundational mathematical mindset: Propositional Logic, Truth Tables, Set Operations, Combinatorics, Graph Theory, and Finite Automata.",
     topics: [
@@ -91,7 +91,7 @@ void main() {
     icon: "🔮",
     color: "#9C27B0",
     xPos: 16.0,
-    yPos: 50,
+    yPos: 49,
     story: "Armed with Discrete Math logic, Alex trains in Data Structures & Algorithms. He implements Stacks, Queues, Binary Search Trees, and Graph traversals natively in Dart.",
     description: "Master Data Structures and Algorithms implemented natively in Dart to solve complex problems and optimize Flutter app performance.",
     topics: [
@@ -135,7 +135,7 @@ void main() {
     icon: "💙",
     color: "#02569B",
     xPos: 22.0,
-    yPos: 22,
+    yPos: 32,
     story: "Alex opens Flutter for the first time! He learns that 'Everything is a Widget' and masters project configuration via `pubspec.yaml`, `analysis_options.yaml`, and `l10n.yaml` for assets, fonts, dependencies, and lint rules.",
     description: "Understand the core UI framework and project configuration: Widgets, Constraints, Layouts, RenderTree, and project configuration using YAML files.",
     topics: [
@@ -174,7 +174,7 @@ URL: YAML/index.html`,
     icon: "🔌",
     color: "#FF6F00",
     xPos: 28.0,
-    yPos: 50,
+    yPos: 49,
     story: "Alex encounters a challenge: his app requires custom hardware sensors, iOS Live Activities, and Android Foreground Services. He masters `MethodChannel` & `EventChannel`, type-safe interop with `Pigeon`, and C/C++ interop via `dart:ffi`!",
     description: "Bridge Flutter with native Swift/Objective-C (iOS) and Kotlin/Java (Android) codebases using Method Channels, Event Channels, Pigeon, and FFI.",
     topics: [
@@ -221,7 +221,7 @@ class BatteryService {
     icon: "🏛️",
     color: "#673AB7",
     xPos: 34.0,
-    yPos: 76,
+    yPos: 66,
     story: "Alex lands a role on a large engineering team! To keep code clean and scalable, he structures the app into Presentation, Domain, and Data layers. He uses `get_it` for Dependency Injection and structures multi-package workspaces with `melos`.",
     description: "Architect production Flutter applications using 3-layer Clean Architecture (Presentation, Domain, Data), Dependency Injection, and Multi-Package Monorepos.",
     topics: [
@@ -270,7 +270,7 @@ void setupLocator() {
     icon: "🧠",
     color: "#00B0FF",
     xPos: 40.0,
-    yPos: 50,
+    yPos: 49,
     story: "As Alex's app grows, passing variables down 10 widget levels becomes messy. Alex learns Riverpod and BLoC to separate UI from business logic cleanly.",
     description: "Manage global application state cleanly, decouple business logic from presentation, and optimize UI re-rendering efficiency.",
     topics: [
@@ -307,7 +307,7 @@ class LearningProgressNotifier extends _$LearningProgressNotifier {
     icon: "💾",
     color: "#4CAF50",
     xPos: 46.0,
-    yPos: 22,
+    yPos: 32,
     story: "Alex wants his users to access their data seamless offline. He masters `shared_preferences`, secure encrypted storage, relational SQLite (`drift`), fast NoSQL (`Hive` & `Isar`), and cache-first offline synchronization.",
     description: "Store persistent user data locally using key-value stores, relational databases, fast NoSQL databases, and implement cache-first sync.",
     topics: [
@@ -345,7 +345,7 @@ void main() async {
     icon: "🌐",
     color: "#26A69A",
     xPos: 52.0,
-    yPos: 50,
+    yPos: 49,
     story: "Alex connects his app to cloud web servers, adds deep linking for marketing campaigns, configures multi-environment YAML configurations (`env.yaml`), and implements in-app purchases!",
     description: "Connect to REST APIs with Dio, handle immutable JSON code generation (`freezed`), support Universal Deep Links, multi-environment YAML configs, and RevenueCat payments.",
     topics: [
@@ -390,7 +390,7 @@ dio.interceptors.add(InterceptorsWrapper(
     icon: "🔥",
     color: "#FF9800",
     xPos: 58.0,
-    yPos: 76,
+    yPos: 66,
     story: "Alex discovers BaaS platforms! He adds Google & Apple social sign-in, Cloud Firestore real-time database listeners, FCM push notifications, and Supabase PostgreSQL.",
     description: "Accelerate app development with Backend-as-a-Service platforms for Auth, Cloud Databases, Realtime Streams, Push Notifications, and Storage.",
     topics: [
@@ -430,7 +430,7 @@ void listenToCommunityChat() {
     icon: "🐙",
     color: "#E0E0E0",
     xPos: 64.0,
-    yPos: 50,
+    yPos: 49,
     story: "Alex collaborates seamlessly using Git branching strategies, opening Pull Requests on GitHub, resolving merge conflicts, and conducting code reviews.",
     description: "Manage source code versions effectively, collaborate using Git workflows, resolve merge conflicts, and utilize GitHub Pull Requests.",
     topics: [
@@ -466,7 +466,7 @@ URL: git-github/index.html`,
     icon: "⚡",
     color: "#FF4081",
     xPos: 70.0,
-    yPos: 22,
+    yPos: 32,
     story: "Alex becomes a master of performance! He uses Flutter DevTools to profile CPU usage, inspect memory allocations, track widget rebuilds, and eliminate UI jank. He optimizes app bundle size down to perfection.",
     description: "Profile, debug, and optimize Flutter applications using DevTools, timeline analysis, memory leak detection, RepaintBoundary, and R8/Proguard binary shrinking.",
     topics: [
@@ -511,7 +511,7 @@ class HeavySubtree extends StatelessWidget {
     icon: "🚀",
     color: "#2088FF",
     xPos: 76.0,
-    yPos: 50,
+    yPos: 49,
     story: "No more manual building! Alex writes GitHub Actions YAML workflows (`.github/workflows/*.yml`) so every push runs `dart analyze`, executes tests, and auto-builds APK/IPA files using Fastlane.",
     description: "Automate code quality checks, static analysis, unit test runs, and APK/IPA build deployments using GitHub Actions YAML workflow pipelines.",
     topics: [
@@ -561,7 +561,7 @@ jobs:
     icon: "🐳",
     color: "#0288D1",
     xPos: 82.0,
-    yPos: 76,
+    yPos: 66,
     story: "Alex expands his skills into Full-Stack DevOps! He packages Flutter Web apps into Docker containers, writes `docker-compose.yml`, and deploys them to Kubernetes clusters using YAML manifests.",
     description: "Containerize Flutter Web apps and backend APIs with Docker, write compose configurations, and orchestrate cloud deployments with Kubernetes YAML manifests.",
     topics: [
@@ -610,7 +610,7 @@ spec:
     icon: "🏆",
     color: "#FFD700",
     xPos: 88.0,
-    yPos: 48,
+    yPos: 49,
     story: "The ultimate milestone! Alex writes robust test suites, generates release keystores, signs Android AAB & iOS IPA packages, and launches his app on Google Play Store & Apple App Store. Millions of users now enjoy his app daily!",
     description: "Ensure complete quality with Unit/Widget/Golden tests, sign production packages, submit to Google Play Store & Apple App Store, and monitor Crashlytics.",
     topics: [

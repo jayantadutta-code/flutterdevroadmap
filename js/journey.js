@@ -61,11 +61,11 @@ class JourneyEngine {
     const H = this.container.clientHeight || 500;
 
     MILESTONES_DATA.forEach((ms, index) => {
-      // Smart badge vertical position (above vs below icon) to prevent text collision
+      // Smart badge vertical position (above vs below icon) to prevent text collision with HUD & Bottom Bar
       let isAbove = false;
-      if (ms.yPos >= 60) {
+      if (ms.yPos >= 55) {
         isAbove = true;
-      } else if (ms.yPos <= 35) {
+      } else if (ms.yPos <= 38) {
         isAbove = false;
       } else {
         isAbove = (index % 2 === 1);
