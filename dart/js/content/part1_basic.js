@@ -871,28 +871,42 @@ void main() async {
         </p>
 
         <h3 class="section-h3">Comments in Dart</h3>
-        <p class="topic-paragraph">Dart supports single-line, multi-line, and documentation comments (which format into markdown for dartdoc):</p>
+        <p class="topic-paragraph">
+          Dart supports single-line, multi-line, documentation comments (which format into markdown for <code>dartdoc</code>), as well as IDE-integrated <strong>TODO</strong> and <strong>FIXME</strong> annotations for tracking upcoming tasks and urgent bug fixes:
+        </p>
+
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.8rem; font-size: 0.88rem; line-height: 1.6;">
+          <li><code>// Comment</code> &mdash; Single-line comment.</li>
+          <li><code>/* Comment */</code> &mdash; Multi-line block comment (can be nested in Dart).</li>
+          <li><code>/// Comment</code> &mdash; Documentation comment (supports Markdown & <code>[Symbol]</code> references).</li>
+          <li><code>// TODO: ...</code> &mdash; Indicates a planned feature, pending refactor, or future task. Highlighted in IDEs.</li>
+          <li><code>// FIXME: ...</code> &mdash; Indicates a known bug, temporary hack, or urgent issue requiring immediate fix.</li>
+        </ul>
         
         <div class="code-snippet-box">
           <div class="code-snippet-header">
             <span>comments.dart</span>
             <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
           </div>
-          <pre><code class="language-dart">// Single-line comment: Execution starts here
+          <pre><code class="language-dart">// Single-line comment: Program entrypoint
 void main() {
   /*
      Multi-line comment:
      Dart programs require a main() top-level function.
   */
   
-  /// Documentation comment for [greetUser]
+  /// Documentation comment for [main]
   print('Welcome to Dart Cookbook 2026!');
+
+  // TODO: Add user authentication and profile initialization
+  
+  // FIXME: Handle potential null values when network drops
 }</code></pre>
         </div>
 
         <div class="callout-box tip">
           <i class="fa-solid fa-lightbulb callout-icon"></i>
-          <div><strong>Pro-Tip:</strong> Always use triple slashes <code>///</code> for docstrings. References inside square brackets like <code>[greetUser]</code> will be automatically hyperlinked in generated documentation.</div>
+          <div><strong>Pro-Tip:</strong> Modern IDEs (VS Code & Android Studio) index <code>// TODO:</code> and <code>// FIXME:</code> tags into a dedicated task list panel. Use <code>///</code> triple slashes for docstrings to generate HTML docs via <code>dart doc</code>.</div>
         </div>
       `
     },
