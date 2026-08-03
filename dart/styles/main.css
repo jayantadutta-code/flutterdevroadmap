@@ -753,9 +753,50 @@ h1, h2, h3, h4, h5, h6 {
 
 .page-inner-content {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto !important;
   padding-top: 1rem;
   padding-right: 0.5rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Enable vertical scrolling on all overflowed page containers & hide scrollbars visually */
+.page-inner-content,
+.page-face,
+.cover-container,
+.chapter-title-page,
+.reader-container,
+.reader-wrapper,
+.sidebar-content,
+.toc-content,
+.search-results,
+.bookmarks-list,
+.modal-body {
+  overflow-y: auto !important;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+/* Hide scrollbars visually for Chrome, Safari, Opera, WebKit */
+.page-inner-content::-webkit-scrollbar,
+.page-face::-webkit-scrollbar,
+.cover-container::-webkit-scrollbar,
+.chapter-title-page::-webkit-scrollbar,
+.reader-container::-webkit-scrollbar,
+.reader-wrapper::-webkit-scrollbar,
+.sidebar-content::-webkit-scrollbar,
+.toc-content::-webkit-scrollbar,
+.search-results::-webkit-scrollbar,
+.bookmarks-list::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 .page-footer-strip {
