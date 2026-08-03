@@ -1830,35 +1830,263 @@ Multi-line String""";
       `
     },
     {
-      pageId: "p1_regex_ops",
-      header: "1.4 REGEX & OPERATORS",
+      pageId: "p1_string_buffer",
+      header: "1.3.3 STRINGBUFFER IN DART",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-calculator"></i> 4. Regular Expressions & Operators</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-layer-group"></i> StringBuffer in Dart</h2>
+
+        <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
-          Dart features <code>RegExp</code> for pattern matching, validation, and string parsing.
+          <code>StringBuffer</code> is a class in Dart used to efficiently build and modify strings. It is faster than repeatedly concatenating strings using the <code>+</code> operator because it avoids creating multiple temporary string objects in memory.
         </p>
+
+        <h3 class="section-h3">Why Use StringBuffer?</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.5;">
+          <li><strong>Efficient for creating large strings:</strong> Minimizes garbage collection overhead.</li>
+          <li><strong>Reduces memory usage:</strong> Reuses internal buffers.</li>
+          <li><strong>Improves performance:</strong> Fast appending inside loops.</li>
+        </ul>
+
+        <h3 class="section-h3">Creating a StringBuffer</h3>
+        <p class="topic-paragraph">
+          <code>StringBuffer buffer = StringBuffer();</code><br>
+          Or with an initial value:<br>
+          <code>StringBuffer buffer = StringBuffer("Hello");</code>
+        </p>
+
+        <h3 class="section-h3">Writing Text</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.6rem; font-size: 0.85rem; line-height: 1.6;">
+          <li><code>write()</code> — Adds text without a newline.</li>
+          <li><code>writeln()</code> — Adds text followed by a newline.</li>
+          <li><code>writeAll()</code> — Writes all elements of an iterable with an optional separator.</li>
+          <li><code>writeCharCode()</code> — Writes a character using its Unicode value (e.g. 65 for 'A').</li>
+        </ul>
+
+        <h3 class="section-h3">Common Methods & Properties</h3>
+        <table class="content-table" style="margin-bottom: 0.8rem;">
+          <thead>
+            <tr>
+              <th>Method / Property</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>write()</code></td><td>Appends text without newline</td></tr>
+            <tr><td><code>writeln()</code></td><td>Appends text with a newline</td></tr>
+            <tr><td><code>writeAll()</code></td><td>Appends all elements from an iterable</td></tr>
+            <tr><td><code>writeCharCode()</code></td><td>Appends a Unicode character</td></tr>
+            <tr><td><code>toString()</code></td><td>Returns the final concatenated String</td></tr>
+            <tr><td><code>clear()</code></td><td>Removes all contents (resets buffer)</td></tr>
+            <tr><td><code>length</code></td><td>Number of characters currently in buffer</td></tr>
+            <tr><td><code>isEmpty</code> / <code>isNotEmpty</code></td><td>Checks if buffer has 0 or &gt;0 characters</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="section-h3">String vs StringBuffer</h3>
+        <table class="content-table" style="margin-bottom: 0.8rem;">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>String</th>
+              <th>StringBuffer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Mutability</strong></td><td>Immutable (No)</td><td>Mutable (Yes)</td></tr>
+            <tr><td><strong>Performance</strong></td><td>Slower for many appends</td><td>Faster for repeated appends</td></tr>
+            <tr><td><strong>Memory Usage</strong></td><td>Creates temporary objects</td><td>Memory-efficient buffer</td></tr>
+            <tr><td><strong>Best Use</strong></td><td>Small or fixed text</td><td>Large or dynamically built text</td></tr>
+          </tbody>
+        </table>
 
         <div class="code-snippet-box">
           <div class="code-snippet-header">
-            <span>regex.dart</span>
+            <span>string_buffer_demo.dart</span>
             <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
           </div>
           <pre><code class="language-dart">void main() {
-  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  print('Valid email? \${emailRegex.hasMatch(\'dart@dev.org\')}');
-  
-  final numPattern = RegExp(r'\d+');
-  final matches = numPattern.allMatches('App v3 built with Dart 2026');
-  for (final m in matches) {
-    print('Match: \${m.group(0)}');
-  }
+  StringBuffer buffer = StringBuffer();
+
+  buffer.writeln("Welcome");
+  buffer.write("Learn ");
+  buffer.write("Dart ");
+  buffer.writeAll(["with", "Flutter"], " ");
+  buffer.write(" ");
+  buffer.writeCharCode(65); // 'A'
+
+  print(buffer.toString());
+  print("Length: \${buffer.length}");
+
+  buffer.clear();
+  print("Is Empty after clear? \${buffer.isEmpty}");
 }</code></pre>
         </div>
+      `
+    },
+    {
+      pageId: "p1_regexp_fundamentals",
+      header: "1.4 REGULAR EXPRESSION (REGEXP): FUNDAMENTALS",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-magnifying-glass"></i> Regular Expression (RegExp) in Dart</h2>
 
-        <h3 class="section-h3">Key Dart Operators</h3>
+        <h3 class="section-h3">Definition</h3>
         <p class="topic-paragraph">
-          Dart includes standard arithmetic, relational, type test (<code>is</code>, <code>is!</code>), cascade (<code>..</code>), and null-aware operators.
+          A Regular Expression (<code>RegExp</code>) is a sequence of characters that defines a search pattern. In Dart, the <code>RegExp</code> class is used to search, validate, extract, replace, or split text based on specific patterns.
         </p>
+
+        <h3 class="section-h3">Why Use RegExp?</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.5;">
+          <li>Validate user input (email, phone number, password, etc.)</li>
+          <li>Search for specific text or find all matches in a string</li>
+          <li>Replace or sanitize text</li>
+          <li>Split strings using dynamic patterns</li>
+        </ul>
+
+        <h3 class="section-h3">Creating a RegExp & Raw String (r'')</h3>
+        <p class="topic-paragraph">
+          It is recommended to use raw strings (<code>r''</code>) because backslashes (<code>\\</code>) are treated literally without needing double escapes.
+        </p>
+        <p class="topic-paragraph">
+          <strong>Example:</strong> <code>RegExp regExp = RegExp(r'\\d');</code>
+        </p>
+
+        <h3 class="section-h3">Common RegExp Methods</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.6;">
+          <li><code>hasMatch(String)</code> — Checks whether a pattern exists (returns <code>bool</code>).</li>
+          <li><code>firstMatch(String)</code> — Returns the first match object (<code>Match?</code>).</li>
+          <li><code>allMatches(String)</code> — Returns all matches (<code>Iterable&lt;Match&gt;</code>).</li>
+          <li><code>stringMatch(String)</code> — Returns the matched string directly (<code>String?</code>).</li>
+        </ul>
+
+        <h3 class="section-h3">Using RegExp with String Methods</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.6;">
+          <li><code>text.replaceAll(RegExp(r'\\d'), '*')</code> — Replaces all digits with asterisks.</li>
+          <li><code>text.split(RegExp(r'[,;]'))</code> — Splits string by multiple delimiters.</li>
+        </ul>
+
+        <h3 class="section-h3">Common Match Methods</h3>
+        <table class="content-table" style="margin-bottom: 0.8rem;">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>group(0)</code></td><td>Entire matched text</td></tr>
+            <tr><td><code>group(1)</code></td><td>First captured group</td></tr>
+            <tr><td><code>start</code></td><td>Starting index of match in input string</td></tr>
+            <tr><td><code>end</code></td><td>Ending index of match in input string</td></tr>
+            <tr><td><code>groups(List&lt;int&gt;)</code></td><td>Returns multiple specified captured groups</td></tr>
+          </tbody>
+        </table>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>regexp_fundamentals_demo.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  RegExp regExp = RegExp(r'\\d+');
+
+  // hasMatch & firstMatch
+  print('hasMatch ("Age: 25"): \${regExp.hasMatch("Age: 25")}');
+  Match? match = regExp.firstMatch("Age: 25");
+  print('firstMatch group(0): \${match?.group(0)}');
+
+  // allMatches
+  Iterable<Match> matches = regExp.allMatches("10 20 30");
+  for (var m in matches) {
+    print('Match: \${m.group(0)} (from \${m.start} to \${m.end})');
+  }
+
+  // String integration
+  String text = "Apple,Banana;Orange";
+  List<String> fruits = text.split(RegExp(r'[,;]'));
+  print('Split Fruits: \$fruits');
+}</code></pre>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_regexp_patterns_options",
+      header: "1.4.1 REGEXP PATTERNS, CONSTRUCTOR & VALIDATION",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-code"></i> RegExp Patterns, Options & Practical Examples</h2>
+
+        <h3 class="section-h3">Common RegExp Patterns</h3>
+        <div style="max-height: 220px; overflow-y: auto; margin-bottom: 0.8rem;">
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th>Pattern</th>
+                <th>Meaning</th>
+                <th>Example Match</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.</code></td><td>Any character</td><td>a, 1, @</td></tr>
+              <tr><td><code>\\d</code></td><td>Digit (0–9)</td><td>5</td></tr>
+              <tr><td><code>\\D</code></td><td>Non-digit</td><td>A</td></tr>
+              <tr><td><code>\\w</code></td><td>Word character</td><td>A, a, 0, _</td></tr>
+              <tr><td><code>\\W</code></td><td>Non-word character</td><td>@, #</td></tr>
+              <tr><td><code>\\s</code></td><td>Whitespace</td><td>Space, Tab</td></tr>
+              <tr><td><code>\\S</code></td><td>Non-whitespace</td><td>A, 5</td></tr>
+              <tr><td><code>[abc]</code></td><td>a, b, or c</td><td>a</td></tr>
+              <tr><td><code>[^abc]</code></td><td>Not a, b, or c</td><td>d</td></tr>
+              <tr><td><code>[A-Z]</code></td><td>Uppercase letter</td><td>G</td></tr>
+              <tr><td><code>[a-z]</code></td><td>Lowercase letter</td><td>m</td></tr>
+              <tr><td><code>[0-9]</code></td><td>Digit</td><td>7</td></tr>
+              <tr><td><code>+</code></td><td>One or more</td><td>123</td></tr>
+              <tr><td><code>*</code></td><td>Zero or more</td><td>"", aaa</td></tr>
+              <tr><td><code>?</code></td><td>Zero or one</td><td>a</td></tr>
+              <tr><td><code>{3}</code></td><td>Exactly 3 times</td><td>111</td></tr>
+              <tr><td><code>{2,5}</code></td><td>2 to 5 times</td><td>1234</td></tr>
+              <tr><td><code>^</code></td><td>Start of string</td><td>Hello</td></tr>
+              <tr><td><code>$</code></td><td>End of string</td><td>World</td></tr>
+              <tr><td><code>|</code></td><td>OR operator</td><td>cat|dog</td></tr>
+              <tr><td><code>()</code></td><td>Grouping</td><td>(ab)+</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="section-h3">RegExp Constructor Options</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.6;">
+          <li><code>caseSensitive: false</code> — Ignores letter casing (matches <code>dart</code>, <code>DART</code>, <code>Dart</code>).</li>
+          <li><code>multiLine: true</code> — Allows <code>^</code> and <code>$</code> to match start/end of each line.</li>
+          <li><code>unicode: true</code> — Enables Unicode character support.</li>
+          <li><code>dotAll: true</code> — Makes <code>.</code> match newline characters (<code>\\n</code>) as well.</li>
+        </ul>
+
+        <h3 class="section-h3">Practical Real-World Validations</h3>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>regexp_validations.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  // 1. Email Validation
+  String email = "user@gmail.com";
+  bool validEmail = RegExp(r'^[\\w.-]+@[\\w-]+\\.[A-Za-z]{2,}\$').hasMatch(email);
+  print('Valid Email? \$validEmail');
+
+  // 2. Phone Number Validation
+  String phone = "9876543210";
+  bool validPhone = RegExp(r'^\\d{10}\$').hasMatch(phone);
+  print('Valid 10-digit Phone? \$validPhone');
+
+  // 3. Password Validation (min 8 chars, 1 uppercase, 1 lowercase, 1 digit)
+  String password = "Flutter@123";
+  bool validPassword = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}\$').hasMatch(password);
+  print('Valid Password? \$validPassword');
+
+  // 4. Remove All Digits
+  String text = "A1B2C3";
+  String cleanText = text.replaceAll(RegExp(r'\\d'), "");
+  print('Removed Digits: \$cleanText');
+}</code></pre>
+        </div>
       `
     },
     {
