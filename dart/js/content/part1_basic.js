@@ -1537,46 +1537,294 @@ void main() {
     },
     {
       pageId: "p1_num_str",
-      header: "1.3 NUMBERS & STRINGS",
+      header: "1.3 NUMBERS IN DART",
       content: `
-        <h2 class="section-h2"><i class="fa-solid fa-hashtag"></i> 3. Numbers, Strings & StringBuffer</h2>
+        <h2 class="section-h2"><i class="fa-solid fa-hashtag"></i> 3. Numbers in Dart</h2>
         <p class="topic-paragraph">
-          Dart numbers are represented by <code>int</code> (64-bit integer) and <code>double</code> (64-bit IEEE double-precision float), both extending <code>num</code>.
+          Numbers in Dart are represented by the <code>num</code> type, which has two primary subtypes: <code>int</code> and <code>double</code>.
+        </p>
+
+        <h3 class="section-h3">1. int (Integer)</h3>
+        <p class="topic-paragraph">
+          Stores whole numbers (no decimal point). Can store positive, negative, and zero values.
         </p>
 
         <div class="code-snippet-box">
           <div class="code-snippet-header">
-            <span>numbers.dart</span>
+            <span>int_examples.dart</span>
             <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
           </div>
           <pre><code class="language-dart">void main() {
-  int count = 10;
-  double price = 99.99;
-  num val = 12; // can hold int or double
-  
-  print('Bitwise AND: \${count & 3}');
-  print('Parsed int: \${int.parse(\'42\')}');
-  print('Formatted double: \${price.toStringAsFixed(1)}');
+  int age = 25;
+  int temperature = -10;
+  int count = 0;
+
+  print('Age: \$age, Temperature: \$temperature, Count: \$count');
 }</code></pre>
         </div>
 
-        <h3 class="section-h3">Strings & StringBuffer</h3>
+        <h3 class="section-h3">2. double (Floating-Point Number)</h3>
         <p class="topic-paragraph">
-          Strings are UTF-16 code units. For high-performance repetitive concatenation, use <code>StringBuffer</code> instead of repeatedly using <code>+</code> operator.
+          Stores decimal (fractional) numbers. Used for values that require a decimal point.
         </p>
 
         <div class="code-snippet-box">
           <div class="code-snippet-header">
-            <span>string_buffer.dart</span>
+            <span>double_examples.dart</span>
             <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
           </div>
           <pre><code class="language-dart">void main() {
-  final buffer = StringBuffer();
-  buffer.write('Dart ');
-  buffer.writeAll(['Cookbook ', '2026']);
-  
-  String result = buffer.toString();
-  print('Result: $result (Length: \${buffer.length})');
+  double price = 99.99;
+  double pi = 3.14159;
+  double temperature = -12.5;
+
+  print('Price: \$price, Pi: \$pi, Temp: \$temperature');
+}</code></pre>
+        </div>
+
+        <h3 class="section-h3">3. num (Parent Numeric Type)</h3>
+        <p class="topic-paragraph">
+          Base type of both <code>int</code> and <code>double</code>. Can store either an integer or a decimal value.
+        </p>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>num_examples.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  num a = 100;      // int
+  num b = 99.99;    // double
+
+  print('num a: \$a (\${a.runtimeType})');
+  print('num b: \$b (\${b.runtimeType})');
+}</code></pre>
+        </div>
+
+        <h3 class="section-h3"><i class="fa-solid fa-sitemap"></i> Class Hierarchy</h3>
+        <div class="callout-box info" style="font-family: monospace; white-space: pre; line-height: 1.5; background: rgba(1, 117, 194, 0.12); border-left: 4px solid var(--accent-cyan); font-size: 0.88rem; margin: 0.8rem 0;">
+Object
+   │
+   └── num
+       ├── int
+       └── double
+        </div>
+
+        <h3 class="section-h3"><i class="fa-solid fa-list-check"></i> Summary</h3>
+        <table class="content-table" style="margin-bottom: 0.8rem;">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>int</code></td>
+              <td>Stores whole numbers (e.g., 25, -10, 0).</td>
+            </tr>
+            <tr>
+              <td><code>double</code></td>
+              <td>Stores decimal numbers (e.g., 99.99, 3.14159).</td>
+            </tr>
+            <tr>
+              <td><code>num</code></td>
+              <td>Parent type that can store both <code>int</code> and <code>double</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      `
+    },
+    {
+      pageId: "p1_string_fundamentals",
+      header: "1.3.1 STRING IN DART: FUNDAMENTALS",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-font"></i> String in Dart</h2>
+        <p class="topic-paragraph">
+          A <code>String</code> is a sequence of characters used to store text in Dart. Strings are enclosed in single quotes (<code>' '</code>), double quotes (<code>" "</code>), triple single quotes (<code>''' '''</code>), or triple double quotes (<code>""" """</code>).
+        </p>
+
+        <h3 class="section-h3">Subtopics of String in Dart</h3>
+
+        <h3 class="section-h3">1. String Definition</h3>
+        <p class="topic-paragraph">
+          A String stores text (characters). It is an object of the <code>String</code> class.
+        </p>
+        <p class="topic-paragraph">
+          <strong>Example:</strong> <code>String name = "Jayanta";</code>
+        </p>
+
+        <h3 class="section-h3">2. Creating Strings</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.6rem; font-size: 0.85rem;">
+          <li>Using single quotes (<code>' '</code>)</li>
+          <li>Using double quotes (<code>" "</code>)</li>
+          <li>Using triple single quotes (<code>''' '''</code>)</li>
+          <li>Using triple double quotes (<code>""" """</code>)</li>
+        </ul>
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>creating_strings.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  String a = 'Hello';
+  String b = "World";
+  String c = '''Multi-line
+String''';
+  String d = """Another
+Multi-line String""";
+
+  print(a);
+  print(b);
+  print(c);
+  print(d);
+}</code></pre>
+        </div>
+
+        <h3 class="section-h3">3. String Interpolation</h3>
+        <p class="topic-paragraph">
+          Insert variables or expressions into a string using <code>$</code> and <code>\${}</code>.
+        </p>
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>string_interpolation.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  String name = "Rahul";
+  int age = 20;
+
+  print("Name: \$name");
+  print("Age next year: \${age + 1}");
+}</code></pre>
+        </div>
+
+        <h3 class="section-h3">4. String Concatenation</h3>
+        <p class="topic-paragraph">
+          Combine two or more strings using <code>+</code> or adjacent string literals.
+        </p>
+
+        <h3 class="section-h3">5. Escape Characters</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.6rem; font-size: 0.85rem; line-height: 1.5;">
+          <li><code>\\n</code> → New line</li>
+          <li><code>\\t</code> → Tab</li>
+          <li><code>\\'</code> → Single quote</li>
+          <li><code>\\"</code> → Double quote</li>
+          <li><code>\\\\</code> → Backslash</li>
+        </ul>
+
+        <h3 class="section-h3">6. Raw String</h3>
+        <p class="topic-paragraph">
+          Prefix the string with <code>r</code> to ignore escape sequences.
+        </p>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>string_basics.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  // Concatenation
+  String first = "Hello";
+  String second = "World";
+  print(first + " " + second);
+
+  // Escape Characters
+  print("Hello\\nWorld");
+  print("Flutter\\tDart");
+
+  // Raw String
+  String path = r"C:\\Users\\Jayanta\\Documents";
+  print(path);
+}</code></pre>
+        </div>
+      `
+    },
+    {
+      pageId: "p1_string_methods_conversions",
+      header: "1.3.2 STRING PROPERTIES, METHODS & CONVERSIONS",
+      content: `
+        <h2 class="section-h2"><i class="fa-solid fa-sliders"></i> String Properties, Methods & Conversions</h2>
+
+        <h3 class="section-h3">7. Common String Properties</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.6rem; font-size: 0.85rem;">
+          <li><code>length</code></li>
+          <li><code>isEmpty</code></li>
+          <li><code>isNotEmpty</code></li>
+        </ul>
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>string_properties.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  String text = "Flutter";
+
+  print(text.length);     // 7
+  print(text.isEmpty);    // false
+  print(text.isNotEmpty); // true
+}</code></pre>
+        </div>
+
+        <h3 class="section-h3">8. Common String Methods</h3>
+        <p class="topic-paragraph">
+          Dart provides rich built-in utility methods on the <code>String</code> class:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; font-size: 0.82rem; margin-bottom: 0.8rem; background: rgba(255,255,255,0.03); padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+          <div><code>toUpperCase()</code></div>
+          <div><code>toLowerCase()</code></div>
+          <div><code>trim()</code></div>
+          <div><code>trimLeft()</code></div>
+          <div><code>trimRight()</code></div>
+          <div><code>contains()</code></div>
+          <div><code>startsWith()</code></div>
+          <div><code>endsWith()</code></div>
+          <div><code>replaceAll()</code></div>
+          <div><code>replaceFirst()</code></div>
+          <div><code>split()</code></div>
+          <div><code>substring()</code></div>
+          <div><code>indexOf()</code></div>
+          <div><code>lastIndexOf()</code></div>
+          <div><code>codeUnitAt()</code></div>
+          <div><code>compareTo()</code></div>
+          <div><code>padLeft()</code></div>
+          <div><code>padRight()</code></div>
+        </div>
+
+        <h3 class="section-h3">9. Converting Between String and Other Types</h3>
+        <ul style="margin-left: 1.2rem; margin-bottom: 0.6rem; font-size: 0.85rem; line-height: 1.6;">
+          <li>String → int: <code>int.parse("25")</code></li>
+          <li>String → double: <code>double.parse("99.99")</code></li>
+          <li>int → String: <code>100.toString()</code></li>
+          <li>double → String: <code>3.14.toString()</code></li>
+        </ul>
+
+        <h3 class="section-h3">10. String Comparison</h3>
+        <p class="topic-paragraph">
+          Compare strings using <code>==</code> or <code>compareTo()</code>.
+        </p>
+        <p class="topic-paragraph">
+          <strong>Example:</strong> <code>print("Dart" == "Dart");</code>
+        </p>
+
+        <div class="code-snippet-box">
+          <div class="code-snippet-header">
+            <span>string_methods_conversions.dart</span>
+            <button class="code-btn" onclick="runCodeSnippet(this)"><i class="fa-solid fa-play"></i> Run</button>
+          </div>
+          <pre><code class="language-dart">void main() {
+  // Type Conversions
+  int age = int.parse("25");
+  double price = double.parse("99.99");
+
+  String a = 100.toString();
+  String b = 3.14.toString();
+
+  print('Parsed int: \$age, double: \$price');
+  print('Converted to String: \$a, \$b');
+
+  // String Comparison
+  print("Dart" == "Dart");
 }</code></pre>
         </div>
       `
