@@ -558,14 +558,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page-front {
-  transform: rotateY(0deg) translateZ(1px);
+  transform: rotateY(0deg);
   border-radius: 0 12px 12px 0;
   box-shadow: inset 20px 0 35px rgba(0, 0, 0, 0.35), 10px 15px 30px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .page-back {
-  transform: rotateY(180deg) translateZ(1px);
+  transform: rotateY(180deg);
   border-radius: 12px 0 0 12px;
   box-shadow: inset -20px 0 35px rgba(0, 0, 0, 0.35), -10px 15px 30px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -573,34 +573,30 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Interactive 3D corner lift on page hover */
 .paper-sheet:not(.flipped) .page-front:hover {
-  transform: rotateY(-4deg) translateZ(8px);
+  transform: rotateY(-4deg);
   box-shadow: inset 22px 0 40px rgba(0, 0, 0, 0.4), 15px 22px 42px rgba(0, 0, 0, 0.5);
 }
 
 .paper-sheet.flipped .page-back:hover {
-  transform: rotateY(176deg) translateZ(8px);
+  transform: rotateY(176deg);
   box-shadow: inset -22px 0 40px rgba(0, 0, 0, 0.4), -15px 22px 42px rgba(0, 0, 0, 0.5);
 }
 
-/* 3D WebKit Trackpad 2-Finger Hit-Testing & Pointer-Events Fix for Odd & Even Pages */
+/* Pointer Events for Active Front/Back Faces */
 .paper-sheet:not(.flipped) .page-front {
-  pointer-events: auto !important;
-  visibility: visible !important;
+  pointer-events: auto;
 }
 
 .paper-sheet:not(.flipped) .page-back {
-  pointer-events: none !important;
-  visibility: hidden !important;
+  pointer-events: none;
 }
 
 .paper-sheet.flipped .page-back {
-  pointer-events: auto !important;
-  visibility: visible !important;
+  pointer-events: auto;
 }
 
 .paper-sheet.flipped .page-front {
-  pointer-events: none !important;
-  visibility: hidden !important;
+  pointer-events: none;
 }
 
 .corner-curl-hint {

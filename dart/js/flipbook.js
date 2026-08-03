@@ -87,10 +87,83 @@ class FlipbookEngine {
 
       // Key Navigation
       document.addEventListener("keydown", (e) => {
-        if (document.querySelector(".modal-overlay.active")) return;
-        if (e.key === "ArrowLeft") this.prevPage();
-        if (e.key === "ArrowRight") this.nextPage();
+        if (document.querySelector(".sidebar.active") || document.querySelector(".modal-overlay.active")) return;
+        if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+        if (e.key === "ArrowLeft" || e.key === "PageUp") this.prevPage();
+        if (e.key === "ArrowRight" || e.key === "PageDown") this.nextPage();
       });
+
+      // Mouse Wheel Scroll Page Turning
+      let lastWheelTime = 0;
+      const wheelCooldown = 550;
+      const flipbookWrapper = document.getElementById("flipbook-wrapper");
+
+      if (flipbookWrapper) {
+        flipbookWrapper.addEventListener("wheel", (e) => {
+          if (this.mode !== 'flipbook') return;
+          if (document.querySelector(".sidebar.active")) return;
+
+          const scrollableContent = e.target.closest(".page-inner-content, .page-content");
+          if (scrollableContent) {
+            const { scrollTop, scrollHeight, clientHeight } = scrollableContent;
+            const isOverflowing = scrollHeight > clientHeight + 5;
+            if (isOverflowing) {
+              const atBottom = scrollTop + clientHeight >= scrollHeight - 5;
+              const atTop = scrollTop <= 5;
+              if (e.deltaY > 0 && !atBottom) return;
+              if (e.deltaY < 0 && !atTop) return;
+            }
+          }
+
+          const now = Date.now();
+          if (now - lastWheelTime < wheelCooldown) return;
+
+          const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+          if (Math.abs(delta) < 15) return;
+
+          if (delta > 0) {
+            lastWheelTime = now;
+            this.nextPage();
+          } else if (delta < 0) {
+            lastWheelTime = now;
+            this.prevPage();
+          }
+        }, { passive: true });
+      }
+
+      // Mouse Drag / Touch Swipe Page Turning
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let isDragging = false;
+      const bookViewport = document.querySelector(".book-viewport") || flipbookWrapper;
+
+      if (bookViewport) {
+        bookViewport.addEventListener("mousedown", (e) => {
+          if (this.mode !== 'flipbook') return;
+          if (e.target.closest("button, input, select, textarea, a, .code-runner-box, .playground-box, .btn-bookmark-page")) return;
+          const selection = window.getSelection();
+          if (selection && selection.toString().length > 0) return;
+
+          isDragging = true;
+          dragStartX = e.clientX;
+          dragStartY = e.clientY;
+        });
+
+        document.addEventListener("mouseup", (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          const diffX = e.clientX - dragStartX;
+          const diffY = e.clientY - dragStartY;
+
+          if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX < 0) {
+              this.nextPage();
+            } else {
+              this.prevPage();
+            }
+          }
+        });
+      }
 
       this.updateBookState();
       this.buildTOC();
@@ -326,20 +399,49 @@ class FlipbookEngine {
 
     // Attach page face click handlers for quick flipping on sheet clicks
     const sheets = flipbookEl.querySelectorAll(".paper-sheet");
-    sheets.forEach((sheet, idx) => {
-      sheet.addEventListener("click", (e) => {
-        if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input") || e.target.closest(".code-snippet-box")) return;
+    sheets.forEach((sheet) => {
+      const frontFace = sheet.querySelector(".page-front");
+      const backFace = sheet.querySelector(".page-back");
 
-        if (sheet.classList.contains("flipped")) {
-          if (idx === totalSheets) {
-            this.goToSheet(totalSheets - 1);
-          } else {
-            this.goToSheet(idx);
-          }
-        } else {
-          this.goToSheet(idx + 1);
-        }
-      });
+      if (frontFace) {
+        frontFace.addEventListener("click", (e) => {
+          if (e.target.closest("button") || 
+              e.target.closest("a") || 
+              e.target.closest("input") || 
+              e.target.closest("select") || 
+              e.target.closest("textarea") || 
+              e.target.closest(".code-snippet-box") || 
+              e.target.closest(".code-runner-box") || 
+              e.target.closest(".playground-box") ||
+              e.target.closest(".quick-guide-box") ||
+              e.target.closest(".btn-bookmark-page")) return;
+
+          const selection = window.getSelection();
+          if (selection && selection.toString().length > 0) return;
+
+          this.nextPage();
+        });
+      }
+
+      if (backFace) {
+        backFace.addEventListener("click", (e) => {
+          if (e.target.closest("button") || 
+              e.target.closest("a") || 
+              e.target.closest("input") || 
+              e.target.closest("select") || 
+              e.target.closest("textarea") || 
+              e.target.closest(".code-snippet-box") || 
+              e.target.closest(".code-runner-box") || 
+              e.target.closest(".playground-box") ||
+              e.target.closest(".quick-guide-box") ||
+              e.target.closest(".btn-bookmark-page")) return;
+
+          const selection = window.getSelection();
+          if (selection && selection.toString().length > 0) return;
+
+          this.prevPage();
+        });
+      }
     });
 
     // Attach 2-finger MacBook trackpad wheel scroll listener to all inner page containers (both odd & even)
