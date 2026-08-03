@@ -2106,7 +2106,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q3. What is the difference between `/` and `~/` in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q3. What is the difference between <code>/</code> and <code>~/</code> in Dart?</h4>
           <p><strong>Answer:</strong> <code>/</code> performs standard division and always returns a <code>double</code>, whereas <code>~/</code> performs integer truncating division and returns an <code>int</code>.</p>
         </div>
 
@@ -2116,27 +2116,27 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q5. How does `clamp()` work on numbers in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q5. How does <code>clamp()</code> work on numbers in Dart?</h4>
           <p><strong>Answer:</strong> <code>number.clamp(lower, upper)</code> bounds a value within the specified minimum and maximum range.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q6. What does `ceil()` do?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q6. What does <code>ceil()</code> do?</h4>
           <p><strong>Answer:</strong> Returns the smallest integer that is not less than the current number (rounds up).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q7. What does `floor()` do?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q7. What does <code>floor()</code> do?</h4>
           <p><strong>Answer:</strong> Returns the largest integer that is not greater than the current number (rounds down).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q8. What does `round()` do?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q8. What does <code>round()</code> do?</h4>
           <p><strong>Answer:</strong> Returns the integer closest to the current number.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q9. What does `truncate()` do?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q9. What does <code>truncate()</code> do?</h4>
           <p><strong>Answer:</strong> Discards fractional digits and returns the integer part without rounding.</p>
         </div>
 
@@ -2146,12 +2146,12 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q11. What is `double.nan`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q11. What is <code>double.nan</code>?</h4>
           <p><strong>Answer:</strong> Represents "Not a Number" resulting from undefined operations like <code>0.0 / 0.0</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q12. How do you check if a double value is `NaN`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q12. How do you check if a double value is <code>NaN</code>?</h4>
           <p><strong>Answer:</strong> Use <code>val.isNaN</code> property (Note: <code>val == double.nan</code> returns false because NaN is not equal to anything).</p>
         </div>
 
@@ -2161,7 +2161,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q14. What are `isEven` and `isOdd`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q14. What are <code>isEven</code> and <code>isOdd</code>?</h4>
           <p><strong>Answer:</strong> Properties on <code>int</code> returning boolean flags for parity (e.g. <code>4.isEven</code> is true).</p>
         </div>
 
@@ -2171,7 +2171,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q16. What is the return type of `abs()` when called on an `int` vs `double`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q16. What is the return type of <code>abs()</code> when called on an <code>int</code> vs <code>double</code>?</h4>
           <p><strong>Answer:</strong> Calling <code>abs()</code> on an <code>int</code> returns an <code>int</code>; calling it on a <code>double</code> returns a <code>double</code>.</p>
         </div>
 
@@ -2186,7 +2186,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q19. What is the `sign` property on Dart numbers?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q19. What is the <code>sign</code> property on Dart numbers?</h4>
           <p><strong>Answer:</strong> Returns <code>-1</code> for negative numbers, <code>1</code> for positive numbers, and <code>0</code> for zero.</p>
         </div>
 
@@ -2196,27 +2196,27 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q21. What does `bitLength` return on an integer?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q21. What does <code>bitLength</code> return on an integer?</h4>
           <p><strong>Answer:</strong> Returns the minimum number of bits required to store the integer value.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q22. What happens when dividing a positive double by `0.0` in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q22. What happens when dividing a positive double by <code>0.0</code> in Dart?</h4>
           <p><strong>Answer:</strong> It evaluates to <code>double.infinity</code> without throwing a division by zero error.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q23. What happens when dividing a negative double by `0.0` in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q23. What happens when dividing a negative double by <code>0.0</code> in Dart?</h4>
           <p><strong>Answer:</strong> It evaluates to <code>-double.infinity</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q24. How does `%` (modulo) differ from `remainder()` in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q24. How does <code>%</code> (modulo) differ from <code>remainder()</code> in Dart?</h4>
           <p><strong>Answer:</strong> <code>%</code> always returns a result with the sign of the divisor, while <code>remainder()</code> returns a result with the sign of the dividend.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q25. Why is `0.1 + 0.2 != 0.3` in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q25. Why is <code>0.1 + 0.2 != 0.3</code> in Dart?</h4>
           <p><strong>Answer:</strong> IEEE 754 binary floating-point representation cannot represent 0.1 or 0.2 with exact binary precision, resulting in <code>0.30000000000000004</code>.</p>
         </div>
       `
@@ -2228,17 +2228,17 @@ Multi-line String""";
         <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Numbers in Dart: Q&A (Part 2: Q26–Q50)</h2>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q26. Can a variable declared as `num` hold an integer and later be assigned a double?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q26. Can a variable declared as <code>num</code> hold an integer and later be assigned a double?</h4>
           <p><strong>Answer:</strong> Yes, because <code>num</code> is the superclass of both <code>int</code> and <code>double</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q27. What is the size of an `int` in the Native Dart VM?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q27. What is the size of an <code>int</code> in the Native Dart VM?</h4>
           <p><strong>Answer:</strong> 64-bit signed integer (from -2^63 to 2^63 - 1).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q28. What is the range of an `int` when compiled to JavaScript (Dart Web)?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q28. What is the range of an <code>int</code> when compiled to JavaScript (Dart Web)?</h4>
           <p><strong>Answer:</strong> Represented as IEEE 754 double precision floats (exact integers from -2^53 + 1 to 2^53 - 1).</p>
         </div>
 
@@ -2253,12 +2253,12 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q31. What is `BigInt` in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q31. What is <code>BigInt</code> in Dart?</h4>
           <p><strong>Answer:</strong> A class representing arbitrary-precision integers for working with numbers larger than 64-bit limits.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q32. How do you create a `BigInt` from a String?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q32. How do you create a <code>BigInt</code> from a String?</h4>
           <p><strong>Answer:</strong> Use <code>BigInt.parse("922337203685477580799999")</code>.</p>
         </div>
 
@@ -2268,28 +2268,28 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q34. What does `~` (bitwise NOT) do to an integer?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q34. What does <code>~</code> (bitwise NOT) do to an integer?</h4>
           <p><strong>Answer:</strong> Inverts all bits of the 2's complement representation (i.e. <code>~x == -x - 1</code>).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q35. What is the difference between `>>` and `>>>` in Dart 2.14+?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q35. What is the difference between <code>&gt;&gt;</code> and <code>&gt;&gt;&gt;</code> in Dart 2.14+?</h4>
           <p><strong>Answer:</strong> <code>&gt;&gt;</code> performs sign-extending right shift; <code>&gt;&gt;&gt;</code> performs zero-fill unsigned right shift.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q36. How do you check if a `num` variable contains a double at runtime?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q36. How do you check if a <code>num</code> variable contains a double at runtime?</h4>
           <p><strong>Answer:</strong> Use type test operator: <code>val is double</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q37. What happens when calling `int.parse()` on a String containing decimal numbers like `"12.34"`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q37. What happens when calling <code>int.parse()</code> on a String containing decimal numbers like <code>"12.34"</code>?</h4>
           <p><strong>Answer:</strong> It throws a <code>FormatException</code>. Use <code>double.parse()</code> or <code>num.parse()</code> instead.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q38. What does `num.parse()` return when parsing `"42"` vs `"42.5"`?</h4>
-          <p><strong>Answer:</strong> It returns an <code>int</code> (42) for `"42"` and a <code>double</code> (42.5) for `"42.5"`.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q38. What does <code>num.parse()</code> return when parsing <code>"42"</code> vs <code>"42.5"</code>?</h4>
+          <p><strong>Answer:</strong> It returns an <code>int</code> (42) for <code>"42"</code> and a <code>double</code> (42.5) for <code>"42.5"</code>.</p>
         </div>
 
         <div class="qa-card">
@@ -2303,12 +2303,12 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q41. What is `double.minPositive` in `dart:math`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q41. What is <code>double.minPositive</code> in <code>dart:math</code>?</h4>
           <p><strong>Answer:</strong> The smallest positive non-zero value representable by a 64-bit float (approx 5e-324).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q42. What is `double.maxFinite` in `dart:math`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q42. What is <code>double.maxFinite</code> in <code>dart:math</code>?</h4>
           <p><strong>Answer:</strong> The maximum finite value representable by a 64-bit float (approx 1.79e+308).</p>
         </div>
 
@@ -2323,22 +2323,22 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q45. What does `compareTo()` return for numbers?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q45. What does <code>compareTo()</code> return for numbers?</h4>
           <p><strong>Answer:</strong> Returns <code>-1</code> if self &lt; other, <code>0</code> if equal, and <code>1</code> if self &gt; other.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q46. How does Dart handle `NaN` in `compareTo()`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q46. How does Dart handle <code>NaN</code> in <code>compareTo()</code>?</h4>
           <p><strong>Answer:</strong> In <code>compareTo()</code>, <code>NaN</code> is considered greater than all numbers, including <code>double.infinity</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q47. How does Dart handle `-0.0` vs `0.0` in `compareTo()`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q47. How does Dart handle <code>-0.0</code> vs <code>0.0</code> in <code>compareTo()</code>?</h4>
           <p><strong>Answer:</strong> In <code>compareTo()</code>, <code>-0.0</code> is considered smaller than <code>0.0</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q48. Is `int` an object in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q48. Is <code>int</code> an object in Dart?</h4>
           <p><strong>Answer:</strong> Yes! Everything in Dart is an object, including primitive numeric types.</p>
         </div>
 
@@ -2385,7 +2385,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q56. When must you use curly braces `${}` in String interpolation?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q56. When must you use curly braces <code>\${}</code> in String interpolation?</h4>
           <p><strong>Answer:</strong> When evaluating complex expressions, property lookups, or method calls (e.g. <code>\${user.name}</code>, <code>\${1 + 1}</code>).</p>
         </div>
 
@@ -2410,12 +2410,12 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q61. How do you concatenate adjacent string literals without using `+`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q61. How do you concatenate adjacent string literals without using <code>+</code>?</h4>
           <p><strong>Answer:</strong> Simply place string literals next to each other: <code>String s = 'Hello' ' ' 'World';</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q62. What does `string.length` return?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q62. What does <code>string.length</code> return?</h4>
           <p><strong>Answer:</strong> The number of UTF-16 code units in the string.</p>
         </div>
 
@@ -2430,12 +2430,12 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q65. What does `string.isEmpty` check?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q65. What does <code>string.isEmpty</code> check?</h4>
           <p><strong>Answer:</strong> Returns <code>true</code> if <code>length == 0</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q66. What does `string.isNotEmpty` check?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q66. What does <code>string.isNotEmpty</code> check?</h4>
           <p><strong>Answer:</strong> Returns <code>true</code> if <code>length &gt; 0</code>.</p>
         </div>
 
@@ -2455,22 +2455,22 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q70. Does Dart support indexing characters directly with bracket operator `s[0]`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q70. Does Dart support indexing characters directly with bracket operator <code>s[0]</code>?</h4>
           <p><strong>Answer:</strong> Yes, <code>s[0]</code> returns a 1-character String representing the UTF-16 code unit at index 0.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q71. What happens if you index out of bounds on a String `s[99]`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q71. What happens if you index out of bounds on a String <code>s[99]</code>?</h4>
           <p><strong>Answer:</strong> Throws a <code>RangeError</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q72. How do compile-time `const` strings behave in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q72. How do compile-time <code>const</code> strings behave in Dart?</h4>
           <p><strong>Answer:</strong> They are canonicalized in memory so identical <code>const</code> strings share the exact same memory instance.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q73. Can String interpolation be evaluated in a `const` context?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q73. Can String interpolation be evaluated in a <code>const</code> context?</h4>
           <p><strong>Answer:</strong> Yes, provided all interpolated values are also compile-time constants (e.g. <code>const greeting = "Hello \$name";</code>).</p>
         </div>
 
@@ -2547,7 +2547,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q87. What happens if `endIndex` is omitted in `substring(startIndex)`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q87. What happens if <code>endIndex</code> is omitted in <code>substring(startIndex)</code>?</h4>
           <p><strong>Answer:</strong> It extracts from <code>startIndex</code> up to the end of the string.</p>
         </div>
 
@@ -2557,7 +2557,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q89. What does `string.split('')` (empty string delimiter) do?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q89. What does <code>string.split('')</code> (empty string delimiter) do?</h4>
           <p><strong>Answer:</strong> Splits the String into a list of individual 1-character String elements.</p>
         </div>
 
@@ -2592,7 +2592,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q96. What does `splitMapJoin()` do on a String?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q96. What does <code>splitMapJoin()</code> do on a String?</h4>
           <p><strong>Answer:</strong> Splits the string by pattern, converts matches and non-matches using callbacks, and joins them back together.</p>
         </div>
 
@@ -2607,7 +2607,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q99. What does `compareTo()` return for Strings?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q99. What does <code>compareTo()</code> return for Strings?</h4>
           <p><strong>Answer:</strong> Returns <code>0</code> if equal, negative if self precedes other alphabetically (lexicographically), and positive if self follows other.</p>
         </div>
 
@@ -2664,7 +2664,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q109. What happens when calling `int.parse()` on a String with leading/trailing spaces?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q109. What happens when calling <code>int.parse()</code> on a String with leading/trailing spaces?</h4>
           <p><strong>Answer:</strong> It throws a <code>FormatException</code>. You must call <code>int.parse(str.trim())</code>.</p>
         </div>
 
@@ -2684,27 +2684,27 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q113. How does `indexOf()` behave if a start index is specified?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q113. How does <code>indexOf()</code> behave if a start index is specified?</h4>
           <p><strong>Answer:</strong> <code>string.indexOf("a", 3)</code> starts searching for "a" beginning at index 3.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q114. What does `compareTo()` return when comparing `"Apple"` and `"Banana"`?</h4>
-          <p><strong>Answer:</strong> Returns a negative integer because `"Apple"` comes before `"Banana"` lexicographically.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q114. What does <code>compareTo()</code> return when comparing <code>"Apple"</code> and <code>"Banana"</code>?</h4>
+          <p><strong>Answer:</strong> Returns a negative integer because <code>"Apple"</code> comes before <code>"Banana"</code> lexicographically.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q115. What does `compareTo()` return when comparing `"Cat"` and `"Apple"`?</h4>
-          <p><strong>Answer:</strong> Returns a positive integer because `"Cat"` comes after `"Apple"`. </p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q115. What does <code>compareTo()</code> return when comparing <code>"Cat"</code> and <code>"Apple"</code>?</h4>
+          <p><strong>Answer:</strong> Returns a positive integer because <code>"Cat"</code> comes after <code>"Apple"</code>. </p>
         </div>
 
         <div class="qa-card">
           <h4><i class="fa-solid fa-circle-question"></i> Q116. How does Dart evaluate String comparison for uppercase vs lowercase letters?</h4>
-          <p><strong>Answer:</strong> Uppercase letters have smaller ASCII/Unicode values than lowercase letters (e.g., `'Z'.compareTo('a') &lt; 0`).</p>
+          <p><strong>Answer:</strong> Uppercase letters have smaller ASCII/Unicode values than lowercase letters (e.g., <code>'Z'.compareTo('a') &lt; 0</code>).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q117. What is the efficiency of string concatenation inside a loop using `+`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q117. What is the efficiency of string concatenation inside a loop using <code>+</code>?</h4>
           <p><strong>Answer:</strong> O(N^2) time complexity due to creating a new String instance on every iteration.</p>
         </div>
 
@@ -2714,7 +2714,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q119. Can a `String?` (nullable string) call string methods directly without null checks?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q119. Can a <code>String?</code> (nullable string) call string methods directly without null checks?</h4>
           <p><strong>Answer:</strong> No, you must use null-aware operator <code>str?.toUpperCase()</code> or null check <code>if (str != null)</code>.</p>
         </div>
 
@@ -2734,7 +2734,7 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q123. What is the difference between `contains()` with String vs RegExp?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q123. What is the difference between <code>contains()</code> with String vs RegExp?</h4>
           <p><strong>Answer:</strong> String checks exact substring literal; RegExp matches against a dynamic regular expression pattern.</p>
         </div>
 
@@ -2756,27 +2756,27 @@ Multi-line String""";
         <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> StringBuffer in Dart: Q&A (Q126–Q160)</h2>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q126. What is `StringBuffer` in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q126. What is <code>StringBuffer</code> in Dart?</h4>
           <p><strong>Answer:</strong> A mutable buffer class designed for efficiently building and appending String data incrementally.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q127. Why is `StringBuffer` faster than `+` string concatenation in loops?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q127. Why is <code>StringBuffer</code> faster than <code>+</code> string concatenation in loops?</h4>
           <p><strong>Answer:</strong> It appends data into a reusable internal buffer without creating intermediate String objects on every iteration.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q128. What is the time complexity of appending N strings with `StringBuffer`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q128. What is the time complexity of appending N strings with <code>StringBuffer</code>?</h4>
           <p><strong>Answer:</strong> Amortized O(N) linear time.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q129. How do you create an empty `StringBuffer`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q129. How do you create an empty <code>StringBuffer</code>?</h4>
           <p><strong>Answer:</strong> <code>StringBuffer buffer = StringBuffer();</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q130. How do you initialize a `StringBuffer` with starting content?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q130. How do you initialize a <code>StringBuffer</code> with starting content?</h4>
           <p><strong>Answer:</strong> Pass content to the constructor: <code>StringBuffer buffer = StringBuffer("Initial");</code>.</p>
         </div>
 
@@ -2791,143 +2791,143 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q133. What happens if `buffer.writeln()` is called with no arguments?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q133. What happens if <code>buffer.writeln()</code> is called with no arguments?</h4>
           <p><strong>Answer:</strong> It appends just a single newline character (<code>\\n</code>).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q134. How do you append all elements of an Iterable to a `StringBuffer`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q134. How do you append all elements of an Iterable to a <code>StringBuffer</code>?</h4>
           <p><strong>Answer:</strong> Use <code>buffer.writeAll(objects, [separator])</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q135. What is the default separator if `separator` is omitted in `writeAll()`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q135. What is the default separator if <code>separator</code> is omitted in <code>writeAll()</code>?</h4>
           <p><strong>Answer:</strong> An empty string <code>""</code> (elements are concatenated directly).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q136. How do you append a character code (Unicode code point) to a `StringBuffer`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q136. How do you append a character code (Unicode code point) to a <code>StringBuffer</code>?</h4>
           <p><strong>Answer:</strong> Use <code>buffer.writeCharCode(charCode)</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q137. How do you convert the accumulated content of a `StringBuffer` into a String?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q137. How do you convert the accumulated content of a <code>StringBuffer</code> into a String?</h4>
           <p><strong>Answer:</strong> Call <code>buffer.toString()</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q138. How do you clear all accumulated content in a `StringBuffer`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q138. How do you clear all accumulated content in a <code>StringBuffer</code>?</h4>
           <p><strong>Answer:</strong> Call <code>buffer.clear()</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q139. What does `buffer.length` return?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q139. What does <code>buffer.length</code> return?</h4>
           <p><strong>Answer:</strong> The total number of characters currently stored in the buffer.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q140. What does `buffer.isEmpty` return?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q140. What does <code>buffer.isEmpty</code> return?</h4>
           <p><strong>Answer:</strong> Returns <code>true</code> if <code>length == 0</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q141. What does `buffer.isNotEmpty` return?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q141. What does <code>buffer.isNotEmpty</code> return?</h4>
           <p><strong>Answer:</strong> Returns <code>true</code> if <code>length &gt; 0</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q142. Is `StringBuffer` thread-safe in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q142. Is <code>StringBuffer</code> thread-safe in Dart?</h4>
           <p><strong>Answer:</strong> Dart is single-threaded (event loop based per isolate), so thread safety is guaranteed within an isolate.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q143. Does `StringBuffer` implement `StringSink`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q143. Does <code>StringBuffer</code> implement <code>StringSink</code>?</h4>
           <p><strong>Answer:</strong> Yes, <code>StringBuffer</code> implements <code>StringSink</code> interface.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q144. Can non-string objects be passed to `buffer.write()`?</h4>
-          <p><strong>Answer:</strong> Yes, `write()` automatically converts any Object to a String by calling its <code>toString()</code> method.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q144. Can non-string objects be passed to <code>buffer.write()</code>?</h4>
+          <p><strong>Answer:</strong> Yes, <code>write()</code> automatically converts any Object to a String by calling its <code>toString()</code> method.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q145. What happens if `null` is passed to `buffer.write(null)`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q145. What happens if <code>null</code> is passed to <code>buffer.write(null)</code>?</h4>
           <p><strong>Answer:</strong> It appends the string <code>"null"</code> to the buffer.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q146. How does `StringBuffer` reduce garbage collector (GC) pressure?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q146. How does <code>StringBuffer</code> reduce garbage collector (GC) pressure?</h4>
           <p><strong>Answer:</strong> By eliminating temporary short-lived String allocations created during intermediate concatenation steps.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q147. What is the primary use case for `StringBuffer` in Flutter/Dart development?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q147. What is the primary use case for <code>StringBuffer</code> in Flutter/Dart development?</h4>
           <p><strong>Answer:</strong> Generating large text files, building dynamic HTML/XML markup, constructing SQL queries, or formatting log streams.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q148. Does calling `buffer.toString()` clear the buffer?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q148. Does calling <code>buffer.toString()</code> clear the buffer?</h4>
           <p><strong>Answer:</strong> No, calling <code>toString()</code> returns a String snapshot while leaving the buffer contents intact.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q149. Can you append to a `StringBuffer` after calling `toString()`?</h4>
-          <p><strong>Answer:</strong> Yes, you can continue appending additional content with `write()` after `toString()`.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q149. Can you append to a <code>StringBuffer</code> after calling <code>toString()</code>?</h4>
+          <p><strong>Answer:</strong> Yes, you can continue appending additional content with <code>write()</code> after <code>toString()</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q150. How do you append a list of integers as CSV formatted text using `writeAll()`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q150. How do you append a list of integers as CSV formatted text using <code>writeAll()</code>?</h4>
           <p><strong>Answer:</strong> <code>buffer.writeAll([10, 20, 30], ", ")</code> resulting in <code>"10, 20, 30"</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q151. Is `StringBuffer` suitable for small 2-string concatenations like `a + b`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q151. Is <code>StringBuffer</code> suitable for small 2-string concatenations like <code>a + b</code>?</h4>
           <p><strong>Answer:</strong> No, standard interpolation <code>"\$a\$b"</code> or <code>a + b</code> is cleaner and optimized by Dart compiler for simple cases.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q152. Does `StringBuffer` support index access like `buffer[0]`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q152. Does <code>StringBuffer</code> support index access like <code>buffer[0]</code>?</h4>
           <p><strong>Answer:</strong> No, you must call <code>toString()</code> first to inspect or slice characters.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q153. Does `StringBuffer` support `substring()` directly?</h4>
-          <p><strong>Answer:</strong> No, `StringBuffer` does not implement string slicing methods directly.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q153. Does <code>StringBuffer</code> support <code>substring()</code> directly?</h4>
+          <p><strong>Answer:</strong> No, <code>StringBuffer</code> does not implement string slicing methods directly.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q154. How do you reset a `StringBuffer` to re-use it for another task?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q154. How do you reset a <code>StringBuffer</code> to re-use it for another task?</h4>
           <p><strong>Answer:</strong> Call <code>buffer.clear()</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q155. Can `StringBuffer` be passed directly to functions accepting `StringSink`?</h4>
-          <p><strong>Answer:</strong> Yes, because `StringBuffer` implements `StringSink`.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q155. Can <code>StringBuffer</code> be passed directly to functions accepting <code>StringSink</code>?</h4>
+          <p><strong>Answer:</strong> Yes, because <code>StringBuffer</code> implements <code>StringSink</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q156. What does `writeCharCode(66)` append?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q156. What does <code>writeCharCode(66)</code> append?</h4>
           <p><strong>Answer:</strong> The letter <code>"B"</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q157. What does `writeCharCode(10)` append?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q157. What does <code>writeCharCode(10)</code> append?</h4>
           <p><strong>Answer:</strong> A linefeed (newline) character <code>\\n</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q158. What happens when `buffer.clear()` is called on an already empty `StringBuffer`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q158. What happens when <code>buffer.clear()</code> is called on an already empty <code>StringBuffer</code>?</h4>
           <p><strong>Answer:</strong> Nothing, it safely remains empty without error.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q159. Can `StringBuffer` hold multiline strings appended via `writeln()`?</h4>
-          <p><strong>Answer:</strong> Yes, multiple `writeln()` calls create a multiline string structure.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q159. Can <code>StringBuffer</code> hold multiline strings appended via <code>writeln()</code>?</h4>
+          <p><strong>Answer:</strong> Yes, multiple <code>writeln()</code> calls create a multiline string structure.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q160. Summary of `StringBuffer` best practice:</h4>
-          <p><strong>Answer:</strong> Use `StringBuffer` whenever constructing text dynamically in loops or across multiple operational steps.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q160. Summary of <code>StringBuffer</code> best practice:</h4>
+          <p><strong>Answer:</strong> Use <code>StringBuffer</code> whenever constructing text dynamically in loops or across multiple operational steps.</p>
         </div>
       `
     },
@@ -2938,52 +2938,52 @@ Multi-line String""";
         <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Regular Expressions in Dart: Q&A (Part 1: Q161–Q180)</h2>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q161. What is the `RegExp` class in Dart?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q161. What is the <code>RegExp</code> class in Dart?</h4>
           <p><strong>Answer:</strong> A class representing regular expressions used for pattern matching, validation, text searching, and string manipulation.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q162. Why should raw strings `r'...'` be used when defining `RegExp` patterns?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q162. Why should raw strings <code>r'...'</code> be used when defining <code>RegExp</code> patterns?</h4>
           <p><strong>Answer:</strong> Raw strings treat backslashes literally, avoiding double-escaping issues (e.g. <code>r'\\d'</code> instead of <code>'\\\\d'</code>).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q163. What does `regExp.hasMatch(string)` return?</h4>
-          <p><strong>Answer:</strong> Returns a boolean `true` if the pattern matches anywhere within the target string.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q163. What does <code>regExp.hasMatch(string)</code> return?</h4>
+          <p><strong>Answer:</strong> Returns a boolean <code>true</code> if the pattern matches anywhere within the target string.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q164. What does `regExp.firstMatch(string)` return?</h4>
-          <p><strong>Answer:</strong> Returns the first `Match?` object found, or `null` if no match exists.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q164. What does <code>regExp.firstMatch(string)</code> return?</h4>
+          <p><strong>Answer:</strong> Returns the first <code>Match?</code> object found, or <code>null</code> if no match exists.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q165. What does `regExp.allMatches(string)` return?</h4>
-          <p><strong>Answer:</strong> Returns a lazy `Iterable&lt;Match&gt;` containing all non-overlapping matches found in the input string.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q165. What does <code>regExp.allMatches(string)</code> return?</h4>
+          <p><strong>Answer:</strong> Returns a lazy <code>Iterable&lt;Match&gt;</code> containing all non-overlapping matches found in the input string.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q166. What does `regExp.stringMatch(string)` return?</h4>
-          <p><strong>Answer:</strong> Returns the matched substring directly (`String?`), or `null` if no match is found.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q166. What does <code>regExp.stringMatch(string)</code> return?</h4>
+          <p><strong>Answer:</strong> Returns the matched substring directly (<code>String?</code>), or <code>null</code> if no match is found.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q167. How do you access the entire matched text from a `Match` object?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q167. How do you access the entire matched text from a <code>Match</code> object?</h4>
           <p><strong>Answer:</strong> Call <code>match.group(0)</code> or <code>match[0]</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q168. How do you access specific captured groups from a `Match` object?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q168. How do you access specific captured groups from a <code>Match</code> object?</h4>
           <p><strong>Answer:</strong> Call <code>match.group(1)</code>, <code>match.group(2)</code> for 1-based index captured groups.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q169. What property returns the start index of a `Match` in the original string?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q169. What property returns the start index of a <code>Match</code> in the original string?</h4>
           <p><strong>Answer:</strong> <code>match.start</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q170. What property returns the end index of a `Match` in the original string?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q170. What property returns the end index of a <code>Match</code> in the original string?</h4>
           <p><strong>Answer:</strong> <code>match.end</code>.</p>
         </div>
 
@@ -2993,12 +2993,12 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q172. How do you split a String using a `RegExp` pattern as delimiter?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q172. How do you split a String using a <code>RegExp</code> pattern as delimiter?</h4>
           <p><strong>Answer:</strong> Call <code>text.split(RegExp(r'pattern'))</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q173. What character class in `RegExp` matches any single digit (0–9)?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q173. What character class in <code>RegExp</code> matches any single digit (0–9)?</h4>
           <p><strong>Answer:</strong> <code>\\d</code>.</p>
         </div>
 
@@ -3028,13 +3028,13 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q179. What does the dot `.` metacharacter match by default?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q179. What does the dot <code>.</code> metacharacter match by default?</h4>
           <p><strong>Answer:</strong> Any single character except newline characters (unless <code>dotAll: true</code> is enabled).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q180. How do you match a literal dot `.` in `RegExp`?</h4>
-          <p><strong>Answer:</strong> Escape it with a backslash: <code>\\.`</code>.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q180. How do you match a literal dot <code>.</code> in <code>RegExp</code>?</h4>
+          <p><strong>Answer:</strong> Escape it with a backslash: <code>\\.</code>.</p>
         </div>
       `
     },
@@ -3045,77 +3045,77 @@ Multi-line String""";
         <h2 class="section-h2"><i class="fa-solid fa-circle-question"></i> Regular Expressions in Dart: Q&A (Part 2: Q181–Q200)</h2>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q181. What does the `^` anchor represent in `RegExp`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q181. What does the <code>^</code> anchor represent in <code>RegExp</code>?</h4>
           <p><strong>Answer:</strong> Matches the beginning of the string (or line if <code>multiLine: true</code>).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q182. What does the `$` anchor represent in `RegExp`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q182. What does the <code>$</code> anchor represent in <code>RegExp</code>?</h4>
           <p><strong>Answer:</strong> Matches the end of the string (or line if <code>multiLine: true</code>).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q183. What does the `+` quantifier mean?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q183. What does the <code>+</code> quantifier mean?</h4>
           <p><strong>Answer:</strong> Matches 1 or more occurrences of the preceding element.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q184. What does the `*` quantifier mean?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q184. What does the <code>*</code> quantifier mean?</h4>
           <p><strong>Answer:</strong> Matches 0 or more occurrences of the preceding element.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q185. What does the `?` quantifier mean?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q185. What does the <code>?</code> quantifier mean?</h4>
           <p><strong>Answer:</strong> Matches 0 or 1 occurrence of the preceding element (optional).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q186. What does `{n}` quantifier mean?</h4>
-          <p><strong>Answer:</strong> Matches exactly `n` occurrences (e.g. <code>\\d{4}</code> matches 4 digits).</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q186. What does <code>{n}</code> quantifier mean?</h4>
+          <p><strong>Answer:</strong> Matches exactly <code>n</code> occurrences (e.g. <code>\\d{4}</code> matches 4 digits).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q187. What does `{n,m}` quantifier mean?</h4>
-          <p><strong>Answer:</strong> Matches between `n` and `m` occurrences inclusive (e.g. <code>\\d{2,4}</code>).</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q187. What does <code>{n,m}</code> quantifier mean?</h4>
+          <p><strong>Answer:</strong> Matches between <code>n</code> and <code>m</code> occurrences inclusive (e.g. <code>\\d{2,4}</code>).</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q188. How do you make a `RegExp` search case-insensitive?</h4>
-          <p><strong>Answer:</strong> Pass option <code>caseSensitive: false</code> to `RegExp` constructor.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q188. How do you make a <code>RegExp</code> search case-insensitive?</h4>
+          <p><strong>Answer:</strong> Pass option <code>caseSensitive: false</code> to <code>RegExp</code> constructor.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q189. What does `multiLine: true` option enable in `RegExp`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q189. What does <code>multiLine: true</code> option enable in <code>RegExp</code>?</h4>
           <p><strong>Answer:</strong> Allows <code>^</code> and <code>$</code> to match the start and end of each line within a multiline string.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q190. What does `dotAll: true` option enable in `RegExp`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q190. What does <code>dotAll: true</code> option enable in <code>RegExp</code>?</h4>
           <p><strong>Answer:</strong> Allows the dot <code>.</code> character class to match newline characters (<code>\\n</code>) as well.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q191. How do character sets `[abc]` work?</h4>
-          <p><strong>Answer:</strong> Matches any single character that is either `a`, `b`, or `c`.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q191. How do character sets <code>[abc]</code> work?</h4>
+          <p><strong>Answer:</strong> Matches any single character that is either <code>a</code>, <code>b</code>, or <code>c</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q192. How do negated character sets `[^abc]` work?</h4>
-          <p><strong>Answer:</strong> Matches any single character that is NOT `a`, `b`, or `c`.</p>
+          <h4><i class="fa-solid fa-circle-question"></i> Q192. How do negated character sets <code>[^abc]</code> work?</h4>
+          <p><strong>Answer:</strong> Matches any single character that is NOT <code>a</code>, <code>b</code>, or <code>c</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q193. What `RegExp` pattern matches a standard 10-digit phone number?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q193. What <code>RegExp</code> pattern matches a standard 10-digit phone number?</h4>
           <p><strong>Answer:</strong> <code>RegExp(r'^\\d{10}\$')</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q194. What `RegExp` pattern matches basic email addresses?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q194. What <code>RegExp</code> pattern matches basic email addresses?</h4>
           <p><strong>Answer:</strong> <code>RegExp(r'^[\\w.-]+@[\\w-]+\\.[A-Za-z]{2,}\$')</code>.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q195. How do you extract all numbers from a String using `RegExp`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q195. How do you extract all numbers from a String using <code>RegExp</code>?</h4>
           <p><strong>Answer:</strong> <code>RegExp(r'\\d+').allMatches(str).map((m) =&gt; m.group(0))</code>.</p>
         </div>
 
@@ -3125,22 +3125,22 @@ Multi-line String""";
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q197. What does the `|` operator in `RegExp` represent?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q197. What does the <code>|</code> operator in <code>RegExp</code> represent?</h4>
           <p><strong>Answer:</strong> Alternation / OR operator (e.g. <code>RegExp(r'cat|dog')</code> matches "cat" or "dog").</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q198. What do parentheses `()` represent in `RegExp`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q198. What do parentheses <code>()</code> represent in <code>RegExp</code>?</h4>
           <p><strong>Answer:</strong> Grouping and capturing sub-patterns.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q199. How do non-capturing groups `(?:...)` work?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q199. How do non-capturing groups <code>(?:...)</code> work?</h4>
           <p><strong>Answer:</strong> Groups elements for quantifier application without capturing them into match group indexes.</p>
         </div>
 
         <div class="qa-card">
-          <h4><i class="fa-solid fa-circle-question"></i> Q200. What is a lookahead assertion `(?=...)` in `RegExp`?</h4>
+          <h4><i class="fa-solid fa-circle-question"></i> Q200. What is a lookahead assertion <code>(?=...)</code> in <code>RegExp</code>?</h4>
           <p><strong>Answer:</strong> A zero-width assertion ensuring that the enclosed pattern matches ahead without including it in the matched result (e.g. checking password strength requirements).</p>
         </div>
       `
