@@ -93,43 +93,8 @@ class FlipbookEngine {
         if (e.key === "ArrowRight" || e.key === "PageDown") this.nextPage();
       });
 
-      // Mouse Wheel Scroll Page Turning
-      let lastWheelTime = 0;
-      const wheelCooldown = 550;
       const flipbookWrapper = document.getElementById("flipbook-wrapper");
 
-      if (flipbookWrapper) {
-        flipbookWrapper.addEventListener("wheel", (e) => {
-          if (this.mode !== 'flipbook') return;
-          if (document.querySelector(".sidebar.active")) return;
-
-          const scrollableContent = e.target.closest(".page-inner-content, .page-content");
-          if (scrollableContent) {
-            const { scrollTop, scrollHeight, clientHeight } = scrollableContent;
-            const isOverflowing = scrollHeight > clientHeight + 5;
-            if (isOverflowing) {
-              const atBottom = scrollTop + clientHeight >= scrollHeight - 5;
-              const atTop = scrollTop <= 5;
-              if (e.deltaY > 0 && !atBottom) return;
-              if (e.deltaY < 0 && !atTop) return;
-            }
-          }
-
-          const now = Date.now();
-          if (now - lastWheelTime < wheelCooldown) return;
-
-          const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-          if (Math.abs(delta) < 15) return;
-
-          if (delta > 0) {
-            lastWheelTime = now;
-            this.nextPage();
-          } else if (delta < 0) {
-            lastWheelTime = now;
-            this.prevPage();
-          }
-        }, { passive: true });
-      }
 
       // Mouse Drag / Touch Swipe Page Turning
       let dragStartX = 0;

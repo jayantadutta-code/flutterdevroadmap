@@ -208,47 +208,8 @@ class FlipBookEngine {
       }
     });
 
-    // Mouse Wheel Scroll Page Turning
-    let lastWheelTime = 0;
-    const wheelCooldown = 550; // ms between wheel page turns
-
-    const handleWheelScroll = (e) => {
-      const activeSection = document.querySelector('.view-section.active');
-      if (!activeSection || activeSection.id !== 'view-book') return;
-
-      // Don't flip if TOC drawer is open
-      if (document.getElementById('toc-drawer')?.classList.contains('open')) return;
-
-      // Check if user is scrolling inside an overflowing page-content div
-      const scrollableContent = e.target.closest('.page-content');
-      if (scrollableContent) {
-        const { scrollTop, scrollHeight, clientHeight } = scrollableContent;
-        const isOverflowing = scrollHeight > clientHeight + 5;
-        if (isOverflowing) {
-          const atBottom = scrollTop + clientHeight >= scrollHeight - 5;
-          const atTop = scrollTop <= 5;
-          if (e.deltaY > 0 && !atBottom) return; // scroll down inside content
-          if (e.deltaY < 0 && !atTop) return;    // scroll up inside content
-        }
-      }
-
-      const now = Date.now();
-      if (now - lastWheelTime < wheelCooldown) return;
-
-      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-      if (Math.abs(delta) < 15) return; // ignore micro-scrolls
-
-      if (delta > 0) {
-        lastWheelTime = now;
-        this.turnNext();
-      } else if (delta < 0) {
-        lastWheelTime = now;
-        this.turnPrev();
-      }
-    };
-
     const bookContainer = document.querySelector('.flipbook-wrapper') || document;
-    bookContainer.addEventListener('wheel', handleWheelScroll, { passive: true });
+
 
     // Mouse Drag / Swipe Page Turning
     let dragStartX = 0;
